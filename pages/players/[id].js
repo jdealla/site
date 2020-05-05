@@ -1,10 +1,12 @@
-import { Fragment } from "react";
+import { useState, Fragment } from "react";
 import Layout from "../../components/layout";
 import Attributes from "../../components/attributes";
 import { getPlayersIds, getPlayerData } from "../../lib/players";
 
 export default function Player({ playerData }) {
-    const shootingRatings = () => {
+    const [view, setView] = useState("stats");
+
+    const renderRatings = () => {
         const shooting = [
             { name: 'Driving Layup', rating: playerData.driving_layup },
             { name: 'Post Fade', rating: playerData.post_fade },
@@ -18,37 +20,21 @@ export default function Player({ playerData }) {
             { name: 'Standing Dunk', rating: playerData.standing_dunk },
             { name: 'Driving Dunk', rating: playerData.driving_dunk },
         ];
-        return <Attributes attributes={shooting} attrName="Shooting" />;
-    }
-
-    const passingRatings = () => {
         const passing = [
             { name: 'Ball Handle', rating: playerData.ball_handle },
             { name: 'Pass IQ', rating: playerData.passing_iq },
             { name: 'Pass Accuracy', rating: playerData.passing_accuracy },
-        ]
-        return <Attributes attributes={passing} attrName="Passing" />
-    }
-
-    const defenseRatings = () => {
+        ];
         const defense = [
             { name: 'Block', rating: playerData.block },
             { name: 'Steal', rating: playerData.steal },
             { name: 'Perimeter Defense', rating: playerData.perimeter_defense },
             { name: 'Interior Defense', rating: playerData.interior_defense },
-        ]
-        return <Attributes attributes={defense} attrName="Defense" />
-    }
-
-    const reboundRatings = () => {
+        ];
         const rebound = [
             { name: 'Off Rebound', rating: playerData.offensive_rebound },
             { name: 'Def Rebound', rating: playerData.defensive_rebound },
-        ]
-        return <Attributes attributes={rebound} attrName="Rebound" />
-    }
-
-    const athleticismRatings = () => {
+        ];
         const athleticism = [
             { name: 'Speed', rating: playerData.speed },
             { name: 'Speed with Ball', rating: playerData.speed_with_ball },
@@ -58,11 +44,7 @@ export default function Player({ playerData }) {
             { name: 'Stamina', rating: playerData.stamina },
             { name: 'Hustle', rating: playerData.hustle },
             { name: 'Lat Quickness', rating: playerData.lateral_quickness },
-        ]
-        return <Attributes attributes={athleticism} attrName="Athleticism" />
-    }
-
-    const mentalRatings = () => {
+        ];
         const mental = [
             { name: 'Pass Perception', rating: playerData.pass_perception },
             { name: 'Def Consistency', rating: playerData.defensive_consistency },
@@ -70,15 +52,45 @@ export default function Player({ playerData }) {
             { name: 'Help Defense IQ', rating: playerData.help_defense_iq },
             { name: 'Shot IQ', rating: playerData.shot_iq },
         ];
-        return <Attributes attributes={mental} attrName="Mental" />
-    }
-
-    const potentialRatings = () => {
         const potential = [
             { name: 'Intangibles', rating: playerData.intangibles },
             { name: 'Potential', rating: playerData.potential }
         ];
-        return <Attributes attributes={potential} attrName="Potential" />
+
+        return (
+            <Fragment>
+                <div className="column is-one-fifth-tablet is-half-mobile">
+                    <Attributes attributes={shooting} attrName="Shooting" />
+                    <Attributes attributes={passing} attrName="Passing" />
+                    <Attributes attributes={defense} attrName="Defense" />
+                </div>
+                <div className="column is-one-fifth-tablet is-half-mobile">
+                    <Attributes attributes={rebound} attrName="Rebound" />
+                    <Attributes attributes={athleticism} attrName="Athleticism" />
+                    <Attributes attributes={mental} attrName="Mental" />
+                    <Attributes attributes={potential} attrName="Potential" />
+                </div>
+            </Fragment>
+        )
+    }
+
+    const renderBadges = () => {
+        return (
+            <div className="column ">
+                    <div className="container">
+                    <p className="has-text-weight-semibold"> Finishing Badges </p>
+                    {finishingBadges()}
+                    <p className="has-text-weight-semibold "> Shooting Badges </p>
+                    {shootingBadges()}
+                    <p className="has-text-weight-semibold "> Playmaking Badges </p>
+                    {playmakingBadges()}
+                    <p className="has-text-weight-semibold "> Defensive Badges </p>
+                    {defensiveBadges()}
+                    <p className="has-text-weight-semibold "> Personality Badges </p>
+                    {personalityBadges()}
+                </div>
+            </div>
+        )
     }
 
     const finishingBadges = () => {
@@ -195,7 +207,6 @@ export default function Player({ playerData }) {
     }
 
     const renderTag = (data) => {
-        // do sort here
         const levelToNum = (level) => {
             switch(level) {
                 case 'HOF': return 4;
@@ -216,7 +227,7 @@ export default function Player({ playerData }) {
 
         return (
             <div className="tags">
-                {data.map(badge => <span className={`tag ${badge.level}`}>{badge.name}</span>)}
+                {data.map((badge, i) => <span key={i} className={`tag ${badge.level}`}>{badge.name}</span>)}
             </div>
         )
     }
@@ -348,6 +359,42 @@ export default function Player({ playerData }) {
         return <Attributes attributes={tendencies} attrName="Defensive" />
     }
 
+    const renderView = () => {
+        switch(view) {
+            case "stats": return (
+                <Fragment>
+                    {renderRatings()}
+                    {renderBadges()}
+                </Fragment>
+            )
+            case "tendencies": return (
+                <Fragment>
+                    <div className="column is-full">
+                        <p className="has-text-weight-bold">Tendencies</p>
+                    </div>
+                    <div className="column is-one-fifth-tablet is-half-mobile">
+                        {shootingTendencies()}
+                    </div>
+                    <div className="column is-one-fifth-tablet is-half-mobile">
+                        {isoTendencies()}
+                        {dribbleTendencies()}
+                        {passTendencies()}
+                    </div>
+                    <div className="column is-one-fifth-tablet is-half-mobile">
+                        {postTendencies()}
+                    </div>
+                    <div className="column is-one-fifth-tablet is-half-mobile">
+                        {playbookTendencies()}
+                        {defensiveTendencies()}
+                    </div>
+                </Fragment>
+            )
+            case "animations": return;
+            case "diamond-shoe": return;
+            default: return;
+        }
+    }
+
     return (
         <Layout>
             <div className="container is-fluid ">
@@ -366,69 +413,16 @@ export default function Player({ playerData }) {
                         <div className="column is-full">
                             <div className="tabs is-boxed">
                                 <ul>
-                                    <li className="is-active" ><a>Stats</a></li>
-                                    <li><a>Tendencies</a></li>
-                                    <li><a>Signature/Animations</a></li>
-                                    <li><a>Best Diamond Shoe</a></li>
+                                    <li className={view === "stats" ? "is-active" : ""} onClick={() => setView("stats")}><a>Stats</a></li>
+                                    <li className={view === "tendencies" ? "is-active" : ""} onClick={() => setView("tendencies")}><a>Tendencies</a></li>
+                                    <li className={view === "animations" ? "is-active" : ""} onClick={() => setView("animations")}><a>Signature/Animations</a></li>
+                                    <li className={view === "diamond-shoe" ? "is-active" : ""} onClick={() => setView("diamond-shoe")}><a>Best Diamond Shoe</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div className="columns is-multiline is-mobile is-gapless">
-                        <div className="column is-one-fifth-tablet is-half-mobile">
-                            {shootingRatings()}
-                            {passingRatings()}
-                            {defenseRatings()}
-                        </div>
-                        <div className="column is-one-fifth-tablet is-half-mobile">
-                            {reboundRatings()}
-                            {athleticismRatings()}
-                            {mentalRatings()}
-                            {potentialRatings()}
-                        </div>
-
-                        <div className="column ">
-                            <div className="box">
-                                <p className="has-text-weight-semibold"> Finishing Badges </p>
-                                {finishingBadges()}
-                            </div>
-                            <div className="box">
-                                <p className="has-text-weight-semibold "> Shooting Badges </p>
-                                {shootingBadges()}
-                            </div>
-                            <div className="box">
-                                <p className="has-text-weight-semibold "> Playmaking Badges </p>
-                                {playmakingBadges()}
-                            </div>
-                            <div className="box">
-                                <p className="has-text-weight-semibold "> Defensive Badges </p>
-                                {defensiveBadges()}
-                            </div>
-                            <div className="box">
-                                <p className="has-text-weight-semibold "> Personality Badges </p>
-                                {personalityBadges()}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="columns is-multiline is-mobile is-gapless">
-                        <div className="column is-full">
-                            <p className="has-text-weight-bold">Tendencies</p>
-                        </div>
-                        <div className="column is-one-fifth-tablet is-half-mobile">
-                            {shootingTendencies()}
-                        </div>
-                        <div className="column is-one-fifth-tablet is-half-mobile">
-                            {isoTendencies()}
-                            {dribbleTendencies()}
-                            {passTendencies()}
-                        </div>
-                        <div className="column is-one-fifth-tablet is-half-mobile">
-                            {postTendencies()}
-                        </div>
-                        <div className="column is-one-fifth-tablet is-half-mobile">
-                            {playbookTendencies()}
-                            {defensiveTendencies()}
-                        </div>
+                        {renderView()}
                     </div>
                 </div>
             </div>

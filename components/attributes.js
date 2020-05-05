@@ -30,7 +30,7 @@ export default function Attributes(props) {
     }
 
     return (
-        <div className="box">
+        <div className="container">
             <p className="has-text-weight-semibold "> {attrName} </p>
             {renderTags()}
         </div>
