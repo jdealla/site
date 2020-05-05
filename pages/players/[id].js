@@ -18,7 +18,7 @@ export default function Player({ playerData }) {
             { name: 'Standing Dunk', rating: playerData.standing_dunk },
             { name: 'Driving Dunk', rating: playerData.driving_dunk },
         ];
-        return <Attributes attributes={shooting} />;
+        return <Attributes attributes={shooting} attrName="Shooting" />;
     }
 
     const passingRatings = () => {
@@ -27,7 +27,7 @@ export default function Player({ playerData }) {
             { name: 'Pass IQ', rating: playerData.passing_iq },
             { name: 'Pass Accuracy', rating: playerData.passing_accuracy },
         ]
-        return <Attributes attributes={passing} />
+        return <Attributes attributes={passing} attrName="Passing" />
     }
 
     const defenseRatings = () => {
@@ -37,7 +37,7 @@ export default function Player({ playerData }) {
             { name: 'Perimeter Defense', rating: playerData.perimeter_defense },
             { name: 'Interior Defense', rating: playerData.interior_defense },
         ]
-        return <Attributes attributes={defense} />
+        return <Attributes attributes={defense} attrName="Defense" />
     }
 
     const reboundRatings = () => {
@@ -45,7 +45,7 @@ export default function Player({ playerData }) {
             { name: 'Off Rebound', rating: playerData.offensive_rebound },
             { name: 'Def Rebound', rating: playerData.defensive_rebound },
         ]
-        return <Attributes attributes={rebound} />
+        return <Attributes attributes={rebound} attrName="Rebound" />
     }
 
     const athleticismRatings = () => {
@@ -59,7 +59,7 @@ export default function Player({ playerData }) {
             { name: 'Hustle', rating: playerData.hustle },
             { name: 'Lat Quickness', rating: playerData.lateral_quickness },
         ]
-        return <Attributes attributes={athleticism} />
+        return <Attributes attributes={athleticism} attrName="Athleticism" />
     }
 
     const mentalRatings = () => {
@@ -70,7 +70,7 @@ export default function Player({ playerData }) {
             { name: 'Help Defense IQ', rating: playerData.help_defense_iq },
             { name: 'Shot IQ', rating: playerData.shot_iq },
         ];
-        return <Attributes attributes={mental} />
+        return <Attributes attributes={mental} attrName="Mental" />
     }
 
     const potentialRatings = () => {
@@ -78,7 +78,7 @@ export default function Player({ playerData }) {
             { name: 'Intangibles', rating: playerData.intangibles },
             { name: 'Potential', rating: playerData.potential }
         ];
-        return <Attributes attributes={potential} />
+        return <Attributes attributes={potential} attrName="Potential" />
     }
 
     const finishingBadges = () => {
@@ -246,29 +246,29 @@ export default function Player({ playerData }) {
             { name: 'Stepback Three', rating: playerData.stepback_jumper_3pt_t },
             { name: 'Stepback Mid', rating: playerData.stepback_jumper_mid_t },
             { name: 'Spin Jumper', rating: playerData.spin_jumper_t },
-            { name: 'Transition Pull Up Three', rating: playerData.transition_pull_up_3pt_t },
+            { name: 'T. Pull Up Three', rating: playerData.transition_pull_up_3pt_t },
             { name: 'Drive Pull Up Three', rating: playerData.drive_pull_up_3pt_t },
             { name: 'Drive Pull Up Mid', rating: playerData.drive_pull_up_mid_t },
             { name: 'Use Glass', rating: playerData.use_glass_t },
         ]
-        return <Attributes attributes={tendencies} />
+        return <Attributes attributes={tendencies} attrName="Shooting" />
     }
 
     const isoTendencies = () => {
         const tendencies = [
-            { name: 'Triple Threat Pump Fake', rating: playerData.triple_threat_pump_fake_t },
-            { name: 'Triple Threat Jab Step', rating: playerData.triple_threat_jab_step_t },
-            { name: 'Triple Threat Idle', rating: playerData.triple_threat_idle_t },
-            { name: 'Triple Threat Shoot', rating: playerData.triple_threat_shoot_t },
+            { name: 'Pump Fake', rating: playerData.triple_threat_pump_fake_t },
+            { name: 'TThreat Jab Step', rating: playerData.triple_threat_jab_step_t },
+            { name: 'TThreat Idle', rating: playerData.triple_threat_idle_t },
+            { name: 'TThreat Shoot', rating: playerData.triple_threat_shoot_t },
             { name: 'Setup With Sizeup', rating: playerData.setup_with_sizeup_t },
             { name: 'Setup With Hesi', rating: playerData.setup_with_hesitation_t },
             { name: 'No Setup Dribble', rating: playerData.no_setup_dribble_t },
             { name: 'Drive', rating: playerData.drive_t },
-            { name: 'Attack Strong On Drive', rating: playerData.attack_strong_on_drive_t },
+            { name: 'Attack Strong', rating: playerData.attack_strong_on_drive_t },
             { name: 'Drive Right', rating: playerData.drive_right_t },
             { name: 'Dish To Open Man', rating: playerData.dish_to_open_man_t },
         ];
-        return <Attributes attributes={tendencies} />
+        return <Attributes attributes={tendencies} attrName="Isolation" />
     }
 
     const postTendencies = () => {
@@ -276,7 +276,7 @@ export default function Player({ playerData }) {
             { name: 'Post Shimmy Shot', rating: playerData.post_shimmy_shot_t },
             { name: 'Post Face Up', rating: playerData.post_face_up_t },
             { name: 'Post Back Down', rating: playerData.post_back_down_t },
-            { name: 'Post Aggressive Back Down', rating: playerData.post_aggressive_backdown_t },
+            { name: 'P. Agr. Back Down', rating: playerData.post_aggressive_backdown_t },
             { name: 'Shoot From Post', rating: playerData.shoot_from_post_t },
             { name: 'Post Hook Left', rating: playerData.post_hook_left_t },
             { name: 'Post Hook Right', rating: playerData.post_hook_right_t },
@@ -291,22 +291,22 @@ export default function Player({ playerData }) {
             { name: 'Post Hop Step', rating: playerData.post_hop_step_t },
             { name: 'Step Through Shot', rating: playerData.step_through_shot_t },
         ];
-        return <Attributes attributes={tendencies} />
+        return <Attributes attributes={tendencies} attrName="Post" />
     }
 
     const dribbleTendencies = () => {
         const tendencies = [
-            { name: 'Driving Crossover', rating: playerData.driving_crossover_t },
-            { name: 'Driving Spin', rating: playerData.driving_spin_t },
-            { name: 'Driving Step Back', rating: playerData.driving_step_back_t },
-            { name: 'Driving Half Spin', rating: playerData.driving_half_spin_t },
-            { name: 'Driving Double Crossover', rating: playerData.driving_double_crossover_t },
-            { name: 'Driving Behind The Back', rating: playerData.driving_behind_the_back_t },
-            { name: 'Driving Dribble Hesi', rating: playerData.driving_dribble_hesitation_t },
-            { name: 'Driving In & Out', rating: playerData.driving_in_and_out_t },
-            { name: 'No Driving Dribble Move', rating: playerData.no_driving_dribble_move_t },
+            { name: 'Crossover', rating: playerData.driving_crossover_t },
+            { name: 'Spin', rating: playerData.driving_spin_t },
+            { name: 'Step Back', rating: playerData.driving_step_back_t },
+            { name: 'Half Spin', rating: playerData.driving_half_spin_t },
+            { name: 'Double Cross', rating: playerData.driving_double_crossover_t },
+            { name: 'Behind The Back', rating: playerData.driving_behind_the_back_t },
+            { name: 'Hesi', rating: playerData.driving_dribble_hesitation_t },
+            { name: 'In & Out', rating: playerData.driving_in_and_out_t },
+            { name: 'No Dribble Drive', rating: playerData.no_driving_dribble_move_t },
         ];
-        return <Attributes attributes={tendencies} />
+        return <Attributes attributes={tendencies} attrName="Dribble Moves" />
     }
 
     const passTendencies = () => {
@@ -314,7 +314,7 @@ export default function Player({ playerData }) {
             { name: 'Flashy Pass', rating: playerData.flashy_pass_t },
             { name: 'Alley Oop Pass', rating: playerData.alley_oop_pass_t },
         ];
-        return <Attributes attributes={tendencies} />
+        return <Attributes attributes={tendencies} attrName="Passing" />
     }
 
     const playbookTendencies = () => {
@@ -324,14 +324,14 @@ export default function Player({ playerData }) {
             { name: 'Touches', rating: playerData.touches_t },
             { name: 'Post Up', rating: playerData.post_up_t },
             { name: 'Roll Vs. Pop', rating: playerData.roll_vs_pop_t },
-            { name: 'Transition Spot Up Vs. Cut To Basket', rating: playerData.transition_spot_up_t },
-            { name: 'Iso Vs. Elite Defender', rating: playerData.iso_vs_elite_defender_t },
-            { name: 'Iso Vs. Good Defender', rating: playerData.iso_vs_good_defender_t },
-            { name: 'Iso Vs. Average Defender', rating: playerData.iso_vs_average_defender_t },
-            { name: 'Iso Vs. Poor Defender', rating: playerData.iso_vs_poor_defender_t },
+            { name: 'T. Spot Up', rating: playerData.transition_spot_up_t },
+            { name: 'Iso Vs. Elite D', rating: playerData.iso_vs_elite_defender_t },
+            { name: 'Iso Vs. Good D', rating: playerData.iso_vs_good_defender_t },
+            { name: 'Iso Vs. Average D', rating: playerData.iso_vs_average_defender_t },
+            { name: 'Iso Vs. Poor D', rating: playerData.iso_vs_poor_defender_t },
             { name: 'Play Discipline', rating: playerData.play_discipline_t },
         ];
-        return <Attributes attributes={tendencies} />
+        return <Attributes attributes={tendencies} attrName="Playbook" />
     }
 
     const defensiveTendencies = () => {
@@ -345,7 +345,7 @@ export default function Player({ playerData }) {
             { name: 'Hard Foul', rating: playerData.hard_foul_t },
             { name: 'Take Charge', rating: playerData.take_charge_t },
         ];
-        return <Attributes attributes={tendencies} />
+        return <Attributes attributes={tendencies} attrName="Defensive" />
     }
 
     return (
@@ -374,73 +374,59 @@ export default function Player({ playerData }) {
                             </div>
                         </div>
                     </div>
-                    <div className="columns is-gapless">
-                        <div className="column is-one-fifth">
-                            <p className="has-text-weight-semibold "> Shooting </p>
+                    <div className="columns is-multiline is-mobile is-gapless">
+                        <div className="column is-one-fifth-tablet is-half-mobile">
                             {shootingRatings()}
-                            <p className="has-text-weight-semibold "> Passing </p>
                             {passingRatings()}
-                            <p className="has-text-weight-semibold "> Defense </p>
                             {defenseRatings()}
                         </div>
-                        <div className="column is-one-fifth">
-                            <p className="has-text-weight-semibold "> Rebounding </p>
+                        <div className="column is-one-fifth-tablet is-half-mobile">
                             {reboundRatings()}
-                            <p className="has-text-weight-semibold "> Athleticism </p>
                             {athleticismRatings()}
-                            <p className="has-text-weight-semibold "> Mental </p>
                             {mentalRatings()}
-                            <p className="has-text-weight-semibold "> Potential </p>
                             {potentialRatings()}
                         </div>
 
-                        <div className="column">
-                            <div className="container">
+                        <div className="column ">
+                            <div className="box">
                                 <p className="has-text-weight-semibold"> Finishing Badges </p>
                                 {finishingBadges()}
                             </div>
-                            <div className="container">
+                            <div className="box">
                                 <p className="has-text-weight-semibold "> Shooting Badges </p>
                                 {shootingBadges()}
                             </div>
-                            <div className="container">
+                            <div className="box">
                                 <p className="has-text-weight-semibold "> Playmaking Badges </p>
                                 {playmakingBadges()}
                             </div>
-                            <div className="container">
+                            <div className="box">
                                 <p className="has-text-weight-semibold "> Defensive Badges </p>
                                 {defensiveBadges()}
                             </div>
-                            <div className="container">
+                            <div className="box">
                                 <p className="has-text-weight-semibold "> Personality Badges </p>
                                 {personalityBadges()}
                             </div>
                         </div>
                     </div>
-                    <div className="columns is-multiline is-gapless">
+                    <div className="columns is-multiline is-mobile is-gapless">
                         <div className="column is-full">
                             <p className="has-text-weight-bold">Tendencies</p>
                         </div>
-                        <div className="column is-one-fifth">
-                            <p className="has-text-weight-semibold "> Shooting </p>
+                        <div className="column is-one-fifth-tablet is-half-mobile">
                             {shootingTendencies()}
                         </div>
-                        <div className="column is-one-fifth">
-                            <p className="has-text-weight-semibold "> Isolation </p>
+                        <div className="column is-one-fifth-tablet is-half-mobile">
                             {isoTendencies()}
-                            <p className="has-text-weight-semibold "> Dribble Moves </p>
                             {dribbleTendencies()}
-                            <p className="has-text-weight-semibold "> Passing </p>
                             {passTendencies()}
                         </div>
-                        <div className="column is-one-fifth">
-                            <p className="has-text-weight-semibold "> Post </p>
+                        <div className="column is-one-fifth-tablet is-half-mobile">
                             {postTendencies()}
                         </div>
-                        <div className="column is-one-fifth">
-                            <p className="has-text-weight-semibold "> Playbook </p>
+                        <div className="column is-one-fifth-tablet is-half-mobile">
                             {playbookTendencies()}
-                            <p className="has-text-weight-semibold "> Defensive </p>
                             {defensiveTendencies()}
                         </div>
                     </div>

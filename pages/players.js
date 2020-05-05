@@ -1,21 +1,31 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { useRouter } from 'next/router'
-import Layout from "../components/layout";
 import { getPlayersData, getPlayersByPage } from "../lib/players";
+
+import Layout from "../components/layout";
+import FilterBox from "../components/filterbox"
 
 export default function Players({ allPlayers, length }) {
     const [page, setPage] = useState(1)
     const [players, setPlayers] = useState(getPlayersByPage(1));
     const router = useRouter()
 
+    const handlePlayers = (players) => setPlayers(players)
     const handlePage = (dir) => {
         if (dir === "prev") {
-            setPage(page - 1);
+            if (page === 0) {
+                // cant go back my boy
+            } else {
+                setPage(page - 1);
+            }
         } else {
             setPage(page + 1);
         }
-        setPlayers(getPlayersByPage(page))
     }
+
+    useEffect(() => {
+        setPlayers(getPlayersByPage(page))
+    }, [page])
 
     const handleClick = (e, playerId) => {
         e.preventDefault();
@@ -40,8 +50,8 @@ export default function Players({ allPlayers, length }) {
     const renderPlayerData = () => {
         return players.map(player => {
             return (
-                <Fragment>
-                    <div className="columns is-mobile is-gapless is-marginless" onClick={(e) => handleClick(e, player.id)} key={player.id} id="player-link">
+                <Fragment key={player.id}>
+                    <div className="columns is-mobile is-gapless is-marginless" id="player-link" onClick={(e) => handleClick(e, player.id)}>
                         <div className="column is-one-fifth-mobile is-2-tablet">
                             {player.name}
                         </div>
@@ -74,7 +84,7 @@ export default function Players({ allPlayers, length }) {
             <div className="container">
                 <div className="columns">
                     <div className="column is-full">
-                        Filter component
+                        <FilterBox />
                     </div>
                 </div>
                 <div className="divider is-right"></div>
@@ -97,6 +107,14 @@ export default function Players({ allPlayers, length }) {
                 </div>
                 <div className="divider is-right"></div>
                 {renderPlayerData()}
+                <div className="columns">
+                    <div className="column is-full">
+                        <nav className="pagination is-centered" role="navigation" aria-label="pagination">
+                            <a className="pagination-previous" onClick={() => handlePage("prev")} disabled={page <= 1}>Previous</a>
+                            <a className="pagination-next" onClick={() => handlePage("next")}>Next page</a>
+                        </nav>
+                    </div>
+                </div>
             </div>
         </Layout>
     )

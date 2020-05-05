@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 
 export default function Attributes(props) {
-    const { attributes } = props;
+    const { attributes, attrName } = props;
 
     const ratingColor = (number) => {
         let color = ""
@@ -30,8 +30,9 @@ export default function Attributes(props) {
     }
 
     return (
-        <Fragment>
+        <div className="box">
+            <p className="has-text-weight-semibold "> {attrName} </p>
             {renderTags()}
-        </Fragment>
+        </div>
     )
 }
