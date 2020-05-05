@@ -446,36 +446,3 @@ export async function getStaticProps({ params }) {
         }
     }
 }
-
-// {/* <div className="buttons has-addons">
-//                                     <button 
-//                                         className={`button ${view === "stats" ? "is-active" : ""}`}
-//                                         onClick={() => handleView("stats")} 
-//                                     >
-//                                         Stats
-//                                     </button>
-//                                     <button 
-//                                         className={`button ${view === "badges" ? "is-active" : ""}`} 
-//                                         onClick={() => handleView("badges")} 
-//                                     >
-//                                         Badges
-//                                     </button>
-//                                     <button 
-//                                         className={`button ${view === "tendencies" ? "is-active" : ""}`} 
-//                                         onClick={() => handleView("tendencies")} 
-//                                     >
-//                                         Tendencies
-//                                     </button>
-//                                     <button 
-//                                         className={`button ${view === "animations" ? "is-active" : ""}`} 
-//                                         onClick={() => handleView("animations")} 
-//                                     >
-//                                         Animations
-//                                     </button>
-//                                     <button 
-//                                         className={`button ${view === "diamond-shoe" ? "is-active" : ""}`} 
-//                                         onClick={() => handleView("diamond-shoe")} 
-//                                     >
-//                                         Best Diamond Shoe
-//                                     </button>
-//                                 </div> */}
