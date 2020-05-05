@@ -405,7 +405,7 @@ export default function Player({ playerData }) {
                             <p className="subtitle">
                                 Overall: {playerData.overall}
                                 <br />
-                                Position: {playerData.position} {playerData.secondary_position != null ? `/${playerData.secondary_position}` : ""}
+                                Position: {playerData.position}{playerData.secondary_position != null ? `/${playerData.secondary_position}` : ""}
                             </p>
                         </div>
                     </div>

@@ -3,7 +3,7 @@ import Autosuggest from "react-autosuggest"
 import { getPlayersData, getPlayerData } from "../lib/players"
 
 export default function SearchPlayers(props) {
-    const { handlePlayer, playerNum } = props;
+    const { handlePlayer, playerInfo } = props;
     const allPlayers = getPlayersData();
     const [value, setValue] = useState('');
     const [players, setPlayers] = useState([]);
@@ -11,7 +11,7 @@ export default function SearchPlayers(props) {
     const onChange = (event, { newValue, method }) => setValue(newValue)
     const handleClick = (e, playerId) => {
         e.preventDefault();
-        handlePlayer(playerNum, getPlayerData(playerId))
+        handlePlayer(playerInfo, getPlayerData(playerId))
     }
 
     const getSuggestions = value => {
@@ -19,7 +19,6 @@ export default function SearchPlayers(props) {
         const inputLength = inputValue.length;
 
         return inputLength === 0 ? [] : allPlayers.filter(lang => {
-            console.log(lang.name);
             let name = lang.name.toLowerCase().split(" ");
             
             return (
@@ -45,7 +44,6 @@ export default function SearchPlayers(props) {
 
     return (
         <Autosuggest
-            id="navbar-search"
             suggestions={players}
             onSuggestionsFetchRequested={onSuggestionsFetchRequested}
             onSuggestionsClearRequested={onSuggestionsClearRequested}
