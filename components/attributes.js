@@ -7,9 +7,10 @@ export default function Attributes(props) {
         let color = ""
         let num = parseInt(number)
         switch (true) {
+            case (num < 50): color = "is-link"; break;
             case (num < 70): color = "is-danger"; break;
             case (num < 80): color = "is-warning"; break;
-            case (num < 89): color = "is-primary"; break;
+            case (num < 89): color = "is-info"; break;
             default: color = "is-success";
         }
         return (

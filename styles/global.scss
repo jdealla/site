@@ -1,2 +1,39 @@
 @charset "utf-8";
+
+$bronze: #CD7F32;
+$silver: silver;
+$gold: gold;
+$hof: #8A2BE2;
+
+$info: #51B364;
+$success: #007000;
+$link: #B60A1C;
+$danger: red;
+
+$tabs-link-active-color: hsl(217, 71%, 53%);
+
+.tag {
+    &.HOF {
+        background-color: $hof;
+        color: white;
+    }
+    &.Gold {
+        background-color: $gold;
+        color: white;
+    }
+    &.Silver {
+        background-color: $silver;
+        color: white;
+    }
+    &.Bronze {
+        background-color: $bronze;
+        color: white;
+    }
+    &.Yes {
+        background-color: $bronze;
+        color: white;
+    }
+}
+
 @import "../node_modules/bulma/bulma.sass";
+

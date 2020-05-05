@@ -12,7 +12,6 @@ export default function SearchBar() {
     const onChange = (event, { newValue, method }) => setValue(newValue)
     const handleClick = (e, playerId) => {
         e.preventDefault();
-        console.log(playerId)
         router.push(`/players/${playerId}`)
     }
 
@@ -40,7 +39,7 @@ export default function SearchBar() {
     )
 
     const inputProps = {
-        placeholder: 'Search for players here',
+        placeholder: 'Search players',
         value,
         onChange
     }

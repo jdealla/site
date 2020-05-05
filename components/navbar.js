@@ -20,8 +20,12 @@ export default function NavBar() {
 
             <div id="navbarBasicExample" className="navbar-menu">
                 <div className="navbar-start">
-                    <a className="navbar-item" href="/players">Players</a>
-                    <a className="navbar-item">Compare</a>
+                    <Link href="/players" passHref>
+                        <a className="navbar-item" href="/players">Players</a>
+                    </Link>
+                    <Link href="/compare" passHref>
+                        <a className="navbar-item">Compare</a>
+                    </Link>
                 </div>
 
                 <div className="navbar-end">
