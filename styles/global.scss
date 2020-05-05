@@ -12,6 +12,8 @@ $danger: red;
 
 $tabs-link-active-color: hsl(217, 71%, 53%);
 
+$divider-margin-size: 10px;
+
 .tag {
     &.HOF {
         background-color: $hof;
@@ -35,5 +37,13 @@ $tabs-link-active-color: hsl(217, 71%, 53%);
     }
 }
 
-@import "../node_modules/bulma/bulma.sass";
+#player-link {
+    cursor: pointer;
+    &:hover {
+        color: black;
+        font-weight: bold;
+    }
+}
 
+@import "../node_modules/bulma/bulma.sass";
+@import "@creativebulma/bulma-divider";
