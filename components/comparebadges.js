@@ -55,9 +55,9 @@ export default function PlayerBadges(props) {
                 <thead>
                     <tr>
                         <td className="has-text-weight-semibold">{name}</td>
-                        <td className="has-text-weight-semibold">{players.player1.name}</td>
-                        <td className="has-text-weight-semibold">Difference</td>
-                        <td className="has-text-weight-semibold">{players.player2.name}</td>
+                        <td className="has-text-weight-semibold has-text-centered">{players.player1.name}</td>
+                        <td className="has-text-weight-semibold has-text-centered">Difference</td>
+                        <td className="has-text-weight-semibold has-text-centered">{players.player2.name}</td>
                     </tr>
                 </thead>
                 <tbody>

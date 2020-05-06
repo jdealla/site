@@ -1,12 +1,13 @@
-import { Fragment, useState, useEffect } from "react";
+import Head from "next/head";
+import { useState, useEffect } from "react";
 import { useRouter } from 'next/router'
-import { getPlayersData, getPlayersByPage } from "../lib/players";
+import { getPlayersByPage } from "../lib/players";
 
 import Layout from "../components/layout";
 import FilterBox from "../components/filterbox"
 import PlayersList from "../components/playerslist"
 
-export default function Players({ allPlayers }) {
+export default function Players() {
     const [page, setPage] = useState(1)
     const [players, setPlayers] = useState(getPlayersByPage(1));
     const router = useRouter()
@@ -33,23 +34,11 @@ export default function Players({ allPlayers }) {
         router.push(`/players/${playerId}`)
     }
 
-    const getPlayerHeight = (height) => {
-        let heightString = "";
-        let feet = height / 12;
-
-        if (Number.isInteger(feet)) return `${feet}'`;
-
-        heightString += parseInt(feet).toString();
-        let feetInches = parseInt(feet) * 12;
-        let inches = height - feetInches;
-
-        heightString += `'${inches}"`
-
-        return heightString;
-    }
-
     return (
         <Layout>
+            <Head>
+                <title>2KDB All Players List</title>
+            </Head>
             <div className="container">
                 <div className="columns">
                     <div className="column is-full">
@@ -89,14 +78,4 @@ export default function Players({ allPlayers }) {
             </div>
         </Layout>
     )
-}
-
-export async function getStaticProps() {
-    const allPlayers = getPlayersData();
-
-    return {
-        props: {
-            allPlayers
-        }
-    }
 }

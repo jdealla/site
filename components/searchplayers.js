@@ -2,6 +2,8 @@ import { useState } from "react";
 import Autosuggest from "react-autosuggest"
 import { getPlayersData, getPlayerData } from "../lib/players"
 
+import styles from "./searchplayers.module.css"
+
 export default function SearchPlayers(props) {
     const { handlePlayer, playerInfo } = props;
     const allPlayers = getPlayersData();
@@ -47,8 +49,8 @@ export default function SearchPlayers(props) {
 
     return (
         <Autosuggest
+            theme={styles}
             suggestions={players}
-            multiSection={false}
             onSuggestionsFetchRequested={onSuggestionsFetchRequested}
             onSuggestionsClearRequested={onSuggestionsClearRequested}
             getSuggestionValue={getSuggestionValue}

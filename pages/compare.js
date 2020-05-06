@@ -31,10 +31,10 @@ export default function Compare() {
         }
     }
 
-    const playerInfoContainer = (playerData) => {
+    const playerInfoContainer = (playerData, playerId) => {
         return (
             <div className="notification">
-                <button className="delete" onClick={() => handlePlayer("player1", null)}></button>
+                <button className="delete" onClick={() => handlePlayer(playerId, null)}></button>
                 <p className="subtitle">
                     {playerData.name}
                     <br />
@@ -54,7 +54,7 @@ export default function Compare() {
                 } else {
                     let playerData = players.player1
 
-                    return playerInfoContainer(playerData);
+                    return playerInfoContainer(playerData, "player1");
                 }
             }
             case 2: {
@@ -63,7 +63,7 @@ export default function Compare() {
                 } else {
                     let playerData = players.player2
                     
-                    return playerInfoContainer(playerData)
+                    return playerInfoContainer(playerData, "player2")
                 }
             }
         }

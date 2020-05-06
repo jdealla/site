@@ -46,16 +46,16 @@ export default function CompareStats(props) {
                 <thead>
                     <tr>
                         <td className="has-text-weight-semibold">{name}</td>
-                        <td className="has-text-weight-semibold">{players.player1.name}</td>
-                        <td className="has-text-weight-semibold">Difference</td>
-                        <td className="has-text-weight-semibold">{players.player2.name}</td>
+                        <td className="has-text-weight-semibold has-text-centered">{players.player1.name}</td>
+                        <td className="has-text-weight-semibold has-text-centered">Difference</td>
+                        <td className="has-text-weight-semibold has-text-centered">{players.player2.name}</td>
                     </tr>
                 </thead>
                 <tbody>
                     {stats.map((rating, i) => {
                         return (
                             <tr key={i}>
-                                <td>{rating.name}</td>
+                                <td className="has-text-weight-semibold">{rating.name}</td>
                                 <td className="has-text-centered">{rating.player1}</td>
                                 {difference(rating.player1, rating.player2)}
                                 <td className="has-text-centered">{rating.player2}</td>

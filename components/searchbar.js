@@ -3,6 +3,8 @@ import Autosuggest from "react-autosuggest"
 import { getPlayersData } from "../lib/players"
 import { useRouter } from 'next/router'
 
+import styles from "./searchbar.module.css"
+
 export default function SearchBar(props) {
     const allPlayers = getPlayersData();
     const [value, setValue] = useState('');
@@ -47,6 +49,7 @@ export default function SearchBar(props) {
 
     return (
         <Autosuggest
+            theme={styles}
             suggestions={players}
             onSuggestionsFetchRequested={onSuggestionsFetchRequested}
             onSuggestionsClearRequested={onSuggestionsClearRequested}

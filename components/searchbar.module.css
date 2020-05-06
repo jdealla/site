@@ -1,12 +1,8 @@
-body {
-    font-family: Helvetica, sans-serif;
-}
-  
-.react-autosuggest__container {
+.container {
     position: relative;
 }
 
-.react-autosuggest__input {
+.input {
     width: 300px;
     height: 30px;
     padding: 10px 20px;
@@ -17,20 +13,20 @@ body {
     border-radius: 4px;
 }
 
-.react-autosuggest__input--focused {
+.inputFocused {
     outline: none;
 }
 
-.react-autosuggest__input--open {
+.inputOpen {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
 
-.react-autosuggest__suggestions-container {
+.suggestionsContainer {
     display: none;
 }
 
-.react-autosuggest__suggestions-container--open {
+.suggestionsContainerOpen {
     display: block;
     position: absolute;
     top: 32px;
@@ -51,17 +47,17 @@ body {
     z-index: 2;
 }
 
-.react-autosuggest__suggestions-list {
+.suggestionsList {
     margin: 0;
     padding: 0;
     list-style-type: none;
 }
 
-.react-autosuggest__suggestion {
+.suggestion {
     cursor: pointer;
     padding: 10px 20px;
 }
 
-.react-autosuggest__suggestion--highlighted {
+.suggestionHighlighted {
     background-color: #ddd;
 }
