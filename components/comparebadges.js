@@ -33,24 +33,41 @@ export default function PlayerBadges(props) {
             }
         }
 
+        //sort and change difference color
+        const difference = (badge1, badge2) => {
+            let diff = levelToNum(badge1) - levelToNum(badge2)
+            let diffColor;
+
+            if (diff > 0)
+                diffColor = "success";
+            else if (diff === 0)
+                diffColor = ""
+            else 
+                diffColor = "danger"
+
+            return (
+                <td className={`has-text-${diffColor} has-text-centered`}>{diff}</td>
+            )
+        }
+
         return (
             <table className="table is-striped is-fullwidth">
                 <thead>
                     <tr>
-                        <td>{name}</td>
-                        <td>{players.player1.name}</td>
-                        <td>{players.player2.name}</td>
-                        <td>Difference</td>
+                        <td className="has-text-weight-semibold">{name}</td>
+                        <td className="has-text-weight-semibold">{players.player1.name}</td>
+                        <td className="has-text-weight-semibold">Difference</td>
+                        <td className="has-text-weight-semibold">{players.player2.name}</td>
                     </tr>
                 </thead>
                 <tbody>
                     {stats.map(badge => {
                         return (
                             <tr>
-                                <td>{badge.name}</td>
-                                <td>{badge.player1}</td>
-                                <td>{badge.player2}</td>
-                                <td><strong>{levelToNum(badge.player1) - levelToNum(badge.player2)}</strong></td>
+                                <td className="has-text-weight-semibold">{badge.name}</td>
+                                <td className={`${badge.player1} has-text-centered`}>{badge.player1}</td>
+                                {difference(badge.player1, badge.player2)}
+                                <td className={`${badge.player2} has-text-centered`}>{badge.player2}</td>
                             </tr>
                         )
                     })}

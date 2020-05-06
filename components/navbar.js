@@ -2,13 +2,14 @@ import { useState } from "react";
 import Link from "next/link";
 import SearchBar from "../components/searchbar";
 
-export default function NavBar() {
+export default function NavBar(props) {
+    const { index } = props;
     const [view, setView] = useState(false);
 
     const handleClick = () => setView(!view);
 
     return (
-        <nav className="navbar" role="navigation" aria-label="main navigation">
+        <nav className={`navbar ${index ? "is-fixed-top" : ""}`} role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
                 <Link href="/" passHref>
                     <a className="navbar-item">
@@ -32,12 +33,18 @@ export default function NavBar() {
                         <a className="navbar-item">Compare</a>
                     </Link>
                 </div>
-
-                <div className="navbar-end">
-                    <div className="navbar-item">
-                        <SearchBar />
-                    </div>
-                </div>
+                {
+                    index ? (
+                        <div></div>
+                    ) : (
+                        <div className="navbar-end">
+                            <div className="navbar-item">
+                                <SearchBar />
+                            </div>
+                        </div>
+                    )
+                }
+                
             </div>
         </nav>
     )

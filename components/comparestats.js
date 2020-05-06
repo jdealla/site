@@ -29,10 +29,10 @@ export default function CompareStats(props) {
             <table className="table is-striped is-fullwidth">
                 <thead>
                     <tr>
-                        <td>{name}</td>
-                        <td>{players.player1.name}</td>
-                        <td>{players.player2.name}</td>
-                        <td>Difference</td>
+                        <td className="has-text-weight-semibold">{name}</td>
+                        <td className="has-text-weight-semibold">{players.player1.name}</td>
+                        <td className="has-text-weight-semibold">Difference</td>
+                        <td className="has-text-weight-semibold">{players.player2.name}</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,8 +41,8 @@ export default function CompareStats(props) {
                             <tr>
                                 <td>{rating.name}</td>
                                 <td>{rating.player1}</td>
-                                <td>{rating.player2}</td>
                                 <td><strong>{rating.player1 - rating.player2}</strong></td>
+                                <td>{rating.player2}</td>
                             </tr>
                         )
                     })}

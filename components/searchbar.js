@@ -33,15 +33,15 @@ export default function SearchBar() {
     const onSuggestionsClearRequested = () => setPlayers([])
     const getSuggestionValue = (suggestion) => suggestion.name
     const renderSuggestion = (suggestion) => (
-        <span onClick={(e) => handleClick(e, suggestion.id)}>
+        <div onClick={(e) => handleClick(e, suggestion.id)}>
             {suggestion.name} | {suggestion.overall} | {suggestion.position}
-        </span>
+        </div>
     )
 
     const inputProps = {
         placeholder: 'Search players',
         value,
-        onChange
+        onChange,
     }
 
     return (

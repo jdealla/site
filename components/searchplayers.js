@@ -31,7 +31,7 @@ export default function SearchPlayers(props) {
     const onSuggestionsClearRequested = () => setPlayers([])
     const getSuggestionValue = (suggestion) => suggestion.name
     const renderSuggestion = (suggestion) => (
-        <span onClick={(e) => handleClick(e, suggestion.id)}>
+        <span className="is-marginless" onClick={(e) => handleClick(e, suggestion.id)}>
             {suggestion.name} | {suggestion.overall} | {suggestion.position}
         </span>
     )
@@ -45,6 +45,7 @@ export default function SearchPlayers(props) {
     return (
         <Autosuggest
             suggestions={players}
+            multiSection={false}
             onSuggestionsFetchRequested={onSuggestionsFetchRequested}
             onSuggestionsClearRequested={onSuggestionsClearRequested}
             getSuggestionValue={getSuggestionValue}

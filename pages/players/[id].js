@@ -369,9 +369,6 @@ export default function Player({ playerData }) {
             )
             case "tendencies": return (
                 <Fragment>
-                    <div className="column is-full">
-                        <p className="has-text-weight-bold">Tendencies</p>
-                    </div>
                     <div className="column is-one-fifth-tablet is-half-mobile">
                         {shootingTendencies()}
                     </div>
