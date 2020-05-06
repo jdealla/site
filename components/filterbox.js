@@ -6,11 +6,8 @@ export default function FilterBox(props) {
     return (
         <div className="container">
             <div className="columns is-mobile">
-                <div className="column">
-                    <Panel handlePlayers={handlePlayers} panelName="Filter" />
-                </div>
-                <div className="column">
-                    <Panel handlePlayers={handlePlayers} panelName="Sort" />
+                <div className="column is-full">
+                    <Panel handlePlayers={handlePlayers} />
                 </div>
             </div>
         </div>

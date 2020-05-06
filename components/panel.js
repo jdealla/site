@@ -6,7 +6,7 @@ export default function Panel(props) {
 
     return (
         <article className="panel is-transparent">
-            <p className="panel-heading">{panelName}</p>
+            <p className="panel-heading">Filter/Sort Players</p>
 
             <div className="panel-block">
                 <p className="control has-icons-left">
@@ -15,16 +15,16 @@ export default function Panel(props) {
             </div>
 
             <p className="panel-tabs">
-                <a className="is-active">Stats</a>
-                <a>Tendencies</a>
-                <a>Badges</a>
-                <a>Animations</a>
+                <a className={view === "stats" ? "is-active" : ""} onClick={() => setView("stats")}>Stats</a>
+                <a className={view === "stats" ? "is-active" : ""} onClick={() => setView("tendencies")}>Tendencies</a>
+                <a className={view === "stats" ? "is-active" : ""} onClick={() => setView("badges")}>Badges</a>
+                <a className={view === "stats" ? "is-active" : ""} onClick={() => setView("animations")}>Animations</a>
             </p>
 
             <div className="panel-block">
                 <div className="container">
                     <div className="columns">
-                        <div className="column is-half is-marginless">
+                        <div className="column is-one-quarter is-marginless">
                             <ul className="panel-list">
                                 <li className="panel-item">Overall</li>
                                 <li className="panel-item">Stats</li>
@@ -39,8 +39,14 @@ export default function Panel(props) {
                             </ul>
                         </div>
                         <div className="divider is-vertical is-left"></div>
-                        <div className="column is-half is-paddingless">
+                        <div className="column is-one-quarter is-paddingless">
                             Column 2
+                        </div>
+                        <div className="column is-one-quarter is-paddingless">
+                        Column 3
+                        </div>
+                        <div className="column is-one-quarter is-paddingless">
+                        Column 4
                         </div>
                     </div>
                 </div>

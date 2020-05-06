@@ -13,7 +13,7 @@ export default function Home() {
         <div className="hero-body">
           <div className="container has-text-centered">
             <p className="title">
-              NBA 2K MyTeam Database
+              NBA2K MyTeam Database
             </p>
             <SearchBar />
           </div>
