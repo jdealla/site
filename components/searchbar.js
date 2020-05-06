@@ -3,7 +3,7 @@ import Autosuggest from "react-autosuggest"
 import { getPlayersData } from "../lib/players"
 import { useRouter } from 'next/router'
 
-export default function SearchBar() {
+export default function SearchBar(props) {
     const allPlayers = getPlayersData();
     const [value, setValue] = useState('');
     const [players, setPlayers] = useState([]);
@@ -20,9 +20,7 @@ export default function SearchBar() {
         const inputLength = inputValue.length;
 
         return inputLength === 0 ? [] : allPlayers.filter(lang => {
-            console.log(lang.name);
             let name = lang.name.toLowerCase().split(" ");
-            
             return (
                 name[0].slice(0, inputLength) === inputValue || 
                 name[1].slice(0, inputLength) === inputValue
@@ -31,7 +29,10 @@ export default function SearchBar() {
     };
     const onSuggestionsFetchRequested = ({ value }) => setPlayers(getSuggestions(value))
     const onSuggestionsClearRequested = () => setPlayers([])
-    const getSuggestionValue = (suggestion) => suggestion.name
+    const getSuggestionValue = (suggestion) => {
+        router.push(`/players/${suggestion.id}`)
+        return suggestion.name
+    }
     const renderSuggestion = (suggestion) => (
         <div onClick={(e) => handleClick(e, suggestion.id)}>
             {suggestion.name} | {suggestion.overall} | {suggestion.position}
@@ -41,7 +42,7 @@ export default function SearchBar() {
     const inputProps = {
         placeholder: 'Search players',
         value,
-        onChange,
+        onChange
     }
 
     return (

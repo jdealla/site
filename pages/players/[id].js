@@ -1,4 +1,5 @@
 import { useState, Fragment } from "react";
+import Head from 'next/head'
 import Layout from "../../components/layout";
 import Attributes from "../../components/attributes";
 import { getPlayersIds, getPlayerData } from "../../lib/players";
@@ -71,25 +72,6 @@ export default function Player({ playerData }) {
                     <Attributes attributes={potential} attrName="Potential" />
                 </div>
             </Fragment>
-        )
-    }
-
-    const renderBadges = () => {
-        return (
-            <div className="column ">
-                    <div className="container">
-                    <p className="has-text-weight-semibold"> Finishing Badges </p>
-                    {finishingBadges()}
-                    <p className="has-text-weight-semibold "> Shooting Badges </p>
-                    {shootingBadges()}
-                    <p className="has-text-weight-semibold "> Playmaking Badges </p>
-                    {playmakingBadges()}
-                    <p className="has-text-weight-semibold "> Defensive Badges </p>
-                    {defensiveBadges()}
-                    <p className="has-text-weight-semibold "> Personality Badges </p>
-                    {personalityBadges()}
-                </div>
-            </div>
         )
     }
 
@@ -227,7 +209,7 @@ export default function Player({ playerData }) {
 
         return (
             <div className="tags">
-                {data.map((badge, i) => <span key={i} className={`tag ${badge.level}`}>{badge.name}</span>)}
+                {data.map((badge, i) => <span key={i} className={`tag ${badge.level}`}> {badge.name} </span>)}
             </div>
         )
     }
@@ -364,7 +346,20 @@ export default function Player({ playerData }) {
             case "stats": return (
                 <Fragment>
                     {renderRatings()}
-                    {renderBadges()}
+                    <div className="column ">
+                        <div className="container">
+                            <p className="has-text-weight-semibold"> Finishing Badges </p>
+                            {finishingBadges()}
+                            <p className="has-text-weight-semibold "> Shooting Badges </p>
+                            {shootingBadges()}
+                            <p className="has-text-weight-semibold "> Playmaking Badges </p>
+                            {playmakingBadges()}
+                            <p className="has-text-weight-semibold "> Defensive Badges </p>
+                            {defensiveBadges()}
+                            <p className="has-text-weight-semibold "> Personality Badges </p>
+                            {personalityBadges()}
+                        </div>
+                    </div>
                 </Fragment>
             )
             case "tendencies": return (
@@ -394,6 +389,9 @@ export default function Player({ playerData }) {
 
     return (
         <Layout>
+            <Head>
+            <title>{playerData.name} | 2KDB</title>
+            </Head>
             <div className="container is-fluid ">
                 <div className="container ">
                     <div className="columns ">

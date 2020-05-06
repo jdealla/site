@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function Panel(props) {
-    const { handlePlayers, panelName } = props;
+    const { handlePlayers } = props;
     const [view, setView] = useState("stats")
 
     return (
