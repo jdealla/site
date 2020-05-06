@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { useState, useEffect } from "react";
-import { useRouter } from 'next/router'
 import { getPlayersByPage } from "../lib/players";
 
 import Layout from "../components/layout";
@@ -10,7 +9,6 @@ import PlayersList from "../components/playerslist"
 export default function Players() {
     const [page, setPage] = useState(1)
     const [players, setPlayers] = useState(getPlayersByPage(1));
-    const router = useRouter()
 
     const handlePlayers = (players) => setPlayers(players)
     const handlePage = (dir) => {
@@ -29,10 +27,7 @@ export default function Players() {
         setPlayers(getPlayersByPage(page))
     }, [page])
 
-    const handleClick = (e, playerId) => {
-        e.preventDefault();
-        router.push(`/players/${playerId}`)
-    }
+
 
     return (
         <Layout>

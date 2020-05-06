@@ -1,7 +1,9 @@
 import { Fragment } from "react";
+import { useRouter } from 'next/router'
 
 export default function PlayersList(props) {
     const { players } = props;
+    const router = useRouter()
 
     const getPlayerHeight = (height) => {
         let heightString = "";
@@ -18,6 +20,11 @@ export default function PlayersList(props) {
         return heightString;
     }
     
+    const handleClick = (e, playerId) => {
+        e.preventDefault();
+        router.push(`/players/${playerId}`)
+    }
+
     return players.map(player => {
         return (
             <Fragment key={player.id}>
