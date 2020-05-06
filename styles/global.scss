@@ -1,17 +1,19 @@
 @charset "utf-8";
+@import "../node_modules/bulma/sass/utilities/initial-variables.sass";
 
-$blue:hsl(217, 71%, 53%);
-
+//custom variables
 $bronze: #CD7F32;
 $silver: silver;
 $gold: gold;
 $hof: #8A2BE2;
 
+//global variables
 $danger: #FF0000;
 $link: #FF9E00;
 $info: #B0FF00;
-$success: #00FF00;
+$success: rgb(0, 190, 0);
 
+//bulma component variables
 $divider-margin-size: 10px;
 $box-padding: 5px;
 $panel-heading-padding: 0.6em 0.8em;
@@ -67,7 +69,7 @@ $tabs-link-active-color: $blue;
 #player-link {
     cursor: pointer;
     &:hover {
-        color: black;
+        color: $black;
         font-weight: bold;
     }
 }
@@ -91,7 +93,10 @@ $tabs-link-active-color: $blue;
     }
 }
 
-@import "../node_modules/bulma/sass/utilities/_all.sass";
+@import "../node_modules/bulma/sass/utilities/functions.sass";
+@import "../node_modules/bulma/sass/utilities/derived-variables.sass";
+@import "../node_modules/bulma/sass/utilities/controls.sass";
+@import "../node_modules/bulma/sass/utilities/mixins.sass";
 @import "../node_modules/bulma/sass/base/_all.sass";
 @import "../node_modules/bulma/sass/layout/hero.sass";
 @import "../node_modules/bulma/sass/grid/columns.sass";

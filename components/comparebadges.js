@@ -38,9 +38,10 @@ export default function PlayerBadges(props) {
             let diff = levelToNum(badge1) - levelToNum(badge2)
             let diffColor;
 
-            if (diff > 0)
+            if (diff > 0) {
                 diffColor = "success";
-            else if (diff === 0)
+                diff = "+" + diff.toString();
+            } else if (diff === 0)
                 diffColor = ""
             else 
                 diffColor = "danger"

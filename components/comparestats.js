@@ -29,9 +29,10 @@ export default function CompareStats(props) {
             let diff = rating1 - rating2
             let diffColor;
 
-            if (diff > 0)
+            if (diff > 0) {
                 diffColor = "success";
-            else if (diff === 0)
+                diff = "+" + diff.toString();
+            } else if (diff === 0)
                 diffColor = ""
             else 
                 diffColor = "danger"
