@@ -34,7 +34,7 @@ export default function Compare() {
     const playerInfoContainer = (playerData) => {
         return (
             <div className="notification">
-                <button class="delete" onClick={() => handlePlayer("player1", null)}></button>
+                <button className="delete" onClick={() => handlePlayer("player1", null)}></button>
                 <p className="subtitle">
                     {playerData.name}
                     <br />

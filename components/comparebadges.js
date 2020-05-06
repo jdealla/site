@@ -61,9 +61,9 @@ export default function PlayerBadges(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {stats.map(badge => {
+                    {stats.map((badge, i) => {
                         return (
-                            <tr>
+                            <tr key={i}>
                                 <td className="has-text-weight-semibold">{badge.name}</td>
                                 <td className={`${badge.player1} has-text-centered`}>{badge.player1}</td>
                                 {difference(badge.player1, badge.player2)}
