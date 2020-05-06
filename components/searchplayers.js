@@ -4,9 +4,10 @@ import { getPlayersData, getPlayerData } from "../lib/players"
 
 import styles from "./searchplayers.module.css"
 
+const allPlayers = getPlayersData();
+
 export default function SearchPlayers(props) {
     const { handlePlayer, playerInfo } = props;
-    const allPlayers = getPlayersData();
     const [value, setValue] = useState('');
     const [players, setPlayers] = useState([]);
 

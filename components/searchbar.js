@@ -5,8 +5,9 @@ import { useRouter } from 'next/router'
 
 import styles from "./searchbar.module.css"
 
+const allPlayers = getPlayersData();
+
 export default function SearchBar(props) {
-    const allPlayers = getPlayersData();
     const [value, setValue] = useState('');
     const [players, setPlayers] = useState([]);
     const router = useRouter()

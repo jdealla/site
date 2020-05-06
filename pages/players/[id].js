@@ -117,7 +117,7 @@ export default function Player({ playerData }) {
             { name: 'Quick Draw', level: playerData.quick_draw },
             { name: 'Range Extender', level: playerData.range_extender },
             { name: 'Slippery Off Ball', level: playerData.slippery_off_ball },
-            { name: 'Steady Shooter', level: playerData.corner_specialist },
+            { name: 'Steady Shooter', level: playerData.steady_shooter },
             { name: 'Tireless Shooter', level: playerData.tireless_shooter },
             { name: 'Volume Shooter', level: playerData.volume_shooter },
         ];
