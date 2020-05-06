@@ -33,18 +33,15 @@ export default function NavBar(props) {
                         <a className="navbar-item">Compare</a>
                     </Link>
                 </div>
-                {
-                    index ? (
-                        <div></div>
-                    ) : (
-                        <div className="navbar-end">
-                            <div className="navbar-item">
-                                <SearchBar />
-                            </div>
+                {index ? (
+                    <div></div>
+                ) : (
+                    <div className="navbar-end">
+                        <div className="navbar-item">
+                            <SearchBar />
                         </div>
-                    )
-                }
-                
+                    </div>
+                )}  
             </div>
         </nav>
     )

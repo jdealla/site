@@ -25,6 +25,22 @@ export default function CompareStats(props) {
     }
 
     const renderTable = (name, stats) => {
+        const difference = (rating1, rating2) => {
+            let diff = rating1 - rating2
+            let diffColor;
+
+            if (diff > 0)
+                diffColor = "success";
+            else if (diff === 0)
+                diffColor = ""
+            else 
+                diffColor = "danger"
+
+            return (
+                <td className={`has-text-${diffColor} has-text-centered`}>{diff}</td>
+            )
+        }
+
         return (
             <table className="table is-striped is-fullwidth">
                 <thead>
@@ -36,13 +52,13 @@ export default function CompareStats(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {stats.map(rating => {
+                    {stats.map((rating, i) => {
                         return (
-                            <tr>
+                            <tr key={i}>
                                 <td>{rating.name}</td>
-                                <td>{rating.player1}</td>
-                                <td><strong>{rating.player1 - rating.player2}</strong></td>
-                                <td>{rating.player2}</td>
+                                <td className="has-text-centered">{rating.player1}</td>
+                                {difference(rating.player1, rating.player2)}
+                                <td className="has-text-centered">{rating.player2}</td>
                             </tr>
                         )
                     })}

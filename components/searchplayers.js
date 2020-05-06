@@ -29,7 +29,10 @@ export default function SearchPlayers(props) {
     };
     const onSuggestionsFetchRequested = ({ value }) => setPlayers(getSuggestions(value))
     const onSuggestionsClearRequested = () => setPlayers([])
-    const getSuggestionValue = (suggestion) => suggestion.name
+    const getSuggestionValue = (suggestion) => {
+        handlePlayer(playerInfo, suggestion);
+        return suggestion.name
+    }
     const renderSuggestion = (suggestion) => (
         <span className="is-marginless" onClick={(e) => handleClick(e, suggestion.id)}>
             {suggestion.name} | {suggestion.overall} | {suggestion.position}
