@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Layout from "../../components/layout";
 import Attributes from "../../components/attributes";
 import { getPlayersIds, getPlayerData } from "../../lib/players";
+import { getPlayerHeight } from "../../lib/players";
 
 export default function Player({ playerData }) {
     const [view, setView] = useState("stats");
@@ -184,6 +185,11 @@ export default function Player({ playerData }) {
             { name: 'Legendary Work Ethic', level: playerData.legendary_work_ethic },
             { name: 'Pat My Back', level: playerData.pat_my_back },
             { name: 'Unpredictable', level: playerData.unpredictable },
+            { name: 'Reserved', level: playerData.reserved },
+            { name: 'Friendly', level: playerData.friendly },
+            { name: 'Team Player', level: playerData.team_player },
+            { name: 'Keep It Real', level: playerData.keep_it_real },
+            { name: 'Laid Back', level: playerData.laid_back },
         ];
         return renderTag(badges);
     }
@@ -397,8 +403,24 @@ export default function Player({ playerData }) {
                     <div className="columns ">
                         <div className="column is-three-fifths">
                             <p className="title">{playerData.name}</p>
+							<p className="subtitle">
+							{playerData.collection} / {playerData.theme}
+							<br />
+							    Height: {getPlayerHeight(playerData.height)}
+								<br />
+								Weight: {playerData.weight}lbs
+								<br />
+							</p>
                             <p className="subtitle">
+							    Nickname: {playerData.nickname}
+								<br />
+								Team: {playerData.team}
+								<br />
                                 Overall: {playerData.overall}
+								<br />
+								Offensive Overall: {playerData.off_overall}
+								<br />
+								Defensive Overall: {playerData.def_overall}
                                 <br />
                                 Position: {playerData.position}{playerData.secondary_position != null ? `/${playerData.secondary_position}` : ""}
                             </p>
