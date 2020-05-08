@@ -24,10 +24,9 @@ export default function Players() {
     }
 
     useEffect(() => {
+        // slice(page) for filtered players 
         setPlayers(getPlayersByPage(page))
     }, [page])
-
-
 
     return (
         <Layout>

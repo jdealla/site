@@ -396,7 +396,7 @@ export default function Player({ playerData }) {
     return (
         <Layout>
             <Head>
-            <title>{playerData.name} | 2KDB</title>
+                <title>{playerData.name} | 2KDB</title>
             </Head>
             <div className="container is-fluid ">
                 <div className="container ">
