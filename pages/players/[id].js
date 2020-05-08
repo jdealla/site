@@ -401,7 +401,7 @@ export default function Player({ playerData }) {
             <div className="container is-fluid ">
                 <div className="container ">
                     <div className="columns ">
-                        <div className="column is-three-fifths">
+                        <div className="column is-one-third">
                             <p className="title">{playerData.name}</p>
 							<p className="subtitle">
 							{playerData.collection} / {playerData.theme}
@@ -424,6 +424,12 @@ export default function Player({ playerData }) {
                                 <br />
                                 Position: {playerData.position}{playerData.secondary_position != null ? `/${playerData.secondary_position}` : ""}
                             </p>
+                        </div>
+                        <div className="column is-one-third">
+                            <img src={`https://via.placeholder.com/225x313.png?text=${playerData.id}`} />
+                        </div>
+                        <div className="column">
+                            Hot Zones
                         </div>
                     </div>
                     <div className="columns ">
