@@ -1,4 +1,7 @@
-import { useState, Fragment } from "react";
+import Head from "next/head";
+import { useState } from "react";
+import { getPlayerHeight } from "../lib/players";
+
 import Layout from "../components/layout";
 import SearchPlayers from "../components/searchplayers";
 import CompareStats from "../components/comparestats";
@@ -13,38 +16,67 @@ export default function Compare() {
     }
 
     const renderView = () => {
+        const heroView = (
+            <section className="hero is-fullheight-with-navbar">
+                <div className="hero-body">
+                    <div className="container has-text-centered">
+                    </div>
+                </div>
+            </section>
+        )
+
         switch(view) {
             case "stats": {
                 if (players.player1 == null || players.player2 == null)
-                    return;
+                    return heroView;
                 else
                     return <CompareStats players={players} />;
             }
             case "badges": {
                 if (players.player1 == null || players.player2 == null)
-                    return;
+                    return heroView;
                 else
                     return <CompareBadges players={players} />;
             }
-            case "tendencies": return;
-            case "animations": return;
-        }
-    }
+            case "tendencies": return heroView;
+            case "animations": return heroView;
+        };
+    };
 
     const playerInfoContainer = (playerData, playerId) => {
+        console.log(playerData);
         return (
-            <div className="notification">
-                <button className="delete" onClick={() => handlePlayer(playerId, null)}></button>
-                <p className="subtitle">
-                    {playerData.name}
-                    <br />
-                    Overall: {playerData.overall}
-                    <br />
-                    Position: {playerData.position}{playerData.secondary_position != null ? `/${playerData.secondary_position}` : ""}
-                </p>
-            </div>
+            <article className="message">
+                <div className="message-header has-text-centered">
+                    <p>{playerData.name}</p>
+                    <button className="delete" aria-label="delete" onClick={() => handlePlayer(playerId, null)}></button>
+                </div>
+                <div className="message-body">
+                    <div className="columns">
+                        <div className="column is-half">
+                            <p>
+                                Overall: {playerData.overall}
+                            </p>
+                            <p>
+                                Height: {getPlayerHeight(playerData.height)}
+                            </p>
+                            Position: {playerData.position}{playerData.secondary_position != null ? `/${playerData.secondary_position}` : ""}
+                        </div>
+                        <div className="column is-half">
+                            <p>Total Badges: </p>
+                            <div className="tags has-addons">
+                                <span className="tag HOF">{playerData.hof_badges}</span>
+                                <span className="tag Gold">{playerData.gold_badges}</span>
+                                <span className="tag Silver">{playerData.silver_badges}</span>
+                                <span className="tag Bronze">{playerData.bronze_badges}</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </article>
         )
-    }
+    };
 
     const renderSearch = (playerNum) => {
         switch(playerNum) {
@@ -71,13 +103,15 @@ export default function Compare() {
 
     return (
         <Layout>
+            <Head>
+                <title>2KDB Compare Players Page</title>
+            </Head>
             <div className="container">
-                <p className="has-text-centered has-text-weight-semibold">Compare Player Cards</p>
                 <div className="level">
                     <div className="level-item">
                         {renderSearch(1)}
                         
-                    </div>    
+                    </div>
                     <div className="level-item">
                         {renderSearch(2)}
                     </div>
@@ -95,6 +129,9 @@ export default function Compare() {
                 <div className="columns">
                     {renderView()}
                 </div>
+            </div>
+            <div className="container">
+
             </div>
         </Layout>
     )

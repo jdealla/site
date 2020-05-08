@@ -1,21 +1,21 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
-import Link from "next/link";
 import SearchBar from "../components/searchbar";
 
 export default function NavBar(props) {
     const { index } = props;
     const [view, setView] = useState(false);
+    const router = useRouter();
 
     const handleClick = () => setView(!view);
+    const handleClickPlayer = (playerId) => router.push(`/players/${playerId}`);
 
     return (
         <nav className={`navbar ${index ? "is-fixed-top" : ""}`} role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
-                <Link href="/" passHref>
-                    <a className="navbar-item">
-                        2KDB
-                    </a>
-                </Link>
+                <a className="navbar-item" onClick={() => router.push(`/`)}>
+                    2KDB
+                </a>
 
                 <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={handleClick}>
                     <span aria-hidden="true"></span>
@@ -26,22 +26,16 @@ export default function NavBar(props) {
 
             <div className={`navbar-menu is-transparent ${view ? "is-active" : ""}`}>
                 <div className="navbar-start">
-                    <Link href="/players" passHref>
-                        <a className="navbar-item" href="/players">Players</a>
-                    </Link>
-                    <Link href="/compare" passHref>
-                        <a className="navbar-item">Compare</a>
-                    </Link>
-                </div>
-                {index ? (
-                    <div></div>
-                ) : (
-                    <div className="navbar-end">
+                    {index ? (
+                        <></>
+                    ) : (
                         <div className="navbar-item">
-                            <SearchBar />
+                            <SearchBar handleClick={handleClickPlayer} />
                         </div>
-                    </div>
-                )}  
+                    )}
+                    <a className="navbar-item" onClick={() => router.push(`/players`)}>Players</a>
+                    <a className="navbar-item" onClick={() => router.push(`/compare`)}>Compare</a>
+                </div>
             </div>
         </nav>
     )

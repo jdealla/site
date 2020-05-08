@@ -411,7 +411,7 @@ export default function Player({ playerData }) {
                                     <li className={view === "stats" ? "is-active" : ""} onClick={() => setView("stats")}><a>Stats</a></li>
                                     <li className={view === "tendencies" ? "is-active" : ""} onClick={() => setView("tendencies")}><a>Tendencies</a></li>
                                     <li className={view === "animations" ? "is-active" : ""} onClick={() => setView("animations")}><a>Signature/Animations</a></li>
-                                    <li className={view === "diamond-shoe" ? "is-active" : ""} onClick={() => setView("diamond-shoe")}><a>Best Diamond Shoe</a></li>
+                                    <li className={view === "diamond-shoe" ? "is-active" : ""} onClick={() => setView("diamond-shoe")}><a>Diamond Shoe Fit</a></li>
                                 </ul>
                             </div>
                         </div>

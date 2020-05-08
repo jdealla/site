@@ -1,25 +1,11 @@
 import { Fragment } from "react";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
+import { getPlayerHeight } from "../lib/players";
 
 export default function PlayersList(props) {
     const { players } = props;
     const router = useRouter()
 
-    const getPlayerHeight = (height) => {
-        let heightString = "";
-        let feet = height / 12;
-
-        if (Number.isInteger(feet)) return `${feet}'`;
-
-        heightString += parseInt(feet).toString();
-        let feetInches = parseInt(feet) * 12;
-        let inches = height - feetInches;
-
-        heightString += `'${inches}"`
-
-        return heightString;
-    }
-    
     const handleClick = (e, playerId) => {
         e.preventDefault();
         router.push(`/players/${playerId}`)

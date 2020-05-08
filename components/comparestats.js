@@ -32,10 +32,12 @@ export default function CompareStats(props) {
             if (diff > 0) {
                 diffColor = "success";
                 diff = "+" + diff.toString();
-            } else if (diff === 0)
-                diffColor = ""
-            else 
+            } else if (diff === 0) {
+                diffColor = "";
+                diff = "-";
+            } else {
                 diffColor = "danger"
+            }
 
             return (
                 <td className={`has-text-${diffColor} has-text-centered`}>{diff}</td>
