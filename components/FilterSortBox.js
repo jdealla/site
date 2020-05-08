@@ -50,7 +50,7 @@ export default function FilterSortBox(props) {
                 <div className="column is-full">
                     <div className="container">
                         <div className="buttons">
-                            {getItemsByView().map(item => <button className="button">{item}</button>)}
+                            {getItemsByView().map((item, i) => <button key={i} className="button">{item}</button>)}
                         </div>
                     </div>
                 </div>
