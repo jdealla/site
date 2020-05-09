@@ -75,8 +75,13 @@ export default function Player({ playerData }) {
                     </div>
                 </Fragment>
             )
-            case "animations": return;
-            case "diamond-shoe": return;
+            case "animations": return (
+                <Fragment>
+                    <div className="column is-one-fifth-tablet is-half-mobile">
+
+                    </div>
+                </Fragment>
+            )
             default: return;
         }
     }
@@ -89,11 +94,10 @@ export default function Player({ playerData }) {
             <div className="container is-fluid ">
                 <div className="container ">
                     <div className="columns ">
-                        <div className="column is-one-third">
+                        <div className="column is-one-quarter">
                             <p className="title">{playerData.info.name}</p>
 							<p className="subtitle">
-                                {playerData.info.collection} / {playerData.info.theme}
-                                <br />
+                                <p className="is-paddingless is-size-6"> {playerData.info.collection} / {playerData.info.theme} </p>
                                 Height: {getPlayerHeight(playerData.info.height)}
 								<br />
 								Weight: {playerData.info.weight}lbs
@@ -113,15 +117,15 @@ export default function Player({ playerData }) {
                                 Position: {playerData.info.position}{playerData.info.secondary_position != null ? `/${playerData.info.secondary_position}` : ""}
                             </p>
                         </div>
-                        <div className="column is-one-third">
-                            <img src={`https://via.placeholder.com/225x313.png?text=${playerData.id}`} />
-                        </div>
                         <div className="column">
+                            <img src={`https://via.placeholder.com/225x313.png?text=${playerData.info.id}`} />
+                        </div>
+                        <div className="column is-one-quarter">
                             <p className="subtitle is-6 has-text-weight-semibold ">Hot Zones:</p>
                             <ShotChart hotzones={playerData.hotzones} />
                         </div>
                         <div className="column">
-
+                            Badge Icons
                         </div>
                     </div>
 
@@ -132,7 +136,6 @@ export default function Player({ playerData }) {
                                     <li className={view === "stats" ? "is-active" : ""} onClick={() => setView("stats")}><a>Stats</a></li>
                                     <li className={view === "tendencies" ? "is-active" : ""} onClick={() => setView("tendencies")}><a>Tendencies</a></li>
                                     <li className={view === "animations" ? "is-active" : ""} onClick={() => setView("animations")}><a>Signature/Animations</a></li>
-                                    <li className={view === "diamond-shoe" ? "is-active" : ""} onClick={() => setView("diamond-shoe")}><a>Diamond Shoe Fit</a></li>
                                 </ul>
                             </div>
                         </div>
