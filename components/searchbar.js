@@ -6,7 +6,6 @@ import styles from "./searchbar.module.css";
 
 const allPlayers = getPlayersData();
 
-
 export default function SearchBar(props) {
     const { handleClick } = props;
     const [value, setValue] = useState('');

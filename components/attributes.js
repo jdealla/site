@@ -3,9 +3,8 @@ import { Fragment } from "react";
 export default function Attributes(props) {
     const { attributes, attrName } = props;
 
-    const ratingColor = (number) => {
+    const ratingColor = (num) => {
         let color = ""
-        let num = parseInt(number)
         switch (true) {
             case (num < 50): color = "is-danger"; break;
             case (num < 70): color = "is-link"; break;
@@ -14,19 +13,35 @@ export default function Attributes(props) {
             default: color = "is-success";
         }
         return (
-        <span className={`tag ${color} has-text-weight-semibold`}>{num}</span>
+            <span className={`tag ${color} has-text-weight-semibold`}>{num}</span>
         )
     }
 
+    const formatName = (statName) => {
+        let name = statName.split("_");
+
+        if (name.length === 1)
+            return name[0].charAt(0).toUpperCase() + name[0].substring(1);
+        
+        if (name[name.length - 1] === "t" || name[name.length - 1] === "a")
+            name[name.length - 1] = "";
+
+        return name.map(word => word.charAt(0).toUpperCase() + word.substring(1)).join(" ");
+    }
+
     const renderTags = () => {
-        return attributes.map((attr, i) => {
-            return (
-                <div className="tags has-addons is-marginless" key={i}>
-                    {ratingColor(attr.rating)}
-                    <span className="tag">{attr.name}</span>
+        let tags = [];
+        let i = 0;
+        for (let [key, value] of Object.entries(attributes)) {
+            const tag = (
+                <div className="tags has-addons is-marginless" key={i++}>
+                    {ratingColor(value)}
+                    <span className="tag">{formatName(key)}</span>
                 </div>
             )
-        })
+            tags.push(tag)
+        }
+        return tags
     }
 
     return (
