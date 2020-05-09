@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { formatName } from "../lib/players";
 
 export default function Attributes(props) {
     const { attributes, attrName } = props;
@@ -15,18 +15,6 @@ export default function Attributes(props) {
         return (
             <span className={`tag ${color} has-text-weight-semibold`}>{num}</span>
         )
-    }
-
-    const formatName = (statName) => {
-        let name = statName.split("_");
-
-        if (name.length === 1)
-            return name[0].charAt(0).toUpperCase() + name[0].substring(1);
-        
-        if (name[name.length - 1] === "t" || name[name.length - 1] === "a")
-            name[name.length - 1] = "";
-
-        return name.map(word => word.charAt(0).toUpperCase() + word.substring(1)).join(" ");
     }
 
     const renderTags = () => {

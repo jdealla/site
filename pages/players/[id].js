@@ -5,6 +5,7 @@ import Head from 'next/head'
 import Layout from "../../components/layout";
 import BadgeContainer from "../../components/badgecontainer";
 import Attributes from "../../components/attributes";
+import ShotChart from "../../components/shotchart";
 
 export default function Player({ playerData }) {
     const [view, setView] = useState("stats");
@@ -44,35 +45,7 @@ export default function Player({ playerData }) {
             </div>
         )
     }
-
-    const shootingTendencies = () => {
-        return <Attributes attributes={tendencies} attrName="Shooting" />
-    }
-
-    const isoTendencies = () => {
-        return <Attributes attributes={tendencies} attrName="Isolation" />
-    }
-
-    const postTendencies = () => {
-        return <Attributes attributes={tendencies} attrName="Post" />
-    }
-
-    const dribbleTendencies = () => {
-        return <Attributes attributes={tendencies} attrName="Dribble Moves" />
-    }
-
-    const passTendencies = () => {
-        return <Attributes attributes={tendencies} attrName="Passing" />
-    }
-
-    const playbookTendencies = () => {
-        return <Attributes attributes={tendencies} attrName="Playbook" />
-    }
-
-    const defensiveTendencies = () => {
-        return <Attributes attributes={tendencies} attrName="Defensive" />
-    }
-
+    
     const renderView = () => {
         switch(view) {
             case "stats": return (
@@ -84,19 +57,21 @@ export default function Player({ playerData }) {
             case "tendencies": return (
                 <Fragment>
                     <div className="column is-one-fifth-tablet is-half-mobile">
-                        {shootingTendencies()}
+                        <Attributes attributes={playerData.tendencies.shooting} attrName="Shooting" />
                     </div>
                     <div className="column is-one-fifth-tablet is-half-mobile">
-                        {isoTendencies()}
-                        {dribbleTendencies()}
-                        {passTendencies()}
+                        <Attributes attributes={playerData.tendencies.iso} attrName="Iso" />
+                        <Attributes attributes={playerData.tendencies.drive} attrName="Drive" />
                     </div>
                     <div className="column is-one-fifth-tablet is-half-mobile">
-                        {postTendencies()}
+                        <Attributes attributes={playerData.tendencies.shooting} attrName="Freelance" />
                     </div>
                     <div className="column is-one-fifth-tablet is-half-mobile">
-                        {playbookTendencies()}
-                        {defensiveTendencies()}
+                        <Attributes attributes={playerData.tendencies.post} attrName="Post" />
+                    </div>
+                    <div className="column is-one-fifth-tablet is-half-mobile">
+                        <Attributes attributes={playerData.tendencies.passing} attrName="Passing" />
+                        <Attributes attributes={playerData.tendencies.defense} attrName="Defense" />
                     </div>
                 </Fragment>
             )
@@ -142,7 +117,11 @@ export default function Player({ playerData }) {
                             <img src={`https://via.placeholder.com/225x313.png?text=${playerData.id}`} />
                         </div>
                         <div className="column">
-                            Hot Zones
+                            <p className="subtitle is-6 has-text-weight-semibold ">Hot Zones:</p>
+                            <ShotChart hotzones={playerData.hotzones} />
+                        </div>
+                        <div className="column">
+
                         </div>
                     </div>
 

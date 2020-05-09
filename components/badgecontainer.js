@@ -1,9 +1,12 @@
+import { formatName } from "../lib/players";
+
 export default function BadgesContainer(props) {
     const { badges } = props;
 
     const renderBadges = () => {
         let badgeImgs = [];
         let i = 0;
+
         for(const [key, value] of Object.entries(badges)) {
             let name = key.replace(/_/g, "");
             let level = value.toLowerCase();
@@ -16,12 +19,12 @@ export default function BadgesContainer(props) {
                 imgSource = "/badges/badge_none.png";
 
             let img = (
-                <div className="column is-paddingless">
-                    <div className="container is-centered has-text-centered">
-                        <figure className="image is-48x48" key={i++} style={{ marginLeft: "auto", marginRight: "auto" }}>
+                <div className="column is-paddingless is-1-mobile is-one-third-tablet is-1-desktop" key={i++}>
+                    <div className="container">
+                        <figure className="image is-48x48" style={{ marginLeft: "auto", marginRight: "auto" }}>
                             <img src={imgSource} />
                         </figure>
-                        <p className="is-size-7"> {key.replace(/_/g, " ")} </p>
+                        <p className="is-size-7 has-text-centered"> {formatName(key)} </p>
                     </div>
                 </div>
             )
@@ -31,7 +34,7 @@ export default function BadgesContainer(props) {
     }
 
     return (
-        <div className="columns is-gapless">
+        <div className="columns is-gapless is-mobile">
             {renderBadges()}
         </div>
     )

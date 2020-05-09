@@ -13,8 +13,7 @@
     "react": "16.13.1",
     "react-autosuggest": "^10.0.2",
     "react-dom": "16.13.1",
-    "sass": "^1.26.5",
-    "serialize-javascript": "^3.0.0"
+    "sass": "^1.26.5"
   },
   "devDependencies": {
     "bulma": "^0.8.2",
