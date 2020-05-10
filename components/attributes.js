@@ -24,12 +24,12 @@ export default function Attributes(props) {
         let i = 0;
         for (let [key, value] of Object.entries(attributes)) {
             const tag = reverse ? (
-                <div className="tags has-addons is-marginless" key={i++}>
+                <div className="tags has-addons is-marginless" key={i++} >
                     <span className="tag">{formatName(key)}</span>
                     {ratingColor(value)}
                 </div>
             ) : (
-                <div className="tags has-addons is-marginless" key={i++}>
+                <div className="tags has-addons is-marginless" key={i++} style={{ flex: "0 0 75%" }}>
                     {ratingColor(value)}
                     <span className="tag">{formatName(key)}</span>
                 </div>

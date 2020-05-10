@@ -13,12 +13,12 @@ export default function Player({ playerData }) {
     const renderRatings = () => {
         return (
             <Fragment>
-                <div className="column is-one-fifth-tablet is-half-mobile">
+                <div className="column is-one-fifth-tablet is-half-mobile is-2-desktop">
                     <Attributes attributes={playerData.stats.shooting} attrName="Shooting" />
                     <Attributes attributes={playerData.stats.inside} attrName="Inside Scoring" />
                     <Attributes attributes={playerData.stats.playmaking} attrName="Playmaking" />
                 </div>
-                <div className="column is-one-fifth-tablet is-half-mobile">
+                <div className="column is-one-fifth-tablet is-half-mobile is-2-desktop">
                     <Attributes attributes={playerData.stats.defense} attrName="Defense" />
                     <Attributes attributes={playerData.stats.rebound} attrName="Rebound" />
                     <Attributes attributes={playerData.stats.potential} attrName="Potential" />
@@ -99,18 +99,18 @@ export default function Player({ playerData }) {
                 <title>{playerData.name} | 2KDB</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <div className="container is-fluid">
-                <div className="columns ">
-                    <div className="column is-one-quarter">
+            <div className="container is-fluid is-desktop">
+                <div className="columns is-mobile is-multiline">
+                    <div className="column is-5-mobile is-2-desktop is-2-tablet">
                         <p className="title">{playerData.info.name}</p>
                         <p className="subtitle">
-                            <p className="is-paddingless is-size-6"> {playerData.info.collection} / {playerData.info.theme} </p>
+                            <span className="is-paddingless is-size-6"> {playerData.info.collection} / {playerData.info.theme} </span>
                             Height: {getPlayerHeight(playerData.info.height)}
                             <br />
                             Weight: {playerData.info.weight}lbs
                             <br />
                         </p>
-                        <p className="subtitle">
+                        <p className="subtitle is-size-5-mobile">
                             Nickname: {playerData.info.nickname}
                             <br />
                             Team: {playerData.info.team}
@@ -123,16 +123,19 @@ export default function Player({ playerData }) {
                             <br />
                             Position: {playerData.info.position}{playerData.info.secondary_position != null ? `/${playerData.info.secondary_position}` : ""}
                         </p>
+                        <p className="subtitle is-size-5-mobile">
+                            Plays:
+                        </p>
                     </div>
-                    <div className="column">
-                        <img src={`https://via.placeholder.com/225x313.png?text=${playerData.info.id}`} />
+                    <div className="column is-7-mobile is-2-desktop is-2-tablet">
+                        <img src={playerData.image} />
                     </div>
-                    <div className="column is-one-quarter">
+                    <div className="column is-12-mobile is-2-desktop is-2-tablet">
                         <p className="subtitle is-6 has-text-weight-semibold ">Hot Zones:</p>
                         <ShotChart hotzones={playerData.hotzones} />
-                    </div>
-                    <div className="column">
                         Badge Icons
+                    </div>
+                    <div className="column is-one-quarter-mobile is-2-desktop is-2-tablet">
                     </div>
                 </div>
 

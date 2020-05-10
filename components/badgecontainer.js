@@ -1,7 +1,5 @@
 import { formatName } from "../lib/players";
 
-import styles from "./badgecontainer.module.css";
-
 export default function BadgesContainer(props) {
     const { badges } = props;
 
