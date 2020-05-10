@@ -48,27 +48,27 @@ export default function Compare() {
         return (
             <article className="message">
                 <div className="message-header has-text-centered">
-                    <p>{playerData.name}</p>
+                    <p>{playerData.info.name}</p>
                     <button className="delete" aria-label="delete" onClick={() => handlePlayer(playerId, null)}></button>
                 </div>
                 <div className="message-body">
                     <div className="columns">
                         <div className="column is-half">
                             <p>
-                                Overall: {playerData.overall}
+                                Overall: {playerData.info.overall}
                             </p>
                             <p>
-                                Height: {getPlayerHeight(playerData.height)}
+                                Height: {getPlayerHeight(playerData.info.height)}
                             </p>
-                            Position: {playerData.position}{playerData.secondary_position != null ? `/${playerData.secondary_position}` : ""}
+                            Position: {playerData.info.position}{playerData.info.secondary_position != null ? `/${playerData.info.secondary_position}` : ""}
                         </div>
                         <div className="column is-half">
                             <p>Total Badges: </p>
                             <div className="tags has-addons">
-                                <span className="tag HOF">{playerData.hof_badges}</span>
-                                <span className="tag Gold">{playerData.gold_badges}</span>
-                                <span className="tag Silver">{playerData.silver_badges}</span>
-                                <span className="tag Bronze">{playerData.bronze_badges}</span>
+                                <span className="tag HOF">{playerData.badges.hofBadges}</span>
+                                <span className="tag Gold">{playerData.badges.goldBadges}</span>
+                                <span className="tag Silver">{playerData.badges.silverBadges}</span>
+                                <span className="tag Bronze">{playerData.badges.bronzeBadges}</span>
                             </div>
 
                         </div>
