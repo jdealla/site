@@ -78,7 +78,14 @@ export default function Player({ playerData }) {
             case "animations": return (
                 <Fragment>
                     <div className="column is-one-fifth-tablet is-half-mobile">
-
+                        <Attributes attributes={playerData.animations.shooting} attrName="Shooting" reverse={true} />
+                        <Attributes attributes={playerData.animations.ballhandle} attrName="Dribble Moves" reverse={true} />
+                    </div>
+                    <div className="column is-one-fifth-tablet is-half-mobile">
+                        <Attributes attributes={playerData.animations.post} attrName="Post" reverse={true} />
+                    </div>
+                    <div className="column is-one-fifth-tablet is-half-mobile">
+                        <Attributes attributes={playerData.animations.layup} attrName="Layups/Dunks" reverse={true} />
                     </div>
                 </Fragment>
             )
@@ -90,60 +97,59 @@ export default function Player({ playerData }) {
         <Layout>
             <Head>
                 <title>{playerData.name} | 2KDB</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <div className="container is-fluid ">
-                <div className="container ">
-                    <div className="columns ">
-                        <div className="column is-one-quarter">
-                            <p className="title">{playerData.info.name}</p>
-							<p className="subtitle">
-                                <p className="is-paddingless is-size-6"> {playerData.info.collection} / {playerData.info.theme} </p>
-                                Height: {getPlayerHeight(playerData.info.height)}
-								<br />
-								Weight: {playerData.info.weight}lbs
-								<br />
-							</p>
-                            <p className="subtitle">
-							    Nickname: {playerData.info.nickname}
-								<br />
-								Team: {playerData.info.team}
-								<br />
-                                Overall: {playerData.info.overall}
-								<br />
-								Offensive Overall: {playerData.info.off_overall}
-								<br />
-								Defensive Overall: {playerData.info.def_overall}
-                                <br />
-                                Position: {playerData.info.position}{playerData.info.secondary_position != null ? `/${playerData.info.secondary_position}` : ""}
-                            </p>
-                        </div>
-                        <div className="column">
-                            <img src={`https://via.placeholder.com/225x313.png?text=${playerData.info.id}`} />
-                        </div>
-                        <div className="column is-one-quarter">
-                            <p className="subtitle is-6 has-text-weight-semibold ">Hot Zones:</p>
-                            <ShotChart hotzones={playerData.hotzones} />
-                        </div>
-                        <div className="column">
-                            Badge Icons
-                        </div>
+            <div className="container is-fluid">
+                <div className="columns ">
+                    <div className="column is-one-quarter">
+                        <p className="title">{playerData.info.name}</p>
+                        <p className="subtitle">
+                            <p className="is-paddingless is-size-6"> {playerData.info.collection} / {playerData.info.theme} </p>
+                            Height: {getPlayerHeight(playerData.info.height)}
+                            <br />
+                            Weight: {playerData.info.weight}lbs
+                            <br />
+                        </p>
+                        <p className="subtitle">
+                            Nickname: {playerData.info.nickname}
+                            <br />
+                            Team: {playerData.info.team}
+                            <br />
+                            Overall: {playerData.info.overall}
+                            <br />
+                            Offensive Overall: {playerData.info.off_overall}
+                            <br />
+                            Defensive Overall: {playerData.info.def_overall}
+                            <br />
+                            Position: {playerData.info.position}{playerData.info.secondary_position != null ? `/${playerData.info.secondary_position}` : ""}
+                        </p>
                     </div>
+                    <div className="column">
+                        <img src={`https://via.placeholder.com/225x313.png?text=${playerData.info.id}`} />
+                    </div>
+                    <div className="column is-one-quarter">
+                        <p className="subtitle is-6 has-text-weight-semibold ">Hot Zones:</p>
+                        <ShotChart hotzones={playerData.hotzones} />
+                    </div>
+                    <div className="column">
+                        Badge Icons
+                    </div>
+                </div>
 
-                    <div className="columns ">
-                        <div className="column is-full">
-                            <div className="tabs is-boxed">
-                                <ul>
-                                    <li className={view === "stats" ? "is-active" : ""} onClick={() => setView("stats")}><a>Stats</a></li>
-                                    <li className={view === "tendencies" ? "is-active" : ""} onClick={() => setView("tendencies")}><a>Tendencies</a></li>
-                                    <li className={view === "animations" ? "is-active" : ""} onClick={() => setView("animations")}><a>Signature/Animations</a></li>
-                                </ul>
-                            </div>
+                <div className="columns ">
+                    <div className="column is-full">
+                        <div className="tabs is-boxed">
+                            <ul>
+                                <li className={view === "stats" ? "is-active" : ""} onClick={() => setView("stats")}><a>Stats</a></li>
+                                <li className={view === "tendencies" ? "is-active" : ""} onClick={() => setView("tendencies")}><a>Tendencies</a></li>
+                                <li className={view === "animations" ? "is-active" : ""} onClick={() => setView("animations")}><a>Signature/Animations</a></li>
+                            </ul>
                         </div>
                     </div>
+                </div>
 
-                    <div className="columns is-multiline is-mobile is-gapless">
-                        {renderView()}
-                    </div>
+                <div className="columns is-multiline is-mobile is-gapless">
+                    {renderView()}
                 </div>
             </div>
         </Layout>

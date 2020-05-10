@@ -105,6 +105,7 @@ export default function Compare() {
         <Layout>
             <Head>
                 <title>2KDB Compare Players Page</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <div className="container">
                 <div className="level">

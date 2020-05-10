@@ -1,7 +1,7 @@
 import { formatName } from "../lib/players";
 
 export default function Attributes(props) {
-    const { attributes, attrName } = props;
+    const { attributes, attrName, reverse } = props;
 
     const ratingColor = (num) => {
         let color = ""
@@ -10,10 +10,12 @@ export default function Attributes(props) {
             case (num < 70): color = "is-link"; break;
             case (num < 80): color = "is-warning"; break;
             case (num < 89): color = "is-info"; break;
-            default: color = "is-success";
+            case (num <= 99): color = "is-success"; break;
+            default: color = "is-dark";
         }
+
         return (
-            <span className={`tag ${color} has-text-weight-semibold`}>{num}</span>
+            <span className={`tag ${color} has-text-weight-semibold`}>{num} {'   '}</span>
         )
     }
 
@@ -21,7 +23,12 @@ export default function Attributes(props) {
         let tags = [];
         let i = 0;
         for (let [key, value] of Object.entries(attributes)) {
-            const tag = (
+            const tag = reverse ? (
+                <div className="tags has-addons is-marginless" key={i++}>
+                    <span className="tag">{formatName(key)}</span>
+                    {ratingColor(value)}
+                </div>
+            ) : (
                 <div className="tags has-addons is-marginless" key={i++}>
                     {ratingColor(value)}
                     <span className="tag">{formatName(key)}</span>

@@ -32,6 +32,7 @@ export default function Players() {
         <Layout>
             <Head>
                 <title>2KDB All Players List</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <div className="container">
                 <div className="columns">

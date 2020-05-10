@@ -1,5 +1,7 @@
 import { formatName } from "../lib/players";
 
+import styles from "./badgecontainer.module.css";
+
 export default function BadgesContainer(props) {
     const { badges } = props;
 
@@ -43,7 +45,7 @@ export default function BadgesContainer(props) {
                 imgSource = "/badges/badge_none.png";
 
             let img = (
-                <div className="column is-paddingless is-2-mobile is-one-third-tablet is-1-desktop" key={i++}>
+                <div className="column is-paddingless is-2-mobile is-one-third-tablet is-1-desktop is-badge" key={i++}>
                     <div className="container is-vcentered">
                         <figure className="image is-48x48" style={{ marginLeft: "auto", marginRight: "auto" }}>
                             <img src={imgSource} />

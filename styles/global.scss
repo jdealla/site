@@ -21,6 +21,28 @@ $box-padding: 5px;
 $navbar-item-hover-color: $blue;
 $tabs-link-active-color: $blue;
 
+
+@media only screen and (max-width: 600px) {
+    $gap: 16px;
+}
+
+
+@media only screen and (min-width: 760px) {
+    .column {
+        &.is-badge {
+            width: 13% !important;
+        }
+    }
+}
+
+@media only screen and (min-width: 1500px) {
+    .column {
+        &.is-badge {
+            width: 6% !important;
+        }
+    }
+}
+
 .HOF {
     background-color: $hof;
     color: white;
