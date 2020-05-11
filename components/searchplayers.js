@@ -17,7 +17,7 @@ export default function SearchPlayers(props) {
     const onSuggestionsClearRequested = () => setPlayers([]);
 
     const getSuggestionValue = (suggestion) => {
-        handlePlayer(playerInfo, suggestion);
+        handlePlayer(playerInfo, getPlayerData(suggestion.id));
         return suggestion.name;
     }
 

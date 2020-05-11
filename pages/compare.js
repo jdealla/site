@@ -44,37 +44,15 @@ export default function Compare() {
     };
 
     const playerInfoContainer = (playerData, playerId) => {
-        console.log(playerData);
         return (
-            <article className="message">
-                <div className="message-header has-text-centered">
-                    <p>{playerData.info.name}</p>
+            <div className="card">
+                <div className="card-header">
                     <button className="delete" aria-label="delete" onClick={() => handlePlayer(playerId, null)}></button>
                 </div>
-                <div className="message-body">
-                    <div className="columns">
-                        <div className="column is-half">
-                            <p>
-                                Overall: {playerData.info.overall}
-                            </p>
-                            <p>
-                                Height: {getPlayerHeight(playerData.info.height)}
-                            </p>
-                            Position: {playerData.info.position}{playerData.info.secondary_position != null ? `/${playerData.info.secondary_position}` : ""}
-                        </div>
-                        <div className="column is-half">
-                            <p>Total Badges: </p>
-                            <div className="tags has-addons">
-                                <span className="tag HOF">{playerData.badges.hofBadges}</span>
-                                <span className="tag Gold">{playerData.badges.goldBadges}</span>
-                                <span className="tag Silver">{playerData.badges.silverBadges}</span>
-                                <span className="tag Bronze">{playerData.badges.bronzeBadges}</span>
-                            </div>
-
-                        </div>
-                    </div>
+                <div className="card-image">
+                    <img src={playerData.image} />
                 </div>
-            </article>
+            </div>
         )
     };
 
@@ -111,7 +89,6 @@ export default function Compare() {
                 <div className="level">
                     <div className="level-item">
                         {renderSearch(1)}
-                        
                     </div>
                     <div className="level-item">
                         {renderSearch(2)}
@@ -130,9 +107,6 @@ export default function Compare() {
                 <div className="columns">
                     {renderView()}
                 </div>
-            </div>
-            <div className="container">
-
             </div>
         </Layout>
     )
