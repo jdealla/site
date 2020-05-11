@@ -1,68 +1,56 @@
 import { Fragment } from "react";
+import { formatName, levelToNum } from "../lib/players";
 
 export default function CompareTable(props) {
-    const { players, type } = props;
-    const player1 = players.player1;
-    const player2 = players.player2;
+    const { tableName, firstName, firstStats, secondName, secondStats } = props;
 
-    const comparePlayers = () => {
-        
-    }
-
-    const renderTable = (name, stats) => {
-        const difference = (rating1, rating2) => {
-            let diff = rating1 - rating2
-            let diffColor;
-
-            if (diff > 0) {
-                diffColor = "success";
-                diff = "+" + diff.toString();
-            } else if (diff === 0) {
-                diffColor = "";
-                diff = "-";
-            } else {
-                diffColor = "danger"
-            }
-
-            return (
-                <td className={`has-text-${diffColor} has-text-centered`}>{diff}</td>
-            )
+    const difference = (value, value2) => {
+        let diff = levelToNum(value) - levelToNum(value2)
+        let diffColor;
+        if (diff > 0) {
+            diffColor = "success";
+            diff = "+" + diff.toString();
+        } else if (diff === 0) {
+            diffColor = "";
+            diff = "-";
+        } else {
+            diffColor = "danger"
         }
 
         return (
-            <table className="table is-striped is-fullwidth">
-                <thead>
-                    <tr>
-                        <td className="has-text-weight-semibold">{name}</td>
-                        <td className="has-text-weight-semibold has-text-centered">{player1.name}</td>
-                        <td className="has-text-weight-semibold has-text-centered">Difference</td>
-                        <td className="has-text-weight-semibold has-text-centered">{player2.name}</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {stats.map((rating, i) => {
-                        return (
-                            <tr key={i}>
-                                <td className="has-text-weight-semibold">{rating.name}</td>
-                                <td className="has-text-centered">{rating.player1}</td>
-                                {difference(rating.player1, rating.player2)}
-                                <td className="has-text-centered">{rating.player2}</td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
+            <td className={`has-text-${diffColor} has-text-centered`}>{diff}</td>
         )
     }
 
-    return (
-        <Fragment>
-            <div className="column">
-                {comparePlayers()}
-            </div>
-            <div className="column">
+    const getTableValues = () => {
+        let table = [], i = 0;
+        for(let key in firstStats) {
+            let newRow = (
+                <tr key={i++}>
+                    <td className="has-text-weight-semibold">{formatName(key)}</td>
+                    <td className="has-text-centered">{firstStats[key]}</td>
+                    {difference(firstStats[key], secondStats[key])}
+                    <td className="has-text-centered">{secondStats[key]}</td>
+                </tr>
+            )
+            table.push(newRow)
+        }
+        return table;
+    }
 
-            </div>
-        </Fragment>
+    return (
+        <table className="table is-striped is-fullwidth">
+            <thead>
+                <tr>
+                    <td className="has-text-weight-semibold">{tableName}</td>
+                    <td className="has-text-weight-semibold has-text-centered">{firstName}</td>
+                    <td className="has-text-weight-semibold has-text-centered">Difference</td>
+                    <td className="has-text-weight-semibold has-text-centered">{secondName}</td>
+                </tr>
+            </thead>
+            <tbody>
+                {getTableValues()}
+            </tbody>
+        </table>
     )
 }

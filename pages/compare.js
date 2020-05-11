@@ -1,11 +1,9 @@
 import Head from "next/head";
-import { useState } from "react";
-import { getPlayerHeight } from "../lib/players";
+import { useState, Fragment } from "react";
 
 import Layout from "../components/layout";
 import SearchPlayers from "../components/searchplayers";
-import CompareStats from "../components/comparestats";
-import CompareBadges from "../components/comparebadges";
+import CompareTable from "../components/comparetable";
 
 export default function Compare() {
     const [players, setPlayers] = useState({ player1: null, player2: null, });
@@ -16,6 +14,8 @@ export default function Compare() {
     }
 
     const renderView = () => {
+        const { player1, player2 } = players;
+
         const heroView = (
             <section className="hero is-fullheight-with-navbar">
                 <div className="hero-body">
@@ -27,16 +27,40 @@ export default function Compare() {
 
         switch(view) {
             case "stats": {
-                if (players.player1 == null || players.player2 == null)
+                if (player1 == null || player2 == null)
                     return heroView;
                 else
-                    return <CompareStats players={players} />;
+                    return (
+                        <Fragment>
+                            <div className="column">
+                                <CompareTable tableName="Shooting" firstName={player1.info.name} firstStats={player1.stats.shooting} secondName={player2.info.name} secondStats={player2.stats.shooting} />
+                                <CompareTable tableName="Inside Scoring" firstName={player1.info.name} firstStats={player1.stats.inside} secondName={player2.info.name} secondStats={player2.stats.inside} />
+                                <CompareTable tableName="Playmaking" firstName={player1.info.name} firstStats={player1.stats.playmaking} secondName={player2.info.name} secondStats={player2.stats.playmaking} />
+                            </div>
+                            <div className="column">
+                                <CompareTable tableName="Defense" firstName={player1.info.name} firstStats={player1.stats.defense} secondName={player2.info.name} secondStats={player2.stats.defense} />
+                                <CompareTable tableName="Rebound" firstName={player1.info.name} firstStats={player1.stats.rebound} secondName={player2.info.name} secondStats={player2.stats.rebound} />
+                                <CompareTable tableName="Potential" firstName={player1.info.name} firstStats={player1.stats.potential} secondName={player2.info.name} secondStats={player2.stats.potential} />
+                            </div>
+                        </Fragment>
+                    )
             }
             case "badges": {
-                if (players.player1 == null || players.player2 == null)
+                if (player1 == null || player2 == null)
                     return heroView;
                 else
-                    return <CompareBadges players={players} />;
+                    return (
+                        <Fragment>
+                            <div className="column">
+                                <CompareTable tableName="Finishing Badges" firstName={player1.info.name} firstStats={player1.badges.finishing} secondName={player2.info.name} secondStats={player2.badges.finishing} />
+                                <CompareTable tableName="Playmaking Badges" firstName={player1.info.name} firstStats={player1.badges.playmaking} secondName={player2.info.name} secondStats={player2.badges.playmaking} />
+                            </div>
+                            <div className="column">
+                                <CompareTable tableName="Shooting Badges" firstName={player1.info.name} firstStats={player1.badges.shooting} secondName={player2.info.name} secondStats={player2.badges.shooting} />
+                                <CompareTable tableName="Defensive Badges" firstName={player1.info.name} firstStats={player1.badges.defensive} secondName={player2.info.name} secondStats={player2.badges.defensive} />
+                            </div>
+                        </Fragment>
+                    )
             }
             case "tendencies": return heroView;
             case "animations": return heroView;

@@ -1,5 +1,5 @@
 import { useState, Fragment } from "react";
-import { getPlayersIds, getPlayerData, getPlayerHeight, getPlayerInfo } from "../../lib/players";
+import { getPlayersIds, getPlayerData, getPlayerInfo } from "../../lib/players";
 
 import Head from 'next/head'
 import Layout from "../../components/layout";
@@ -108,7 +108,7 @@ export default function Player({ playerData }) {
                         <p className="title">{playerData.info.name}</p>
                         <p className="subtitle">
                             <span className="is-paddingless is-size-6"> {playerData.info.collection} / {playerData.info.theme} </span>
-                            Height: {getPlayerHeight(playerData.info.height)}
+                            Height: {playerData.info.height}
                             <br />
                             Weight: {playerData.info.weight}lbs
                             <br />
