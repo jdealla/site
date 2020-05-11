@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { formatName, levelToNum } from "../lib/players";
 
 export default function CompareTable(props) {
-    const { tableName, firstName, firstStats, secondName, secondStats } = props;
+    const { tableName, firstName, firstStats, secondName, secondStats, diff } = props;
 
     const difference = (value, value2) => {
         let diff = levelToNum(value) - levelToNum(value2)
@@ -29,7 +29,7 @@ export default function CompareTable(props) {
                 <tr key={i++}>
                     <td className="has-text-weight-semibold">{formatName(key)}</td>
                     <td className="has-text-centered">{firstStats[key]}</td>
-                    {difference(firstStats[key], secondStats[key])}
+                    {diff === false ? "" : difference(firstStats[key], secondStats[key])}
                     <td className="has-text-centered">{secondStats[key]}</td>
                 </tr>
             )
@@ -44,7 +44,7 @@ export default function CompareTable(props) {
                 <tr>
                     <td className="has-text-weight-semibold">{tableName}</td>
                     <td className="has-text-weight-semibold has-text-centered">{firstName}</td>
-                    <td className="has-text-weight-semibold has-text-centered">Difference</td>
+                    {diff === false ? "" : <td className="has-text-weight-semibold has-text-centered">Difference</td>}
                     <td className="has-text-weight-semibold has-text-centered">{secondName}</td>
                 </tr>
             </thead>

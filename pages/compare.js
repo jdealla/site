@@ -62,8 +62,49 @@ export default function Compare() {
                         </Fragment>
                     )
             }
-            case "tendencies": return heroView;
-            case "animations": return heroView;
+            case "tendencies": {
+                if (player1 == null || player2 == null)
+                    return heroView;
+                else
+                    return (
+                        <Fragment>
+                            <div className="column">
+                                <CompareTable tableName="Inside" firstName={player1.info.name} firstStats={player1.tendencies.inside} secondName={player2.info.name} secondStats={player2.tendencies.inside} />
+                                <CompareTable tableName="Iso" firstName={player1.info.name} firstStats={player1.tendencies.iso} secondName={player2.info.name} secondStats={player2.tendencies.iso} />
+                                <CompareTable tableName="Defense" firstName={player1.info.name} firstStats={player1.tendencies.defense} secondName={player2.info.name} secondStats={player2.tendencies.defense} />
+                            </div>
+                            <div className="column">
+                                <CompareTable tableName="Shooting" firstName={player1.info.name} firstStats={player1.badges.shooting} secondName={player2.info.name} secondStats={player2.badges.shooting} />
+                                <CompareTable tableName="Drive" firstName={player1.info.name} firstStats={player1.tendencies.drive} secondName={player2.info.name} secondStats={player2.tendencies.drive} />
+                            </div>
+                            <div className="column">
+                                <CompareTable tableName="Post" firstName={player1.info.name} firstStats={player1.tendencies.post} secondName={player2.info.name} secondStats={player2.tendencies.post} />
+                                <CompareTable tableName="Freelance" firstName={player1.info.name} firstStats={player1.tendencies.freelance} secondName={player2.info.name} secondStats={player2.tendencies.freelance} />
+                                <CompareTable tableName="Passing" firstName={player1.info.name} firstStats={player1.tendencies.passing} secondName={player2.info.name} secondStats={player2.tendencies.passing} />
+                            </div>
+                        </Fragment>
+                    )
+            }
+            case "animations": {
+                if (player1 == null || player2 == null)
+                    return heroView;
+                else
+                    return (
+                        <Fragment>
+                            <div className="column">
+                                <CompareTable tableName="Shooting" firstName={player1.info.name} firstStats={player1.animations.shooting} secondName={player2.info.name} secondStats={player2.animations.shooting} diff={false} />
+                                <CompareTable tableName="Post" firstName={player1.info.name} firstStats={player1.animations.post} secondName={player2.info.name} secondStats={player2.animations.post} diff={false} />
+                            </div>
+                            <div className="column">
+                                <CompareTable tableName="Dribble Moves" firstName={player1.info.name} firstStats={player1.animations.ballhandle} secondName={player2.info.name} secondStats={player2.animations.ballhandle} diff={false} />
+                                <CompareTable tableName="Handedness" firstName={player1.info.name} firstStats={player1.animations.hands} secondName={player2.info.name} secondStats={player2.animations.hands} diff={false} />
+                            </div>
+                            <div className="column">
+                                <CompareTable tableName="Layups / Dunks" firstName={player1.info.name} firstStats={player1.animations.layup} secondName={player2.info.name} secondStats={player2.animations.layup} diff={false} />
+                            </div>
+                        </Fragment>
+                    )
+            }
         };
     };
 
