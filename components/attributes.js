@@ -10,7 +10,7 @@ export default function Attributes(props) {
             case (num < 70): color = "is-link"; break;
             case (num < 80): color = "is-warning"; break;
             case (num < 89): color = "is-info"; break;
-            case (num <= 99): color = "is-success"; break;
+            case (num <= 100): color = "is-success"; break;
             default: color = "is-dark";
         }
 

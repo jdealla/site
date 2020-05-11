@@ -19,6 +19,7 @@ export default function Player({ playerData }) {
                     <Attributes attributes={playerData.stats.playmaking} attrName="Playmaking" />
                 </div>
                 <div className="column is-one-fifth-tablet is-half-mobile is-2-desktop">
+				    <Attributes attributes={playerData.stats.atheleticism} attrName="Atheleticism" />
                     <Attributes attributes={playerData.stats.defense} attrName="Defense" />
                     <Attributes attributes={playerData.stats.rebound} attrName="Rebound" />
                     <Attributes attributes={playerData.stats.potential} attrName="Potential" />
@@ -56,6 +57,9 @@ export default function Player({ playerData }) {
             )
             case "tendencies": return (
                 <Fragment>
+				    <div className="column is-one-fifth-tablet is-half-mobile">
+                        <Attributes attributes={playerData.tendencies.inside} attrName="Inside" />
+                    </div>
                     <div className="column is-one-fifth-tablet is-half-mobile">
                         <Attributes attributes={playerData.tendencies.shooting} attrName="Shooting" />
                     </div>
@@ -63,15 +67,13 @@ export default function Player({ playerData }) {
                         <Attributes attributes={playerData.tendencies.iso} attrName="Iso" />
                         <Attributes attributes={playerData.tendencies.drive} attrName="Drive" />
                     </div>
-                    <div className="column is-one-fifth-tablet is-half-mobile">
-                        <Attributes attributes={playerData.tendencies.shooting} attrName="Freelance" />
-                    </div>
-                    <div className="column is-one-fifth-tablet is-half-mobile">
+					<div className="column is-one-fifth-tablet is-half-mobile">
                         <Attributes attributes={playerData.tendencies.post} attrName="Post" />
                     </div>
                     <div className="column is-one-fifth-tablet is-half-mobile">
-                        <Attributes attributes={playerData.tendencies.passing} attrName="Passing" />
-                        <Attributes attributes={playerData.tendencies.defense} attrName="Defense" />
+					    <Attributes attributes={playerData.tendencies.defense} attrName="Defense" />
+                        <Attributes attributes={playerData.tendencies.freelance} attrName="Freelance" />
+						<Attributes attributes={playerData.tendencies.passing} attrName="Passing" />        
                     </div>
                 </Fragment>
             )
@@ -79,10 +81,11 @@ export default function Player({ playerData }) {
                 <Fragment>
                     <div className="column is-one-fifth-tablet is-half-mobile">
                         <Attributes attributes={playerData.animations.shooting} attrName="Shooting" reverse={true} />
-                        <Attributes attributes={playerData.animations.ballhandle} attrName="Dribble Moves" reverse={true} />
+						<Attributes attributes={playerData.animations.post} attrName="Post" reverse={true} />
                     </div>
                     <div className="column is-one-fifth-tablet is-half-mobile">
-                        <Attributes attributes={playerData.animations.post} attrName="Post" reverse={true} />
+                        <Attributes attributes={playerData.animations.ballhandle} attrName="Dribble Moves" reverse={true} />
+						<Attributes attributes={playerData.animations.hands} attrName="Handedness" reverse={true} />
                     </div>
                     <div className="column is-one-fifth-tablet is-half-mobile">
                         <Attributes attributes={playerData.animations.layup} attrName="Layups/Dunks" reverse={true} />
