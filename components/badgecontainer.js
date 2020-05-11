@@ -1,4 +1,4 @@
-import { formatName } from "../lib/players";
+import { formatName, levelToNum } from "../lib/players";
 
 export default function BadgesContainer(props) {
     const { badges } = props;
@@ -7,29 +7,19 @@ export default function BadgesContainer(props) {
         let badgeImgs = [];
         let i = 0;
 
-        // sort before loop
-        const levelToNum = (level) => {
-            switch(level) {
-                case 'HOF': return 4;
-                case 'Gold': return 3;
-                case 'Silver': return 2;
-                case 'Bronze': return 1;
-                case 'Yes': return 1;
-                default: return 0;
-            }
-        }
-
-        // let sorted = Object.entries(badges).sort((a, b) => {
-        //     let aLevel = levelToNum(badges[a]);
-        //     let bLevel = levelToNum(badges[b]);
+        let sorted = Object.entries(badges).sort((a, b) => {
+            let aLevel = levelToNum(badges[a]);
+            let bLevel = levelToNum(badges[b]);
             
-        //     return (aLevel > bLevel) ? -1 : 1
-        // }).reduce((sortedObj, key) => ({
-        //     ...sortedObj,
-        //     [key]: badges[key]
-        // }), {})
+            return (aLevel > bLevel) ? -1 : 1
+        })
+        // .reduce((sortedObj, key) => {
+        //     let [name, value] = key;
+            
+        //     return { ...sortedObj, [name]: value }
+        // }, {})
 
-        // console.log(sorted)
+        console.log(sorted)
 
         for(const [key, value] of Object.entries(badges)) {
             let name = key.replace(/_/g, "");

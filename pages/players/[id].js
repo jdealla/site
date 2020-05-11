@@ -1,5 +1,5 @@
 import { useState, Fragment } from "react";
-import { getPlayersIds, getPlayerData, getPlayerInfo } from "../../lib/players";
+import { getPlayersIds, getPlayerData } from "../../lib/players";
 
 import Head from 'next/head'
 import Layout from "../../components/layout";
@@ -13,12 +13,12 @@ export default function Player({ playerData }) {
     const renderRatings = () => {
         return (
             <Fragment>
-                <div className="column is-one-fifth-tablet is-half-mobile is-2-desktop">
+                <div className="column is-one-fifth-tablet is-half-mobile is-one-fifth-desktop">
                     <Attributes attributes={playerData.stats.shooting} attrName="Shooting" />
                     <Attributes attributes={playerData.stats.inside} attrName="Inside Scoring" />
                     <Attributes attributes={playerData.stats.playmaking} attrName="Playmaking" />
                 </div>
-                <div className="column is-one-fifth-tablet is-half-mobile is-2-desktop">
+                <div className="column is-one-fifth-tablet is-half-mobile is-one-fifth-desktop">
 				    <Attributes attributes={playerData.stats.atheleticism} attrName="Atheleticism" />
                     <Attributes attributes={playerData.stats.defense} attrName="Defense" />
                     <Attributes attributes={playerData.stats.rebound} attrName="Rebound" />
@@ -126,19 +126,43 @@ export default function Player({ playerData }) {
                             <br />
                             Position: {playerData.info.position}{playerData.info.secondary_position != null ? `/${playerData.info.secondary_position}` : ""}
                         </p>
-                        <p className="subtitle is-size-5-mobile">
+                        <p className="subtitle has-text-weight-semibold is-size-5-mobile is-size-6">
                             Plays:
                         </p>
+                        <div className="tags has-addons">
+                            <span className="tag">{playerData.info.play1}</span>
+                            <span className="tag">{playerData.info.play2}</span>
+                            <span className="tag">{playerData.info.play3}</span>
+                            <span className="tag">{playerData.info.play4}</span>
+                        </div>
                     </div>
                     <div className="column is-7-mobile is-2-desktop is-2-tablet">
                         <img src={playerData.image} />
                     </div>
                     <div className="column is-12-mobile is-2-desktop is-2-tablet">
                         <p className="subtitle is-6 has-text-weight-semibold ">Hot Zones:</p>
-                        <ShotChart hotzones={playerData.hotzones} />
-                        Badge Icons
-                    </div>
-                    <div className="column is-one-quarter-mobile is-2-desktop is-2-tablet">
+                        <ShotChart hotzones={playerData.hotzones} />  
+                        <p className="subtitle is-6 has-text-weight-semibold ">Badges:</p>
+                        <div className="level ">
+                            <div className="level-item is-size-5 has-text-centered">
+                                <figure className="image is-64x64">
+                                    <img src="/badges/icon_badge_bronze.png" />
+                                    <p className="subtitle is-overlay has-text-weight-semibold has-text-black" style={{ marginTop: "0.6em"}}>{playerData.badges.totalBadges.bronzeBadges}</p>
+                                </figure>
+                                <figure className="image is-64x64">
+                                    <img src="/badges/icon_badge_silver.png" />
+                                    <p className="subtitle is-overlay has-text-weight-semibold has-text-black" style={{ marginTop: "0.6em"}}>{playerData.badges.totalBadges.silverBadges}</p>
+                                </figure>
+                                <figure className="image is-64x64">
+                                    <img src="/badges/icon_badge_gold.png" />
+                                    <p className="subtitle is-overlay has-text-weight-semibold has-text-black" style={{ marginTop: "0.6em"}}>{playerData.badges.totalBadges.goldBadges}</p>
+                                </figure>
+                                <figure className="image is-64x64">
+                                    <img src="/badges/icon_badge_hof.png" />
+                                    <p className="subtitle is-overlay has-text-weight-semibold has-text-black" style={{ marginTop: "0.6em"}}>{playerData.badges.totalBadges.hofBadges}</p>
+                                </figure>
+                            </div>
+                        </div>                      
                     </div>
                 </div>
 
