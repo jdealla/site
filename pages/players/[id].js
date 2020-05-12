@@ -104,16 +104,17 @@ export default function Player({ playerData }) {
             </Head>
             <div className="container is-fluid is-desktop">
                 <div className="columns is-mobile is-multiline">
-                    <div className="column is-5-mobile is-2-desktop is-2-tablet">
+                    <div className="column is-5-mobile is-3-desktop is-2-tablet">
                         <p className="title">{playerData.info.name}</p>
-                        <p className="subtitle">
-                            <span className="is-paddingless is-size-6"> {playerData.info.collection} / {playerData.info.theme} </span>
+                        <p className="subtitle is-size-5">
+                            <span className="is-paddingless is-size-7"> {playerData.info.collection} / {playerData.info.theme} </span>
+                            <br />
                             Height: {playerData.info.height}
                             <br />
                             Weight: {playerData.info.weight}lbs
                             <br />
                         </p>
-                        <p className="subtitle is-size-5-mobile">
+                        <p className="subtitle is-size-5">
                             Nickname: {playerData.info.nickname}
                             <br />
                             Team: {playerData.info.team}
