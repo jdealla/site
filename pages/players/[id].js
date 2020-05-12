@@ -115,6 +115,8 @@ export default function Player({ playerData }) {
                             <br />
                         </p>
                         <p className="subtitle is-size-5">
+						    From: {playerData.info.college}
+                            <br />
                             Nickname: {playerData.info.nickname}
                             <br />
                             Team: {playerData.info.team}
@@ -148,19 +150,19 @@ export default function Player({ playerData }) {
                             <div className="level-item is-size-5 has-text-centered">
                                 <figure className="image is-64x64">
                                     <img src="/badges/icon_badge_bronze.png" />
-                                    <p className="subtitle is-overlay has-text-weight-semibold has-text-black" style={{ marginTop: "0.6em"}}>{playerData.badges.totalBadges.bronzeBadges}</p>
+                                    <p className="subtitle is-4 is-overlay has-text-weight-semibold has-text-white" style={{ textShadow: "1px 2px 4px #000", marginTop: "0.4em"}}>{playerData.badges.totalBadges.bronzeBadges}</p>
                                 </figure>
                                 <figure className="image is-64x64">
                                     <img src="/badges/icon_badge_silver.png" />
-                                    <p className="subtitle is-overlay has-text-weight-semibold has-text-black" style={{ marginTop: "0.6em"}}>{playerData.badges.totalBadges.silverBadges}</p>
+                                    <p className="subtitle is-4 is-overlay has-text-weight-semibold has-text-white" style={{ textShadow: "1px 2px 4px #000", marginTop: "0.4em"}}>{playerData.badges.totalBadges.silverBadges}</p>
                                 </figure>
                                 <figure className="image is-64x64">
                                     <img src="/badges/icon_badge_gold.png" />
-                                    <p className="subtitle is-overlay has-text-weight-semibold has-text-black" style={{ marginTop: "0.6em"}}>{playerData.badges.totalBadges.goldBadges}</p>
+                                    <p className="subtitle is-4 is-overlay has-text-weight-semibold has-text-white" style={{textShadow: "1px 2px 4px #000", marginTop: "0.4em"}}>{playerData.badges.totalBadges.goldBadges}</p>
                                 </figure>
                                 <figure className="image is-64x64">
                                     <img src="/badges/icon_badge_hof.png" />
-                                    <p className="subtitle is-overlay has-text-weight-semibold has-text-black" style={{ marginTop: "0.6em"}}>{playerData.badges.totalBadges.hofBadges}</p>
+                                    <p className="subtitle is-4 is-overlay has-text-weight-semibold has-text-white" style={{ textShadow: "1px 2px 4px #000", marginTop: "0.4em"}}>{playerData.badges.totalBadges.hofBadges}</p>
                                 </figure>
                             </div>
                         </div>                      
