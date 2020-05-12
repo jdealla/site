@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { getPlayersByPage } from "../lib/players";
 
 import Layout from "../components/layout";
-import FilterSortBox from "../components/FilterSortBox"
+import FilterSortBox from "../components/filtersortbox"
 import PlayersList from "../components/playerslist"
 
 export default function Players() {
@@ -46,6 +46,9 @@ export default function Players() {
                             <p className="has-text-weight-semibold "> Name </p>
                         </div>
                         <div className="column is-one-fifth-mobile is-1-tablet">
+                            <p className="has-text-weight-semibold "> Tier </p>
+                        </div>
+                        <div className="column is-one-fifth-mobile is-1-tablet">
                             <p className="has-text-weight-semibold "> Overall </p>
                         </div>
                         <div className="column is-one-fifth-mobile is-1-tablet">
@@ -53,6 +56,9 @@ export default function Players() {
                         </div>
                         <div className="column is-one-fifth-mobile is-1-tablet">
                             <p className="has-text-weight-semibold "> Height </p>
+                        </div>
+                        <div className="column is-one-fifth-mobile is-1-tablet">
+                            <p className="has-text-weight-semibold "> Weight </p>
                         </div>
                         <div className="column is-one-fifth-mobile is-2-tablet">
                             <p className="has-text-weight-semibold "> Badges </p>

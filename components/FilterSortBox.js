@@ -12,7 +12,7 @@ export default function FilterSortBox(props) {
             case "stats": return getPropNames("stats");
             case "tendencies": return getPropNames("tendencies");
             case "badges": return getPropNames("badges");
-            case "sigs": console.log(getPropNames("sigs")); return getPropNames("sigs");
+            case "animations": return getPropNames("sigs");
         }
     }
 
@@ -68,6 +68,22 @@ export default function FilterSortBox(props) {
                                 <div className="container is-scrollable">
                                     <div className="columns">
                                         {renderDropdownItems("tendencies")}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="dropdown is-hoverable">
+                        <div className="dropdown-trigger">
+                            <button className="button" aria-haspopup="true" aria-controls="dropdown-menu2">
+                                <span>Sort By Animations</span>
+                            </button>
+                        </div>
+                        <div className="dropdown-menu" id="dropdown-menu2" role="menu">
+                            <div className="dropdown-content">
+                                <div className="container is-scrollable">
+                                    <div className="columns">
+                                        {renderDropdownItems("animations")}
                                     </div>
                                 </div>
                             </div>
