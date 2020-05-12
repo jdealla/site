@@ -105,16 +105,13 @@ export default function Player({ playerData }) {
             <div className="container is-fluid is-desktop">
                 <div className="columns is-mobile is-multiline">
                     <div className="column is-5-mobile is-3-desktop is-2-tablet">
-                        <p className="title">{playerData.info.name}</p>
-                        <p className="subtitle is-size-5">
-                            <span className="is-paddingless is-size-7"> {playerData.info.collection} / {playerData.info.theme} </span>
-                            <br />
+                        <p className="title is-size-4">{playerData.info.name}</p>
+                        <p className="subtitle is-paddingless is-size-6-desktop is-size-7-mobile"> {playerData.info.collection} / {playerData.info.theme} </p>
+                        <p className="subtitle is-size-6 is-size-7-mobile">
                             Height: {playerData.info.height}
                             <br />
                             Weight: {playerData.info.weight}lbs
                             <br />
-                        </p>
-                        <p className="subtitle is-size-5">
 						    From: {playerData.info.college}
                             <br />
                             Nickname: {playerData.info.nickname}
@@ -129,14 +126,18 @@ export default function Player({ playerData }) {
                             <br />
                             Position: {playerData.info.position}{playerData.info.secondary_position != null ? `/${playerData.info.secondary_position}` : ""}
                         </p>
-                        <p className="subtitle has-text-weight-semibold is-size-5-mobile is-size-6">
-                            Plays:
-                        </p>
+                        <p className="subtitle is-paddingless has-text-weight-bold is-size-7-mobile is-size-6"> Plays: </p>
                         <div className="tags has-addons">
                             <span className="tag">{playerData.info.play1}</span>
                             <span className="tag">{playerData.info.play2}</span>
                             <span className="tag">{playerData.info.play3}</span>
                             <span className="tag">{playerData.info.play4}</span>
+                        </div>
+                        <div className="container">
+                            <div className="buttons has-addons">
+                                <button className="button is-small">Add a Diamond Shoe</button>
+                                <button className="button is-small">Add a Coach</button>
+                            </div>
                         </div>
                     </div>
                     <div className="column is-7-mobile is-2-desktop is-2-tablet">
