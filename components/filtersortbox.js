@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getPropNames, getPlayersData, sortPlayersByProp, } from "../lib/players";
+import { getPropNames, getPlayersData, } from "../lib/players";
 
 const allPlayers = getPlayersData();
 

@@ -4,8 +4,6 @@ import { getPlayersData, getPlayerData, getPlayerBySuggestion } from "../lib/pla
 
 import styles from "./searchplayers.module.css";
 
-const allPlayers = getPlayersData();
-
 export default function SearchPlayers(props) {
     const { handlePlayer, playerInfo } = props;
     const [value, setValue] = useState('');
