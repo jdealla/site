@@ -135,8 +135,18 @@ export default function Player({ playerData }) {
                         </div>
                         <div className="container">
                             <div className="buttons has-addons">
-                                <button className="button is-small">Add a Diamond Shoe</button>
-                                <button className="button is-small">Add a Coach</button>
+                                <button className="button" disabled>
+                                    <span className="icon">
+                                        <img src="/icons/icon_shoes.png" />
+                                    </span>
+                                    <span>Add Shoe</span>
+                                </button>
+                                <button className="button" disabled>
+                                    <span className="icon">
+                                        <img src="/icons/icon_coach.png" />
+                                    </span>
+                                    <span>Add Coach</span>
+                                </button>
                             </div>
                         </div>
                     </div>

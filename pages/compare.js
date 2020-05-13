@@ -115,7 +115,7 @@ export default function Compare() {
                     <button className="delete" aria-label="delete" onClick={() => handlePlayer(playerId, null)}></button>
                 </div>
                 <div className="card-image">
-                    <img style={{maxWidth:"250px"}} src={playerData.image} />
+                    <img style={{ maxWidth: "250px" }} src={playerData.image} />
                 </div>
             </div>
         )

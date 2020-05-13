@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { groupedPlayersByDate } from "../lib/players";
 
 import Layout from "../components/layout";
+import UpdatedList from "../components/updatedlist";
 
 export default function Updated({ groupedByDate }) {
     const router = useRouter();
@@ -10,10 +11,10 @@ export default function Updated({ groupedByDate }) {
     const renderUpdates = () => {
         let updates = [], i = 0;
         for(let [date, players] of Object.entries(groupedByDate)) {
-            debugger
             let dateObj = (
-                <div className="column" key={i++}>
-                    <p className="subtitle">{date}</p>
+                <div className="notification" key={i++}>
+                    <p className="title is-4">{date}</p>
+                    <UpdatedList players={players} />
                 </div>
             )
             updates.push(dateObj);
