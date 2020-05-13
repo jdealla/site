@@ -1,11 +1,17 @@
 import { useState } from "react";
-import { getPropNames, getPlayersData, } from "../lib/players";
+import { getPropNames, getPlayersData, sortPlayersByProp } from "../lib/players";
 
-const allPlayers = getPlayersData();
+import Dropdown from "../components/dropdown";
 
 export default function FilterSortBox(props) {
-    const { handlePlayers } = props;
+    const { handleSorted, sortedBy } = props;
     const [view, setView] = useState("sort");
+
+    const handleClick = (item) => {
+        let unformatted = item.toLowerCase().replace(/ /g, "_");
+
+        handleSorted(unformatted);
+    }
 
     const getItemsByProp = (prop) => {
         switch(prop) {
@@ -19,80 +25,44 @@ export default function FilterSortBox(props) {
     const renderDropdownItems = (prop) => {
         let items = getItemsByProp(prop).map((item, i) => {
             return (
-                <a key={i} className="dropdown-item">
+                <a key={i} className="dropdown-item" onClick={() => handleClick(item)} >
                     {item}
                 </a>
             )
         })
 
         return (
-            <>
+            <div className="columns">
                 <div className="column is-half">
                     {items.slice(0, items.length / 2)}
                 </div>
                 <div className="column is-half">
                     {items.slice(items.length / 2 + 1)}
                 </div>
-            </>
+            </div>
         )
+    }
+
+    const handleSortDirection = () => {
+        let value = sortedBy.split("-");
+
+        //dsc
+        if (value.length > 1)
+            handleSorted(value[1])
+        else
+            handleSorted("-" + value[0].toLowerCase().replace(/ /g, "_"))
     }
 
     return (
         <div className="box">
             <div className="columns is-mobile">
                 <div className="column is-half">
-                    <div className="dropdown is-hoverable">
-                        <div className="dropdown-trigger">
-                            <button className="button" aria-haspopup="true" aria-controls="dropdown-menu2">
-                                <span>Sort By Stats</span>
-                            </button>
-                        </div>
-                        <div className="dropdown-menu" id="dropdown-menu2" role="menu">
-                            <div className="dropdown-content">
-                                <div className="container is-scrollable">
-                                    <div className="columns">
-                                        {renderDropdownItems("stats")}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="dropdown is-hoverable">
-                        <div className="dropdown-trigger">
-                            <button className="button" aria-haspopup="true" aria-controls="dropdown-menu2">
-                                <span>Sort By Tendencies</span>
-                            </button>
-                        </div>
-                        <div className="dropdown-menu" id="dropdown-menu2" role="menu">
-                            <div className="dropdown-content">
-                                <div className="container is-scrollable">
-                                    <div className="columns">
-                                        {renderDropdownItems("tendencies")}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="dropdown is-hoverable">
-                        <div className="dropdown-trigger">
-                            <button className="button" aria-haspopup="true" aria-controls="dropdown-menu2">
-                                <span>Sort By Animations</span>
-                            </button>
-                        </div>
-                        <div className="dropdown-menu" id="dropdown-menu2" role="menu">
-                            <div className="dropdown-content">
-                                <div className="container is-scrollable">
-                                    <div className="columns">
-                                        {renderDropdownItems("animations")}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <Dropdown hover={true} items={renderDropdownItems("stats")} title="Sort By Stats" />
+                    <Dropdown hover={true} items={renderDropdownItems("tendencies")} title="Sort By Tendencies" />
                 </div>
                 <div className="column has-text-right">
-                    <button className="button">Asc</button>
-                    <button className="button">Desc</button>
+                    <button className="button" onClick={handleSortDirection} >Asc</button>
+                    <button className="button" onClick={handleSortDirection} >Desc</button>
                 </div>
             </div>
         </div>
