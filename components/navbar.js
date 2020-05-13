@@ -35,6 +35,7 @@ export default function NavBar(props) {
                     )}
                     <a className="navbar-item" onClick={() => router.push(`/players`)}>Players</a>
                     <a className="navbar-item" onClick={() => router.push(`/compare`)}>Compare</a>
+                    <a className="navbar-item" onClick={() => router.push(`/updated`)}>Updates</a>
                 </div>
             </div>
         </nav>
