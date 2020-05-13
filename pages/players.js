@@ -6,9 +6,7 @@ import Layout from "../components/layout";
 import FilterSortBox from "../components/filtersortbox"
 import PlayersList from "../components/playerslist"
 
-const allPlayers = getAllPlayersData();
-
-export default function Players() {
+export default function Players({ allPlayers }) {
     const [page, setPage] = useState(1)
     const [perPage, setPerPage] = useState(20);
     const [players, setPlayers] = useState(allPlayers);
@@ -89,4 +87,14 @@ export default function Players() {
             </div>
         </Layout>
     )
+}
+
+export async function getStaticProps() {
+    const allPlayers = getAllPlayersData();
+
+    return {
+        props: {
+            allPlayers
+        }
+    }
 }

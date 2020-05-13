@@ -103,6 +103,11 @@ $tabs-link-active-color: $blue;
     }
 }
 
+@font-face {
+    font-family: 'Rajdhani-Regular';
+    src: url("/fonts/Rajdhani-Regular.tff");
+}
+
 @import "../node_modules/bulma/sass/utilities/functions.sass";
 @import "../node_modules/bulma/sass/utilities/derived-variables.sass";
 @import "../node_modules/bulma/sass/utilities/controls.sass";
