@@ -14,14 +14,14 @@ export default function UpdatedList(props) {
         let newPlayers = playersToRender.map((player, i) => {
             return (
                 <div className="column is-4-mobile is-1-desktop" key={i} onClick={() => router.push(`/players/${player.id}`)}>
-                    <img style={{ maxWidth: "100px" }} src={`/players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`} />
+                    <img style={{ maxWidth: "100px", cursor: "pointer" }} src={`/players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`} />
                 </div>
             )
         })
 
         if (players.length > 10) {
             let lastItem = (
-                <div className="column is-4-mobile is-2-desktop">
+                <div className="column is-4-mobile is-2-desktop" key={11} >
                     <p className="subtitle"> +{players.length - 10} more players </p>
                 </div>
             )
