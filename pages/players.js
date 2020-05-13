@@ -35,6 +35,7 @@ export default function Players() {
             <Head>
                 <title>2KDB All Players List</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
             </Head>
             <div className="container">
                 <div className="columns">
@@ -45,7 +46,14 @@ export default function Players() {
                 <div className="box">
                     <div className="columns is-mobile is-gapless is-marginless" style={{ cursor: "pointer"}}>
                         <div className="column is-one-fifth-mobile is-2-tablet" onClick={() => setPlayers(sortPlayersByProp("name"))} >
-                            <p className="has-text-weight-semibold " > Name </p>
+                            <div className="level">
+                                <div className="level-left">
+                                    <p className="has-text-weight-semibold"> Name </p>
+                                    <span className="icon is-small">
+                                        <i className="fas fa-sort-up"></i>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                         <div className="column is-one-fifth-mobile is-1-tablet" onClick={() => setPlayers(sortPlayersByProp("overall"))}>
                             <p className="has-text-weight-semibold "> Tier </p>

@@ -5,9 +5,9 @@ import SearchBar from "../components/searchbar";
 import NavBar from "../components/navbar"
 
 export default function Home() {
-  const router = useRouter()
+  const router = useRouter();
 
-  const handleClick = (playerId) => router.push(`/players/${playerId}`)
+  const handleClick = (playerId) => router.push(`/players/${playerId}`);
 
   return (
     <div>
