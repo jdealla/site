@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import OverallImage from "./overallimage";
 
 export default function PlayersList(props) {
-    const { players } = props;
+    const { players, perPage, page } = props;
     const router = useRouter()
 
     const handleClick = (e, playerId) => {
@@ -17,7 +17,16 @@ export default function PlayersList(props) {
             <Fragment key={player.info.id}>
                 <div className="columns is-mobile is-gapless is-marginless" id="player-link" onClick={(e) => handleClick(e, player.info.id)}>
                     <div className="column is-one-fifth-mobile is-2-tablet">
-                        {player.info.name}
+                        <div className="columns is-mobile is-multiline">
+                            <div className="column is-3-desktop is-4-mobile">
+                                <figure className="image is-48x48">
+                                    <img src={player.image} />
+                                </figure>
+                            </div>
+                            <div className="column is-hidden-mobile is-size-7-mobile">
+                                {player.info.name}
+                            </div>
+                        </div>
                     </div>
                     <div className="column is-one-fifth-mobile is-1-tablet">
                         <figure className="image is-32x32">
@@ -33,10 +42,10 @@ export default function PlayersList(props) {
                     <div className="column is-one-fifth-mobile is-1-tablet">
                         {player.info.height}
                     </div>
-                    <div className="column is-one-fifth-mobile is-1-tablet">
+                    <div className="column is-hidden-mobile is-1-tablet">
                         {player.info.weight} lbs
                     </div>
-                    <div className="column is-one-fifth-mobile is-2-tablet">
+                    <div className="column is-hidden-mobile is-2-tablet">
                         <div className="tags has-addons">
                             <span className="tag HOF">{player.badges.totalBadges.hofBadges}</span>
                             <span className="tag Gold">{player.badges.totalBadges.goldBadges}</span>
@@ -48,5 +57,5 @@ export default function PlayersList(props) {
                 <div className="divider is-right"></div>
             </Fragment>
         )
-    })
+    }).slice((page * perPage) - perPage, page * perPage + 1);
 }
