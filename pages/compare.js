@@ -74,7 +74,7 @@ export default function Compare() {
                                 <CompareTable tableName="Defense" firstName={player1.info.name} firstStats={player1.tendencies.defense} secondName={player2.info.name} secondStats={player2.tendencies.defense} />
                             </div>
                             <div className="column">
-                                <CompareTable tableName="Shooting" firstName={player1.info.name} firstStats={player1.badges.shooting} secondName={player2.info.name} secondStats={player2.badges.shooting} />
+                                <CompareTable tableName="Shooting" firstName={player1.info.name} firstStats={player1.tendencies.shooting} secondName={player2.info.name} secondStats={player2.tendencies.shooting} />
                                 <CompareTable tableName="Drive" firstName={player1.info.name} firstStats={player1.tendencies.drive} secondName={player2.info.name} secondStats={player2.tendencies.drive} />
                             </div>
                             <div className="column">
@@ -115,7 +115,7 @@ export default function Compare() {
                     <button className="delete" aria-label="delete" onClick={() => handlePlayer(playerId, null)}></button>
                 </div>
                 <div className="card-image">
-                    <img src={playerData.image} />
+                    <img style={{maxWidth:"250px"}} src={playerData.image} />
                 </div>
             </div>
         )
