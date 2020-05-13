@@ -127,7 +127,7 @@ export default function Player({ playerData }) {
                             Position: {playerData.info.position}{playerData.info.secondary_position != null ? `/${playerData.info.secondary_position}` : ""}
                         </p>
                         <p className="subtitle is-paddingless has-text-weight-bold is-size-7-mobile is-size-6"> Plays: </p>
-                        <div className="tags has-addons">
+                        <div className="tags">
                             <span className="tag">{playerData.info.play1}</span>
                             <span className="tag">{playerData.info.play2}</span>
                             <span className="tag">{playerData.info.play3}</span>
