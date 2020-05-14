@@ -111,9 +111,9 @@ export default function Player({ playerData }) {
                     <div className="column is-5-mobile is-5-desktop is-2-tablet has-padding-2 ">
                         <p className="title is-size-3 has-text-weight-bold has-text-white">{playerData.info.name}</p>
                         <p className="subtitle is-paddingless is-size-6-desktop is-size-7-mobile has-text-warning has-text-weight-semibold"> 
-                            <a href={`/collection/${playerData.info.collection.toLowerCase().replace(/ /g, "-")}`}>{playerData.info.collection} </a>
+                            <a href={`/collection/${playerData.info.collection.toLowerCase().replace(/ /g, "-").replace(/'/g, "")}`}>{playerData.info.collection} </a>
                             / 
-                            <a href={`/collection/${playerData.info.collection.toLowerCase().replace(/ /g, "-")}/theme/${playerData.info.theme.toLowerCase().replace(/ /g, "-")}`}> {playerData.info.theme} </a>
+                            <a href={`/collection/${playerData.info.collection.toLowerCase().replace(/ /g, "-").replace(/'/g, "")}/theme/${playerData.info.theme.toLowerCase().replace(/ /g, "-")}`}> {playerData.info.theme} </a>
                         </p>
                         <div className="subtitle is-size-6 is-size-7-mobile has-text-white">
                             <nav className="level ">

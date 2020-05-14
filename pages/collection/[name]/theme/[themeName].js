@@ -15,7 +15,7 @@ export default function Collection({ players }) {
 
 export async function getStaticPaths() {
     const paths = getThemes();
-
+    console.log(paths);
     return {
         paths,
         fallback: false
@@ -28,9 +28,18 @@ export async function getStaticProps({ params }) {
 
     if (nameArray.length === 1)
         formatted = nameArray[0].charAt(0).toUpperCase() + nameArray[0].substring(1);
+    else    
+        formatted = nameArray.map(word => {
+            let result = "";
+            if (word === "2k20")
+                result = word.toUpperCase();
+            else
+                result = word.charAt(0).toUpperCase() + word.substring(1);
 
-    formatted = nameArray.map(word => word.charAt(0).toUpperCase() + word.substring(1)).join(" ");
+            return result 
+        }).join(" ");
 
+    console.log(formatted);
     const players = getPlayersByPropValue("theme", formatted);
 
     return {
