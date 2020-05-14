@@ -10,7 +10,7 @@ export default function Players({ allPlayers }) {
     const [page, setPage] = useState(1)
     const [perPage, setPerPage] = useState(20);
     const [players, setPlayers] = useState(allPlayers);
-    const [sortedBy, setSortedBy] = useState("");
+    const [sortedBy, setSortedBy] = useState({ name: "", asc: true, propName: "" });
 
     const handlePage = (dir) => {
         if (dir === "prev") {
@@ -25,8 +25,17 @@ export default function Players({ allPlayers }) {
     }
     const handlePerPage = (amount) => setPerPage(amount);
     const handleSorted = (prop) => {
-        setSortedBy(prop)
-        setPlayers(sortPlayersByProp(prop))
+        let propName = prop.toLowerCase().replace(/ /g, "_");
+        setSortedBy({ ...sortedBy, name: prop, propName: propName })
+        setPlayers(sortPlayersByProp(propName))
+    }
+    const handleSortDirection = () => {
+        let propName = sortedBy.propName;
+        if (sortedBy.asc) {
+            propName = "-" + propName;
+        }
+        setSortedBy({ ...sortedBy, asc: !sortedBy.asc })
+        setPlayers(sortPlayersByProp(propName))
     }
     const handlePlayers = (players) => setPlayers(players)
 
@@ -40,7 +49,7 @@ export default function Players({ allPlayers }) {
             <div className="container">
                 <div className="columns">
                     <div className="column is-full">
-                        <FilterSortBox handleSorted={handleSorted} sortedBy={sortedBy} />
+                        <FilterSortBox handleSorted={handleSorted} handleSortDirection={handleSortDirection} handlePerPage={handlePerPage} sortedBy={sortedBy} />
                     </div>
                 </div>
                 <div className="box">
@@ -74,7 +83,7 @@ export default function Players({ allPlayers }) {
                             <p className="has-text-weight-semibold "> Badges </p>
                         </div> */}
                         <div className={`column is-2-tablet ${sortedBy == "" ? "is-hidden" : ""}`}>
-                            <p className="has-text-weight-bold"> {formatName(sortedBy)}</p>
+                            <p className="has-text-weight-bold"> {sortedBy.name}</p>
                         </div>
                     </div>
                     <div className="divider is-right"></div>

@@ -53,7 +53,7 @@ export default function PlayersList(props) {
                         </div>
                     </div> */}
                     <div className={`column is-2-tablet ${sortedBy == "" ? "is-hidden" : "has-text-weight-semibold"}`}>
-                        {player[sortedBy.replace(/-/g, "")]}
+                        {player[sortedBy.propName]}
                     </div>
                 </div>
                 <div className="divider is-right"></div>

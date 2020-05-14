@@ -1,16 +1,18 @@
-import { useState } from "react";
-import { getPropNames, getPlayersData, sortPlayersByProp } from "../lib/players";
+import { getPropNames } from "../lib/players";
 
-import Dropdown from "../components/dropdown";
+import Dropdown from "./dropdown";
+import SortIcon from "./sorticon";
 
 export default function FilterSortBox(props) {
-    const { handleSorted, sortedBy } = props;
-    const [view, setView] = useState("sort");
+    const { handleSorted, sortedBy, handleSortDirection } = props;
 
-    const handleClick = (item) => {
-        let unformatted = item.toLowerCase().replace(/ /g, "_");
+    const handleClick = (item, addT) => {
+        if (addT) {
+            item += "T";
+        }
 
-        handleSorted(unformatted);
+        handleSortDirection();
+        handleSorted(item);
     }
 
     const getItemsByProp = (prop) => {
@@ -23,9 +25,14 @@ export default function FilterSortBox(props) {
     }
 
     const renderDropdownItems = (prop) => {
+        let addT = false;
+
+        if (prop === "tendencies")
+            addT = true;
+
         let items = getItemsByProp(prop).map((item, i) => {
             return (
-                <a key={i} className="dropdown-item" onClick={() => handleClick(item)} >
+                <a key={i} className="dropdown-item" onClick={() => handleClick(item, addT)} >
                     {item}
                 </a>
             )
@@ -43,16 +50,6 @@ export default function FilterSortBox(props) {
         )
     }
 
-    const handleSortDirection = () => {
-        let value = sortedBy.split("-");
-
-        //dsc
-        if (value.length > 1)
-            handleSorted(value[1])
-        else
-            handleSorted("-" + value[0].toLowerCase().replace(/ /g, "_"))
-    }
-
     return (
         <div className="box">
             <div className="columns is-mobile">
@@ -61,8 +58,12 @@ export default function FilterSortBox(props) {
                     <Dropdown hover={true} items={renderDropdownItems("tendencies")} title="Sort By Tendencies" />
                 </div>
                 <div className="column has-text-right">
-                    <button className="button" onClick={handleSortDirection} >Asc</button>
-                    <button className="button" onClick={handleSortDirection} >Desc</button>
+                    <button className="button" onClick={() => handleSortDirection()}>
+                        <SortIcon asc={sortedBy.asc} />
+                        <span>
+                            {sortedBy.asc ? "Asc" : "Desc" }
+                        </span>
+                    </button>
                 </div>
             </div>
         </div>
