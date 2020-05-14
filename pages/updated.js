@@ -13,8 +13,8 @@ export default function Updated({ groupedByDate }) {
         for(let [date, players] of Object.entries(groupedByDate)) {
             let dateObj = (
                 <div className="notification" key={i++}>
-                    <p className="title is-4">{date}</p>
-                    <UpdatedList players={players} />
+                    <p className="title is-4" onClick={() => router.push(`/updates/${date}`)} >{date}</p>
+                    <UpdatedList players={players} amount={10} />
                 </div>
             )
             updates.push(dateObj);

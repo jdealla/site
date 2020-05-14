@@ -1,14 +1,14 @@
 import { useRouter } from "next/router";
 
 export default function UpdatedList(props) {
-    const { players } = props;
+    const { players, amount } = props;
     const router = useRouter();
 
     const renderPlayerCards = () => {
         let playersToRender = players;
 
-        if (players.length > 10) {
-            playersToRender = players.slice(0, 10);
+        if (players.length > amount) {
+            playersToRender = players.slice(0, amount);
         }
         
         let newPlayers = playersToRender.map((player, i) => {
@@ -19,10 +19,10 @@ export default function UpdatedList(props) {
             )
         })
 
-        if (players.length > 10) {
+        if (players.length > amount) {
             let lastItem = (
                 <div className="column is-4-mobile is-2-desktop" key={11} >
-                    <p className="subtitle"> +{players.length - 10} more players </p>
+                    <p className="subtitle"> +{players.length - amount} more players </p>
                 </div>
             )
             newPlayers.push(lastItem);
