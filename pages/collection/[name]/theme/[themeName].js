@@ -6,7 +6,7 @@ export default function Collection({ players }) {
     return (
         <Layout>
             <div className="container">
-                <p className="title is-size-5">{players[0].collection}</p>
+                <p className="title is-size-5">{players[0].theme}</p>
                 <UpdatedList players={players} amount={players.length} />
             </div>
         </Layout>
