@@ -109,6 +109,15 @@ $tabs-link-active-color: $blue;
     src: url("/fonts/Rajdhani-SemiBold.ttf");
 }
 
+.total_badges_style {
+    font-family: "Rajdhani";
+	font-weight: 700;
+	font-size: 1.7em;
+	color: #f0f0f0;
+	text-shadow: 0px 1px 7px #404040;
+	margin-top: 0.1em;
+}
+
 @import "../node_modules/bulma/sass/utilities/functions.sass";
 @import "../node_modules/bulma/sass/utilities/derived-variables.sass";
 @import "../node_modules/bulma/sass/utilities/controls.sass";
