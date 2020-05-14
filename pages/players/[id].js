@@ -213,7 +213,7 @@ export default function Player({ playerData }) {
                         </div>
                     </div>
                     
-                    <div className="column is-11-mobile is-2-desktop is-2-tablet">
+                    <div className="column is-11-mobile is-one-fifth-desktop is-2-tablet">
                     
                     <p className="subtitle has-text-weight-bold is-size-6 is-size-7-mobile has-text-warning">Hot Zones:</p>
                     <ShotChart hotzones={playerData.hotzones} />  
