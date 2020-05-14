@@ -6,6 +6,7 @@ import Layout from "../../components/layout";
 import BadgeContainer from "../../components/badgecontainer";
 import Attributes from "../../components/attributes";
 import ShotChart from "../../components/shotchart";
+import OverallImage from "../../components/overallimage";
 
 export default function Player({ playerData }) {
     const [view, setView] = useState("stats");
@@ -108,7 +109,7 @@ export default function Player({ playerData }) {
                     <div className="column is-7-mobile is-one-fifth-desktop is-2-tablet ">
                         <img src={require(`images/players/${playerData.info.name.replace(/ /g, "_").toLowerCase()}_${playerData.info.id}.jpg`)} />
                     </div>
-                    <div className="column is-5-mobile is-5-desktop is-2-tablet has-padding-2 ">
+                    <div className="column is-5-mobile is-5-desktop is-2-tablet has-padding-2 is-player-info">
                         <p className="title is-size-3 has-text-weight-bold has-text-white">{playerData.info.name}</p>
                         <p className="subtitle is-paddingless is-size-6-desktop is-size-7-mobile has-text-warning has-text-weight-semibold"> 
                             <a href={`/collection/${playerData.info.collection.toLowerCase().replace(/ /g, "-")}`}>{playerData.info.collection} </a>
@@ -120,7 +121,9 @@ export default function Player({ playerData }) {
                                 <div className="level-item has-text-centered">
                                     <div>
                                         <p className="heading has-text-warning">Overall</p>
-                                        <p className="title is-1 title has-text-white">{playerData.info.overall}</p>
+                                        <p className="title is-1 title has-text-white">
+                                            {playerData.info.overall}
+                                        </p>
                                     </div>
                                 </div>
                                 <div className="level-item has-text-centered">

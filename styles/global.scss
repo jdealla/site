@@ -93,14 +93,6 @@ $tabs-link-active-color: $blue;
     }
 }
 
-#player-link {
-    cursor: pointer;
-    &:hover {
-        color: $black;
-        font-weight: bold;
-    }
-}
-
 .container {
     &.is-scrollable {
         overflow-y: auto;
@@ -135,12 +127,14 @@ $tabs-link-active-color: $blue;
             width: 2000px;
             max-width: 2000px;
             height: 27em;
-            z-index: -1 !important;
+            z-index: -3 !important;
         }
     }
     .column {
-        position: relative;
-        z-index: 2;
+        &.is-player-info {
+            position: relative;
+            z-index: 2;
+        }
     }
 }
 
@@ -150,6 +144,15 @@ $tabs-link-active-color: $blue;
         background-size: 100% 100%;
     }
 }
+
+#player-link {
+    cursor: pointer;
+    &:hover {
+        color: $black;
+        font-weight: bold;
+    }
+}
+
 @import "../node_modules/bulma/sass/utilities/functions.sass";
 @import "../node_modules/bulma/sass/utilities/derived-variables.sass";
 @import "../node_modules/bulma/sass/utilities/controls.sass";
