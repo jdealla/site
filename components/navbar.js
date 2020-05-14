@@ -11,7 +11,7 @@ export default function NavBar(props) {
     const handleClickPlayer = (playerId) => router.push(`/players/${playerId}`);
 
     return (
-        <nav className={`navbar ${index ? "is-fixed-top" : ""}`} role="navigation" aria-label="main navigation">
+        <nav className={`navbar is-black ${index ? "is-fixed-top" : ""}`} role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
                 <a className="navbar-item" onClick={() => router.push(`/`)}>
                     2KDB

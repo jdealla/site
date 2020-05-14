@@ -103,111 +103,122 @@ export default function Player({ playerData }) {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <div className="container is-fluid">
-                <div className="columns is-mobile is-multiline " style={{ background: "url(/icons/bg.png) no-repeat center / cover" }}>
-				<div className="column is-7-mobile is-one-fifth-desktop is-2-tablet ">
+                <div className="columns is-mobile is-multiline is-player-card">
+                    <div className="is-player-card"><img src="/playercard_bg.png" /></div>
+                    <div className="column is-7-mobile is-one-fifth-desktop is-2-tablet ">
                         <img src={playerData.image} />
                     </div>
                     <div className="column is-5-mobile is-5-desktop is-2-tablet has-padding-2 ">
                         <p className="title is-size-3 has-text-weight-bold has-text-white">{playerData.info.name}</p>
                         <p className="subtitle is-paddingless is-size-6-desktop is-size-7-mobile has-text-warning has-text-weight-semibold"> {playerData.info.collection} / {playerData.info.theme} </p>
-						
-                <p className="subtitle is-size-6 is-size-7-mobile has-text-white">
-                    <nav className="level ">
-                         <div className="level-item has-text-centered">
-                            <div>
-                               <p className="heading has-text-warning">Overall</p>
-                               <p className="title is-1 title has-text-white">{playerData.info.overall}</p>
-                            </div>
-                         </div>
-                         <div className="level-item has-text-centered">
-                            <div>
-                                <p className="heading has-text-warning">Off. Overall</p>
-                                <p className="title is-4 title has-text-white">{playerData.info.off_overall}</p>
-                            </div>
-                         </div>
-                         <div className="level-item has-text-centered">
-                            <div>
-                                <p className="heading has-text-warning">Def. Overall</p>
-                                <p className="title is-5 has-text-white">{playerData.info.def_overall}</p>
-                            </div>
-                         </div>
-                         <div className="level-item has-text-centered">
-                            <div>
-                                <p className="heading has-text-warning">Position</p>
-                                <p className="title is-5 has-text-white">{playerData.info.position}{playerData.info.secondary_position != null ? `/${playerData.info.secondary_position}` : ""}</p>
-                            </div>
-                        </div>
-                        <div className="level-item has-text-centered">
-                            <div>
-                                <p className="heading has-text-warning">Height</p>
-                                <p className="title is-5 has-text-white">{playerData.info.height}</p>
-                            </div>
-                         </div>
-                         <div className="level-item has-text-centered">
-                            <div>
-                                <p className="heading has-text-warning">Weight</p>
-                                <p className="title is-5 has-text-white">{playerData.info.weight} lbs</p>
-                            </div>
-                         </div>
-                    </nav>
-                    <nav className="level ">
-                         <div className="level-item has-text-centered">
-                            <div>
-                                <p className="heading has-text-warning">Nickname</p>
-                                <p className="title is-4 has-text-white">{playerData.info.nickname}</p>
-                            </div>
-                        </div>
-                        <div className="level-item has-text-centered">
-                            <div>
-                                <p className="heading has-text-warning">Team</p>
-                                <p className="title is-4 has-text-white">{playerData.info.team}</p>
-                            </div>
-                        </div>
-                        <div className="level-item has-text-centered">
-                            <div>
-                                <p className="heading has-text-warning">From</p>
-                                <p className="title is-4 has-text-white">{playerData.info.college}</p>
-                            </div>
-                        </div>
-                    </nav>
-                    <nav className="level ">
-                          <div className="level-item has-text-centered">
-                              <div>
-                               <p className="heading has-text-warning">Plays</p>
-                               <div className="tags has-addons is-rounded has-text-weight-bold">
-                                 <span className="tag is-dark">{playerData.info.play1}</span>
-                                 <span className="tag is-dark">{playerData.info.play2}</span>
-                                 <span className="tag is-dark">{playerData.info.play3}</span>
-                                 <span className="tag is-dark">{playerData.info.play4}</span>
-                               </div> 
-			                </div>
-		                  </div>
-                        </nav>
-					</p>
+                        <p className="subtitle is-size-6 is-size-7-mobile has-text-white">
+                            <nav className="level ">
+                                <div className="level-item has-text-centered">
+                                    <div>
+                                        <p className="heading has-text-warning">Overall</p>
+                                        <p className="title is-1 title has-text-white">{playerData.info.overall}</p>
+                                    </div>
+                                </div>
+                                <div className="level-item has-text-centered">
+                                    <div>
+                                        <p className="heading has-text-warning">Off. Overall</p>
+                                        <p className="title is-4 title has-text-white">{playerData.info.off_overall}</p>
+                                    </div>
+                                </div>
+                                <div className="level-item has-text-centered">
+                                    <div>
+                                        <p className="heading has-text-warning">Def. Overall</p>
+                                        <p className="title is-5 has-text-white">{playerData.info.def_overall}</p>
+                                    </div>
+                                </div>
+                                <div className="level-item has-text-centered">
+                                    <div>
+                                        <p className="heading has-text-warning">Position</p>
+                                        <p className="title is-5 has-text-white">{playerData.info.position}{playerData.info.secondary_position != null ? `/${playerData.info.secondary_position}` : ""}</p>
+                                    </div>
+                                </div>
+                                <div className="level-item has-text-centered">
+                                    <div>
+                                        <p className="heading has-text-warning">Height</p>
+                                        <p className="title is-5 has-text-white">{playerData.info.height}</p>
+                                    </div>
+                                </div>
+                                <div className="level-item has-text-centered">
+                                    <div>
+                                        <p className="heading has-text-warning">Weight</p>
+                                        <p className="title is-5 has-text-white">{playerData.info.weight} lbs</p>
+                                    </div>
+                                </div>
+                            </nav>
+                            <nav className="level ">
+                                {
+                                    playerData.info.nickname === "" ? (
+                                        <div className="level-item has-text-centered">
+                                            <div>
+                                                <p className="heading has-text-warning">Nickname</p>
+                                                <p className="title is-4 has-text-white">{playerData.info.nickname}</p>
+                                            </div>
+                                        </div>
+                                    ) : ""
+                                }
+                                <div className="level-item has-text-centered">
+                                    <div>
+                                        <p className="heading has-text-warning">Team</p>
+                                        <p className="title is-4 has-text-white">{playerData.info.team}</p>
+                                    </div>
+                                </div>
+                                <div className="level-item has-text-centered">
+                                    <div>
+                                        <p className="heading has-text-warning">From</p>
+                                        <p className="title is-4 has-text-white">{playerData.info.college}</p>
+                                    </div>
+                                </div>
+                            </nav>
+                            <nav className="level ">
+                                <div className="level-item has-text-centered">
+                                    <div className="columns is-centered">
+                                        <div className="column">
+                                            <p className="heading has-text-warning">Plays</p>
+                                            <div className="tags has-addons is-rounded has-text-weight-bold">
+                                                <span className="tag is-dark">{playerData.info.play1}</span>
+                                                <span className="tag is-dark">{playerData.info.play2}</span>
+                                                <span className="tag is-dark">{playerData.info.play3}</span>
+                                                <span className="tag is-dark">{playerData.info.play4}</span>
+                                            </div> 
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </nav>
+                        </p>
                         <div className="container">
-                            <div className="buttons has-addons">
-                                <button className="button" disabled>
-                                    <span className="icon">
-                                        <img src="/icons/icon_shoes.png" />
-                                    </span>
-                                    <span>Add Shoe</span>
-                                </button>
-                                <button className="button" disabled>
-                                    <span className="icon">
-                                        <img src="/icons/icon_coach.png" />
-                                    </span>
-                                    <span>Add Coach</span>
-                                </button>
+                            <div className="columns is-centered">
+                                <div className="column is-half">
+                                    <div className="buttons has-addons is-centered">
+                                        <button className="button" disabled>
+                                            <span className="icon">
+                                                <img src="/icons/icon_shoes.png" />
+                                            </span>
+                                            <span>Add Shoe</span>
+                                        </button>
+                                        <button className="button" disabled>
+                                            <span className="icon">
+                                                <img src="/icons/icon_coach.png" />
+                                            </span>
+                                            <span>Add Coach</span>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                  
-					<div className="column is-11-mobile is-2-desktop is-2-tablet">
-					
-                      <p className="subtitle has-text-weight-bold is-size-6 is-size-7-mobile has-text-warning">Hot Zones:</p>
-                      <ShotChart hotzones={playerData.hotzones} />  
-					  
-						<p className="subtitle has-text-weight-bold is-size-6 is-size-7-mobile has-text-warning">Badges:</p>
+                    
+                    <div className="column is-11-mobile is-2-desktop is-2-tablet">
+                    
+                    <p className="subtitle has-text-weight-bold is-size-6 is-size-7-mobile has-text-warning">Hot Zones:</p>
+                    <ShotChart hotzones={playerData.hotzones} />  
+                    
+                        <p className="subtitle has-text-weight-bold is-size-6 is-size-7-mobile has-text-warning">Badges:</p>
                         <div className="level ">
                             <div className="level-item is-size-5 has-text-centered">
                                 <figure className="image is-64x64">
