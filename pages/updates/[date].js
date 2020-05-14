@@ -1,5 +1,5 @@
+import { getUpdateDates, getPlayersByPropValue } from "../../lib/players";
 import Layout from "../../components/layout";
-import { getUpdateDates, getPlayersByDate } from "../../lib/players";
 import UpdatedList from "../../components/updatedlist";
 
 export default function UpdatePage({ players }) {
@@ -23,7 +23,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const players = getPlayersByDate(params.date);
+    const players = getPlayersByPropValue("date", params.date);
 
     return {
         props: {

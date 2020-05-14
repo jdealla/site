@@ -5,19 +5,19 @@ import { groupedPlayersByProp } from "../lib/players";
 import Layout from "../components/layout";
 import UpdatedList from "../components/updatedlist";
 
-export default function Updated({ groupedByDate }) {
+export default function Collections({ groupedByCollection }) {
     const router = useRouter();
 
     const renderUpdates = () => {
         let updates = [], i = 0;
-        for(let [date, players] of Object.entries(groupedByDate)) {
-            let dateObj = (
+        for(let [collection, players] of Object.entries(groupedByCollection)) {
+            let collectionObj = (
                 <div className="notification" key={i++}>
-                    <p className="title is-4" onClick={() => router.push(`/updates/${date}`)} >{date}</p>
+                    <p className="title is-4" onClick={() => router.push(`/collection/${collection.toLowerCase().replace(/ /g, "-")}`)} >{collection}</p>
                     <UpdatedList players={players} amount={10} />
                 </div>
             )
-            updates.push(dateObj);
+            updates.push(collectionObj);
         }
         return updates;
     }
@@ -25,7 +25,7 @@ export default function Updated({ groupedByDate }) {
     return (
         <Layout>
             <Head>
-                <title>2KDB | NBA 2K20 MyTeam Updated Players</title>
+                <title>2KDB | NBA2K20 MyTeam Collections</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <div className="container">
@@ -37,11 +37,11 @@ export default function Updated({ groupedByDate }) {
 }
 
 export async function getStaticProps() {
-    let groupedByDate = groupedPlayersByProp("date");
+    let groupedByCollection = groupedPlayersByProp("collection");
 
     return {
         props: {
-            groupedByDate
+            groupedByCollection
         }
     }
 }

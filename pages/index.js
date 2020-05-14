@@ -32,7 +32,7 @@ export default function Home() {
 
         <div className="hero-footer">
           <div className="container has-text-centered">
-            <p>
+            <p className="has-text-white">
               © {new Date().getFullYear()} <strong>2KDB</strong> | All image assets are property of 2K Sports.
             </p>
           </div>
