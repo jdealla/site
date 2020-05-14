@@ -102,7 +102,7 @@ export default function Player({ playerData }) {
                 <title>{playerData.info.name} | 2KDB</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <div className="container is-fluid is-desktop">
+            <div className="container is-fluid">
                 <div className="columns is-mobile is-multiline">
                     <div className="column is-5-mobile is-3-desktop is-2-tablet">
                         <p className="title is-size-4">{playerData.info.name}</p>
@@ -126,13 +126,6 @@ export default function Player({ playerData }) {
                             <br />
                             Position: {playerData.info.position}{playerData.info.secondary_position != null ? `/${playerData.info.secondary_position}` : ""}
                         </p>
-                        <p className="subtitle is-paddingless has-text-weight-bold is-size-7-mobile is-size-6"> Plays: </p>
-                        <div className="tags">
-                            <span className="tag">{playerData.info.play1}</span>
-                            <span className="tag">{playerData.info.play2}</span>
-                            <span className="tag">{playerData.info.play3}</span>
-                            <span className="tag">{playerData.info.play4}</span>
-                        </div>
                         <div className="container">
                             <div className="buttons has-addons">
                                 <button className="button" disabled>
@@ -150,13 +143,13 @@ export default function Player({ playerData }) {
                             </div>
                         </div>
                     </div>
-                    <div className="column is-7-mobile is-2-desktop is-2-tablet">
+                    <div className="column is-7-mobile is-one-fifth-desktop is-2-tablet">
                         <img src={playerData.image} />
                     </div>
-                    <div className="column is-12-mobile is-2-desktop is-2-tablet">
-                        <p className="subtitle is-6 has-text-weight-semibold ">Hot Zones:</p>
+                    <div className="column is-11-mobile is-2-desktop is-2-tablet">
+                        <p className="subtitle has-text-weight-bold is-size-6 is-size-7-mobile ">Hot Zones:</p>
                         <ShotChart hotzones={playerData.hotzones} />  
-                        <p className="subtitle is-6 has-text-weight-semibold ">Badges:</p>
+                        <p className="subtitle has-text-weight-bold is-size-6 is-size-7-mobile">Badges:</p>
                         <div className="level ">
                             <div className="level-item is-size-5 has-text-centered">
                                 <figure className="image is-64x64">
@@ -177,6 +170,15 @@ export default function Player({ playerData }) {
                                 </figure>
                             </div>
                         </div>                      
+                    </div>
+                    <div className="column is-12-mobile is-2-desktop is-2-tablet">
+                        <p className="subtitle is-paddingless has-text-weight-bold is-size-7-mobile is-size-6"> Plays: </p>
+                        <div className="tags has-addons is-rounded">
+                            <span className="tag">{playerData.info.play1}</span>
+                            <span className="tag">{playerData.info.play2}</span>
+                            <span className="tag">{playerData.info.play3}</span>
+                            <span className="tag">{playerData.info.play4}</span>
+                        </div>
                     </div>
                 </div>
 
