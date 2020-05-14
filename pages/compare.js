@@ -115,7 +115,7 @@ export default function Compare() {
                     <button className="delete" aria-label="delete" onClick={() => handlePlayer(playerId, null)}></button>
                 </div>
                 <div className="card-image">
-                    <img style={{ maxWidth: "250px" }} src={playerData.image} />
+                    <img style={{ maxWidth: "250px" }} src={require(`images/players/${playerData.info.name.replace(/ /g, "_").toLowerCase()}_${playerData.info.id}.jpg`)} />
                 </div>
             </div>
         )
@@ -150,7 +150,7 @@ export default function Compare() {
                 <title>2KDB Compare Players Page</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <div className="container">
+            <div className="container" style={{ marginTop: '10px' }}>
                 <div className="level">
                     <div className="level-item">
                         {renderSearch(1)}

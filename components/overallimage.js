@@ -17,7 +17,7 @@ export default function OverallImage(props) {
             case (overall == 99): tier = "galaxyopal"; break;
         }
 
-        return <img src={`/icons/icon_${tier}.png`} />
+        return <img src={require(`images/icons/icon_${tier}.png`)} />
     }
 
     return renderOverall();

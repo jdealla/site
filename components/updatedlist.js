@@ -14,7 +14,7 @@ export default function UpdatedList(props) {
         let newPlayers = playersToRender.map((player, i) => {
             return (
                 <div className="column is-4-mobile is-1-desktop" key={i} onClick={() => router.push(`/players/${player.id}`)}>
-                    <img style={{ maxWidth: "100px", cursor: "pointer" }} src={`/players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`} />
+                    <img style={{ maxWidth: "100px", cursor: "pointer" }} src={require(`images/players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`)} />
                 </div>
             )
         })

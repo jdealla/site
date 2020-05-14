@@ -36,7 +36,7 @@ export default function NavBar(props) {
                     <a className="navbar-item" href="/players" >Players</a>
                     <a className="navbar-item" href="/compare">Compare</a>
                     <a className="navbar-item" href="/updated">Updates</a>
-                    <a className="navbar-item" href="/collections">Updates</a>
+                    <a className="navbar-item" href="/collections">Collections</a>
                 </div>
             </div>
         </nav>
