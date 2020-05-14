@@ -11,6 +11,7 @@ const csvConfig = {
                 dynamicTyping: true,
                 header: true,
                 skipEmptyLines: true,
+                fastMode: true,
             }
         })
         config.resolve.alias.images = path.join(__dirname, "images");
@@ -20,6 +21,6 @@ const csvConfig = {
 
 module.exports = withPlugins([
     [optimizedImages, {
-        optimizeImagesInDev: true,
+        optimizeImagesInDev: false,
     }]
 ], csvConfig);

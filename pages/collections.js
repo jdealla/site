@@ -13,7 +13,7 @@ export default function Collections({ groupedByCollection }) {
         for(let [collection, players] of Object.entries(groupedByCollection)) {
             let collectionObj = (
                 <div className="notification" key={i++}>
-                    <p className="title is-4" onClick={() => router.push(`/collection/${collection.toLowerCase().replace(/ /g, "-").replace(/'/g, "")}`)} >{collection}</p>
+                    <p className="title is-4" onClick={() => router.push(`/collection/${collection.toLowerCase().replace(/ /g, "-")}`)} >{collection}</p>
                     <UpdatedList players={players} amount={10} />
                 </div>
             )
