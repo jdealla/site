@@ -206,7 +206,7 @@ export async function getStaticPaths() {
     const paths = getPlayersIds()
     return {
         paths,
-        fallback: true
+        fallback: false
     }
 }
 
