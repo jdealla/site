@@ -38,7 +38,13 @@ $tabs-link-active-color: $blue;
 @media only screen and (min-width: 1400px) {
     .column {
         &.is-badge {
-            width: 6% !important;
+            width: 8% !important;
+        }
+    }
+
+    .container {
+        &.is-fluid {
+            max-width: 1600px !important;
         }
     }
 }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import Autosuggest from "react-autosuggest";
 import { getPlayersData, getPlayerBySuggestion } from "../lib/players";
 
-import styles from "./searchbar.module.css";
+import styles from "./searchbar.module.scss";
 
 export default function SearchBar(props) {
     const { handleClick } = props;
