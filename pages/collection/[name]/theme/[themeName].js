@@ -15,6 +15,7 @@ export default function Collection({ players }) {
 
 export async function getStaticPaths() {
     const paths = getThemes();
+
     return {
         paths,
         fallback: false
@@ -30,7 +31,7 @@ export async function getStaticProps({ params }) {
     else    
         formatted = nameArray.map(word => {
             let result = "";
-            if (word === "2k20")
+            if (word === "2k20" || word === "mtu")
                 result = word.toUpperCase();
             else
                 result = word.charAt(0).toUpperCase() + word.substring(1);
