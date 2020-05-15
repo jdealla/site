@@ -29,7 +29,7 @@ export default function Collections({ groupedByCollection }) {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <div className="container">
-                <p className="title is-size-4"> MyTeam Card Updates</p>
+                <p className="title is-size-4"> MyTeam Collections</p>
                 {renderUpdates()}
             </div>
         </Layout>
