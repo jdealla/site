@@ -19,7 +19,7 @@ export default function SearchBar(props) {
     };
 
     const renderSuggestion = (suggestion) => (
-        <div onClick={() => handleClick(suggestion.id)}>
+        <div className="has-text-black" onClick={() => handleClick(suggestion.id)}>
             {suggestion.name} | {suggestion.overall} | {suggestion.position}
         </div>
     );

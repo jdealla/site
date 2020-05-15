@@ -32,6 +32,7 @@ export default function Collections({ groupedByCollection }) {
                 <p className="title is-size-4"> MyTeam Collections</p>
                 {renderUpdates()}
             </div>
+
         </Layout>
     )
 }

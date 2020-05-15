@@ -11,7 +11,7 @@ import Dropdown from "../../components/dropdown";
 
 export default function Player({ playerData }) {
     const [view, setView] = useState("stats");
-    const [shoe, setShoe] = useState()
+    const [shoe, setShoe] = useState({})
 
     const renderRatings = () => {
         return (
@@ -99,15 +99,15 @@ export default function Player({ playerData }) {
         }
     }
 
-    // const renderShoeList = () => {
-    //     return getAllShoes.map(shoe => {
-    //         return (
-    //             <a key={i} className="dropdown-item" onClick={() => handleClick(item, addT)} >
-    //                     {shoe.name}
-    //             </a>
-    //         )
-    //     })
-    // }
+    const renderShoeList = () => {
+        return getAllShoes().map((shoe, i) => {
+            return (
+                <a key={i} className="dropdown-item" onClick={() => setShoe(shoe)} >
+                    {shoe.name}
+                </a>
+            )
+        })
+    }
 
     return (
         <Layout>
@@ -213,21 +213,7 @@ export default function Player({ playerData }) {
                         <div className="container">
                             <div className="columns is-centered">
                                 <div className="column is-half">
-                                    {/* <Dropdown hover={false} items={renderShoeList()} customButton={shoeButton} /> */}
-                                    <div className="buttons has-addons is-centered">
-                                        <button className="button" disabled>
-                                            <span className="icon">
-                                                <img src={require("images/icons/icon_shoes.png")} />
-                                            </span>
-                                            <span>Add Shoe</span>
-                                        </button>
-                                        <button className="button" disabled>
-                                            <span className="icon">
-                                                <img src={require("images/icons/icon_coach.png")} />
-                                            </span>
-                                            <span>Add Coach</span>
-                                        </button>
-                                    </div>
+                                    <Dropdown hover={true} items={renderShoeList()} customButton={shoeButton} />
                                 </div>
                             </div>
                         </div>
