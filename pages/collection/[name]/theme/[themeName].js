@@ -26,9 +26,12 @@ export async function getStaticProps({ params }) {
     let nameArray = params.themeName.split("-");
     let formatted = "";
 
-    if (nameArray.length === 1)
-        formatted = nameArray[0].charAt(0).toUpperCase() + nameArray[0].substring(1);
-    else    
+    if (nameArray.length === 1) {
+        if (nameArray[0] === "goat")
+            formatted = nameArray[0].toUpperCase();
+        else
+            formatted = nameArray[0].charAt(0).toUpperCase() + nameArray[0].substring(1);
+    } else {
         formatted = nameArray.map(word => {
             let result = "";
             if (word === "2k20" || word === "mtu")
@@ -38,6 +41,7 @@ export async function getStaticProps({ params }) {
 
             return result 
         }).join(" ");
+    }
 
     const players = getPlayersByPropValue("theme", formatted);
 

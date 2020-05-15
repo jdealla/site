@@ -1,21 +1,23 @@
 import { useState, Fragment } from "react";
 import { getPlayersIds, getPlayerData } from "../../lib/players";
+import { getAllShoes, shoeButton } from "../../lib/shoes";
 
 import Head from 'next/head'
 import Layout from "../../components/layout";
 import BadgeContainer from "../../components/badgecontainer";
 import Attributes from "../../components/attributes";
 import ShotChart from "../../components/shotchart";
-import OverallImage from "../../components/overallimage";
+import Dropdown from "../../components/dropdown";
 
 export default function Player({ playerData }) {
     const [view, setView] = useState("stats");
+    const [shoe, setShoe] = useState()
 
     const renderRatings = () => {
         return (
             <Fragment>
                 <div className="column is-one-fifth-tablet is-half-mobile is-one-fifth-desktop">
-                    <Attributes attributes={playerData.stats.shooting} attrName="Shooting" />
+                    <Attributes attributes={playerData.stats.shooting} attrName="Shooting"  />
                     <Attributes attributes={playerData.stats.inside} attrName="Inside Scoring" />
                     <Attributes attributes={playerData.stats.playmaking} attrName="Playmaking" />
                 </div>
@@ -96,6 +98,16 @@ export default function Player({ playerData }) {
             default: return;
         }
     }
+
+    // const renderShoeList = () => {
+    //     return getAllShoes.map(shoe => {
+    //         return (
+    //             <a key={i} className="dropdown-item" onClick={() => handleClick(item, addT)} >
+    //                     {shoe.name}
+    //             </a>
+    //         )
+    //     })
+    // }
 
     return (
         <Layout>
@@ -201,6 +213,7 @@ export default function Player({ playerData }) {
                         <div className="container">
                             <div className="columns is-centered">
                                 <div className="column is-half">
+                                    {/* <Dropdown hover={false} items={renderShoeList()} customButton={shoeButton} /> */}
                                     <div className="buttons has-addons is-centered">
                                         <button className="button" disabled>
                                             <span className="icon">
