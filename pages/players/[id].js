@@ -129,7 +129,7 @@ export default function Player({ playerData }) {
                                 <div className="level-item has-text-centered">
                                     <div>
                                         <p className="heading has-text-warning">Off. Overall</p>
-                                        <p className="title is-4 title has-text-white">{playerData.info.off_overall}</p>
+                                        <p className="title is-5 title has-text-white">{playerData.info.off_overall}</p>
                                     </div>
                                 </div>
                                 <div className="level-item has-text-centered">
