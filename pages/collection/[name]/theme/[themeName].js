@@ -1,8 +1,17 @@
+import { useRouter } from "next/router";
 import { getThemes, getPlayersByPropValue } from "../../../../lib/players";
+
 import Layout from "../../../../components/layout";
 import UpdatedList from "../../../../components/updatedlist";
+import Spinner from "../../../../components/spinner";
 
 export default function Collection({ players }) {
+    const router = useRouter();
+
+    if (router.isFallback) {
+        return <Spinner />
+    }
+
     return (
         <Layout>
             <div className="container">
