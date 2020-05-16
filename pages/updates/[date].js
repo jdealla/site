@@ -1,13 +1,13 @@
 import { getUpdateDates, getPlayersByPropValue } from "../../lib/players";
 import Layout from "../../components/layout";
-import UpdatedList from "../../components/updatedlist";
+import PlayersLayout from "../../components/playerslayout";
 
 export default function UpdatePage({ players }) {
     return (
         <Layout>
             <div className="container">
-                <p className="title is-size-5">{players[0].date}</p>
-                <UpdatedList players={players} amount={players.length} />
+                <h1 className="title is-size-4" style={{ marginTop: "10px" }}>Roster Update ({players[0].date})</h1>
+                <PlayersLayout players={players} />
             </div>
         </Layout>
     )
