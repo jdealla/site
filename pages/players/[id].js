@@ -14,10 +14,9 @@ import Spinner from "../../components/spinner";
 export default function Player({ playerData }) {
     const [view, setView] = useState("stats");
     const [shoe, setShoe] = useState({})
+    const { isFallback } = useRouter();
 
-    const router = useRouter();
-
-    if (router.isFallback) {
+    if (isFallback) {
         return <h1 className="title">Loading...</h1>
     }
 
@@ -289,7 +288,8 @@ export async function getStaticProps({ params }) {
     
     return {
         props: {
-            playerData
-        }
+            playerData,
+        },
+        unstable_revalidate: 1
     }
 }
