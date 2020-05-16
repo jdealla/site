@@ -13,17 +13,17 @@ export default function UpdatedList(props) {
         
         let newPlayers = playersToRender.map((player, i) => {
             return (
-                <div className="column is-4-mobile is-1-desktop" key={i} onClick={() => router.push(`/players/${player.id}`)}>
-                    <img style={{ maxWidth: "100px", cursor: "pointer" }} src={require(`images/players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`)} />
-                </div>
+                <td className="is-paddingless" key={i} onClick={() => router.push(`/players/${player.id}`)}>
+                    <img style={{ maxWidth: "50px", cursor: "pointer" }} src={require(`images/players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`)} />
+                </td>
             )
         })
 
         if (players.length > amount) {
             let lastItem = (
-                <div className="column is-4-mobile is-2-desktop" key={11} >
-                    <p className="subtitle"> +{players.length - amount} more players </p>
-                </div>
+                <td key={amount + 1} >
+                    <a className="heading" href={`/updates/${players[0].date}`} > +{players.length - amount} more players </a>
+                </td>
             )
             newPlayers.push(lastItem);
         }
@@ -31,9 +31,5 @@ export default function UpdatedList(props) {
         return newPlayers;
     }
 
-    return (
-        <div className="columns is-multiline is-mobile">
-            {renderPlayerCards()}
-        </div>
-    )
+    return renderPlayerCards()
 }
