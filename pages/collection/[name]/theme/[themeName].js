@@ -23,7 +23,7 @@ export default function Collection({ players }) {
 }
 
 export async function getStaticPaths() {
-    const paths = getThemes();
+    const paths = await getThemes();
 
     return {
         paths,
@@ -52,7 +52,7 @@ export async function getStaticProps({ params }) {
         }).join(" ");
     }
 
-    const players = getPlayersByPropValue("theme", formatted);
+    const players = await getPlayersByPropValue("theme", formatted);
 
     return {
         props: {

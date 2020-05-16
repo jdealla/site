@@ -23,7 +23,7 @@ export default function UpdatePage({ players }) {
 }
 
 export async function getStaticPaths() {
-    const paths = getUpdateDates();
+    const paths = await getUpdateDates();
 
     return {
         paths,
@@ -32,7 +32,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const players = getPlayersByPropValue("date", params.date);
+    const players = await getPlayersByPropValue("date", params.date);
 
     return {
         props: {

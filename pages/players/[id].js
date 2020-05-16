@@ -18,9 +18,9 @@ export default function Player({ playerData }) {
     const router = useRouter();
 
     if (router.isFallback) {
-        return <Spinner />
+        return <h1 className="title">Loading...</h1>
     }
-    
+
     const renderRatings = () => {
         return (
             <Fragment>
@@ -277,7 +277,7 @@ export default function Player({ playerData }) {
 }
 
 export async function getStaticPaths() {
-    const paths = getPlayersIds()
+    const paths = await getPlayersIds()
     return {
         paths,
         fallback: true
@@ -285,7 +285,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const playerData = getPlayerData(params.id)
+    const playerData = await getPlayerData(params.id)
     
     return {
         props: {
