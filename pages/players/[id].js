@@ -1,4 +1,5 @@
 import { useState, Fragment } from "react";
+import { useRouter } from "next/router";
 import { getPlayersIds, getPlayerData } from "../../lib/players";
 import { getAllShoes, shoeButton } from "../../lib/shoes";
 
@@ -8,11 +9,18 @@ import BadgeContainer from "../../components/badgecontainer";
 import Attributes from "../../components/attributes";
 import ShotChart from "../../components/shotchart";
 import Dropdown from "../../components/dropdown";
+import Spinner from "../../components/spinner";
 
 export default function Player({ playerData }) {
     const [view, setView] = useState("stats");
     const [shoe, setShoe] = useState({})
 
+    const router = useRouter();
+
+    if (router.isFallback) {
+        return <Spinner />
+    }
+    
     const renderRatings = () => {
         return (
             <Fragment>
@@ -272,7 +280,7 @@ export async function getStaticPaths() {
     const paths = getPlayersIds()
     return {
         paths,
-        fallback: false
+        fallback: true
     }
 }
 
