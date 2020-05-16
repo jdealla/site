@@ -1,8 +1,17 @@
+import { useRouter } from "next/router";
 import { getCollections, getPlayersByPropValue } from "../../lib/players";
+
 import Layout from "../../components/layout";
 import UpdatedList from "../../components/updatedlist";
+import Spinner from "../../components/spinner";
 
 export default function Collection({ players }) {
+    const router = useRouter();
+
+    if (router.isFallback) {
+        return <Spinner />
+    }
+
     return (
         <Layout>
             <div className="container">
@@ -14,7 +23,7 @@ export default function Collection({ players }) {
 }
 
 export async function getStaticPaths() {
-    const paths = getCollections();
+    const paths = await getCollections();
 
     return {
         paths,
@@ -31,9 +40,9 @@ export async function getStaticProps({ params }) {
 
     formatted = nameArray.map(word => word.charAt(0).toUpperCase() + word.substring(1)).join(" ");
 
-    const players = getPlayersByPropValue("collection", formatted);
+    const players = await getPlayersByPropValue("collection", formatted);
 
-    players.sort((a, b) => a.theme < b.theme);
+    await players.sort((a, b) => a.theme < b.theme);
 
     return {
         props: {

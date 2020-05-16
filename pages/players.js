@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useState } from "react";
-import { getPlayersData, sortPlayersByProp, formatName } from "../lib/players";
+import { getPlayersData, sortPlayersByProp } from "../lib/players";
 
 import Layout from "../components/layout";
 import FilterSortBox from "../components/filtersortbox"
@@ -55,14 +55,7 @@ export default function Players({ allPlayers }) {
                 <div className="box">
                     <div className="columns is-mobile is-gapless is-marginless">
                         <div className="column is-one-fifth-mobile is-2-tablet" style={{ cursor: "pointer"}} onClick={() => handleSorted("name")} >
-                            <div className="level">
-                                <div className="level-left">
-                                    <p className="has-text-weight-semibold"> Name </p>
-                                    <span className="icon is-small">
-                                        <i className="fas fa-sort-up"></i>
-                                    </span>
-                                </div>
-                            </div>
+                            <p className="has-text-weight-semibold"> Name </p>
                         </div>
                         <div className="column is-one-fifth-mobile is-1-tablet" style={{ cursor: "pointer"}} onClick={() => handleSorted("overall")}>
                             <p className="has-text-weight-semibold "> Tier </p>
@@ -79,9 +72,6 @@ export default function Players({ allPlayers }) {
                         <div className="column is-hidden-mobile is-1-tablet" style={{ cursor: "pointer"}} onClick={() => handleSorted("weight")}>
                             <p className="has-text-weight-semibold "> Weight </p>
                         </div>
-                        {/* <div className="column is-hidden-mobile is-2-tablet">
-                            <p className="has-text-weight-semibold "> Badges </p>
-                        </div> */}
                         <div className={`column is-2-tablet ${sortedBy == "" ? "is-hidden" : ""}`}>
                             <p className="has-text-weight-bold"> {sortedBy.name}</p>
                         </div>
@@ -104,7 +94,7 @@ export default function Players({ allPlayers }) {
 }
 
 export async function getStaticProps() {
-    const allPlayers = getPlayersData();
+    const allPlayers = await getPlayersData();
 
     return {
         props: {

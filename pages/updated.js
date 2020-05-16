@@ -30,7 +30,7 @@ export default function Updated({ groupedByDate }) {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <div className="container">
-                <p className="title is-size-4"> MyTeam Card Updates</p>
+                <p className="title is-size-4">MyTeam Card Updates</p>
                 <div className="box">
                     <table className="table">
                         <tbody>
@@ -44,7 +44,7 @@ export default function Updated({ groupedByDate }) {
 }
 
 export async function getStaticProps() {
-    let groupedByDate = groupedPlayersByProp("date");
+    let groupedByDate = await groupedPlayersByProp("date");
 
     return {
         props: {

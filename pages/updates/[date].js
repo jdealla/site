@@ -1,8 +1,17 @@
+import { useRouter } from "next/router";
 import { getUpdateDates, getPlayersByPropValue } from "../../lib/players";
+
 import Layout from "../../components/layout";
 import PlayersLayout from "../../components/playerslayout";
+import Spinner from "../../components/spinner";
 
 export default function UpdatePage({ players }) {
+    const router = useRouter();
+
+    if (router.isFallback) {
+        return <Spinner />
+    }
+
     return (
         <Layout>
             <div className="container">
@@ -14,7 +23,7 @@ export default function UpdatePage({ players }) {
 }
 
 export async function getStaticPaths() {
-    const paths = getUpdateDates();
+    const paths = await getUpdateDates();
 
     return {
         paths,
@@ -23,7 +32,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const players = getPlayersByPropValue("date", params.date);
+    const players = await getPlayersByPropValue("date", params.date);
 
     return {
         props: {
