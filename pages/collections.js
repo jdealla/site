@@ -37,7 +37,7 @@ export default function Collections({ groupedByCollection }) {
 }
 
 export async function getStaticProps() {
-    let groupedByCollection = groupedPlayersByProp("collection");
+    let groupedByCollection = await groupedPlayersByProp("collection");
 
     return {
         props: {

@@ -94,7 +94,7 @@ export default function Players({ allPlayers }) {
 }
 
 export async function getStaticProps() {
-    const allPlayers = getPlayersData();
+    const allPlayers = await getPlayersData();
 
     return {
         props: {
