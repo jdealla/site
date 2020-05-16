@@ -17,7 +17,7 @@ export default function Player({ playerData }) {
     const { isFallback } = useRouter();
 
     if (isFallback) {
-        return <h1 className="title">Loading...</h1>
+        return <h1>Loading...</h1>
     }
 
     const renderRatings = () => {
@@ -284,7 +284,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const playerData = await getPlayerData(params.id)
+    const playerData = getPlayerData(params.id)
     
     return {
         props: {
