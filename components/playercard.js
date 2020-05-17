@@ -72,7 +72,7 @@ export default function PlayerCard(props) {
                     </nav>
                     <nav className="level ">
                         {
-                            playerData.info.nickname === "" ? (
+                            playerData.info.nickname != " " ? (
                                 <div className="level-item has-text-centered">
                                     <div>
                                         <p className="heading has-text-warning">Nickname</p>
