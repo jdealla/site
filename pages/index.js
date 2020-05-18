@@ -1,7 +1,7 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
 import { Fragment } from "react";
+import { useRouter } from "next/router";
 
+import SiteHead from "../components/sitehead";
 import SearchBar from "../components/searchbar";
 import NavBar from "../components/navbar"
 
@@ -12,10 +12,7 @@ export default function Home() {
 
   return (
     <Fragment>
-      <Head>
-        <title>2KDB Homepage</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
+      <SiteHead title="2KDB Homepage" description="NBA 2K20 MyTeam Database Index Page" />
       <section className="hero is-fullheight-with-navbar with-bg">
         <div className="hero-head">
           <NavBar index={true} />

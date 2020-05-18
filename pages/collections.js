@@ -1,8 +1,8 @@
-import Head from "next/head";
 import { groupedPlayersByProp } from "../lib/players";
 
 import Layout from "../components/layout";
 import UpdatedList from "../components/updatedlist";
+import SiteHead from "../components/sitehead";
 
 export default function Collections({ groupedByCollection }) {
     const renderUpdates = () => {
@@ -23,15 +23,11 @@ export default function Collections({ groupedByCollection }) {
 
     return (
         <Layout>
-            <Head>
-                <title>2KDB | NBA2K20 MyTeam Collections</title>
-                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-            </Head>
+            <SiteHead title="NBA2K20 MyTeam Collections | 2KDB" description="NBA 2K20 MyTeam collections page including every collection in the game" />
             <div className="container">
                 <p className="title is-size-4"> MyTeam Collections</p>
                 {renderUpdates()}
             </div>
-
         </Layout>
     )
 }

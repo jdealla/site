@@ -4,12 +4,12 @@ import ShotChart from "./shotchart";
 import Dropdown from "./dropdown";
 
 export default function PlayerCard(props) {
-    const { playerData } = props;
+    const { playerData, shoe, handleShoe, } = props;
 
     const renderShoeList = () => {
         return getAllShoes().map((shoe, i) => {
             return (
-                <a key={i} className="dropdown-item" onClick={() => setShoe(shoe)} >
+                <a key={i} className="dropdown-item" onClick={() => handleShoe(shoe)} >
                     {shoe.name}
                 </a>
             )
@@ -114,7 +114,23 @@ export default function PlayerCard(props) {
                 <div className="container">
                     <div className="columns is-centered">
                         <div className="column is-half">
-                            <Dropdown hover={true} items={renderShoeList()} customButton={shoeButton} />
+                            {
+                                shoe == null ? (
+                                    <Dropdown hover={true} items={renderShoeList()} customButton={shoeButton} />
+                                ) : (
+                                    <article className="media">
+                                        <div className="media-content">
+                                            <div className="content">
+                                                <p className="title">{shoe.brand}</p>
+                                                <p className="subtitle">{shoe.name}</p>
+                                            </div>
+                                        </div>
+                                        <div className="media-right">
+                                            <button className="delete" onClick={handleShoe(null)}></button>
+                                        </div>
+                                    </article>
+                                )
+                            }
                         </div>
                     </div>
                 </div>

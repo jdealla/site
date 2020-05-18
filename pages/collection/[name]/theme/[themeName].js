@@ -4,6 +4,7 @@ import { getThemes, getPlayersByPropValue } from "../../../../lib/players";
 import Layout from "../../../../components/layout";
 import UpdatedList from "../../../../components/updatedlist";
 import Spinner from "../../../../components/spinner";
+import SiteHead from "../../../../components/sitehead";
 
 export default function Collection({ players }) {
     const router = useRouter();
@@ -14,6 +15,7 @@ export default function Collection({ players }) {
 
     return (
         <Layout>
+            <SiteHead title="NBA 2K20 MyTeam Theme Collection Page" description={`NBA 2K20 MyTeam Theme Collection ${players[0].theme}`} />
             <div className="container">
                 <p className="title is-size-5">{players[0].theme}</p>
                 <UpdatedList players={players} amount={players.length} />

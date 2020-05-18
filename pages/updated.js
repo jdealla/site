@@ -1,9 +1,9 @@
-import Head from "next/head";
 import { useRouter } from "next/router";
 import { groupedPlayersByProp } from "../lib/players";
 
 import Layout from "../components/layout";
 import UpdatedList from "../components/updatedlist";
+import SiteHead from "../components/sitehead";
 
 export default function Updated({ groupedByDate }) {
     const router = useRouter();
@@ -25,10 +25,7 @@ export default function Updated({ groupedByDate }) {
 
     return (
         <Layout>
-            <Head>
-                <title>2KDB | NBA 2K20 MyTeam Updated Players</title>
-                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-            </Head>
+            <SiteHead title="NBA 2K20 MyTeam Updated Players | 2KDB" description="List of player cards updated in NBA 2K20 MyTeam" />
             <div className="container">
                 <p className="title is-size-4">MyTeam Card Updates</p>
                 <div className="box">
