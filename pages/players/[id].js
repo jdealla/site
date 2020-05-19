@@ -108,6 +108,7 @@ export default function Player({ playerData }) {
             <Head>
                 <title>{playerData.info.name} | 2KDB</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+				<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
             </Head>
             <div className="container is-fluid">
                 <PlayerCard playerData={playerData} />
