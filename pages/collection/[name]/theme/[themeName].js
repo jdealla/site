@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { getThemes, getPlayersByPropValue } from "../../../../lib/players";
 
 import Layout from "../../../../components/layout";
-import UpdatedList from "../../../../components/updatedlist";
+import UpdatesList from "../../../../components/updateslist";
 import Spinner from "../../../../components/spinner";
 import SiteHead from "../../../../components/sitehead";
 
@@ -18,7 +18,7 @@ export default function Collection({ players }) {
             <SiteHead title="NBA 2K20 MyTeam Theme Collection Page" description={`NBA 2K20 MyTeam Theme Collection ${players[0].theme}`} />
             <div className="container">
                 <p className="title is-size-5">{players[0].theme}</p>
-                <UpdatedList players={players} amount={players.length} />
+                <UpdatesList players={players} amount={players.length} />
             </div>
         </Layout>
     )

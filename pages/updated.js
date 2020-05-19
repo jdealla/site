@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { groupedPlayersByProp } from "../lib/players";
 
 import Layout from "../components/layout";
-import UpdatedList from "../components/updatedlist";
+import UpdatesList from "../components/updateslist";
 import SiteHead from "../components/sitehead";
 
 export default function Updated({ groupedByDate }) {
@@ -15,7 +15,7 @@ export default function Updated({ groupedByDate }) {
                 <tr key={i++}>
                     <th className="title is-5" onClick={() => router.push(`/updates/${date}`)} style={{ cursor: "pointer" }}>{date}</th>
                     <td className="has-text-weight-medium has-text-success">+{players.length}</td>
-                    <UpdatedList players={players} amount={10} />
+                    <UpdatesList players={players} amount={10} />
                 </tr>
             )
             updates.push(dateObj);

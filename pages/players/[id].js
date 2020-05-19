@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { getPlayersIds, getPlayerData } from "../../lib/players";
 
 import Layout from "../../components/layout";
-import PlayerCard from "../../components/playercard";
+import PlayerHeader from "../../components/playerheader";
 import BadgeContainer from "../../components/badgecontainer";
 import Attributes from "../../components/attributes";
 import SiteHead from "../../components/sitehead";
@@ -112,7 +112,7 @@ export default function Player({ playerData }) {
         <Layout>
             <SiteHead title={`${playerData.info.name} | NBA2K20 MyTeam 2KDB`} description={`NBA 2K20 MyTeam Card Description of ${playerData.info.name}`} />
             <div className="container is-fluid">
-                <PlayerCard playerData={playerData} shoe={shoe} handleShoe={handleShoe} />
+                <PlayerHeader playerData={playerData} shoe={shoe} handleShoe={handleShoe} />
 
                 <div className="columns ">
                     <div className="column is-full">

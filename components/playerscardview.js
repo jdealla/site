@@ -1,4 +1,4 @@
-export default function PlayersLayout(props) {
+export default function PlayersCardView(props) {
     const { players } = props;
 
     const renderPlayers = () => {

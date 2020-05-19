@@ -3,7 +3,7 @@ import { getAllShoes, shoeButton } from "../lib/shoes";
 import ShotChart from "./shotchart";
 import Dropdown from "./dropdown";
 
-export default function PlayerCard(props) {
+export default function PlayerHeader(props) {
     const { playerData, shoe, handleShoe, } = props;
 
     const renderShoeList = () => {

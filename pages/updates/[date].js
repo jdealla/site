@@ -3,7 +3,7 @@ import { getUpdateDates, getPlayersByPropValue } from "../../lib/players";
 
 import SiteHead from "../../components/sitehead";
 import Layout from "../../components/layout";
-import PlayersLayout from "../../components/playerslayout";
+import PlayersCardView from "../../components/playerscardview";
 import Spinner from "../../components/spinner";
 
 export default function UpdatePage({ players }) {
@@ -18,7 +18,7 @@ export default function UpdatePage({ players }) {
             <SiteHead title={`MyTeam Update ${players[0].date} | 2KDB`} description={`NBA 2K20 MyTeam Card Update [${players[0].date}]`} />
             <div className="container">
                 <h1 className="title is-size-4" style={{ marginTop: "10px" }}>Roster Update ({players[0].date})</h1>
-                <PlayersLayout players={players} />
+                <PlayersCardView players={players} />
             </div>
         </Layout>
     )

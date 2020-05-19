@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { groupedPlayersByProp } from "../lib/players";
 
 import Layout from "../components/layout";
-import UpdatedList from "../components/updatedlist";
+import UpdatedList from "../components/updateslist";
 import SiteHead from "../components/sitehead";
 
 export default function Collections({ groupedByCollection }) {
+    const [view, setView] = useState("20current");
+
     const renderUpdates = () => {
         let updates = [], i = 0;
         for(let [collection, players] of Object.entries(groupedByCollection)) {
@@ -21,19 +24,68 @@ export default function Collections({ groupedByCollection }) {
         return updates;
     }
 
+    const renderMenu = () => {
+        return (
+            <aside className="menu">
+                <p className="menu-label">
+                    NBA 2K20 Collections Menu
+                </p>
+                <ul className="menu-list">
+                    <li><a onClick={() => setView("20current")}>'20 Current</a></li>
+                    <li><a onClick={() => setView("20current2")}>'20 Current Series 2</a></li>
+                    <li><a onClick={() => setView("heatcheck")}>Heat Check</a></li>
+                    <li><a onClick={() => setView("moments")}>Moments</a></li>
+                    <li><a onClick={() => setView("rewards")}>Rewards</a></li>
+                    <li><a onClick={() => setView("premium")}>Premium</a></li>
+                </ul>
+            </aside>
+        )
+    }
+
+    const renderView = () => {
+        switch(view) {
+            case "20current": {
+
+            }
+            case "20current2": {
+
+            }
+            case "heatcheck": {
+
+            }
+            case "moments": {
+
+            }
+            case "rewards": {
+
+            }
+            case "premium": {
+
+            }
+        }
+    }
+
     return (
         <Layout>
             <SiteHead title="NBA2K20 MyTeam Collections | 2KDB" description="NBA 2K20 MyTeam collections page including every collection in the game" />
             <div className="container">
-                <p className="title is-size-4"> MyTeam Collections</p>
-                {renderUpdates()}
+                <div className="box">
+                    <div className="columns is-multiline">
+                        <div className="column is-3-desktop">
+                            {renderMenu()}
+                        </div>
+                        <div className="column">
+                            {renderView()}
+                        </div>
+                    </div>
+                </div>
             </div>
         </Layout>
     )
 }
 
 export async function getStaticProps() {
-    let groupedByCollection = await groupedPlayersByProp("collection");
+    let groupedByCollection = groupedPlayersByProp("collection");
 
     return {
         props: {

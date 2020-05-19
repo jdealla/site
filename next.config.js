@@ -22,5 +22,12 @@ const csvConfig = {
 module.exports = withPlugins([
     [optimizedImages, {
         optimizeImagesInDev: false,
+        mozjpeg: {
+            dct: "fast",
+            
+        },
+        pngquant: {
+            speed: 10,
+        },
     }]
 ], csvConfig);
