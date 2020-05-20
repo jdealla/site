@@ -1,10 +1,11 @@
 import Head from "next/head";
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { getPlayersData, sortPlayersByProp } from "../lib/players";
 
 import Layout from "../components/layout";
-import FilterSortBox from "../components/filtersortbox"
-import PlayersList from "../components/playerslist"
+const FilterSortBox = dynamic(import("../components/filtersortbox"));
+const PlayersList = dynamic(import("../components/playerslist"));
 
 export default function Players({ allPlayers }) {
     const [page, setPage] = useState(1)
@@ -43,6 +44,8 @@ export default function Players({ allPlayers }) {
         <Layout>
             <Head>
                 <title>2KDB All Players List</title>
+                <html lang="en" />
+                <meta name="description" content="NBA 2K20 MyTeam Database players list" />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
             </Head>

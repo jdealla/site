@@ -1,9 +1,9 @@
+import Head from "next/head";
 import { useState, Fragment } from "react";
 
 import Layout from "../components/layout";
 import SearchPlayers from "../components/searchplayers";
 import CompareTable from "../components/comparetable";
-import SiteHead from "../components/sitehead";
 
 export default function Compare() {
     const [players, setPlayers] = useState({ player1: null, player2: null, });
@@ -146,7 +146,12 @@ export default function Compare() {
 
     return (
         <Layout>
-            <SiteHead title="2KDB Compare Players Page" description="Page to compare NBA 2K20 MyTeam cards for their stats, tendencies, animations" />
+            <Head>
+                <title>2KDB Compare Players Page</title>
+                <html lang="en"/>
+                <meta name="description" content="Page to compare NBA 2K20 MyTeam cards for their stats, tendencies, animations" />
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
             <div className="container" style={{ marginTop: '10px' }}>
                 <div className="level">
                     <div className="level-item">

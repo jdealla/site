@@ -1,7 +1,7 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { getUpdateDates, getPlayersByPropValue } from "../../lib/players";
 
-import SiteHead from "../../components/sitehead";
 import Layout from "../../components/layout";
 import PlayersCardView from "../../components/playerscardview";
 import Spinner from "../../components/spinner";
@@ -15,7 +15,12 @@ export default function UpdatePage({ players }) {
 
     return (
         <Layout>
-            <SiteHead title={`MyTeam Update ${players[0].date} | 2KDB`} description={`NBA 2K20 MyTeam Card Update [${players[0].date}]`} />
+            <Head>
+                <title>{`MyTeam Update ${players[0].date} | 2KDB`}</title>
+                <html lang="en"/>
+                <meta name="description" content={`NBA 2K20 MyTeam Card Update [${players[0].date}]`} />
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
             <div className="container">
                 <h1 className="title is-size-4" style={{ marginTop: "10px" }}>Roster Update ({players[0].date})</h1>
                 <PlayersCardView players={players} />

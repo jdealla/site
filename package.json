@@ -20,7 +20,9 @@
     "sass": "^1.26.5"
   },
   "devDependencies": {
+    "@zeit/next-css": "^1.0.1",
     "bulma": "^0.8.2",
-    "csv-loader": "^3.0.3"
+    "csv-loader": "^3.0.3",
+    "webp-loader": "^0.6.0"
   }
 }

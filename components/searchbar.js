@@ -1,17 +1,17 @@
 import { useState } from "react";
 import Autosuggest from "react-autosuggest";
-import { getPlayersData, getPlayerBySuggestion } from "../lib/players";
+import { getPlayerBySuggestion } from "../lib/players";
 
 import styles from "./searchbar.module.scss";
 
 export default function SearchBar(props) {
     const { handleClick } = props;
     const [value, setValue] = useState('');
-    const [players, setPlayers] = useState([]);
+    const [items, setItems] = useState([]);
     
     const onChange = (event, { newValue, method }) => setValue(newValue);
-    const onSuggestionsFetchRequested = ({ value }) => setPlayers(getPlayerBySuggestion(value));
-    const onSuggestionsClearRequested = () => setPlayers([]);
+    const onSuggestionsFetchRequested = ({ value }) => setItems(getPlayerBySuggestion(value));
+    const onSuggestionsClearRequested = () => setItems([]);
     
     const getSuggestionValue = (suggestion) => {
         handleClick(suggestion.id);
@@ -33,7 +33,7 @@ export default function SearchBar(props) {
     return (
         <Autosuggest
             theme={styles}
-            suggestions={players}
+            suggestions={items}
             onSuggestionsFetchRequested={onSuggestionsFetchRequested}
             onSuggestionsClearRequested={onSuggestionsClearRequested}
             getSuggestionValue={getSuggestionValue}

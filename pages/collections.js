@@ -1,9 +1,10 @@
+import Head from "next/head";
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { groupedPlayersByProp } from "../lib/players";
 
 import Layout from "../components/layout";
-import UpdatedList from "../components/updateslist";
-import SiteHead from "../components/sitehead";
+const UpdatedList = dynamic(import("../components/updateslist"));
 
 export default function Collections({ groupedByCollection }) {
     const [view, setView] = useState("20current");
@@ -67,7 +68,12 @@ export default function Collections({ groupedByCollection }) {
 
     return (
         <Layout>
-            <SiteHead title="NBA2K20 MyTeam Collections | 2KDB" description="NBA 2K20 MyTeam collections page including every collection in the game" />
+            <Head>
+                <title>NBA2K20 MyTeam Collections | 2KDB</title>
+                <html lang="en"/>
+                <meta name="description" content="NBA 2K20 MyTeam collections page including every collection in the game" />
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
             <div className="container">
                 <div className="box">
                     <div className="columns is-multiline">

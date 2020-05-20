@@ -1,12 +1,15 @@
-import { useState, Fragment } from "react";
+import Head from "next/head";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
+import { useState, Fragment } from "react";
 import { getPlayersIds, getPlayerData } from "../../lib/players";
 
 import Layout from "../../components/layout";
-import PlayerHeader from "../../components/playerheader";
+// import PlayerHeader from "../../components/playerheader";
 import BadgeContainer from "../../components/badgecontainer";
 import Attributes from "../../components/attributes";
-import SiteHead from "../../components/sitehead";
+
+const PlayerHeader = dynamic(import("../../components/playerheader"));
 
 export default function Player({ playerData }) {
     const [view, setView] = useState("stats");
@@ -110,7 +113,12 @@ export default function Player({ playerData }) {
 
     return (
         <Layout>
-            <SiteHead title={`${playerData.info.name} | NBA2K20 MyTeam 2KDB`} description={`NBA 2K20 MyTeam Card Description of ${playerData.info.name}`} />
+            <Head>
+                <title>{`${playerData.info.name} | NBA2K20 MyTeam 2KDB`}</title>
+                <html lang="en"/>
+                <meta name="description" content={`NBA 2K20 MyTeam Card Description of ${playerData.info.name}`} />
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
             <div className="container is-fluid">
                 <PlayerHeader playerData={playerData} shoe={shoe} handleShoe={handleShoe} />
 

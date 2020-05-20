@@ -1,10 +1,10 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { getThemes, getPlayersByPropValue } from "../../../../lib/players";
 
 import Layout from "../../../../components/layout";
 import UpdatesList from "../../../../components/updateslist";
 import Spinner from "../../../../components/spinner";
-import SiteHead from "../../../../components/sitehead";
 
 export default function Collection({ players }) {
     const router = useRouter();
@@ -15,7 +15,12 @@ export default function Collection({ players }) {
 
     return (
         <Layout>
-            <SiteHead title="NBA 2K20 MyTeam Theme Collection Page" description={`NBA 2K20 MyTeam Theme Collection ${players[0].theme}`} />
+            <Head>
+                <title>NBA 2K20 MyTeam Theme Collection Page</title>
+                <html lang="en"/>
+                <meta name="description" content={`NBA 2K20 MyTeam Theme Collection ${players[0].theme}`} />
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
             <div className="container">
                 <p className="title is-size-5">{players[0].theme}</p>
                 <UpdatesList players={players} amount={players.length} />

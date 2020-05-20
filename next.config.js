@@ -15,7 +15,7 @@ const csvConfig = {
             }
         })
         config.resolve.alias.images = path.join(__dirname, "images");
-        return config
+        return config;
     }
 }
 
@@ -24,10 +24,13 @@ module.exports = withPlugins([
         optimizeImagesInDev: false,
         mozjpeg: {
             dct: "fast",
-            
         },
         pngquant: {
             speed: 10,
+        },
+        webp: {
+            preset: 'default',
+            quality: 75,
         },
     }]
 ], csvConfig);

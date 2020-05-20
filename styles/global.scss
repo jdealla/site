@@ -140,7 +140,7 @@ $tabs-link-active-color: $blue;
 
 .hero {
     &.with-bg {
-        background: url('/bg2.png') no-repeat top fixed;
+        background: url('/bg2.png?webp') no-repeat top fixed;
         background-size: 100% 100%;
     }
 }
