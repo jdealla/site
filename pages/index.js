@@ -14,9 +14,9 @@ export default function Home() {
     <Fragment>
       <Head>
         <title>2KDB Homepage</title>
-        <html lang="en"/>
-        <meta name="description" content="NBA 2K20 MyTeam Database Index Page" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <html lang="en"></html>
+        <meta name="description" content="NBA 2K20 MyTeam Database Index Page"></meta>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width"></meta>
       </Head>
       <section className="hero is-fullheight-with-navbar with-bg">
         <div className="hero-head">

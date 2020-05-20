@@ -31,6 +31,6 @@ module.exports = withPlugins([
         webp: {
             preset: 'default',
             quality: 75,
-        },
+        }
     }]
 ], csvConfig);
