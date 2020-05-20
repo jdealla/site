@@ -18,7 +18,7 @@ export default function PlayerHeader(props) {
 
     return (
         <div className="columns is-mobile is-multiline is-player-card">
-            <div className="is-player-card"><img src="/playercard_bg.png" /></div>
+            <div className="is-player-card"><img src="/playercard_bg.png?webp" /></div>
             <div className="column is-7-mobile is-one-fifth-desktop is-2-tablet ">
                 <img src={require(`images/players/${playerData.info.name.replace(/ /g, "_").toLowerCase()}_${playerData.info.id}.jpg`)} />
             </div>
