@@ -21,7 +21,7 @@ const csvConfig = {
 
 module.exports = withPlugins([
     [optimizedImages, {
-        optimizeImagesInDev: false,
+        optimizeImagesInDev: true,
         mozjpeg: {
             dct: "fast",
         },
