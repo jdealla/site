@@ -19,7 +19,7 @@ export default function OverallImage(props) {
             case (overall == 99): tier = "galaxyopal"; break;
         }
 
-        return <ImageCloud src={`/images/icons/icon_${tier}.png`} width="32" height="32" />
+        return <ImageCloud src={`icons/icon_${tier}.png`} width="32" height="32" />
     }
 
     return renderOverall();

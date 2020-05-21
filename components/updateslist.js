@@ -1,5 +1,7 @@
 import { useRouter } from "next/router";
 
+import ImageCloud from "./imagecloud";
+
 export default function UpdatedList(props) {
     const { players, amount } = props;
     const router = useRouter();
@@ -14,7 +16,7 @@ export default function UpdatedList(props) {
         let newPlayers = playersToRender.map((player, i) => {
             return (
                 <td className="is-paddingless" key={i} onClick={() => router.push(`/players/${player.id}`)}>
-                    <img style={{ maxWidth: "50px", cursor: "pointer" }} src={`/images/players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`} />
+                    <ImageCloud src={`players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`} width="50" height="70" />
                 </td>
             )
         })

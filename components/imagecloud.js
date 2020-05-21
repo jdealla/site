@@ -11,8 +11,8 @@ export default function ImageCloud(props) {
   }, [])
 
   return mounted.current ? (
-      <Image cloudName={process.env.CLOUD_API_NAME} publicId={props.src} type="fetch">
-        <Transformation width={props.width} height={props.height} gravity="faces" crop="limit" fetchFormat="auto" quality="auto" />
+      <Image publicId={`${props.src}`} cloudName="dndoa4fno">
+        <Transformation width={props.width} height={props.height} fetchFormat="auto" quality="75" />
       </Image> 
   ) : null
 }

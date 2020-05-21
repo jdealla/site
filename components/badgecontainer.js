@@ -1,4 +1,5 @@
 import { formatName } from "../lib/players";
+import ImageCloud from "./imagecloud";
 
 export default function BadgesContainer(props) {
     const { badges } = props;
@@ -22,7 +23,7 @@ export default function BadgesContainer(props) {
                 <div className="column is-paddingless is-2-mobile is-one-third-tablet is-1-desktop is-badge" key={i++}>
                     <div className="container is-vcentered">
                         <figure className="image is-48x48" style={{ marginLeft: "auto", marginRight: "auto" }}>
-                            <img src={`/badges/${imgSource}`} />
+                            <ImageCloud src={`${imgSource}`} width="48" height="48" />
                         </figure>
                         <p className="is-size-7 has-text-centered"> {formatName(key)} </p>
                     </div>

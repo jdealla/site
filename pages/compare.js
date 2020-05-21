@@ -4,6 +4,7 @@ import { useState, Fragment } from "react";
 import Layout from "../components/layout";
 import SearchPlayers from "../components/searchplayers";
 import CompareTable from "../components/comparetable";
+import ImageCloud from "../components/imagecloud";
 
 export default function Compare() {
     const [players, setPlayers] = useState({ player1: null, player2: null, });
@@ -115,7 +116,7 @@ export default function Compare() {
                     <button className="delete" aria-label="delete" onClick={() => handlePlayer(playerId, null)}></button>
                 </div>
                 <div className="card-image">
-                    <img style={{ maxWidth: "250px" }} src={`images/players/${playerData.info.name.replace(/ /g, "_").toLowerCase()}_${playerData.info.id}.jpg`} />
+                    <ImageCloud src={`images/players/${playerData.info.name.replace(/ /g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width="200" height="380" />
                 </div>
             </div>
         )
