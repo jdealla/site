@@ -146,19 +146,19 @@ export default function PlayerHeader(props) {
                 <div className="level ">
                     <div className="level-item is-size-5 has-text-centered">
                         <figure className="image is-64x64">
-                            <ImageCloud src="./images/icons/icon_badge_bronze.png" height="61" width="64" />
+                            <ImageCloud src="/images/icons/icon_badge_bronze.png" height="61" width="64" />
                             <p className="is-overlay total_badges_style">{playerData.badges.totalBadges.bronzeBadges}</p>
                         </figure>
                         <figure className="image is-64x64">
-                            <ImageCloud src="./images/icons/icon_badge_silver.png" height="61" width="64" />
+                            <ImageCloud src="/images/icons/icon_badge_silver.png" height="61" width="64" />
                             <p className="is-overlay total_badges_style">{playerData.badges.totalBadges.silverBadges}</p>
                         </figure>
                         <figure className="image is-64x64">
-                            <ImageCloud src="./images/icons/icon_badge_gold.png" height="61" width="64" />
+                            <ImageCloud src="/images/icons/icon_badge_gold.png" height="61" width="64" />
                             <p className="is-overlay total_badges_style">{playerData.badges.totalBadges.goldBadges}</p>
                         </figure>
                         <figure className="image is-64x64">
-                            <ImageCloud src="./images/icons/icon_badge_hof.png" height="61" width="64" />
+                            <ImageCloud src="/images/icons/icon_badge_hof.png" height="61" width="64" />
                             <p className="is-overlay total_badges_style">{playerData.badges.totalBadges.hofBadges}</p>
                         </figure>
                     </div>

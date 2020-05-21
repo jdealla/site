@@ -1,19 +1,17 @@
-import { useState, useEffect } from "react";
+import { useRef } from "react";
 import { Image, Transformation } from "cloudinary-react";
 
+const isProd = process.env.NODE_ENV === 'production'
+const BASE_URL = isProd ? `${process.env.VERCEL_URL}` : "http://localhost:3000"
+
 export default function ImageCloud(props) {
-  const [didMount, setMount] = useState(false);
+  const imageRef = useRef();
 
-  useEffect(() => {
-    if (!didMount)
-      setMount(true)
+  console.log(process.env.CLOUD_API_NAME);
 
-    console.log(props.src)
-  }, [didMount])
-
-  return (
-      <Image cloudName={process.env.CLOUD_API_NAME} apiKey={process.env.CLOUD_API_KEY} api_secret={process.env.CLOUD_API_SECRET} publicId={props.src} type="fetch">
+  return imageRef != null ? (
+      <Image innerRef={imageRef} cloudName={process.env.CLOUD_API_NAME} publicId={`${BASE_URL}/${props.src}`} type="fetch">
         <Transformation width={props.width} height={props.height} gravity="faces" crop="limit" fetchFormat="auto" quality="75" />
       </Image>
-  ) && didMount
+  ) : null;
 }
