@@ -6,7 +6,7 @@ export default function PlayersCardView(props) {
             return (
                 <div className="column is-2-desktop is-half-mobile" key={i}>
                     <a href={`/players/${player.id}`}>
-                        <img style={{ maxWidth: "200px", cursor: "pointer" }} src={require(`images/players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`)} />
+                        <img style={{ maxWidth: "200px", cursor: "pointer" }} src={`images/players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`} />
                     </a>
                 </div>
             )

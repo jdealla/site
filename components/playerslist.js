@@ -19,7 +19,7 @@ export default function PlayersList(props) {
                         <div className="columns is-mobile is-multiline">
                             <div className="column is-3-desktop is-4-mobile">
                                 <figure className="image is-48x48">
-                                    <img src={require(`images/players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`)} />
+                                    <img src={`/images/players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`} />
                                 </figure>
                             </div>
                             <div className="column is-hidden-mobile is-size-7-mobile">
