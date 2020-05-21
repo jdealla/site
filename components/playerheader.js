@@ -2,6 +2,7 @@ import { getAllShoes, shoeButton } from "../lib/shoes";
 
 import ShotChart from "./shotchart";
 import Dropdown from "./dropdown";
+import ImageCloud from "./imagecloud";
 
 export default function PlayerHeader(props) {
     const { playerData, shoe, handleShoe, } = props;
@@ -18,9 +19,9 @@ export default function PlayerHeader(props) {
 
     return (
         <div className="columns is-mobile is-multiline is-player-card">
-            <div className="is-player-card"><img src="/playercard_bg.png" /></div>
+            <div className="is-player-card"><img src="/images/backgrounds/playercard_bg.png" /></div>
             <div className="column is-7-mobile is-one-fifth-desktop is-2-tablet ">
-                <img src={require(`images/players/${playerData.info.name.replace(/ /g, "_").toLowerCase()}_${playerData.info.id}.jpg`)} />
+                <ImageCloud src={`/images/players/${playerData.info.name.replace(/ /g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width="2000" height="432" />
             </div>
             <div className="column is-5-mobile is-5-desktop is-2-tablet has-padding-2 is-player-info">
                 <p className="title is-size-3 has-text-weight-bold has-text-white">{playerData.info.name}</p>
@@ -145,19 +146,19 @@ export default function PlayerHeader(props) {
                 <div className="level ">
                     <div className="level-item is-size-5 has-text-centered">
                         <figure className="image is-64x64">
-                            <img src={require("images/icons/icon_badge_bronze.png")} />
+                            <ImageCloud src="./images/icons/icon_badge_bronze.png" height="61" width="64" />
                             <p className="is-overlay total_badges_style">{playerData.badges.totalBadges.bronzeBadges}</p>
                         </figure>
                         <figure className="image is-64x64">
-                            <img src={require("images/icons/icon_badge_silver.png")} />
+                            <ImageCloud src="./images/icons/icon_badge_silver.png" height="61" width="64" />
                             <p className="is-overlay total_badges_style">{playerData.badges.totalBadges.silverBadges}</p>
                         </figure>
                         <figure className="image is-64x64">
-                            <img src={require("images/icons/icon_badge_gold.png")} />
+                            <ImageCloud src="./images/icons/icon_badge_gold.png" height="61" width="64" />
                             <p className="is-overlay total_badges_style">{playerData.badges.totalBadges.goldBadges}</p>
                         </figure>
                         <figure className="image is-64x64">
-                            <img src={require("images/icons/icon_badge_hof.png")} />
+                            <ImageCloud src="./images/icons/icon_badge_hof.png" height="61" width="64" />
                             <p className="is-overlay total_badges_style">{playerData.badges.totalBadges.hofBadges}</p>
                         </figure>
                     </div>
