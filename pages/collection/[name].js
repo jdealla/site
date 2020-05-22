@@ -23,7 +23,7 @@ export default function Collection({ players }) {
             </Head>
             <div className="container">
                 <p className="title is-size-5">{players[0].collection}</p>
-                <UpdatesList players={players} amount={players.length} />
+                
             </div>
         </Layout>
     )

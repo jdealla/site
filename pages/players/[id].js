@@ -118,6 +118,7 @@ export default function Player({ playerData }) {
                 <html lang="en"/>
                 <meta name="description" content={`NBA 2K20 MyTeam Card Description of ${playerData.info.name}`} />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+				<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
             </Head>
             <div className="container is-fluid">
                 <PlayerHeader playerData={playerData} shoe={shoe} handleShoe={handleShoe} />

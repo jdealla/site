@@ -32,94 +32,111 @@ export default function PlayerHeader(props) {
             <div className="column is-7-mobile is-one-fifth-desktop is-2-tablet ">
                 <ImageCloud src={`players/${playerData.info.name.replace(/ /g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width="0.7" />
             </div>
-            <div className="column is-5-mobile is-5-desktop is-2-tablet has-padding-2 is-player-info">
-                <p className="title is-size-3 has-text-weight-bold has-text-white">{playerData.info.name}</p>
-                <p className="subtitle is-paddingless is-size-6-desktop is-size-7-mobile has-text-warning has-text-weight-semibold"> 
-                    <a href={`/collection/${playerData.info.collection.toLowerCase().replace(/ /g, "-")}`}>{playerData.info.collection} </a>
-                    / 
-                    <a href={`/collection/${playerData.info.collection.toLowerCase().replace(/ /g, "-")}/theme/${playerData.info.theme.toLowerCase().replace(/ /g, "-")}`}> {playerData.info.theme} </a>
-                </p>
-                <div className="subtitle is-size-6 is-size-7-mobile has-text-white">
-                    <nav className="level ">
-                        <div className="level-item has-text-centered">
-                            <div>
-                                <p className="heading has-text-warning">Overall</p>
-                                <p className="title is-1 title has-text-white">
+            <div className="column is-centered is-5-mobile is-5-desktop is-2-tablet has-padding-2 is-player-info">
+			    <div className="columns is-vcentered is-centered">
+			             <div className="column is-2">
+                            <p className="heading has-text-warning" style={{ marginBottom:0 }}>Overall</p>
+                            <p className="title is-1 title has-text-white">
                                     {playerData.info.overall}
+                            </p>
+			            </div>				
+					    <div className="column is-9-desktop" style={{ paddingLeft:0 }}>
+			                    <p className="title is-size-3 has-text-weight-bold has-text-white">{playerData.info.name}</p>
+                                <p className="subtitle is-paddingless is-size-6-desktop is-size-7-mobile has-text-weight-semibold"> 
+                                          <a className="has-text-warning" href={`/collection/${playerData.info.collection.toLowerCase().replace(/ /g, "-")}`}>{playerData.info.collection} </a>
+                                          / 
+                                          <a className="has-text-warning" href={`/collection/${playerData.info.collection.toLowerCase().replace(/ /g, "-")}/theme/${playerData.info.theme.toLowerCase().replace(/ /g, "-")}`}> {playerData.info.theme} </a>
                                 </p>
-                            </div>
-                        </div>
-                        <div className="level-item has-text-centered">
-                            <div>
-                                <p className="heading has-text-warning">Off. Overall</p>
+				        </div>
+                </div>
+			  
+                <div className="subtitle is-size-6 is-size-7-mobile has-text-white">
+					<div className="columns is-vcentered has-text-centered">
+					    <div className="column">
+                                <p className="heading has-text-warning">Offense</p>
                                 <p className="title is-5 title has-text-white">{playerData.info.off_overall}</p>
-                            </div>
                         </div>
-                        <div className="level-item has-text-centered">
-                            <div>
-                                <p className="heading has-text-warning">Def. Overall</p>
+                        <div className="column">
+                                <p className="heading has-text-warning">Defense</p>
                                 <p className="title is-5 has-text-white">{playerData.info.def_overall}</p>
-                            </div>
                         </div>
-                        <div className="level-item has-text-centered">
-                            <div>
+						<div className="column">
                                 <p className="heading has-text-warning">Position</p>
                                 <p className="title is-5 has-text-white">{playerData.info.position}{playerData.info.secondary_position != null ? `/${playerData.info.secondary_position}` : ""}</p>
-                            </div>
                         </div>
-                        <div className="level-item has-text-centered">
-                            <div>
+                        <div className="column">
                                 <p className="heading has-text-warning">Height</p>
                                 <p className="title is-5 has-text-white">{playerData.info.height}</p>
-                            </div>
                         </div>
-                        <div className="level-item has-text-centered">
-                            <div>
+                        <div className="column">
                                 <p className="heading has-text-warning">Weight</p>
                                 <p className="title is-5 has-text-white">{playerData.info.weight} lbs</p>
-                            </div>
                         </div>
-                    </nav>
-                    <nav className="level ">
-                        {
+                    </div>
+                    <div className="columns has-text-centered"> 
+                        <div className="column">
+                                <p className="heading has-text-warning">Team</p>
+                                <p className="title is-6 has-text-white">{playerData.info.team}</p>
+                        </div>
+                        <div className="column">
+                                <p className="heading has-text-warning">From</p>
+                                <p className="title is-6 has-text-white">{playerData.info.college}</p>
+                        </div>
+						
+					{
                             playerData.info.nickname != " " ? (
-                                <div className="level-item has-text-centered">
+				
+                                <div className="column">
                                     <div>
                                         <p className="heading has-text-warning">Nickname</p>
-                                        <p className="title is-4 has-text-white">{playerData.info.nickname}</p>
+                                        <p className="title is-6 has-text-white">{playerData.info.nickname}</p>
                                     </div>
                                 </div>
+				
                             ) : ""
-                        }
-                        <div className="level-item has-text-centered">
-                            <div>
-                                <p className="heading has-text-warning">Team</p>
-                                <p className="title is-4 has-text-white">{playerData.info.team}</p>
-                            </div>
-                        </div>
-                        <div className="level-item has-text-centered">
-                            <div>
-                                <p className="heading has-text-warning">From</p>
-                                <p className="title is-4 has-text-white">{playerData.info.college}</p>
-                            </div>
-                        </div>
-                    </nav>
-                    <nav className="level ">
-                        <div className="level-item has-text-centered">
-                            <div className="columns is-centered">
+                       }
+					   
+                    </div>
+                            <div className="columns has-text-centered">
                                 <div className="column">
                                     <p className="heading has-text-warning">Plays</p>
-                                    <div className="tags has-addons is-rounded has-text-weight-bold">
-                                        <span className="tag is-dark">{playerData.info.play1}</span>
-                                        <span className="tag is-dark">{playerData.info.play2}</span>
-                                        <span className="tag is-dark">{playerData.info.play3}</span>
-                                        <span className="tag is-dark">{playerData.info.play4}</span>
-                                    </div> 
-
+                                    <div className="tags is-centered is-rounded has-text-weight-bold">
+                                        {
+											playerData.info.play1 != "None" ? (
+											   <span className="tag is-dark">
+											             <span className="icon" style={{ color:"#aaa"}}><i className="fas fa-basketball-ball"></i></span> &nbsp;{playerData.info.play1}
+											   </span> 
+														 ) : ""    
+										}
+										
+                                        {
+											playerData.info.play2 != "None" ? (
+											   <span className="tag is-dark">
+											             <span className="icon" style={{ color:"#aaa"}}><i className="fas fa-basketball-ball"></i></span> &nbsp;{playerData.info.play2}
+											   </span> 
+														 ) : ""
+										}
+										
+										{
+											playerData.info.play3 != "None" ? (
+											   <span className="tag is-dark">
+											             <span className="icon" style={{ color:"#aaa"}}><i className="fas fa-basketball-ball"></i></span> &nbsp;{playerData.info.play3}
+											   </span> 
+														 ) : ""
+										}
+										
+										{
+											playerData.info.play4 != "None" ? (
+											   <span className="tag is-dark">
+											             <span className="icon" style={{ color:"#aaa"}}><i className="fas fa-basketball-ball"></i></span> &nbsp;{playerData.info.play4}
+											   </span> 
+														 ) : ""
+										}
+										
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </nav>
+
                 </div>
                 <div className="container">
                     <div className="columns is-centered">
