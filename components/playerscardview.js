@@ -1,3 +1,5 @@
+import ImageCloud from "./imagecloud";
+
 export default function PlayersCardView(props) {
     const { players } = props;
 
@@ -6,7 +8,7 @@ export default function PlayersCardView(props) {
             return (
                 <div className="column is-2-desktop is-half-mobile" key={i}>
                     <a href={`/players/${player.id}`}>
-                        <img style={{ maxWidth: "200px", cursor: "pointer" }} src={`images/players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`} />
+                        <ImageCloud src={`images/players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`} width="200" height="380" />
                     </a>
                 </div>
             )

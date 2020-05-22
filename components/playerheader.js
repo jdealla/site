@@ -28,7 +28,7 @@ export default function PlayerHeader(props) {
 
     return (
         <div className="columns is-mobile is-multiline is-player-card">
-            <div className="is-player-card"><img src="/images/backgrounds/playercard_bg.png" /></div>
+            <div className="is-player-card"><ImageCloud src="backgrounds/playercard_bg.png" width="2000" height="440" /></div>
             <div className="column is-7-mobile is-one-fifth-desktop is-2-tablet ">
                 <ImageCloud src={`players/${playerData.info.name.replace(/ /g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width="250" height="432" />
             </div>
