@@ -3,6 +3,7 @@ import { formatName } from "../lib/players";
 export default function Attributes(props) {
     const { attributes, attrName, bonus, reverse, } = props;
 
+    
     const ratingColor = (num) => {
         let color = ""
         switch (true) {
@@ -30,7 +31,7 @@ export default function Attributes(props) {
                 </div>
             ) : (
                 <div className="tags has-addons is-marginless" key={i++} style={{ flex: "0 0 75%" }}>
-                    {bonus != null ? `+${bonus} ` : ""}
+                    {/* {bonus != null ? `+${bonus} ` : ""} */}
                     {ratingColor(value)}
                     <span className="tag">{formatName(key)}</span>
                 </div>

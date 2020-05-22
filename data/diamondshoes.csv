@@ -1,44 +1,44 @@
 brand,name,boost1,boost2,boost3,boost4,boost5
-Nike,Kobe A.D,INTERIOR DEFENSE,LATERAL QUICKNESS,PASS PERCEPTION,PERIMETER DEFENSE,STEAL
-Nike,Fear of God,BALL CONTROL,BLOCK,DEFENSIVE CONSISTENCY,SHOT MID,SPEED
-Nike,KD 10,DEFENSIVE CONSISTENCY,INTERIOR DEFENSE,SHOT MID,STAMINA,STEAL
-Nike,Hyperdunk X High,DRAW FOUL,DRIVING DUNK,SHOT MID,SPEED WITH BALL,VERTICAL
-Nike,Kobe XI,BLOCK,DEFENSIVE CONSISTENCY,PASS PERCEPTION,SHOT THREE,STEAL
-Nike,Lebron 15,POST MOVES,POST FADE,POST HOOK,DEFENSIVE REBOUND,OREB
-Nike,Air Foamposite One Weatherman,INTERIOR DEFENSE,POST MOVES,DEFENSIVE REBOUND,OFFENSIVE REBOUND,STRENGTH
-Nike,Lebron 16 PE,BLOCK,DEFENSIVE CONSISTENCY,INTERIOR DEFENSE,STAMINA,STEAL
-Nike,Nike Shox BB4,BLOCK,INTERIOR DEFENSE,OFFENSIVE REBOUND,STANDING DUNK,VERTICAL
-Nike,PG4,BALL CONTROL,DRIVING DUNK,PERIMETER DEFENSE,SHOT CLOSE,SPEED WITH BALL
-Nike,Adapt 2,DRIVING LAYUP,PERIMETER DEFENSE,OFFENSIVE REBOUND,SHOT CLOSE,STEAL
-Nike,Zoom Freak 1 PE,DRAW FOUL,DRIVING DUNK,HELP DEFENSE IQ,PERIMETER DEFENSE,SPEED
-Nike,Fear Of God (Black/White),BALL CONTROL,DRIVING LAYUP,SHOT THREE,SPEED,STEAL
-Nike,KD 13,DEFENSIVE CONSISTENCY,PASS PERCEPTION,SHOT CLOSE,SPEED WITH BALL,STEAL
-Nike,Kyrie 5,BALL CONTROL,DRIVING LAYUP,PASS ACCURACY,PERIMETER DEFENSE,SHOT MID
-Adidas,Pro Bounce 2018 Low,BALL CONTROL,DRIVING LAYUP,DEFENSIVE REBOUND,SPEED WITH BALL,VERTICAL
-Adidas,Adidas Superstar,BALL CONTROL,INTERIOR DEFENSE,SHOT CLOSE,SHOT MID,SHOT THREE
-Adidas,Harden Vol. 3,DRAW FOUL,DRIVING DUNK,DRIVING LAYUP,SHOT CLOSE,SHOT THREE
-Adidas,D Lillard 3,BALL CONTROL,PASS ACCURACY,SHOT MID,SPEED WITH BALL,STEAL
-Adidas,Crazylight Boost 2014,BLOCK,PASS ACCURACY,POST FADE,SHOT THREE,SPEED
-Adidas,Dame 6,BALL CONTROL,DRIVING LAYUP,LATERAL QUICKNESS,SHOT CLOSE,SHOT MID
-Adidas,Harden Vol. 4,BALL CONTROL,DRIVING LAYUP,PASS PERCEPTION,FREE THROW,SHOT THREE
-Adidas,Adizero Rose 1,BALL CONTROL,DRIVING LAYUP,LATERAL QUICKNESS,PASS ACCURACY,SHOT CLOSE
-Adidas,D.O.N. Issue #2,DEFENSIVE CONSISTENCY,PASS PERCEPTION,SHOT MID,SPEED,STEAL
-Jordan,Air Jordan VI,POST FADE,SHOT MID,STAMINA,,
-Jordan,Air Jordan XXXIII PE,POST MOVES,POST FADE,POST HOOK,,
-Jordan,Air Jordan VI (Blue),INTERIOR DEFENSE,PASS ACCURACY,SHOT MID,,
-Jordan,Air Jordan XXXII Low,DRAW FOUL,DRIVING DUNK,FREE THROW,,
-Jordan,Air Jordan XXXII Low (Black),BALL CONTROL,PASS ACCURACY,PASS IQ,,
-Jordan,Air Jordan III,DRIVING DUNK,DRIVING LAYUP,FREE THROW,,
-Jordan,Air Jordan XXXI,BALL CONTROL,DRIVING DUNK,SPEED WITH BALL,,
-Jordan,Air Jordan XXXI (Pink),PASS ACCURACY,PASS IQ,SHOT MID,,
-Jordan,Air Jordan XXXI (Green/Purple),BALL CONTROL,DRIVING LAYUP,STEAL,,
-Jordan,Air Jordan XI IE,LATERAL QUICKNESS,PASS PERCEPTION,STEAL,,
-Jordan,Air Jordan XVI,PASS ACCURACY,SHOT THREE,STAMINA,,
-Jordan,Air Jordan 1 Travis,PASS PERCEPTION,SHOT MID,SHOT THREE,SPEED,STEAL
-Jordan,Jordan Why Not Zero.3,LATERAL QUICKNESS,POST MOVES,DEFENSIVE REBOUND,OFFENSIVE REBOUND,SHOT MID
-Jordan,Air Jordan 1 Union (Black/White),BLOCK,LATERAL QUICKNESS,PASS PERCEPTION,PERIMETER DEFENSE,STEAL
-Jordan,Air Jordan 1 Union (Blue/White),BALL CONTROL,BLOCK,POST MOVES,POST FADE,POST HOOK
-Converse,Converse Chuck Taylor High,POST MOVES,POST FADE,POST HOOK,,
-Under Armor,Curry 7,DRIVING LAYUP,PASS ACCURACY,SHOT MID,SHOT THREE,SPEED
-Puma,Puma Hardwood Classic,BLOCK,INTERIOR DEFENSE,PASS PERCEPTION,PERIMETER DEFENSE,STEAL
-Reebok,The Question PE,BALL CONTROL,DRIVING LAYUP,PASS PERCEPTION,PERIMETER DEFENSE,SPEED WITH BALL
+Nike,Kobe A.D,interior_defense,lateral_quickness,pass_perception,perimeter_defense,steal
+Nike,Fear of God,ball_control,block,defensive_consistency,shot_mid,speed
+Nike,KD 10,defensive_consistency,interior_defense,shot_mid,stamina,steal
+Nike,Hyperdunk X High,DRAW FOUL,driving_dunk,shot_mid,speed_with_ball,vertical
+Nike,Kobe XI,block,defensive_consistency,pass_perception,shot_3pt,steal
+Nike,Lebron 15,post_moves,post_fade,post_hook,defensive_rebound,offensive_rebound
+Nike,Air Foamposite One Weatherman,interior_defense,post_moves,defensive_rebound,offensive_rebound,STRENGTH
+Nike,Lebron 16 PE,block,defensive_consistency,interior_defense,stamina,steal
+Nike,Nike Shox BB4,block,interior_defense,offensive_rebound,standing_dunk,vertical
+Nike,PG4,ball_control,driving_dunk,perimeter_defense,shot_close,speed_with_ball
+Nike,Adapt 2,driving_layup,perimeter_defense,offensive_rebound,shot_close,steal
+Nike,Zoom Freak 1 PE,DRAW FOUL,driving_dunk,help_defense_iq,perimeter_defense,speed
+Nike,Fear Of God (Black/White),ball_control,driving_layup,shot_3pt,speed,steal
+Nike,KD 13,defensive_consistency,pass_perception,shot_close,speed_with_ball,steal
+Nike,Kyrie 5,ball_control,driving_layup,pass_accuracy,perimeter_defense,shot_mid
+Adidas,Pro Bounce 2018 Low,ball_control,driving_layup,defensive_rebound,speed_with_ball,vertical
+Adidas,Adidas Superstar,ball_control,interior_defense,shot_close,shot_mid,shot_3pt
+Adidas,Harden Vol. 3,DRAW FOUL,driving_dunk,driving_layup,shot_close,shot_3pt
+Adidas,D Lillard 3,ball_control,pass_accuracy,shot_mid,speed_with_ball,steal
+Adidas,Crazylight Boost 2014,block,pass_accuracy,post_fade,shot_3pt,speed
+Adidas,Dame 6,ball_control,driving_layup,lateral_quickness,shot_close,shot_mid
+Adidas,Harden Vol. 4,ball_control,driving_layup,pass_perception,free_throw,shot_3pt
+Adidas,Adizero Rose 1,ball_control,driving_layup,lateral_quickness,pass_accuracy,shot_close
+Adidas,D.O.N. Issue #2,defensive_consistency,pass_perception,shot_mid,speed,steal
+Jordan,Air Jordan VI,post_fade,shot_mid,stamina,,
+Jordan,Air Jordan XXXIII PE,post_moves,post_fade,post_hook,,
+Jordan,Air Jordan VI (Blue),interior_defense,pass_accuracy,shot_mid,,
+Jordan,Air Jordan XXXII Low,DRAW FOUL,driving_dunk,free_throw,,
+Jordan,Air Jordan XXXII Low (Black),ball_control,pass_accuracy,pass_iq,,
+Jordan,Air Jordan III,driving_dunk,driving_layup,free_throw,,
+Jordan,Air Jordan XXXI,ball_control,driving_dunk,speed_with_ball,,
+Jordan,Air Jordan XXXI (Pink),pass_accuracy,pass_iq,shot_mid,,
+Jordan,Air Jordan XXXI (Green/Purple),ball_control,driving_layup,steal,,
+Jordan,Air Jordan XI IE,lateral_quickness,pass_perception,steal,,
+Jordan,Air Jordan XVI,pass_accuracy,shot_3pt,stamina,,
+Jordan,Air Jordan 1 Travis,pass_perception,shot_mid,shot_3pt,speed,steal
+Jordan,Jordan Why Not Zero.3,lateral_quickness,post_moves,defensive_rebound,offensive_rebound,shot_mid
+Jordan,Air Jordan 1 Union (Black/White),block,lateral_quickness,pass_perception,perimeter_defense,steal
+Jordan,Air Jordan 1 Union (Blue/White),ball_control,block,post_moves,post_fade,post_hook
+Converse,Converse Chuck Taylor High,post_moves,post_fade,post_hook,,
+Under Armor,Curry 7,driving_layup,pass_accuracy,shot_mid,shot_3pt,speed
+Puma,Puma Hardwood Classic,block,interior_defense,pass_perception,perimeter_defense,steal
+Reebok,The Question PE,ball_control,driving_layup,pass_perception,perimeter_defense,speed_with_ball

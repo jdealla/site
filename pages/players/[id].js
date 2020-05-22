@@ -1,27 +1,35 @@
-import { useState, Fragment } from "react";
+import Head from "next/head";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
+import { useState, Fragment } from "react";
 import { getPlayersIds, getPlayerData } from "../../lib/players";
 
-import Head from 'next/head'
 import Layout from "../../components/layout";
-import PlayerCard from "../../components/playercard";
+// import PlayerHeader from "../../components/playerheader";
 import BadgeContainer from "../../components/badgecontainer";
 import Attributes from "../../components/attributes";
 
+const PlayerHeader = dynamic(import("../../components/playerheader"));
+
 export default function Player({ playerData }) {
     const [view, setView] = useState("stats");
-    const [shoe, setShoe] = useState({})
+    const [shoe, setShoe] = useState()
     const { isFallback } = useRouter();
 
     if (isFallback) {
         return <h1>Loading...</h1>
     }
 
+    const handleShoe = (shoe) => {
+        console.log('setting shoe to: ', shoe)
+        setShoe(shoe)
+    }
+
     const renderRatings = () => {
         return (
             <Fragment>
                 <div className="column is-one-fifth-tablet is-half-mobile is-one-fifth-desktop">
-                    <Attributes attributes={playerData.stats.shooting} attrName="Shooting"  />
+                    <Attributes attributes={playerData.stats.shooting} attrName="Shooting" bonus={shoe} />
                     <Attributes attributes={playerData.stats.inside} attrName="Inside Scoring" />
                     <Attributes attributes={playerData.stats.playmaking} attrName="Playmaking" />
                 </div>
@@ -106,12 +114,14 @@ export default function Player({ playerData }) {
     return (
         <Layout>
             <Head>
-                <title>{playerData.info.name} | 2KDB</title>
+                <title>{`${playerData.info.name} | NBA2K20 MyTeam 2KDB`}</title>
+                <html lang="en"/>
+                <meta name="description" content={`NBA 2K20 MyTeam Card Description of ${playerData.info.name}`} />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
 				<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
             </Head>
             <div className="container is-fluid">
-                <PlayerCard playerData={playerData} />
+                <PlayerHeader playerData={playerData} shoe={shoe} handleShoe={handleShoe} />
 
                 <div className="columns ">
                     <div className="column is-full">

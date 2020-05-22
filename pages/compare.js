@@ -4,6 +4,7 @@ import { useState, Fragment } from "react";
 import Layout from "../components/layout";
 import SearchPlayers from "../components/searchplayers";
 import CompareTable from "../components/comparetable";
+import ImageCloud from "../components/imagecloud";
 
 export default function Compare() {
     const [players, setPlayers] = useState({ player1: null, player2: null, });
@@ -115,7 +116,7 @@ export default function Compare() {
                     <button className="delete" aria-label="delete" onClick={() => handlePlayer(playerId, null)}></button>
                 </div>
                 <div className="card-image">
-                    <img style={{ maxWidth: "250px" }} src={require(`images/players/${playerData.info.name.replace(/ /g, "_").toLowerCase()}_${playerData.info.id}.jpg`)} />
+                    <ImageCloud src={`players/${playerData.info.name.replace(/ /g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width="0.4" />
                 </div>
             </div>
         )
@@ -148,6 +149,8 @@ export default function Compare() {
         <Layout>
             <Head>
                 <title>2KDB Compare Players Page</title>
+                <html lang="en"/>
+                <meta name="description" content="Page to compare NBA 2K20 MyTeam cards for their stats, tendencies, animations" />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <div className="container" style={{ marginTop: '10px' }}>

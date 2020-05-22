@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { useRouter } from "next/router";
 
 import OverallImage from "./overallimage";
+import ImageCloud from "./imagecloud";
 
 export default function PlayersList(props) {
     const { players, perPage, page, sortedBy } = props;
@@ -18,9 +19,7 @@ export default function PlayersList(props) {
                     <div className="column is-one-fifth-mobile is-2-tablet">
                         <div className="columns is-mobile is-multiline">
                             <div className="column is-3-desktop is-4-mobile">
-                                <figure className="image is-48x48">
-                                    <img src={require(`images/players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`)} />
-                                </figure>
+                                <ImageCloud src={`players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`} width="0.1" />
                             </div>
                             <div className="column is-hidden-mobile is-size-7-mobile">
                                 {player.name}
@@ -28,9 +27,7 @@ export default function PlayersList(props) {
                         </div>
                     </div>
                     <div className="column is-one-fifth-mobile is-1-tablet">
-                        <figure className="image is-32x32">
-                            <OverallImage overall={player.overall} />
-                        </figure>
+                        <OverallImage overall={player.overall} />
                     </div>
                     <div className="column is-one-fifth-mobile is-1-tablet">
                         {player.overall}

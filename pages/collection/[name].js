@@ -1,8 +1,9 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { getCollections, getPlayersByPropValue } from "../../lib/players";
 
 import Layout from "../../components/layout";
-import UpdatedList from "../../components/updatedlist";
+import UpdatesList from "../../components/updateslist";
 import Spinner from "../../components/spinner";
 
 export default function Collection({ players }) {
@@ -14,9 +15,15 @@ export default function Collection({ players }) {
 
     return (
         <Layout>
+            <Head>
+                <title>{`${players[0].collection} | 2KDB`}</title>
+                <html lang="en"/>
+                <meta name="description" content={`NBA 2K20 MyTeam ${players[0].collection} collection of player cards`} />
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
             <div className="container">
                 <p className="title is-size-5">{players[0].collection}</p>
-                <UpdatedList players={players} amount={players.length} />
+                
             </div>
         </Layout>
     )

@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { groupedPlayersByProp } from "../lib/players";
 
 import Layout from "../components/layout";
-import UpdatedList from "../components/updatedlist";
+import UpdatesList from "../components/updateslist";
 
 export default function Updated({ groupedByDate }) {
     const router = useRouter();
@@ -15,7 +15,7 @@ export default function Updated({ groupedByDate }) {
                 <tr key={i++}>
                     <th className="title is-5" onClick={() => router.push(`/updates/${date}`)} style={{ cursor: "pointer" }}>{date}</th>
                     <td className="has-text-weight-medium has-text-success">+{players.length}</td>
-                    <UpdatedList players={players} amount={10} />
+                    <UpdatesList players={players} amount={10} />
                 </tr>
             )
             updates.push(dateObj);
@@ -26,7 +26,9 @@ export default function Updated({ groupedByDate }) {
     return (
         <Layout>
             <Head>
-                <title>2KDB | NBA 2K20 MyTeam Updated Players</title>
+                <title>NBA 2K20 MyTeam Updated Players | 2KDB</title>
+                <html lang="en"/>
+                <meta name="description" content="List of player cards updated in NBA 2K20 MyTeam" />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <div className="container">
