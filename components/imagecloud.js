@@ -12,7 +12,7 @@ export default function ImageCloud(props) {
 
   return mounted.current ? (
       <Image publicId={`${props.src}`} cloudName="dndoa4fno">
-        <Transformation width={props.width} height={props.height} fetchFormat="auto" quality="75" />
+        <Transformation width={props.width} height={props.height} fetchFormat="auto" quality="auto" />
       </Image> 
   ) : null
 }
