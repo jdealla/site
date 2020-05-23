@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { getThemes, getPlayersByPropValue } from "../../../../lib/players";
 
 import Layout from "../../../../components/layout";
-import UpdatesList from "../../../../components/updateslist";
+import PlayersCardView from "../../../../components/playerscardview";
 import Spinner from "../../../../components/spinner";
 
 export default function Collection({ players }) {
@@ -23,7 +23,7 @@ export default function Collection({ players }) {
             </Head>
             <div className="container">
                 <p className="title is-size-5">{players[0].theme}</p>
-                
+                <PlayersCardView players={players} />
             </div>
         </Layout>
     )
