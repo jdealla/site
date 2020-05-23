@@ -27,20 +27,20 @@ export default function PlayerHeader(props) {
     )
 
     return (
-        <div className="columns is-mobile is-multiline is-player-card">
+        <div className="columns is-mobile is-multiline is-player-card" style={{ justifyContent:"space-around" }}>
             <div className="is-player-card"><ImageCloud src="backgrounds/playercard_bg.png" width="2000" /></div>
-            <div className="column is-7-mobile is-one-fifth-desktop is-2-tablet ">
+            <div className="column is-7-mobile is-one-fifth-desktop is-3-tablet ">
                 <ImageCloud src={`players/${playerData.info.name.replace(/ /g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width="0.7" />
             </div>
-            <div className="column is-centered is-5-mobile is-5-desktop is-2-tablet has-padding-2 is-player-info">
-			    <div className="columns is-vcentered is-centered">
-			             <div className="column is-2">
+            <div className="column is-centered is-7-mobile is-5-desktop is-7-tablet is-player-info">
+			    <div className="columns is-vcentered">
+			             <div style={{ padding: "0.75rem" }}>
                             <p className="heading has-text-warning" style={{ marginBottom:0 }}>Overall</p>
                             <p className="title is-1 title has-text-white">
                                     {playerData.info.overall}
                             </p>
 			            </div>				
-					    <div className="column is-9-desktop" style={{ paddingLeft:0 }}>
+					    <div style={{ padding: "0.75rem", paddingLeft: "1.5rem" }}>
 			                    <p className="title is-size-3 has-text-weight-bold has-text-white">{playerData.info.name}</p>
                                 <p className="subtitle is-paddingless is-size-6-desktop is-size-7-mobile has-text-weight-semibold"> 
                                           <a className="has-text-warning" href={`/collection/${playerData.info.collection.toLowerCase().replace(/ /g, "-")}`}>{playerData.info.collection} </a>
@@ -51,7 +51,7 @@ export default function PlayerHeader(props) {
                 </div>
 			  
                 <div className="subtitle is-size-6 is-size-7-mobile has-text-white">
-					<div className="columns is-vcentered has-text-centered">
+					<div className="columns is-vcentered has-text-left">
 					    <div className="column">
                                 <p className="heading has-text-warning">Offense</p>
                                 <p className="title is-5 title has-text-white">{playerData.info.off_overall}</p>
@@ -73,7 +73,7 @@ export default function PlayerHeader(props) {
                                 <p className="title is-5 has-text-white">{playerData.info.weight} lbs</p>
                         </div>
                     </div>
-                    <div className="columns has-text-centered"> 
+                    <div className="columns has-text-left"> 
                         <div className="column">
                                 <p className="heading has-text-warning">Team</p>
                                 <p className="title is-6 has-text-white">{playerData.info.team}</p>
@@ -97,10 +97,10 @@ export default function PlayerHeader(props) {
                        }
 					   
                     </div>
-                            <div className="columns has-text-centered">
+                            <div className="columns has-text-left">
                                 <div className="column">
                                     <p className="heading has-text-warning">Plays</p>
-                                    <div className="tags is-centered is-rounded has-text-weight-bold">
+                                    <div className="tags is-left is-rounded has-text-weight-bold">
                                         {
 											playerData.info.play1 != "None" ? (
 											   <span className="tag is-dark">
@@ -139,7 +139,7 @@ export default function PlayerHeader(props) {
 
                 </div>
                 <div className="container">
-                    <div className="columns is-centered">
+                    <div className="columns is-left">
                         <div className="column is-half">
                             {
                                 shoe == null ? (
@@ -165,12 +165,12 @@ export default function PlayerHeader(props) {
             
             <div className="column is-11-mobile is-one-fifth-desktop is-2-tablet">
             
-            <p className="subtitle has-text-weight-bold is-size-6 is-size-7-mobile has-text-warning">Hot Zones:</p>
+            <p className="heading has-text-warning">Hot Zones</p>
             <ShotChart hotzones={playerData.hotzones} />  
-            
-                <p className="subtitle has-text-weight-bold is-size-6 is-size-7-mobile has-text-warning">Badges:</p>
-                <div className="level ">
-                    <div className="level-item is-size-5 has-text-centered">
+            <p className="title"></p>
+                <p className="heading has-text-warning">Badges</p>
+                <div className="level ">   
+                    <div className="level-item is-size-5 has-text-centered" style={{ justifyContent:"space-evenly" }}>
                         <figure className="image is-64x64">
                             <ImageCloud src="icons/icon_badge_bronze.png" height="61" width="64" />
                             <p className="is-overlay total_badges_style">{playerData.badges.totalBadges.bronzeBadges}</p>
