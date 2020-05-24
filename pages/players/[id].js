@@ -113,7 +113,7 @@ export default function Player({ playerData }) {
         <>
             <Head>
                 <title>{`${playerData.info.name} MyTeam Player Page | 2KDB`}</title>
-                <meta name="description" content={`NBA 2K20 MyTeam Card Description of ${playerData.info.name}`} />
+                <meta name="description" content={`NBA 2K20 MyTeam Card Description of ${playerData.info.name}`} key={playerData.info.id} />
             </Head>
             <div className="container is-fluid">
                 <PlayerHeader playerData={playerData} shoe={shoe} handleShoe={handleShoe} />

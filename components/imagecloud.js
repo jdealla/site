@@ -1,12 +1,22 @@
 import React from "react";
-import { Image, Transformation } from "cloudinary-react";
+import Img from 'react-cloudinary-lazy-image'
 
 export default function ImageCloud(props) {
-  const { src, width } = props;
+  const { src, width, height, alt, styles } = props;
   
   return (
-      <Image publicId={`${src}`} cloudName="dndoa4fno" secure="true">
-        <Transformation width={width} quality="90" crop="limit" fetchFormat="auto" />
-      </Image> 
+      <Img 
+        cloudName="dndoa4fno"
+        imageName={`${src}`}
+        alt={alt}
+        fluid={{
+          maxWidth: width,
+          height: height
+        }}
+        style={styles}
+        urlParams={'c_limit'}
+        quality="good"
+
+      />
   )
 }

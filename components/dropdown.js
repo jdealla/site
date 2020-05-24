@@ -18,7 +18,7 @@ export default function Dropdown(props) {
             </div>
             <div className="dropdown-menu" id="dropdown-menu" role="menu">
                 <div className="dropdown-content">
-                    <div className="container is-scrollable">
+                    <div className="container is-scrollable" >
                         {items}
                     </div>
                 </div>

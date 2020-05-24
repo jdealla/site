@@ -15,7 +15,7 @@ export default function Updated({ groupedByDate }) {
                 <tr key={i++}>
                     <th className="title is-5" onClick={() => router.push(`/updates/${date}`)} style={{ cursor: "pointer" }}>{date}</th>
                     <td className="has-text-weight-medium has-text-success">+{players.length}</td>
-                    <UpdatesList players={players} amount={10} />
+                    <UpdatesList date={date} players={players} amount={10} />
                 </tr>
             )
             updates.push(dateObj);

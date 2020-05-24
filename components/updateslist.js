@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import ImageCloud from "./imagecloud";
 
 export default function UpdatedList(props) {
-    const { players, amount } = props;
+    const { date, players, amount } = props;
     const router = useRouter();
 
     const renderPlayerCards = () => {
@@ -16,7 +16,9 @@ export default function UpdatedList(props) {
         let newPlayers = playersToRender.map((player, i) => {
             return (
                 <td className="is-paddingless" key={i} onClick={() => router.push(`/players/${player.id}`)}>
-                    <ImageCloud src={`players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`} width="0.15" />
+                    <figure className="image is-3by4">
+                        <ImageCloud src={`players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`} width={150} height={200} alt={player.name} />
+                    </figure>
                 </td>
             )
         })
@@ -24,7 +26,7 @@ export default function UpdatedList(props) {
         if (players.length > amount) {
             let lastItem = (
                 <td key={amount + 1} >
-                    <a className="heading" href={`/updates/${players[0].date}`} > +{players.length - amount} more players </a>
+                    <a className="heading" href={`/updates/${date}`} > +{players.length - amount} more players </a>
                 </td>
             )
             newPlayers.push(lastItem);

@@ -8,9 +8,11 @@ export default function PlayersCardView(props) {
         return players.map((player, i) => {
             return (
                 <div className="column is-2-desktop is-half-mobile" key={i}>
-                    <a href={`/players/${player.id}`}>
-                        <ImageCloud src={`players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`} width="0.5" />
-                    </a>
+                    <figure className="image is-3by4">
+                        <a href={`/players/${player.id}`}>
+                            <ImageCloud src={`players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`} width={280} height={380} alt={player.name} />
+                        </a>
+                    </figure>
                 </div>
             )
         })
