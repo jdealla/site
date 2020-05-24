@@ -32,12 +32,12 @@ export default function PlayerHeader(props) {
             <div className="is-player-card is-hidden-mobile">
                 <img src="/playercard_bg.png" alt="player card bg" />
             </div>
-            <div className="column is-7-mobile is-one-fifth-desktop is-3-tablet ">
-                <ImageCloud src={`players/${playerData.info.name.replace(/ /g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width={320} height={480} alt={playerData.info.name} />
+            <div className="column is-7-mobile is-4-tablet is-one-third-desktop is-one-fifth-fullhd ">
+                <ImageCloud src={`players/${playerData.info.name.replace(/ /g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width={320} height={420} alt={playerData.info.name} />
             </div>
-            <div className="column is-multiline is-centered is-full-mobile is-5-desktop is-7-tablet is-player-info">
+            <div className="column is-multiline is-centered is-full-mobile is-5-desktop is-5-tablet is-6-widescreen is-6-fullhd is-player-info">
 			    <div className="columns is-vcentered is-flex">
-                    <div className="column is-half-mobile is-2-desktop">
+                    <div className="column is-half-mobile is-3-desktop is-3-tablet is-2-widescreen is-2-fullhd">
                         <p className="heading has-text-warning" style={{ marginBottom:0 }}>Overall</p>
                         <p className="title is-1 title has-text-white">
                             {playerData.info.overall}
@@ -45,7 +45,7 @@ export default function PlayerHeader(props) {
                     </div>
                     <div className="column is-half-mobile">
                         <p className="title is-size-3 has-text-weight-bold has-text-white">{playerData.info.name}</p>
-                        <p className="subtitle is-paddingless is-size-6-desktop is-size-7-mobile has-text-weight-semibold"> 
+                        <p className="subtitle is-paddingless is-size-6-desktop is-size-7-mobile has-text-weight-semibold is-size-7-tablet"> 
                             <a className="has-text-warning" href={`/collections`}>{playerData.info.collection} </a>
                             / 
                             <a className="has-text-warning" href={`/collection/${playerData.info.collection.toLowerCase().replace(/ /g, "-")}/theme/${playerData.info.theme.toLowerCase().replace(/ /g, "-")}`}> {playerData.info.theme} </a>
@@ -171,11 +171,10 @@ export default function PlayerHeader(props) {
                 </div>
             </div>
             
-            <div className="column is-11-mobile is-one-fifth-desktop is-2-tablet">
-            
-            <p className="heading has-text-warning">Hot Zones</p>
-            <ShotChart hotzones={playerData.hotzones} />  
-            <p className="title"></p>
+            <div className="column is-11-mobile is-one-fifth-desktop is-3-tablet">
+                <p className="heading has-text-warning">Hot Zones</p>
+                <ShotChart hotzones={playerData.hotzones} />  
+                <p className="title"></p>
                 <p className="heading has-text-warning">Badges</p>
                 <div className="level ">   
                     <div className="level-item is-size-5 has-text-centered" style={{ justifyContent:"space-evenly" }}>

@@ -13,7 +13,7 @@ export default function Updated({ groupedByDate }) {
         for(let [date, players] of Object.entries(groupedByDate)) {
             let dateObj = (
                 <tr key={i++}>
-                    <th className="title is-5" onClick={() => router.push(`/updates/${date}`)} style={{ cursor: "pointer" }}>{date}</th>
+                    <td className="title is-5 is-marginless" onClick={() => router.push(`/updates/${date}`)} style={{ cursor: "pointer", width: "12%" }}>{date}</td>
                     <td className="has-text-weight-medium has-text-success">+{players.length}</td>
                     <UpdatesList date={date} players={players} amount={10} />
                 </tr>
@@ -32,7 +32,7 @@ export default function Updated({ groupedByDate }) {
             <div className="container">
                 <p className="title is-size-4">MyTeam Card Updates</p>
                 <div className="box">
-                    <table className="table">
+                    <table className="table is-fullwidth is-scrollable-mobile">
                         <tbody>
                             {renderUpdates()}
                         </tbody>

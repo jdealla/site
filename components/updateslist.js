@@ -16,9 +16,7 @@ export default function UpdatedList(props) {
         let newPlayers = playersToRender.map((player, i) => {
             return (
                 <td className="is-paddingless" key={i} onClick={() => router.push(`/players/${player.id}`)}>
-                    <figure className="image is-3by4">
-                        <ImageCloud src={`players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`} width={150} height={200} alt={player.name} />
-                    </figure>
+                    <ImageCloud src={`players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`} width={120} height={240} alt={player.name} />
                 </td>
             )
         })
