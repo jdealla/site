@@ -60,8 +60,8 @@ export async function getStaticProps({ params }) {
     }
 
     const groupedBy = getPlayersByPropValue("theme", formatted);
-    groupedBy.sort((a, b) => a.overall < b.overall);
     let players = groupedBy.filter(player => player.collection.toLowerCase().replace(/ /g, "-") === collection);
+    players.sort((a, b) => a.overall > b.overall ? -1 : 1);
 
     return {
         props: {
