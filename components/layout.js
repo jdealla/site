@@ -1,10 +1,16 @@
+import Head from "next/head";
 import NavBar from "./navbar";
 
-export default function Layout({ children }) {
+export default function Layout(props) {
     return (
         <div>
+            <Head>
+                <html lang="en"></html>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+            </Head>
             <NavBar />
-            {children}
+            {props.children}
             <footer className="footer">
                 <div className="container has-text-centered">
                     <p>

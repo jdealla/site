@@ -1,6 +1,6 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Autosuggest from "react-autosuggest";
-import { getPlayersData, getPlayerData, getPlayerBySuggestion } from "../lib/players";
+import { getPlayerData, getPlayerBySuggestion } from "../lib/players";
 
 import styles from "./searchplayers.module.css";
 

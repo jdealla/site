@@ -1,9 +1,8 @@
+import React, { useState } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import { useState } from "react";
 import { getPlayersData, sortPlayersByProp } from "../lib/players";
 
-import Layout from "../components/layout";
 const FilterSortBox = dynamic(import("../components/filtersortbox"));
 const PlayersList = dynamic(import("../components/playerslist"));
 
@@ -41,13 +40,10 @@ export default function Players({ allPlayers }) {
     const handlePlayers = (players) => setPlayers(players)
 
     return (
-        <Layout>
+        <>
             <Head>
-                <title>2KDB All Players List</title>
-                <html lang="en" />
-                <meta name="description" content="NBA 2K20 MyTeam Database players list" />
-                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-                <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+                <title>NBA 2K20 MyTeam All Players List | 2KDB</title>
+                <meta name="description" content="List of all players in NBA 2K20 MyTeam" />
             </Head>
             <div className="container">
                 <div className="columns">
@@ -92,12 +88,12 @@ export default function Players({ allPlayers }) {
                     </div>
                 </div>
             </div>
-        </Layout>
+        </>
     )
 }
 
 export async function getStaticProps() {
-    const allPlayers = await getPlayersData();
+    const allPlayers = getPlayersData();
 
     return {
         props: {

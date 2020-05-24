@@ -1,12 +1,12 @@
+import React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { getThemes, getPlayersByPropValue } from "../../../../lib/players";
+import { formatName, getThemes, getPlayersByPropValue } from "../../../../lib/players";
 
-import Layout from "../../../../components/layout";
-import UpdatesList from "../../../../components/updateslist";
+import PlayersCardView from "../../../../components/playerscardview";
 import Spinner from "../../../../components/spinner";
 
-export default function Collection({ players }) {
+export default function Collection({ collection, theme, players }) {
     const router = useRouter();
 
     if (router.isFallback) {
@@ -14,32 +14,32 @@ export default function Collection({ players }) {
     }
 
     return (
-        <Layout>
+        <>
             <Head>
-                <title>NBA 2K20 MyTeam Theme Collection Page</title>
-                <html lang="en"/>
-                <meta name="description" content={`NBA 2K20 MyTeam Theme Collection ${players[0].theme}`} />
-                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                <title>{`NBA 2K20 MyTeam ${theme} collection | 2KDB`}</title>
+                <meta name="description" content={`NBA 2K20 MyTeam Theme Collection ${theme}`} />
             </Head>
             <div className="container">
-                <p className="title is-size-5">{players[0].theme}</p>
-                
+                <p className="title is-size-5">{collection} / {theme}</p>
+                <PlayersCardView players={players} />
             </div>
-        </Layout>
+        </>
     )
 }
 
 export async function getStaticPaths() {
-    const paths = await getThemes();
+    const paths = getThemes();
 
     return {
         paths,
-        fallback: false
+        fallback: true
     }
 }
 
 export async function getStaticProps({ params }) {
-    let nameArray = params.themeName.split("-");
+    const collection = params.name;
+    const theme = params.themeName;
+    let nameArray = theme.split("-");
     let formatted = "";
 
     if (nameArray.length === 1) {
@@ -59,11 +59,16 @@ export async function getStaticProps({ params }) {
         }).join(" ");
     }
 
-    const players = await getPlayersByPropValue("theme", formatted);
+    const groupedBy = getPlayersByPropValue("theme", formatted);
+    let players = groupedBy.filter(player => player.collection.toLowerCase().replace(/ /g, "-") === collection);
+    players.sort((a, b) => a.overall > b.overall ? -1 : 1);
 
     return {
         props: {
+            collection,
+            theme,
             players
-        }
+        },
+        unstable_revalidate: 1
     }
 }

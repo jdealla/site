@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function ShotChart(props) {
     const { hotzones } = props
 

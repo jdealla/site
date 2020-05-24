@@ -20,12 +20,12 @@ $divider-margin-size: 10px;
 $box-padding: 5px;
 $navbar-item-hover-color: $blue;
 $tabs-link-active-color: $blue;
-
+$footer-background-color: white;
+$footer-padding: 1.2rem 1.5rem 1.2rem;	
 
 @media only screen and (max-width: 600px) {
     $gap: 16px;
 }
-
 
 @media only screen and (min-width: 760px) {
     .column {
@@ -177,7 +177,6 @@ $tabs-link-active-color: $blue;
 @import "../node_modules/bulma/sass/components/tabs.sass";
 @import "../node_modules/bulma/sass/components/card.sass";
 @import "../node_modules/bulma/sass/components/dropdown.sass";
-@import "../node_modules/bulma/sass/components/menu.sass";
 @import "../node_modules/bulma/sass/form/_all.sass";
 
 @import "@creativebulma/bulma-divider";

@@ -1,3 +1,4 @@
+import React from "react";
 import ImageCloud from "./imagecloud";
 
 export default function OverallImage(props) {
@@ -15,11 +16,15 @@ export default function OverallImage(props) {
             case (overall <= 89): tier = "ruby"; break;
             case (overall <= 92): tier = "amethyst"; break;
             case (overall <= 95): tier = "diamond"; break;
-            case (overall <= 98): tier = "pinkdiamond"; break;
-            case (overall == 99): tier = "galaxyopal"; break;
+            case (overall <= 98): tier = "pink_diamond"; break;
+            case (overall == 99): tier = "galaxy_opal"; break;
         }
 
-        return <ImageCloud src={`icons/icon_${tier}.png`} width="32" height="32" />
+        return (
+            <figure className="image is-32x32">
+                <ImageCloud src={`icons/icon_${tier}.png`} width="32" height="32" />
+            </figure>
+        )
     }
 
     return renderOverall();

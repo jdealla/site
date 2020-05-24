@@ -1,9 +1,9 @@
-import Head from "next/head";
+import React from "react";
 import { useRouter } from "next/router";
 import { groupedPlayersByProp } from "../lib/players";
 
-import Layout from "../components/layout";
 import UpdatesList from "../components/updateslist";
+import Head from "next/head";
 
 export default function Updated({ groupedByDate }) {
     const router = useRouter();
@@ -24,12 +24,10 @@ export default function Updated({ groupedByDate }) {
     }
 
     return (
-        <Layout>
+        <>
             <Head>
                 <title>NBA 2K20 MyTeam Updated Players | 2KDB</title>
-                <html lang="en"/>
                 <meta name="description" content="List of player cards updated in NBA 2K20 MyTeam" />
-                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <div className="container">
                 <p className="title is-size-4">MyTeam Card Updates</p>
@@ -41,12 +39,12 @@ export default function Updated({ groupedByDate }) {
                     </table>
                 </div>
             </div>
-        </Layout>
+        </>
     )
 }
 
 export async function getStaticProps() {
-    let groupedByDate = await groupedPlayersByProp("date");
+    let groupedByDate = groupedPlayersByProp("date");
 
     return {
         props: {

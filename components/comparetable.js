@@ -1,3 +1,4 @@
+import React from "react";
 import { formatName, levelToNum } from "../lib/players";
 
 export default function CompareTable(props) {
