@@ -19,7 +19,9 @@ export default function PlayersList(props) {
                     <div className="column is-one-fifth-mobile is-2-tablet">
                         <div className="columns is-mobile is-multiline">
                             <div className="column is-3-desktop is-4-mobile">
-                                <ImageCloud src={`players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`} width="0.1" />
+                                <figure className="image is-48x48">
+                                    <ImageCloud src={`players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`} width="0.1" />
+                                </figure>
                             </div>
                             <div className="column is-hidden-mobile is-size-7-mobile">
                                 {player.name}
