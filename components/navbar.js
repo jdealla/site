@@ -1,9 +1,8 @@
+import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import SearchBar from "../components/searchbar";
 
-export default function NavBar(props) {
-    const { index } = props;
+export default function NavBar() {
     const [view, setView] = useState(false);
     const router = useRouter();
 
@@ -11,7 +10,7 @@ export default function NavBar(props) {
     const handleClickPlayer = (playerId) => router.push(`/players/${playerId}`);
 
     return (
-        <nav className={`navbar is-black ${index ? "is-fixed-top" : ""}`} role="navigation" aria-label="main navigation">
+        <nav className="navbar is-black" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
                 <a className="navbar-item" onClick={() => router.push(`/`)}>
                     2KDB
@@ -26,13 +25,9 @@ export default function NavBar(props) {
 
             <div className={`navbar-menu is-transparent ${view ? "is-active" : ""}`}>
                 <div className="navbar-start">
-                    {index ? (
-                        <></>
-                    ) : (
-                        <div className="navbar-item">
-                            <SearchBar handleClick={handleClickPlayer} />
-                        </div>
-                    )}
+                    <div className="navbar-item">
+                        <SearchBar handleClick={handleClickPlayer} />
+                    </div>
                     <a className="navbar-item" href="/players" >Players</a>
                     <a className="navbar-item" href="/compare">Compare</a>
                     <a className="navbar-item" href="/updated">Updates</a>

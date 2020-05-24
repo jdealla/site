@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function SortIcon(props) {
     const { asc } = props;
 

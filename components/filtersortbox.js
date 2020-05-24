@@ -1,3 +1,4 @@
+import React from "react";
 import { getPropNames } from "../lib/players";
 
 import Dropdown from "./dropdown";

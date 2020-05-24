@@ -1,3 +1,4 @@
+import React from "react";
 import { getAllShoes } from "../lib/shoes";
 
 import ShotChart from "./shotchart";
@@ -43,7 +44,7 @@ export default function PlayerHeader(props) {
 					    <div style={{ padding: "0.75rem", paddingLeft: "1.5rem" }}>
 			                    <p className="title is-size-3 has-text-weight-bold has-text-white">{playerData.info.name}</p>
                                 <p className="subtitle is-paddingless is-size-6-desktop is-size-7-mobile has-text-weight-semibold"> 
-                                          <a className="has-text-warning" href={`/collection/${playerData.info.collection.toLowerCase().replace(/ /g, "-")}`}>{playerData.info.collection} </a>
+                                          <a className="has-text-warning" href={`/collections`}>{playerData.info.collection} </a>
                                           / 
                                           <a className="has-text-warning" href={`/collection/${playerData.info.collection.toLowerCase().replace(/ /g, "-")}/theme/${playerData.info.theme.toLowerCase().replace(/ /g, "-")}`}> {playerData.info.theme} </a>
                                 </p>

@@ -1,3 +1,4 @@
+import React from "react";
 import { formatName } from "../lib/players";
 import ImageCloud from "./imagecloud";
 
