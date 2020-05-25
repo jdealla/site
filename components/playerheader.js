@@ -28,12 +28,9 @@ export default function PlayerHeader(props) {
     )
 
     return (
-        <div className="columns is-mobile is-multiline is-player-card" style={{ justifyContent:"space-around" }}>
-            <div className="is-player-card is-hidden-mobile">
-                <img src="/playercard_bg.png" alt="player card bg" />
-            </div>
-            <div className="column is-7-mobile is-4-tablet is-one-third-desktop is-one-fifth-fullhd ">
-                <ImageCloud src={`players/${playerData.info.name.replace(/ /g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width={320} height={420} alt={playerData.info.name} />
+        <div className="columns is-mobile is-multiline is-player-card mobile-padding" style={{ justifyContent:"space-around" }}>
+            <div className="column is-7-mobile is-4-tablet is-one-fifth-desktop is-one-fifth-fullhd ">
+                <ImageCloud src={`players/${playerData.info.name.replace(/ /g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width={489} height={681} alt={playerData.info.name} />
             </div>
             <div className="column is-multiline is-centered is-full-mobile is-5-desktop is-5-tablet is-6-widescreen is-6-fullhd is-player-info">
 			    <div className="columns is-vcentered is-flex">
@@ -64,16 +61,16 @@ export default function PlayerHeader(props) {
                             <p className="title is-5 has-text-white">{playerData.info.def_overall}</p>
                         </div>
                         <div className="column is-one-quarter is-3-mobile">
-                            <p className="heading has-text-warning">Position</p>
-                            <p className="title is-5 has-text-white">{playerData.info.position}{playerData.info.secondary_position != null ? `/${playerData.info.secondary_position}` : ""}</p>
-                        </div>
-                        <div className="column is-one-quarter is-3-mobile">
                             <p className="heading has-text-warning">Height</p>
                             <p className="title is-5 has-text-white">{playerData.info.height}</p>
                         </div>
                         <div className="column is-one-quarter is-3-mobile">
                             <p className="heading has-text-warning">Weight</p>
                             <p className="title is-5 has-text-white">{playerData.info.weight} lbs</p>
+                        </div>
+						<div className="column is-one-quarter is-3-mobile">
+                            <p className="heading has-text-warning">Position</p>
+                            <p className="title is-5 has-text-white">{playerData.info.position}{playerData.info.secondary_position != null ? `/${playerData.info.secondary_position}` : ""}</p>
                         </div>
                         <div className="column is-one-quarter is-4-mobile">
                                 <p className="heading has-text-warning">Team</p>

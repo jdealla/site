@@ -115,7 +115,11 @@ export default function Player({ playerData }) {
                 <title>{`${playerData.info.name} MyTeam Player Page | 2KDB`}</title>
                 <meta name="description" content={`NBA 2K20 MyTeam Card Description of ${playerData.info.name}`} key={playerData.info.id} />
             </Head>
-            <div className="container is-fluid">
+			<div className="is-player-card-bg is-hidden-mobile">
+                <img src="/playercard_bg.png" alt="player card bg" />
+            </div>
+            <div className="container is-fluid mobile-nopadding">
+			
                 <PlayerHeader playerData={playerData} shoe={shoe} handleShoe={handleShoe} />
 
                 <div className="columns ">
@@ -130,7 +134,7 @@ export default function Player({ playerData }) {
                     </div>
                 </div>
 
-                <div className="columns is-multiline is-mobile is-gapless">
+                <div className="columns is-multiline is-mobile is-gapless mobile-padding">
                     {renderView()}
                 </div>
             </div>
