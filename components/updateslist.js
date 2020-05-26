@@ -16,14 +16,14 @@ export default function UpdatedList(props) {
         let newPlayers = playersToRender.map((player, i) => {
             return (
                 <td className="is-paddingless" key={i} onClick={() => router.push(`/players/${player.id}`)}>
-                    <ImageCloud src={`players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`} width={120} height={240} alt={player.name} />
+                    <ImageCloud src={`players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`} width={120} height={240} alt={player.name} style={{ height: "auto" }}/>
                 </td>
             )
         })
 
         if (players.length > amount) {
             let lastItem = (
-                <td key={amount + 1} >
+                <td className="is-size-7-mobile is-size-6-tablet" key={amount + 1} >
                     <a className="heading" href={`/updates/${date}`} > +{players.length - amount} more players </a>
                 </td>
             )
@@ -33,5 +33,5 @@ export default function UpdatedList(props) {
         return newPlayers;
     }
 
-    return renderPlayerCards()
+    return renderPlayerCards();
 }

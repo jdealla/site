@@ -13,8 +13,8 @@ export default function Updated({ groupedByDate }) {
         for(let [date, players] of Object.entries(groupedByDate)) {
             let dateObj = (
                 <tr key={i++}>
-                    <td className="title is-5 is-marginless" onClick={() => router.push(`/updates/${date}`)} style={{ cursor: "pointer", width: "12%" }}>{date}</td>
-                    <td className="has-text-weight-medium has-text-success">+{players.length}</td>
+                    <td className="title is-size-7-mobile is-size-6-tablet is-marginless" onClick={() => router.push(`/updates/${date}`)} style={{ cursor: "pointer", width: "12%" }}>{date}</td>
+                    <td className="is-size-7-mobile is-size-6-tablet has-text-weight-medium has-text-success">+{players.length}</td>
                     <UpdatesList date={date} players={players} amount={10} />
                 </tr>
             )
@@ -30,13 +30,24 @@ export default function Updated({ groupedByDate }) {
                 <meta name="description" content="List of player cards updated in NBA 2K20 MyTeam" />
             </Head>
             <div className="container">
-                <p className="title is-size-4">MyTeam Card Updates</p>
-                <div className="box">
-                    <table className="table is-fullwidth is-scrollable-mobile">
+                <section className="hero is-bold">
+                    <div className="hero-body" style={{ padding: "1.2rem" }}>
+                        <div className="container">
+                            <h1 className="title is-size-4">
+                                MyTeam Card Updates
+                            </h1>
+                        </div>
+                    </div>
+                </section>
+
+                <div className="table-container">
+                    <table className="table">
                         <tbody>
                             {renderUpdates()}
                         </tbody>
                     </table>
+                </div>
+                <div className="box">
                 </div>
             </div>
         </>

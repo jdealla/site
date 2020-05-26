@@ -115,9 +115,7 @@ export default function Compare() {
                     <button className="delete" aria-label="delete" onClick={() => handlePlayer(playerId, null)}></button>
                 </div>
                 <div className="card-image">
-                    <figure className="image is-3by4">
-                        <ImageCloud src={`players/${playerData.info.name.replace(/ /g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width={240} height={350} alt={playerData.info.name} />
-                    </figure>
+                    <ImageCloud src={`players/${playerData.info.name.replace(/ /g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width={240} height={350} alt={playerData.info.name} />
                 </div>
             </div>
         )
@@ -167,7 +165,7 @@ export default function Compare() {
                             <li className={view === "stats" ? "is-active" : ""} onClick={() => setView("stats")}><a>Stats</a></li>
                             <li className={view === "badges" ? "is-active" : ""} onClick={() => setView("badges")}><a>Badges</a></li>
                             <li className={view === "tendencies" ? "is-active" : ""} onClick={() => setView("tendencies")}><a>Tendencies</a></li>
-                            <li className={view === "animations" ? "is-active" : ""} onClick={() => setView("animations")}><a>Signature/Animations</a></li>
+                            <li className={view === "animations" ? "is-active" : ""} onClick={() => setView("animations")}><a>Animations</a></li>
                         </ul>
                     </div>
                 </div>

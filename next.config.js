@@ -8,6 +8,7 @@ module.exports = {
                 header: true,
                 skipEmptyLines: true,
                 fastMode: true,
+                worker: true,
             }
         })
         return config;
