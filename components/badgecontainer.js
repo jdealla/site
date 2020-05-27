@@ -1,5 +1,5 @@
 import React from "react";
-import { formatName } from "../lib/players";
+import { formatName } from "../lib/helpers";
 import ImageCloud from "./imagecloud";
 
 export default function BadgesContainer(props) {

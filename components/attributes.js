@@ -1,5 +1,5 @@
 import React from "react";
-import { formatName } from "../lib/players";
+import { formatName } from "../lib/helpers";
 
 export default function Attributes(props) {
     const { attributes, attrName, bonus, reverse, } = props;

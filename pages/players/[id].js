@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import { useState, Fragment } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
@@ -143,7 +143,7 @@ export default function Player({ playerData }) {
 }
 
 export async function getStaticPaths() {
-    const paths = await getPlayersIds()
+    const paths = getPlayersIds()
     return {
         paths,
         fallback: true

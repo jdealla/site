@@ -5,10 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
     "@creativebulma/bulma-divider": "^1.1.0",
+    "@next/bundle-analyzer": "^9.4.2",
     "next": "9.4.0",
     "next-compose-plugins": "^2.2.0",
     "react": "16.13.1",
