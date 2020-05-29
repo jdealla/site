@@ -1,5 +1,4 @@
 import React from "react";
-import { getAllShoes } from "../lib/shoes";
 
 import ShotChart from "./shotchart";
 import Dropdown from "./dropdown";
@@ -18,19 +17,19 @@ export default function PlayerHeader(props) {
         })
     }
 
-    const shoeButton = (
-        <button className="button is-dark is-small is-centered">
-            <span className="icon">
-                <ImageCloud src="icons/icon_shoes.png" width={100} height={100} alt="shoe icon" />
-            </span>
-            <span>Add Diamond Shoe</span>
-        </button>
-    )
+    // const shoeButton = (
+    //     <button className="button is-dark is-small is-centered">
+    //         <span className="icon">
+    //             <ImageCloud src="icons/icon_shoes.png" width={100} />
+    //         </span>
+    //         <span>Add Diamond Shoe</span>
+    //     </button>
+    // )
 
     return (
         <div className="columns is-mobile is-multiline is-player-card mobile-padding" style={{ justifyContent:"space-around" }}>
             <div className="column is-7-mobile is-4-tablet is-one-fifth-desktop is-one-fifth-fullhd ">
-                <ImageCloud src={`players/${playerData.info.name.replace(/ /g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width={489} height={681} alt={playerData.info.name} />
+                <ImageCloud src={`players/${playerData.info.name.replace(/ /g, "_").toLowerCase()}_${playerData.info.pid}.jpg`} width={489} />
             </div>
             <div className="column is-multiline is-centered is-full-mobile is-5-desktop is-5-tablet is-6-widescreen is-6-fullhd is-player-info">
 			    <div className="columns is-vcentered is-flex">
@@ -146,7 +145,7 @@ export default function PlayerHeader(props) {
                 <div className="container">
                     <div className="columns is-left">
                         <div className="column is-half">
-                            {
+                            {/* {
                                 (shoe == undefined || shoe == null) ? (
                                     <Dropdown hover={true} items={renderShoeList()} customButton={shoeButton} />
                                 ) : (
@@ -162,7 +161,7 @@ export default function PlayerHeader(props) {
                                         </div>
                                     </article>
                                 )
-                            }
+                            } */}
                         </div>
                     </div>
                 </div>
@@ -176,19 +175,19 @@ export default function PlayerHeader(props) {
                 <div className="level ">   
                     <div className="level-item is-size-5 has-text-centered" style={{ justifyContent:"space-evenly" }}>
                         <figure className="image is-64x64">
-                            <ImageCloud src="icons/icon_badge_bronze.png" height={74} width={64} alt="Bronze Badge" styles={{ height: "auto" }} />
+                            <ImageCloud src="icons/icon_badge_bronze.png" width={64} />
                             <p className="is-overlay total_badges_style">{playerData.badges.totalBadges.bronzeBadges}</p>
                         </figure>
                         <figure className="image is-64x64">
-                            <ImageCloud src="icons/icon_badge_silver.png" height={74} width={64} alt="Silver Badge" styles={{ height: "auto" }} />
+                            <ImageCloud src="icons/icon_badge_silver.png" width={64} />
                             <p className="is-overlay total_badges_style">{playerData.badges.totalBadges.silverBadges}</p>
                         </figure>
                         <figure className="image is-64x64">
-                            <ImageCloud src="icons/icon_badge_gold.png" height={74} width={64} alt="Gold Badge" styles={{ height: "auto" }} />
+                            <ImageCloud src="icons/icon_badge_gold.png" width={64} />
                             <p className="is-overlay total_badges_style">{playerData.badges.totalBadges.goldBadges}</p>
                         </figure>
                         <figure className="image is-64x64">
-                            <ImageCloud src="icons/icon_badge_hof.png" height={74} width={64} alt="Hall Of Fame Badge" styles={{ height: "auto" }} />
+                            <ImageCloud src="icons/icon_badge_hof.png" width={64} />
                             <p className="is-overlay total_badges_style">{playerData.badges.totalBadges.hofBadges}</p>
                         </figure>
                     </div>

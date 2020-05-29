@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Autosuggest from "react-autosuggest";
-import { getPlayerData, getPlayerBySuggestion } from "../lib/players";
 
 import styles from "./searchplayers.module.css";
 
@@ -11,11 +10,11 @@ export default function SearchPlayers(props) {
 
     const handleClick = (playerId) => handlePlayer(playerInfo, getPlayerData(playerId));
     const onChange = (event, { newValue, method }) => setValue(newValue);
-    const onSuggestionsFetchRequested = ({ value }) => setPlayers(getPlayerBySuggestion(value));
+    const onSuggestionsFetchRequested = ({ value }) => setPlayers();
     const onSuggestionsClearRequested = () => setPlayers([]);
 
     const getSuggestionValue = (suggestion) => {
-        handlePlayer(playerInfo, getPlayerData(suggestion.id));
+        handlePlayer(playerInfo);
         return suggestion.name;
     }
 

@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import Head from "next/head";
 
-import { groupedPlayersByProp } from "../lib/players";
+import { getValuesFromProp } from "../lib/players";
 import ImageCloud from "../components/imagecloud";
 
-export default function Collections({ groupedByCollection }) {
+export default function Collections({ collections }) {
     const [view, setView] = useState("20 Current");
 
     const renderCollection = () => {
         let themes = [], i = 0;
-        for(let [collection, players] of Object.entries(groupedByCollection)) {
-            if (collection === view) {
+        for(let c of collections) {
+            if (c === view) {
                 let groupedBy = players.reduce((h, obj) => Object.assign(h, { [obj["theme"]]: ( h[obj["theme"]] || [] ).concat(obj) }), {});
 
                 let sorted = {};
@@ -76,11 +76,11 @@ export default function Collections({ groupedByCollection }) {
 }
 
 export async function getStaticProps() {
-    let groupedByCollection = groupedPlayersByProp("collection");
+    let collections = await getValuesFromProp("collection");
 
     return {
         props: {
-            groupedByCollection
+            collections
         }
     }
 }

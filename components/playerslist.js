@@ -10,17 +10,17 @@ export default function PlayersList(props) {
 
     const handleClick = (e, playerId) => {
         e.preventDefault();
-        router.push(`/players/${playerId}`)
+        router.push(`/player/${playerId}`)
     }
     return players.map(player => {
         return (
             <Fragment key={player.id}>
-                <div className="columns is-mobile is-gapless is-marginless" id="player-link" onClick={(e) => handleClick(e, player.id)}>
+                <div className="columns is-mobile is-gapless is-marginless" id="player-link" onClick={(e) => handleClick(e, player.pid)}>
                     <div className="column is-one-fifth-mobile is-2-tablet">
                         <div className="columns is-mobile is-multiline">
                             <div className="column is-3-desktop is-4-mobile">
                                 <figure className="image is-48x48">
-                                    <ImageCloud src={`players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`} width={48} height={48} alt={player.name} />
+                                    <ImageCloud src={`players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.pid}.jpg`} width={48} />
                                 </figure>
                             </div>
                             <div className="column is-hidden-mobile is-size-7-mobile">

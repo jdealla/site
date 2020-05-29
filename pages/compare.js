@@ -125,7 +125,8 @@ export default function Compare() {
         switch(playerNum) {
             case 1: {
                 if (players.player1 == null) {
-                    return <SearchPlayers handlePlayer={handlePlayer} playerInfo="player1" />
+                    return 
+                    // <SearchPlayers handlePlayer={handlePlayer} playerInfo="player1" />
                 } else {
                     let playerData = players.player1
 
@@ -134,7 +135,8 @@ export default function Compare() {
             }
             case 2: {
                 if (players.player2 == null) {
-                    return <SearchPlayers handlePlayer={handlePlayer} playerInfo="player2" />
+                    return 
+                    // <SearchPlayers handlePlayer={handlePlayer} playerInfo="player2" />
                 } else {
                     let playerData = players.player2
                     

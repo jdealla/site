@@ -21,7 +21,7 @@ export default function Home() {
             <p className="title has-text-white">
               NBA2K MyTeam Database
             </p>
-            <SearchBar handleClick={handleClick} />
+            {/* <SearchBar handleClick={handleClick} /> */}
           </div>
         </div>
       </section>

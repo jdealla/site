@@ -1,6 +1,6 @@
 import React from "react";
-import { formatName } from "../lib/helpers";
 import ImageCloud from "./imagecloud";
+import { formatName } from "../lib/helpers";
 
 export default function BadgesContainer(props) {
     const { badges } = props;

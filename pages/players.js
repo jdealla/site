@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import { getPlayersData, sortPlayersByProp } from "../lib/players";
+import { getPlayersByPage } from "../lib/players";
 
 const FilterSortBox = dynamic(import("../components/filtersortbox"));
 const PlayersList = dynamic(import("../components/playerslist"));
@@ -24,19 +24,17 @@ export default function Players({ allPlayers }) {
         }
     }
     const handlePerPage = (amount) => setPerPage(amount);
-    const handleSorted = (prop) => {
-        let propName = prop.toLowerCase().replace(/ /g, "_");
-        setSortedBy({ ...sortedBy, name: prop, propName: propName })
-        setPlayers(sortPlayersByProp(propName))
-    }
-    const handleSortDirection = () => {
-        let propName = sortedBy.propName;
-        if (sortedBy.asc) {
-            propName = "-" + propName;
-        }
-        setSortedBy({ ...sortedBy, asc: !sortedBy.asc })
-        setPlayers(sortPlayersByProp(propName))
-    }
+    // const handleSorted = (prop) => {
+    //     let propName = prop.toLowerCase().replace(/ /g, "_");
+    //     setSortedBy({ ...sortedBy, name: prop, propName: propName })
+    // }
+    // const handleSortDirection = () => {
+    //     let propName = sortedBy.propName;
+    //     if (sortedBy.asc) {
+    //         propName = "-" + propName;
+    //     }
+    //     setSortedBy({ ...sortedBy, asc: !sortedBy.asc })
+    // }
     const handlePlayers = (players) => setPlayers(players)
 
     return (
@@ -48,7 +46,7 @@ export default function Players({ allPlayers }) {
             <div className="container">
                 <div className="columns">
                     <div className="column is-full">
-                        <FilterSortBox handleSorted={handleSorted} handleSortDirection={handleSortDirection} handlePerPage={handlePerPage} sortedBy={sortedBy} />
+                        {/* <FilterSortBox handleSorted={handleSorted} handleSortDirection={handleSortDirection} handlePerPage={handlePerPage} sortedBy={sortedBy} /> */}
                     </div>
                 </div>
                 <div className="box">
@@ -93,8 +91,12 @@ export default function Players({ allPlayers }) {
 }
 
 export async function getStaticProps() {
-    const allPlayers = getPlayersData();
+    const allPlayers = await getPlayersByPage(0);
 
+    for(let i = 0; i < allPlayers.length; i++) {
+        delete allPlayers[i]["@metadata"]
+    }
+    
     return {
         props: {
             allPlayers

@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { formatName, getThemes, getPlayersByPropValue } from "../../../../lib/players";
+import { getThemes, getValuesFromProp } from "../../../../lib/players";
 
 import PlayersCardView from "../../../../components/playerscardview";
 import Spinner from "../../../../components/spinner";
@@ -28,7 +28,7 @@ export default function Collection({ collection, theme, players }) {
 }
 
 export async function getStaticPaths() {
-    const paths = getThemes();
+    const paths = await getThemes();
 
     return {
         paths,
@@ -39,27 +39,8 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     const collection = params.name;
     const theme = params.themeName;
-    let nameArray = theme.split("-");
-    let formatted = "";
 
-    if (nameArray.length === 1) {
-        if (nameArray[0] === "goat")
-            formatted = nameArray[0].toUpperCase();
-        else
-            formatted = nameArray[0].charAt(0).toUpperCase() + nameArray[0].substring(1);
-    } else {
-        formatted = nameArray.map(word => {
-            let result = "";
-            if (word === "2k20" || word === "mtu")
-                result = word.toUpperCase();
-            else
-                result = word.charAt(0).toUpperCase() + word.substring(1);
-
-            return result 
-        }).join(" ");
-    }
-
-    const groupedBy = getPlayersByPropValue("theme", formatted);
+    const groupedBy = await getValuesFromProp("theme", theme);
     let players = groupedBy.filter(player => player.collection.toLowerCase().replace(/ /g, "-") === collection);
     players.sort((a, b) => a.overall > b.overall ? -1 : 1);
 
