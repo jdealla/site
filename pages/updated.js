@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { getValuesFromProp } from "../lib/players";
+import { getPlayersByDates } from "../lib/players";
 
 import UpdatesList from "../components/updateslist";
 import Head from "next/head";
@@ -10,16 +10,16 @@ export default function Updated({ groupedByDate }) {
 
     const renderUpdates = () => {
         let updates = [], i = 0;
-        // for(let [date, players] of Object.entries(groupedByDate)) {
-        //     let dateObj = (
-        //         <tr key={i++}>
-        //             <td className="title is-size-7-mobile is-size-6-tablet is-marginless" onClick={() => router.push(`/updates/${date}`)} style={{ cursor: "pointer", width: "12%" }}>{date}</td>
-        //             <td className="is-size-7-mobile is-size-6-tablet has-text-weight-medium has-text-success">+{players.length}</td>
-        //             <UpdatesList date={date} players={players} amount={10} />
-        //         </tr>
-        //     )
-        //     updates.push(dateObj);
-        // }
+        for(let [date, players] of Object.entries(groupedByDate)) {
+            let dateObj = (
+                <tr key={i++}>
+                    <td className="title is-size-7-mobile is-size-6-tablet is-marginless" onClick={() => router.push(`/updates/${date}`)} style={{ cursor: "pointer", width: "12%" }}>{date}</td>
+                    <td className="is-size-7-mobile is-size-6-tablet has-text-weight-medium has-text-success">+{players.length}</td>
+                    <UpdatesList date={date} players={players} amount={10} />
+                </tr>
+            )
+            updates.push(dateObj);
+        }
         return updates;
     }
 
@@ -40,14 +40,14 @@ export default function Updated({ groupedByDate }) {
                     </div>
                 </section>
 
-                <div className="table-container">
-                    <table className="table">
-                        <tbody>
-                            {renderUpdates()}
-                        </tbody>
-                    </table>
-                </div>
                 <div className="box">
+                    <div className="table-container">
+                        <table className="table">
+                            <tbody>
+                                {renderUpdates()}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </>
@@ -55,9 +55,7 @@ export default function Updated({ groupedByDate }) {
 }
 
 export async function getStaticProps() {
-    let groupedByDate = await getValuesFromProp("date");
-
-    console.log(groupedByDate);
+    let groupedByDate = await getPlayersByDates();
     
     return {
         props: {

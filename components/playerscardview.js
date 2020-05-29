@@ -10,7 +10,7 @@ export default function PlayersCardView(props) {
                 <div className="column is-2-desktop is-half-mobile" key={i}>
                     <figure className="image is-3by4">
                         <a href={`/players/${player.id}`}>
-                            <ImageCloud src={`players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`} width={280} />
+                            <ImageCloud src={`players/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} width={280} />
                         </a>
                     </figure>
                 </div>

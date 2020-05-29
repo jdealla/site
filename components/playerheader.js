@@ -29,7 +29,7 @@ export default function PlayerHeader(props) {
     return (
         <div className="columns is-mobile is-multiline is-player-card mobile-padding" style={{ justifyContent:"space-around" }}>
             <div className="column is-7-mobile is-4-tablet is-one-fifth-desktop is-one-fifth-fullhd ">
-                <ImageCloud src={`players/${playerData.info.name.replace(/ /g, "_").toLowerCase()}_${playerData.info.pid}.jpg`} width={489} />
+                <ImageCloud src={`players/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width={489} />
             </div>
             <div className="column is-multiline is-centered is-full-mobile is-5-desktop is-5-tablet is-6-widescreen is-6-fullhd is-player-info">
 			    <div className="columns is-vcentered is-flex">

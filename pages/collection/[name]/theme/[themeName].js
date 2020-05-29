@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { getThemes, getValuesFromProp } from "../../../../lib/players";
+import { getThemes, getPlayersByTheme } from "../../../../lib/players";
 
 import PlayersCardView from "../../../../components/playerscardview";
 import Spinner from "../../../../components/spinner";
@@ -40,8 +40,8 @@ export async function getStaticProps({ params }) {
     const collection = params.name;
     const theme = params.themeName;
 
-    const groupedBy = await getValuesFromProp("theme", theme);
-    let players = groupedBy.filter(player => player.collection.toLowerCase().replace(/ /g, "-") === collection);
+    const players = await getPlayersByTheme(theme, collection);
+    
     players.sort((a, b) => a.overall > b.overall ? -1 : 1);
 
     return {
