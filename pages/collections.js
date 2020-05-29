@@ -9,11 +9,11 @@ export default function Collections({ collections }) {
 
     const renderCollection = () => {
         let themes = [], i = 0;
-        for(let c of collections) {
-            if (c === view) {
+        // for(let c in collections) {
+        //     if (c === view) {
                 
-            }
-        }
+        //     }
+        // }
         // let themes = [], i = 0;
         // for(let c of collections) {
         //     if (c === view) {
