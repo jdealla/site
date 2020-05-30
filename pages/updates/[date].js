@@ -10,7 +10,7 @@ export default function UpdatePage({ date, players }) {
     const router = useRouter();
 
     if (router.isFallback) {
-        return <Spinner />
+        return <h1>Loading...</h1>
     }
 
     return (
