@@ -1,9 +1,9 @@
 import React, { useState, Fragment } from "react";
+import Head from "next/head";
 
-import SearchPlayers from "../components/searchplayers";
+import SearchBar from "../components/searchbar";
 import CompareTable from "../components/comparetable";
 import ImageCloud from "../components/imagecloud";
-import Head from "next/head";
 
 export default function Compare() {
     const [players, setPlayers] = useState({ player1: null, player2: null, });
@@ -126,7 +126,7 @@ export default function Compare() {
             case 1: {
                 if (players.player1 == null) {
                     return 
-                    // <SearchPlayers handlePlayer={handlePlayer} playerInfo="player1" />
+                    // <SearchBar handleClick={handlePlayer} playerInfo="player1" />
                 } else {
                     let playerData = players.player1
 

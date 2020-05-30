@@ -22,6 +22,7 @@ export default function Players({ allPlayers, startPage, totalPlayers }) {
         } else {
             setPage(page + 1);
         }
+        
         fetchPlayers();
     }
 
