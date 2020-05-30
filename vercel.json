@@ -1,0 +1,6 @@
+{
+    "env": {
+      "RAVENDB_CERT": "@ravendb-cert",
+      "RAVENDB_RSA_KEY": "@ravendb-rsa-key"
+    }
+}
