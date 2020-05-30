@@ -2,7 +2,8 @@ import { useState, Fragment } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { getPlayersIds, getPlayerData } from "../../lib/players";
+import { getPlayersIds } from "../../lib/players";
+import { getPlayerData } from "../../pages/api/player/[id]";
 
 import BadgeContainer from "../../components/badgecontainer";
 import Attributes from "../../components/attributes";
@@ -152,11 +153,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    console.log("we refreshing?")
-    console.log(params);
     const playerData = await getPlayerData(params.id)
-
-    console.log(playerData);
 
     return {
         props: {
