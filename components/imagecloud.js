@@ -10,6 +10,7 @@ export default function ImageCloud(props) {
         publicId={src}
         width={width}
         crop="limit"
+        secure="true"
       />
   )
 }
