@@ -154,6 +154,8 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     const playerData = await getPlayerData(params.id)
 
+    console.log(playerData);
+    
     return {
         props: {
             playerData,
