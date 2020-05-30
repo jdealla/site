@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { getDates, getPlayersByDate } from "../../lib/players";
 
 import PlayersCardView from "../../components/playerscardview";
-import Spinner from "../../components/spinner";
 
 export default function UpdatePage({ date, players }) {
     const router = useRouter();

@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { getThemes, getPlayersByTheme } from "../../../../lib/players";
 
 import PlayersCardView from "../../../../components/playerscardview";
-import Spinner from "../../../../components/spinner";
 
 export default function Collection({ collection, theme, players }) {
     const router = useRouter();
