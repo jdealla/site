@@ -158,6 +158,5 @@ export async function getStaticProps({ params }) {
         props: {
             playerData,
         },
-        unstable_revalidate: 1
     }
 }
