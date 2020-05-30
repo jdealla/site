@@ -221,6 +221,6 @@ export async function getPlayerData(id) {
 export default async (req, res) => {
     const { query: { id } } = req;
 
-    const myData = await getPlayerData(id)
-    res.json(myData)
+    const data = await getPlayerData(id)
+    res.status(200).json(data)
 }

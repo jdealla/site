@@ -5,13 +5,14 @@ import OverallImage from "./overallimage";
 import ImageCloud from "./imagecloud";
 
 export default function PlayersList(props) {
-    const { players, perPage, page, sortedBy } = props;
+    const { players } = props;
     const router = useRouter()
 
     const handleClick = (e, playerId) => {
         e.preventDefault();
         router.push(`/player/${playerId}`)
     }
+
     return players.map(player => {
         return (
             <Fragment key={player.id}>
@@ -51,12 +52,12 @@ export default function PlayersList(props) {
                             <span className="tag Bronze">{player.badges.totalBadges.bronzeBadges}</span>
                         </div>
                     </div> */}
-                    <div className={`column is-2-tablet ${sortedBy == "" ? "is-hidden" : "has-text-weight-semibold"}`}>
+                    {/* <div className={`column is-2-tablet ${sortedBy == "" ? "is-hidden" : "has-text-weight-semibold"}`}>
                         {player[sortedBy.propName]}
-                    </div>
+                    </div> */}
                 </div>
                 <div className="divider is-right"></div>
             </Fragment>
         )
-    }).slice((page * perPage) - perPage, page * perPage);
+    })
 }

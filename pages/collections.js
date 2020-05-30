@@ -8,12 +8,26 @@ export default function Collections({ collections }) {
     const [view, setView] = useState("20 Current");
 
     const renderCollection = () => {
-        let themes = [], i = 0;
-        // for(let c in collections) {
-        //     if (c === view) {
-                
-        //     }
-        // }
+        for(let [collection, themes] of Object.entries(collections)) {
+            if (collection === view) {
+                return themes.map((obj, i) => {
+                    let name = obj.theme;
+                    if (name.includes("Rewards") && !name.includes("Collector") && !name.includes("Prime") && 
+                        !name.includes("Unlimited") && !name.includes("Spotlight")) {
+                        name = name.replace("Rewards", "").trim();
+                    } 
+                    return (
+                        <div className="column is-2-desktop is-3-mobile" key={i++}>
+                            <figure className="image is-96x96">
+                                <a className="title is-4" href={`/collection/${collection.toLowerCase().replace(/ /g, "-")}/theme/${obj.theme.toLowerCase().replace(/ /g, "-")}`}>
+                                    <ImageCloud src={`icons/icon_${name.toLowerCase().replace(/ /g, "_")}.png`} width="96" />
+                                </a>
+                            </figure>
+                        </div>
+                    )
+                })
+            }
+        }
         // let themes = [], i = 0;
         // for(let c of collections) {
         //     if (c === view) {
@@ -27,21 +41,6 @@ export default function Collections({ collections }) {
         //         })
                 
         //         for(let theme of Object.keys(sorted)) {
-        //             let name = theme;
-        //             if (theme.includes("Rewards") && !theme.includes("Collector") && !theme.includes("Prime") && !theme.includes("Unlimited") && !theme.includes("Spotlight")) {
-        //                 name = theme.replace("Rewards", "").trim();
-        //             } 
-
-        //             let themeObj = (
-        //                 <div className="column is-2-desktop is-3-mobile" key={i++}>
-        //                     <figure className="image is-96x96">
-        //                         <a className="title is-4" href={`/collection/${collection.toLowerCase().replace(/ /g, "-")}/theme/${theme.toLowerCase().replace(/ /g, "-")}`}>
-        //                             <ImageCloud src={`icons/icon_${name.toLowerCase().replace(/ /g, "_")}.png`} width="96" />
-        //                         </a>
-        //                     </figure>
-        //                 </div>
-        //             )
-        //             themes.push(themeObj);
         //         }
         //     }
         // }

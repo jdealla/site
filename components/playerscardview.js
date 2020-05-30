@@ -7,7 +7,7 @@ export default function PlayersCardView(props) {
     const renderPlayers = () => {
         return players.map((player, i) => {
             return (
-                <div className="column is-2-desktop is-half-mobile" key={i}>
+                <div className="column is-1-desktop is-2-widescreen is-half-mobile" key={i}>
                     <figure className="image is-3by4">
                         <a href={`/player/${player.id}`}>
                             <ImageCloud src={`players/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} width={280} />
@@ -19,7 +19,7 @@ export default function PlayersCardView(props) {
     }
 
     return (
-        <div className="box is-flex">
+        <div className="box">
             <div className="columns is-multiline is-mobile">
                 {renderPlayers()}
             </div>

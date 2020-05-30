@@ -11,6 +11,8 @@ export default function Updated({ groupedByDate }) {
     const renderUpdates = () => {
         let updates = [], i = 0;
         for(let [date, players] of Object.entries(groupedByDate)) {
+            players.sort((a, b) => (a.overall > b.overall) ? 1 : (a.overall === b.overall) ? ((a.name > b.name) ? 1 : -1) : -1 )
+
             let dateObj = (
                 <tr key={i++}>
                     <td className="title is-size-7-mobile is-size-6-tablet is-marginless" onClick={() => router.push(`/updates/${date}`)} style={{ cursor: "pointer", width: "12%" }}>{date}</td>

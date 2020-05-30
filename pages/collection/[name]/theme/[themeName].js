@@ -13,6 +13,17 @@ export default function Collection({ collection, theme, players }) {
         return <Spinner />
     }
 
+    const formatThemeName = (name) => {
+        let formatted = name.split("-").map(word => {
+            if (word.includes("ii"))
+                return word.toUpperCase();
+
+            return word.charAt(0).toUpperCase() + word.slice(1)
+        }).join(" ")
+
+        return formatted;
+    }
+
     return (
         <>
             <Head>
@@ -20,7 +31,16 @@ export default function Collection({ collection, theme, players }) {
                 <meta name="description" content={`NBA 2K20 MyTeam Theme Collection ${theme}`} />
             </Head>
             <div className="container">
-                <p className="title is-size-5">{collection} / {theme}</p>
+                <section className="hero is-bold">
+                    <div className="hero-body" style={{ padding: "1.2rem" }}>
+                        <div className="container">
+                            <h1 className="title is-size-5">
+                                {collection.charAt(0).toUpperCase() + collection.slice(1)} / {formatThemeName(theme)}
+                            </h1>
+                        </div>
+                    </div>
+                </section>
+
                 <PlayersCardView players={players} />
             </div>
         </>
@@ -40,9 +60,7 @@ export async function getStaticProps({ params }) {
     const collection = params.name;
     const theme = params.themeName;
 
-    const players = await getPlayersByTheme(theme, collection);
-    
-    players.sort((a, b) => a.overall > b.overall ? -1 : 1);
+    const players = await getPlayersByTheme(theme);
 
     return {
         props: {

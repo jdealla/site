@@ -8,6 +8,7 @@ export default function UpdatedList(props) {
 
     const renderPlayerCards = () => {
         let playersToRender = players;
+        playersToRender.sort((a, b) => a.name > b.name ? 1 : -1);
 
         if (players.length > amount) {
             playersToRender = players.slice(0, amount);
