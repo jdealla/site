@@ -152,10 +152,12 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
+    console.log("we refreshing?")
+    console.log(params);
     const playerData = await getPlayerData(params.id)
 
     console.log(playerData);
-    
+
     return {
         props: {
             playerData,
