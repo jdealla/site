@@ -87,6 +87,7 @@ export async function getStaticProps() {
     return {
         props: {
             collections
-        }
+        },
+        unstable_revalidate: 1
     }
 }

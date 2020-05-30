@@ -60,6 +60,7 @@ export async function getStaticProps() {
     return {
         props: {
             groupedByDate
-        }
+        },
+        unstable_revalidate: 1
     }
 }
