@@ -112,6 +112,6 @@ export async function getStaticProps() {
         props: {
             allPlayers,
         },
-        
+        unstable_revalidate: 1
     }
 }

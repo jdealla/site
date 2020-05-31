@@ -7,7 +7,7 @@ export default function NavBar() {
     const router = useRouter();
 
     const handleClick = () => setView(!view);
-    const handleClickPlayer = (playerId) => router.push(`/players/${playerId}`);
+    const handleClickPlayer = (playerId) => router.push(`/player/${playerId}`);
 
     return (
         <nav className="navbar is-black" role="navigation" aria-label="main navigation">
@@ -30,7 +30,7 @@ export default function NavBar() {
                     </div>
                     <a className="navbar-item" href="/players" >Players</a>
                     <a className="navbar-item" href="/compare">Compare</a>
-                    <a className="navbar-item" href="/updated">Updates</a>
+                    <a className="navbar-item" href="/updates">Updates</a>
                     <a className="navbar-item" href="/collections">Collections</a>
                 </div>
             </div>
