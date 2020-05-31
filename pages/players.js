@@ -1,24 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import { getPlayersByPage, getTotalPlayerCount } from "../lib/players";
+import { getAllPlayersWithAllStats } from "../lib/players";
 
-const FilterSortBox = dynamic(import("../components/filtersortbox"));
+// const FilterSortBox = dynamic(import("../components/filtersortbox"));
 const PlayersList = dynamic(import("../components/playerslist"));
 
-export default function Players({ allPlayers, startPage, totalPlayers }) {
-    const [page, setPage] = useState(startPage)
+export default function Players({ allPlayers }) {
+    const [page, setPage] = useState(0)
     const [perPage, setPerPage] = useState(15);
     const [players, setPlayers] = useState(allPlayers);
     const [sortedBy, setSortedBy] = useState({ name: "", asc: true, propName: "" });
 
     const handlePage = (dir) => {
         if (dir === "prev") {
-            if (page === 0) {
-                // cant go back my boy
-            } else {
+            if (page > 0)
                 setPage(page - 1);
-            }
         } else {
             setPage(page + 1);
         }
@@ -88,14 +85,14 @@ export default function Players({ allPlayers, startPage, totalPlayers }) {
                         </div>
                     </div>
                     <div className="divider is-right"></div>
-                    <PlayersList players={players} />
+                    <PlayersList players={players} perPage={perPage} page={page} />
                 </div>
 
                 <div className="columns">
                     <div className="column is-full">
                         <nav className="pagination is-centered" role="navigation" aria-label="pagination">
                             <a className="pagination-previous" onClick={() => handlePage("prev")} disabled={page <= 1}>Previous</a>
-                            <a className="pagination-next" onClick={() => handlePage("next")} disabled={page * 15 >= totalPlayers}>Next page</a>
+                            <a className="pagination-next" onClick={() => handlePage("next")} disabled={page * perPage >= allPlayers.length}>Next page</a>
                         </nav>
                     </div>
                 </div>
@@ -105,8 +102,7 @@ export default function Players({ allPlayers, startPage, totalPlayers }) {
 }
 
 export async function getStaticProps() {
-    const allPlayers = await getPlayersByPage(0);
-    const totalPlayers = await getTotalPlayerCount();
+    const allPlayers = await getAllPlayersWithAllStats();
 
     for(let i = 0; i < allPlayers.length; i++) {
         delete allPlayers[i]["@metadata"]
@@ -115,8 +111,6 @@ export async function getStaticProps() {
     return {
         props: {
             allPlayers,
-            startPage: 0,
-            totalPlayers
         },
         
     }

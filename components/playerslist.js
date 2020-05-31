@@ -5,7 +5,7 @@ import OverallImage from "./overallimage";
 import ImageCloud from "./imagecloud";
 
 export default function PlayersList(props) {
-    const { players } = props;
+    const { players, perPage, page } = props;
     const router = useRouter()
 
     const handleClick = (e, playerId) => {
@@ -59,5 +59,5 @@ export default function PlayersList(props) {
                 <div className="divider is-right"></div>
             </Fragment>
         )
-    })
+    }).slice((page * perPage) - perPage);
 }

@@ -5,7 +5,7 @@ import { getPlayersByDates } from "../lib/players";
 import UpdatesList from "../components/updateslist";
 import Head from "next/head";
 
-export default function Updated({ groupedByDate }) {
+export default function Updates({ groupedByDate }) {
     const router = useRouter();
 
     const renderUpdates = () => {
