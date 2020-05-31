@@ -1,20 +1,30 @@
 import React, { useState, Fragment } from "react";
+import Head from "next/head";
+import { getAllPlayers } from "../lib/players";
 
 import SearchPlayers from "../components/searchplayers";
 import CompareTable from "../components/comparetable";
 import ImageCloud from "../components/imagecloud";
-import Head from "next/head";
 
-export default function Compare() {
-    const [players, setPlayers] = useState({ player1: null, player2: null, });
+export default function Compare({ players }) {
+    const [compare, setCompare] = useState({ player1: null, player2: null, });
     const [view, setView] = useState("stats");
 
-    const handlePlayer = (num, playerObj) => {
-        setPlayers({ ...players, [num]: playerObj });
+    const handlePlayer = (num, playerId) => {
+        const fetchPlayer = async () => {
+            const res = await fetch(`/api/player/${playerId}`);
+            const data = await res.json();
+    
+            delete data["@metadata"];
+    
+            setCompare({...compare, [num]: data });
+        }
+
+        fetchPlayer();
     }
 
     const renderView = () => {
-        const { player1, player2 } = players;
+        const { player1, player2 } = compare;
 
         const heroView = (
             <section className="hero is-fullheight-with-navbar">
@@ -27,7 +37,7 @@ export default function Compare() {
 
         switch(view) {
             case "stats": {
-                if (player1 == null || player2 == null)
+                if (player1 == null || player2 == null || typeof player1 === "string" || typeof player2 === "string")
                     return heroView;
                 else
                     return (
@@ -46,7 +56,7 @@ export default function Compare() {
                     )
             }
             case "badges": {
-                if (player1 == null || player2 == null)
+                if (player1 == null || player2 == null || typeof player1 === "string" || typeof player2 === "string")
                     return heroView;
                 else
                     return (
@@ -63,7 +73,7 @@ export default function Compare() {
                     )
             }
             case "tendencies": {
-                if (player1 == null || player2 == null)
+                if (player1 == null || player2 == null || typeof player1 === "string" || typeof player2 === "string")
                     return heroView;
                 else
                     return (
@@ -86,7 +96,7 @@ export default function Compare() {
                     )
             }
             case "animations": {
-                if (player1 == null || player2 == null)
+                if (player1 == null || player2 == null || typeof player1 === "string" || typeof player2 === "string")
                     return heroView;
                 else
                     return (
@@ -115,9 +125,7 @@ export default function Compare() {
                     <button className="delete" aria-label="delete" onClick={() => handlePlayer(playerId, null)}></button>
                 </div>
                 <div className="card-image">
-                    <figure className="image is-3by4">
-                        <ImageCloud src={`players/${playerData.info.name.replace(/ /g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width={240} height={350} alt={playerData.info.name} />
-                    </figure>
+                    <ImageCloud src={`players/${playerData.info.name.replace(/ /g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width={240} height={350} alt={playerData.info.name} />
                 </div>
             </div>
         )
@@ -126,19 +134,19 @@ export default function Compare() {
     const renderSearch = (playerNum) => {
         switch(playerNum) {
             case 1: {
-                if (players.player1 == null) {
-                    return <SearchPlayers handlePlayer={handlePlayer} playerInfo="player1" />
+                if (compare.player1 == null) {
+                    return <SearchPlayers players={players} handleClick={handlePlayer} playerInfo="player1" />
                 } else {
-                    let playerData = players.player1
+                    let playerData = compare.player1
 
                     return playerInfoContainer(playerData, "player1");
                 }
             }
             case 2: {
-                if (players.player2 == null) {
-                    return <SearchPlayers handlePlayer={handlePlayer} playerInfo="player2" />
+                if (compare.player2 == null) {
+                    return <SearchPlayers players={players} handleClick={handlePlayer} playerInfo="player2" />
                 } else {
-                    let playerData = players.player2
+                    let playerData = compare.player2
                     
                     return playerInfoContainer(playerData, "player2")
                 }
@@ -167,7 +175,7 @@ export default function Compare() {
                             <li className={view === "stats" ? "is-active" : ""} onClick={() => setView("stats")}><a>Stats</a></li>
                             <li className={view === "badges" ? "is-active" : ""} onClick={() => setView("badges")}><a>Badges</a></li>
                             <li className={view === "tendencies" ? "is-active" : ""} onClick={() => setView("tendencies")}><a>Tendencies</a></li>
-                            <li className={view === "animations" ? "is-active" : ""} onClick={() => setView("animations")}><a>Signature/Animations</a></li>
+                            <li className={view === "animations" ? "is-active" : ""} onClick={() => setView("animations")}><a>Animations</a></li>
                         </ul>
                     </div>
                 </div>
@@ -177,4 +185,18 @@ export default function Compare() {
             </div>
         </>
     )
+}
+
+export async function getStaticProps() {
+    const players = await getAllPlayers();
+  
+    for(let i = 0; i < players.length; i++) {
+      delete players[i]["@metadata"]
+    }
+  
+    return {
+      props: {
+        players,
+      }
+    }
 }

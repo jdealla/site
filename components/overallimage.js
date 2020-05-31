@@ -22,7 +22,7 @@ export default function OverallImage(props) {
 
         return (
             <figure className="image is-32x32">
-                <ImageCloud src={`icons/icon_${tier}.png`} width={32} height={32} alt={tier} />
+                <ImageCloud src={`icons/icon_${tier}.png`} width={32} />
             </figure>
         )
     }

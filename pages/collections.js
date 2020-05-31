@@ -1,45 +1,50 @@
 import React, { useState } from "react";
 import Head from "next/head";
 
-import { groupedPlayersByProp } from "../lib/players";
+import { getCollections } from "../lib/players";
 import ImageCloud from "../components/imagecloud";
 
-export default function Collections({ groupedByCollection }) {
+export default function Collections({ collections }) {
     const [view, setView] = useState("20 Current");
 
     const renderCollection = () => {
-        let themes = [], i = 0;
-        for(let [collection, players] of Object.entries(groupedByCollection)) {
+        for(let [collection, themes] of Object.entries(collections)) {
             if (collection === view) {
-                let groupedBy = players.reduce((h, obj) => Object.assign(h, { [obj["theme"]]: ( h[obj["theme"]] || [] ).concat(obj) }), {});
-
-                let sorted = {};
-                Object.keys(groupedBy).sort((a, b) => {
-                    return a < b ? -1 : 1;
-                }).forEach(key => {
-                    sorted[key] = groupedBy[key];
-                })
-                
-                for(let theme of Object.keys(sorted)) {
-                    let name = theme;
-                    if (theme.includes("Rewards") && !theme.includes("Collector") && !theme.includes("Prime") && !theme.includes("Unlimited") && !theme.includes("Spotlight")) {
-                        name = theme.replace("Rewards", "").trim();
+                return themes.map((obj, i) => {
+                    let name = obj.theme;
+                    if (name.includes("Rewards") && !name.includes("Collector") && !name.includes("Prime") && 
+                        !name.includes("Unlimited") && !name.includes("Spotlight")) {
+                        name = name.replace("Rewards", "").trim();
                     } 
-
-                    let themeObj = (
+                    return (
                         <div className="column is-2-desktop is-3-mobile" key={i++}>
                             <figure className="image is-96x96">
-                                <a className="title is-4" href={`/collection/${collection.toLowerCase().replace(/ /g, "-")}/theme/${theme.toLowerCase().replace(/ /g, "-")}`}>
+                                <a className="title is-4" href={`/collection/${collection.toLowerCase().replace(/ /g, "-")}/theme/${obj.theme.toLowerCase().replace(/ /g, "-")}`}>
                                     <ImageCloud src={`icons/icon_${name.toLowerCase().replace(/ /g, "_")}.png`} width="96" />
                                 </a>
                             </figure>
                         </div>
                     )
-                    themes.push(themeObj);
-                }
+                })
             }
         }
-        return themes;
+        // let themes = [], i = 0;
+        // for(let c of collections) {
+        //     if (c === view) {
+        //         let groupedBy = players.reduce((h, obj) => Object.assign(h, { [obj["theme"]]: ( h[obj["theme"]] || [] ).concat(obj) }), {});
+
+        //         let sorted = {};
+        //         Object.keys(groupedBy).sort((a, b) => {
+        //             return a < b ? -1 : 1;
+        //         }).forEach(key => {
+        //             sorted[key] = groupedBy[key];
+        //         })
+                
+        //         for(let theme of Object.keys(sorted)) {
+        //         }
+        //     }
+        // }
+        // return themes;
     }
 
     return (
@@ -76,11 +81,12 @@ export default function Collections({ groupedByCollection }) {
 }
 
 export async function getStaticProps() {
-    let groupedByCollection = groupedPlayersByProp("collection");
+    let collections = await getCollections();
 
     return {
         props: {
-            groupedByCollection
-        }
+            collections
+        },
+        unstable_revalidate: 1
     }
 }

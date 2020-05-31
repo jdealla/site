@@ -1,5 +1,5 @@
 import React from "react";
-import { formatName, levelToNum } from "../lib/players";
+import { formatName, levelToNum } from "../lib/helpers";
 
 export default function CompareTable(props) {
     const { tableName, firstName, firstStats, secondName, secondStats, diff } = props;
@@ -18,7 +18,7 @@ export default function CompareTable(props) {
         }
 
         return (
-            <td className={`has-text-${diffColor} has-text-centered`}>{diff}</td>
+            <td className={`has-text-${diffColor} has-text-centered has-text-weight-semibold`}>{diff}</td>
         )
     }
 

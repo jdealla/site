@@ -26,7 +26,7 @@ export default function NavBar() {
             <div className={`navbar-menu is-transparent ${view ? "is-active" : ""}`}>
                 <div className="navbar-start">
                     <div className="navbar-item">
-                        <SearchBar handleClick={handleClickPlayer} />
+                        {/* <SearchBar handleClick={handleClickPlayer} /> */}
                     </div>
                     <a className="navbar-item" href="/players" >Players</a>
                     <a className="navbar-item" href="/compare">Compare</a>

@@ -1,13 +1,14 @@
 import React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { getAllPlayers } from "../lib/players";
 
 import SearchBar from "../components/searchbar";
 
-export default function Home() {
+export default function Home({ players }) {
   const router = useRouter();
 
-  const handleClick = (playerId) => router.push(`/players/${playerId}`);
+  const handleClick = (playerId) => router.push(`/player/${playerId}`);
 
   return (
     <>
@@ -15,16 +16,30 @@ export default function Home() {
         <title>2KDB Homepage</title>
         <meta name="description" content="NBA 2K20 MyTeam Database Index Page"></meta>
       </Head>
-      <section className="hero is-fullheight-with-navbar with-bg">
+      <section className="hero is-fullheight-with-navbar">
         <div className="hero-body">
           <div className="container has-text-centered">
-            <p className="title has-text-white">
+            <p className="title">
               NBA2K MyTeam Database
             </p>
-            <SearchBar handleClick={handleClick} />
+            <SearchBar handleClick={handleClick} players={players} placeholder="Search players..." />
           </div>
         </div>
       </section>
     </>
   )
+}
+
+export async function getStaticProps() {
+  const players = await getAllPlayers();
+
+  for(let i = 0; i < players.length; i++) {
+    delete players[i]["@metadata"]
+  }
+
+  return {
+    props: {
+      players,
+    }
+  }
 }

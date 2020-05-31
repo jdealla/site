@@ -16,22 +16,22 @@ export default function FilterSortBox(props) {
         handleSorted(item);
     }
 
-    const getItemsByProp = (prop) => {
+    const getItemsByProp = async (prop) => {
         switch(prop) {
-            case "stats": return getPropNames("stats");
-            case "tendencies": return getPropNames("tendencies");
-            case "badges": return getPropNames("badges");
-            case "animations": return getPropNames("sigs");
+            case "stats": return await getPropNames("stats");
+            case "tendencies": return await getPropNames("tendencies");
+            case "badges": return await getPropNames("badges");
+            case "animations": return await getPropNames("sigs");
         }
     }
 
-    const renderDropdownItems = (prop) => {
+    const renderDropdownItems = async (prop) => {
         let addT = false;
 
         if (prop === "tendencies")
             addT = true;
 
-        let items = getItemsByProp(prop).map((item, i) => {
+        let items = await getItemsByProp(prop).map((item, i) => {
             return (
                 <a key={i} className="dropdown-item" onClick={() => handleClick(item, addT)} >
                     {item}
@@ -55,8 +55,8 @@ export default function FilterSortBox(props) {
         <div className="box">
             <div className="columns is-mobile">
                 <div className="column is-half">
-                    <Dropdown hover={true} items={renderDropdownItems("stats")} title="Sort By Stats" />
-                    <Dropdown hover={true} items={renderDropdownItems("tendencies")} title="Sort By Tendencies" />
+                    <Dropdown hover={true} items={async () => {renderDropdownItems("stats") }} title="Sort By Stats" />
+                    <Dropdown hover={true} items={async () => { renderDropdownItems("tendencies")} } title="Sort By Tendencies" />
                 </div>
                 <div className="column has-text-right">
                     <button className="button" onClick={() => handleSortDirection()}>

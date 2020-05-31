@@ -9,21 +9,23 @@ export default function UpdatedList(props) {
     const renderPlayerCards = () => {
         let playersToRender = players;
 
+        playersToRender.sort((a, b) => a.overall > b.overall ? -1 : (a.overall === b.overall) ? ((a.name > b.name) ? 1 : -1) : 1);
+
         if (players.length > amount) {
             playersToRender = players.slice(0, amount);
         }
         
         let newPlayers = playersToRender.map((player, i) => {
             return (
-                <td className="is-paddingless" key={i} onClick={() => router.push(`/players/${player.id}`)}>
-                    <ImageCloud src={`players/${player.name.replace(/ /g, "_").toLowerCase()}_${player.id}.jpg`} width={120} height={240} alt={player.name} />
+                <td className="is-paddingless" key={i} onClick={() => router.push(`/player/${player.id}`)}>
+                    <ImageCloud src={`players/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} width={120} />
                 </td>
             )
         })
 
         if (players.length > amount) {
             let lastItem = (
-                <td key={amount + 1} >
+                <td className="is-size-7-mobile is-size-6-tablet" key={amount + 1} >
                     <a className="heading" href={`/updates/${date}`} > +{players.length - amount} more players </a>
                 </td>
             )
@@ -33,5 +35,5 @@ export default function UpdatedList(props) {
         return newPlayers;
     }
 
-    return renderPlayerCards()
+    return renderPlayerCards();
 }

@@ -1,15 +1,15 @@
-module.exports = {
-    webpack: (config, options) => {
-        config.module.rules.push({
-            test: /\.csv$/,
-            loader: 'csv-loader',
-            options: {
-                dynamicTyping: true,
-                header: true,
-                skipEmptyLines: true,
-                fastMode: true,
-            }
-        })
-        return config;
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+    enabled: process.env.ANALYZE === 'true',
+})
+
+module.exports = withBundleAnalyzer({
+    webpack(config) {
+        config.node = { 
+            console: false,
+            fs: 'empty',
+            net: 'empty',
+            tls: 'empty'
+        }
+        return config
     },
-}
+})

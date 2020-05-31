@@ -1,8 +1,9 @@
-import React, { useState, Fragment } from "react";
+import { useState, Fragment } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { getPlayersIds, getPlayerData } from "../../lib/players";
+import { getPlayersIds } from "../../lib/players";
+import { getPlayerData } from "../../pages/api/player/[id]";
 
 import BadgeContainer from "../../components/badgecontainer";
 import Attributes from "../../components/attributes";
@@ -143,7 +144,8 @@ export default function Player({ playerData }) {
 }
 
 export async function getStaticPaths() {
-    const paths = await getPlayersIds()
+    const paths = await getPlayersIds();
+
     return {
         paths,
         fallback: true
@@ -151,12 +153,11 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const playerData = getPlayerData(params.id)
-    
+    const playerData = await getPlayerData(params.id)
+
     return {
         props: {
             playerData,
         },
-        unstable_revalidate: 1
     }
 }

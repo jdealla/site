@@ -1,16 +1,26 @@
 import React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { formatName, getThemes, getPlayersByPropValue } from "../../../../lib/players";
+import { getThemes, getPlayersByTheme } from "../../../../lib/players";
 
 import PlayersCardView from "../../../../components/playerscardview";
-import Spinner from "../../../../components/spinner";
 
 export default function Collection({ collection, theme, players }) {
     const router = useRouter();
 
     if (router.isFallback) {
-        return <Spinner />
+        return <h1>Loading...</h1>
+    }
+
+    const formatThemeName = (name) => {
+        let formatted = name.split("-").map(word => {
+            if (word.includes("ii"))
+                return word.toUpperCase();
+
+            return word.charAt(0).toUpperCase() + word.slice(1)
+        }).join(" ")
+
+        return formatted;
     }
 
     return (
@@ -20,7 +30,16 @@ export default function Collection({ collection, theme, players }) {
                 <meta name="description" content={`NBA 2K20 MyTeam Theme Collection ${theme}`} />
             </Head>
             <div className="container">
-                <p className="title is-size-5">{collection} / {theme}</p>
+                <section className="hero is-bold">
+                    <div className="hero-body" style={{ padding: "1.2rem" }}>
+                        <div className="container">
+                            <h1 className="title is-size-5">
+                                {collection.charAt(0).toUpperCase() + collection.slice(1)} / {formatThemeName(theme)}
+                            </h1>
+                        </div>
+                    </div>
+                </section>
+
                 <PlayersCardView players={players} />
             </div>
         </>
@@ -28,7 +47,7 @@ export default function Collection({ collection, theme, players }) {
 }
 
 export async function getStaticPaths() {
-    const paths = getThemes();
+    const paths = await getThemes();
 
     return {
         paths,
@@ -39,29 +58,8 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     const collection = params.name;
     const theme = params.themeName;
-    let nameArray = theme.split("-");
-    let formatted = "";
 
-    if (nameArray.length === 1) {
-        if (nameArray[0] === "goat")
-            formatted = nameArray[0].toUpperCase();
-        else
-            formatted = nameArray[0].charAt(0).toUpperCase() + nameArray[0].substring(1);
-    } else {
-        formatted = nameArray.map(word => {
-            let result = "";
-            if (word === "2k20" || word === "mtu")
-                result = word.toUpperCase();
-            else
-                result = word.charAt(0).toUpperCase() + word.substring(1);
-
-            return result 
-        }).join(" ");
-    }
-
-    const groupedBy = getPlayersByPropValue("theme", formatted);
-    let players = groupedBy.filter(player => player.collection.toLowerCase().replace(/ /g, "-") === collection);
-    players.sort((a, b) => a.overall > b.overall ? -1 : 1);
+    const players = await getPlayersByTheme(theme);
 
     return {
         props: {
