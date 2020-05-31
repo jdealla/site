@@ -25,7 +25,8 @@ export default function SearchBar(props) {
             let name = player.name.toLowerCase().split(" ");
             return (
                 name[0].slice(0, inputLength) === inputValue || 
-                name[1].slice(0, inputLength) === inputValue
+                name[1].slice(0, inputLength) === inputValue ||
+                player.name.trim().toLowerCase().includes(inputValue)
             )
         });
     }
