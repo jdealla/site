@@ -40,6 +40,7 @@ export async function getStaticProps() {
   return {
     props: {
       players,
-    }
+    },
+    unstable_revalidate: 1
   }
 }

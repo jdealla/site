@@ -11,16 +11,20 @@ export default function Compare({ players }) {
     const [view, setView] = useState("stats");
 
     const handlePlayer = (num, playerId) => {
+        
         const fetchPlayer = async () => {
             const res = await fetch(`/api/player/${playerId}`);
             const data = await res.json();
-    
+            
             delete data["@metadata"];
-    
+            
             setCompare({...compare, [num]: data });
         }
-
-        fetchPlayer();
+        
+        if (playerId == null)
+            setCompare({...compare, [num]: playerId });
+        else
+            fetchPlayer();
     }
 
     const renderView = () => {
@@ -125,7 +129,7 @@ export default function Compare({ players }) {
                     <button className="delete" aria-label="delete" onClick={() => handlePlayer(playerId, null)}></button>
                 </div>
                 <div className="card-image">
-                    <ImageCloud src={`players/${playerData.info.name.replace(/ /g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width={240} height={350} alt={playerData.info.name} />
+                    <ImageCloud src={`players/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width={240} height={350} />
                 </div>
             </div>
         )
@@ -197,6 +201,7 @@ export async function getStaticProps() {
     return {
       props: {
         players,
-      }
+      },
+      unstable_revalidate: 1
     }
 }
