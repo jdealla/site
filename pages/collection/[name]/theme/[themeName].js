@@ -4,12 +4,13 @@ import { useRouter } from "next/router";
 import { getThemes, getPlayersByTheme } from "../../../../lib/players";
 
 import PlayersCardView from "../../../../components/playerscardview";
+import Loader from "../../../../components/loader";
 
 export default function Collection({ collection, theme, players }) {
     const router = useRouter();
 
     if (router.isFallback) {
-        return <h1>Loading...</h1>
+        return <Loader />
     }
 
     const formatThemeName = (name) => {
@@ -28,6 +29,7 @@ export default function Collection({ collection, theme, players }) {
             <Head>
                 <title>{`NBA 2K20 MyTeam ${theme} collection | 2KDB`}</title>
                 <meta name="description" content={`NBA 2K20 MyTeam Theme Collection ${theme}`} />
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
             </Head>
             <div className="container">
                 <section className="hero is-bold">

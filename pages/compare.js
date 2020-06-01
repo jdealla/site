@@ -2,16 +2,14 @@ import React, { useState, Fragment } from "react";
 import Head from "next/head";
 import { getAllPlayers } from "../lib/players";
 
-import SearchPlayers from "../components/searchplayers";
 import CompareTable from "../components/comparetable";
-import ImageCloud from "../components/imagecloud";
+import CompareHeader from "../components/compareheader";
 
 export default function Compare({ players }) {
     const [compare, setCompare] = useState({ player1: null, player2: null, });
     const [view, setView] = useState("stats");
 
     const handlePlayer = (num, playerId) => {
-        
         const fetchPlayer = async () => {
             const res = await fetch(`/api/player/${playerId}`);
             const data = await res.json();
@@ -122,57 +120,16 @@ export default function Compare({ players }) {
         };
     };
 
-    const playerInfoContainer = (playerData, playerId) => {
-        return (
-            <div className="card">
-                <div className="card-header">
-                    <button className="delete" aria-label="delete" onClick={() => handlePlayer(playerId, null)}></button>
-                </div>
-                <div className="card-image">
-                    <ImageCloud src={`players/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width={240} height={350} />
-                </div>
-            </div>
-        )
-    };
-
-    const renderSearch = (playerNum) => {
-        switch(playerNum) {
-            case 1: {
-                if (compare.player1 == null) {
-                    return <SearchPlayers players={players} handleClick={handlePlayer} playerInfo="player1" />
-                } else {
-                    let playerData = compare.player1
-
-                    return playerInfoContainer(playerData, "player1");
-                }
-            }
-            case 2: {
-                if (compare.player2 == null) {
-                    return <SearchPlayers players={players} handleClick={handlePlayer} playerInfo="player2" />
-                } else {
-                    let playerData = compare.player2
-                    
-                    return playerInfoContainer(playerData, "player2")
-                }
-            }
-        }
-    }
-
     return (
         <>
             <Head>
                 <title>Compare NBA 2K20 MyTeam Players Page | 2KDB</title>
-                <meta name="description" content="Compare 2 NBA 2K20 MyTeam player cards for their stats, badges, tendencies, and animations" />
+                <meta name="description" content="Compare 2 NBA 2K20 MyTeam player cards for their stats, badges, tendencies, and animations"/>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
             </Head>
             <div className="container" style={{ marginTop: '10px' }}>
-                <div className="level">
-                    <div className="level-item">
-                        {renderSearch(1)}
-                    </div>
-                    <div className="level-item">
-                        {renderSearch(2)}
-                    </div>
-                </div>
+                <CompareHeader players={players} handlePlayer={handlePlayer} compare={compare} />
+
                 <div className="container">
                     <div className="tabs is-boxed is-centered">
                         <ul>

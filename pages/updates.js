@@ -29,7 +29,8 @@ export default function Updates({ groupedByDate }) {
         <>
             <Head>
                 <title>NBA 2K20 MyTeam Updated Players | 2KDB</title>
-                <meta name="description" content="List of player cards updated in NBA 2K20 MyTeam" />
+                <meta name="description" content="List of player cards updated in NBA 2K20 MyTeam" key="updates" />
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <div className="container">
                 <section className="hero is-bold">
@@ -57,7 +58,7 @@ export default function Updates({ groupedByDate }) {
 }
 
 export async function getStaticProps() {
-    let groupedByDate = await getPlayersByDates();
+    const groupedByDate = await getPlayersByDates();
     
     return {
         props: {

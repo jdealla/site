@@ -52,12 +52,18 @@ export default function Players({ allPlayers }) {
         <>
             <Head>
                 <title>NBA 2K20 MyTeam All Players List | 2KDB</title>
-                <meta name="description" content="List of all players in NBA 2K20 MyTeam" />
+                <meta name="description" content="List of all players in NBA 2K20 MyTeam" key="description"/>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <div className="container">
                 <div className="columns">
                     <div className="column is-full">
                         {/* <FilterSortBox handleSorted={handleSorted} handleSortDirection={handleSortDirection} handlePerPage={handlePerPage} sortedBy={sortedBy} /> */}
+                        <div className="field">
+                            <div className="control">
+                                <input className="input" type="text" placeholder="Search players..." />
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="box">

@@ -2,10 +2,6 @@
 @import "../node_modules/bulma/sass/utilities/initial-variables.sass";
 
 //custom variables
-$bronze: #CD7F32;
-$silver: silver;
-$gold: gold;
-$hof: #8A2BE2;
 $logo-color: #ED1B24;
 
 //global variables
@@ -64,47 +60,12 @@ $footer-padding: 1.2rem 1.5rem 1.2rem;
     }
 }
 
-.HOF {
-    background-color: $hof;
-    color: white;
-}
-.Gold {
-    background-color: $gold;
-    color: white;
-}
-.Silver {
-    background-color: $silver;
-    color: white;
-}
-.Bronze {
-    background-color: $bronze;
-    color: white;
-}
-.Yes {
-    background-color: $bronze;
-    color: white;
-}
-
-.tag {
-    &.HOF {
-        background-color: $hof;
-        color: white;
-    }
-    &.Gold {
-        background-color: $gold;
-        color: white;
-    }
-    &.Silver {
-        background-color: $silver;
-        color: white;
-    }
-    &.Bronze {
-        background-color: $bronze;
-        color: white;
-    }
-    &.Yes {
-        background-color: $bronze;
-        color: white;
+@media only screen and (max-width: 1024px) {
+    .is-player-card-bg {
+        height: 80%;
+        >img {
+            height: 23em !important;
+        }
     }
 }
 
@@ -151,13 +112,6 @@ $footer-padding: 1.2rem 1.5rem 1.2rem;
             position: relative;
             z-index: 2;
         }
-    }
-}
-
-.hero {
-    &.with-bg {
-        background: url('/bg2.png') no-repeat top fixed;
-        background-size: 100% 100%;
     }
 }
 

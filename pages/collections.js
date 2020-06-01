@@ -52,6 +52,7 @@ export default function Collections({ collections }) {
             <Head>
                 <title>NBA2K20 MyTeam Collections | 2KDB</title>
                 <meta name="description" content="NBA 2K20 MyTeam collections page including every collection in the game" />
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <div className="container">
                 <div className="box">
