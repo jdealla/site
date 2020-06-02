@@ -50,6 +50,7 @@ export default function Compare({ players }) {
                                 <CompareTable tableName="Playmaking" firstName={player1.info.name} firstStats={player1.stats.playmaking} secondName={player2.info.name} secondStats={player2.stats.playmaking} />
                             </div>
                             <div className="column">
+                                <CompareTable tableName="Athleticism" firstName={player1.info.name} firstStats={player1.stats.athleticism} secondName={player2.info.name} secondStats={player2.stats.athleticism} />
                                 <CompareTable tableName="Defense" firstName={player1.info.name} firstStats={player1.stats.defense} secondName={player2.info.name} secondStats={player2.stats.defense} />
                                 <CompareTable tableName="Rebound" firstName={player1.info.name} firstStats={player1.stats.rebound} secondName={player2.info.name} secondStats={player2.stats.rebound} />
                                 <CompareTable tableName="Potential" firstName={player1.info.name} firstStats={player1.stats.potential} secondName={player2.info.name} secondStats={player2.stats.potential} />

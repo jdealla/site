@@ -1,25 +1,9 @@
 import React from "react";
 import { formatName } from "../lib/helpers";
+import { ratingColor } from "../lib/helpers";
 
 export default function Attributes(props) {
     const { attributes, attrName, bonus, reverse, } = props;
-
-    
-    const ratingColor = (num) => {
-        let color = ""
-        switch (true) {
-            case (num < 50): color = "is-danger"; break;
-            case (num < 70): color = "is-link"; break;
-            case (num < 80): color = "is-warning"; break;
-            case (num < 90): color = "is-info"; break;
-            case (num <= 100): color = "is-success"; break;
-            default: color = "is-dark";
-        }
-
-        return (
-            <span className={`tag ${color} has-text-weight-semibold`}>{num} {'   '}</span>
-        )
-    }
 
     const renderTags = () => {
         let tags = [];

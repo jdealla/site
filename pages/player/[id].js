@@ -34,7 +34,7 @@ export default function Player({ playerData }) {
                     <Attributes attributes={playerData.stats.playmaking} attrName="Playmaking" />
                 </div>
                 <div className="column is-one-fifth-tablet is-half-mobile is-one-fifth-desktop">
-				    <Attributes attributes={playerData.stats.atheleticism} attrName="Atheleticism" />
+				    <Attributes attributes={playerData.stats.athleticism} attrName="Athleticism" />
                     <Attributes attributes={playerData.stats.defense} attrName="Defense" />
                     <Attributes attributes={playerData.stats.rebound} attrName="Rebound" />
                     <Attributes attributes={playerData.stats.potential} attrName="Potential" />

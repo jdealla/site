@@ -31,7 +31,7 @@ export async function getPlayerData(id) {
         post_moves: player.post_moves, post_hook: player.post_hook, post_fade: player.post_fade, hands: player.hands
     }
 
-    const atheleticismStats = {
+    const athleticismStats = {
         speed: player.speed, acceleration: player.acceleration, vertical: player.vertical, strength: player.strength, stamina: player.stamina, 
         hustle: player.hustle, overall_durability: player.overall_durability
     }
@@ -183,7 +183,7 @@ export async function getPlayerData(id) {
         stats: {
              shooting: shootingStats,
              inside: insideScoringStats,
-             atheleticism: atheleticismStats,
+             athleticism: athleticismStats,
              playmaking: playmakingStats,
              defense: defenseStats,
              rebound: reboundStats,
