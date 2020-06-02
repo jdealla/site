@@ -118,7 +118,7 @@ export default function Player({ playerData }) {
                 <meta property="og:title" content={`${playerData.info.name} MyTeam Player Page | 2KDB`} key={"title" + playerData.info.id} />
                 <meta name="description" content={`NBA 2K20 MyTeam Card Description of ${playerData.info.name}`} />
                 <meta property="og:description" content={`NBA 2K20 MyTeam Card Description of ${playerData.info.name}`} key={"description" + playerData.info.id} />
-                <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 <html lang="en" key="lang-en" />
             </Head>
 			<div className="is-player-card-bg is-hidden-mobile">
