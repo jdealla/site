@@ -20,18 +20,16 @@ export default function Players({ allPlayers, allProps }) {
         }
     }
 
-    const handlePlayers = (players) => setPlayers(players)
-
     const handleOptions = (options) => {
         setSearchOptions(options);
     }
 
     useEffect(() => {
-        let filtered = allPlayers.filter(player => player.info.name.toLowerCase().includes(searchOptions.searchValue))
+        let filtered = allPlayers.filter(player => player.info.name.toLowerCase().includes(searchOptions.searchValue));
 
         if (searchOptions.filterProp != "" && searchOptions.filterValue != "") {
-            let filtered = allPlayers.filter(player => player[searchOptions.cat][searchOptions.filterBy] === searchOptions.filterValue)
-
+            console.log(searchOptions);
+            filtered = filtered.filter(player => player[searchOptions.cat][searchOptions.filterProp] === searchOptions.filterValue);
         }
 
         setPlayers(filtered);

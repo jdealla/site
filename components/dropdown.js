@@ -10,7 +10,7 @@ export default function Dropdown(props) {
                     customButton != null ?
                     customButton :
                     (
-                        <button className="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                        <button className="button is-small" aria-haspopup="true" aria-controls="dropdown-menu">
                             <span>{title}</span>
                         </button>
                     )
