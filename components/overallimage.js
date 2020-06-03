@@ -22,7 +22,7 @@ export default function OverallImage(props) {
         }
 
         return (
-            <figure className="image is-32x32" style={{ marginLeft: "auto", marginRight: "auto" , filter:`drop-shadow(0px 0px 3px ${color})` }}>
+            <figure className="image is-24x24" style={{ marginLeft: "auto", marginRight: "auto" , filter:`drop-shadow(0px 0px 4px ${color})` }}>
                 <ImageCloud src={`icons/icon_${tier}.png`} width={32} />
             </figure>
         )
