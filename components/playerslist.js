@@ -27,18 +27,18 @@ export default function PlayersList(props) {
                                 <p>{player.info.name}</p>
                             </div>
                         </td>
-                        <td>
+                        <td style={{ textAlign: "center" }}>
                             <div className="container">
                                 <OverallImage overall={player.info.overall} />
-                                <p className="is-overlay has-text-white has-text-weight-semibold" style={{ top: "10%", left: "10%" }}>
+                                <p className="is-overlay has-text-white has-text-weight-semibold  inline-number-ovr">
                                     {player.info.overall}
                                 </p>
                             </div>
                         </td>
-                        <td>{player.info.position}{player.info.secondary_position != null ? `/${player.info.secondary_position}` : ""} </td>
-                        <td>{ratingColor(player.info.off_overall)}</td>
-                        <td>{ratingColor(player.info.def_overall)}</td>
-                        <td>{player.info.height}"</td>
+                        <td style={{ textAlign: "center" }}>{player.info.position}{player.info.secondary_position != null ? `/${player.info.secondary_position}` : ""} </td>
+                        <td style={{ textAlign: "center" }}>{ratingColor(player.info.off_overall)}</td>
+                        <td style={{ textAlign: "center" }}>{ratingColor(player.info.def_overall)}</td>
+                        <td style={{ textAlign: "center" }}>{player.info.height}"</td>
                     </tr>
                 )
             }).slice(page * 15, (page * 15) + 15)}

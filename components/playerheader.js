@@ -132,19 +132,19 @@ export default function PlayerHeader(props) {
                                     <div className="level-item is-size-5 has-text-centered" style={{ justifyContent:"space-evenly" }}>
                                         <figure className="image is-64x64">
                                             <ImageCloud src="icons/icon_badge_bronze.png" width={64} />
-                                            <p className="is-overlay total_badges_style">{playerData.badges.totalBadges.bronzeBadges}</p>
+                                            <p className="is-overlay inline-number-badge">{playerData.badges.totalBadges.bronzeBadges}</p>
                                         </figure>
                                         <figure className="image is-64x64">
                                             <ImageCloud src="icons/icon_badge_silver.png" width={64} />
-                                            <p className="is-overlay total_badges_style">{playerData.badges.totalBadges.silverBadges}</p>
+                                            <p className="is-overlay inline-number-badge">{playerData.badges.totalBadges.silverBadges}</p>
                                         </figure>
                                         <figure className="image is-64x64">
                                             <ImageCloud src="icons/icon_badge_gold.png" width={64} />
-                                            <p className="is-overlay total_badges_style">{playerData.badges.totalBadges.goldBadges}</p>
+                                            <p className="is-overlay inline-number-badge">{playerData.badges.totalBadges.goldBadges}</p>
                                         </figure>
                                         <figure className="image is-64x64">
                                             <ImageCloud src="icons/icon_badge_hof.png" width={64} />
-                                            <p className="is-overlay total_badges_style">{playerData.badges.totalBadges.hofBadges}</p>
+                                            <p className="is-overlay inline-number-badge">{playerData.badges.totalBadges.hofBadges}</p>
                                         </figure>
                                     </div>
                                 </div>
