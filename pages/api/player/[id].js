@@ -10,10 +10,11 @@ export async function getPlayerData(id) {
     const playerInfo = {
         id: player.id, name: player.name, college: player.college, nickname: player.nickname, collection: player.collection, theme: player.theme, 
         team: player.team, overall: player.overall, off_overall: player.off_overall, def_overall: player.def_overall, position: player.position, 
-        secondary_position: player.secondary_position, height: player.height, weight: player.weight, play1: player.play1, play2: player.play2, 
-        play3: player.play3, play4: player.play4
+        secondary_position: player.secondary_position, height: player.height, weight: player.weight
     }
     
+    const plays = [player.play1, player.play2, player.play3, player.play4];
+
     const playerHotZones = {
         hz_under_basket: player.hz_under_basket, hz_close_left: player.hz_close_left, hz_close_middle: player.hz_close_middle, hz_close_right: player.hz_close_right, 
         hz_mid_left: player.hz_mid_left, hz_mid_left_center: player.hz_mid_left_center, hz_mid_center: player.hz_mid_center, hz_mid_right_center: player.hz_mid_right_center, 
@@ -179,6 +180,7 @@ export async function getPlayerData(id) {
 
     return {
         info: playerInfo,
+        plays: plays,
         hotzones: playerHotZones,
         stats: {
              shooting: shootingStats,
