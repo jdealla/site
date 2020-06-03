@@ -1,11 +1,12 @@
 import React, { Fragment } from "react";
 import { useRouter } from "next/router";
+import { ratingColor } from "../lib/helpers";
 
 import OverallImage from "./overallimage";
 import ImageCloud from "./imagecloud";
 
 export default function PlayersList(props) {
-    const { players, perPage, page } = props;
+    const { players, page } = props;
     const router = useRouter()
 
     const handleClick = (e, playerId) => {
@@ -13,51 +14,34 @@ export default function PlayersList(props) {
         router.push(`/player/${playerId}`)
     }
 
-    return players.map(player => {
-        return (
-            <Fragment key={player.id}>
-                <div className="columns is-mobile is-gapless is-marginless" id="player-link" onClick={(e) => handleClick(e, player.id)}>
-                    <div className="column is-one-fifth-mobile is-2-tablet">
-                        <div className="columns is-mobile is-multiline">
-                            <div className="column is-3-desktop is-4-mobile">
-                                <figure className="image is-48x48">
-                                    <ImageCloud src={`players/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} width={48} />
+    return (
+        <tbody>
+            {players.map(player => {
+                return (
+                    <tr onClick={(e) => handleClick(e, player.info.id)} key={player.info.id}>
+                        <td>
+                            <div className="container is-flex">
+                                <figure className="image is-32x32">
+                                    <ImageCloud src={`players/${player.info.name.replace(/( |')/g, "_").toLowerCase()}_${player.info.id}.jpg`} width={48} />
                                 </figure>
+                                <p>{player.info.name}</p>
                             </div>
-                            <div className="column is-hidden-mobile is-size-7-mobile">
-                                {player.name}
+                        </td>
+                        <td>
+                            <div className="container">
+                                <OverallImage overall={player.info.overall} />
+                                <p className="is-overlay has-text-white has-text-weight-semibold" style={{ top: "10%", left: "10%" }}>
+                                    {player.info.overall}
+                                </p>
                             </div>
-                        </div>
-                    </div>
-                    <div className="column is-one-fifth-mobile is-1-tablet">
-                        <OverallImage overall={player.overall} />
-                    </div>
-                    <div className="column is-one-fifth-mobile is-1-tablet">
-                        {player.overall}
-                    </div>
-                    <div className="column is-one-fifth-mobile is-1-tablet">
-                        {player.position}{player.secondary_position != null ? `/${player.secondary_position}` : ""}
-                    </div>
-                    <div className="column is-one-fifth-mobile is-1-tablet">
-                        {player.height}
-                    </div>
-                    <div className="column is-hidden-mobile is-1-tablet">
-                        {player.weight} lbs
-                    </div>
-                    {/* <div className="column is-hidden-mobile is-2-tablet">
-                        <div className="tags has-addons">
-                            <span className="tag HOF">{player.badges.totalBadges.hofBadges}</span>
-                            <span className="tag Gold">{player.badges.totalBadges.goldBadges}</span>
-                            <span className="tag Silver">{player.badges.totalBadges.silverBadges}</span>
-                            <span className="tag Bronze">{player.badges.totalBadges.bronzeBadges}</span>
-                        </div>
-                    </div> */}
-                    {/* <div className={`column is-2-tablet ${sortedBy == "" ? "is-hidden" : "has-text-weight-semibold"}`}>
-                        {player[sortedBy.propName]}
-                    </div> */}
-                </div>
-                <div className="divider is-right"></div>
-            </Fragment>
-        )
-    }).slice((page * perPage) - perPage);
+                        </td>
+                        <td>{player.info.position}{player.info.secondary_position != null ? `/${player.info.secondary_position}` : ""} </td>
+                        <td>{ratingColor(player.info.off_overall)}</td>
+                        <td>{ratingColor(player.info.def_overall)}</td>
+                        <td>{player.info.height}"</td>
+                    </tr>
+                )
+            }).slice(page * 15, (page * 15) + 15)}
+        </tbody>
+    )
 }

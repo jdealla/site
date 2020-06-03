@@ -9,7 +9,6 @@
     "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
-    "@creativebulma/bulma-divider": "^1.1.0",
     "@next/bundle-analyzer": "^9.4.3",
     "bulma-pageloader": "^0.3.0",
     "cloudinary-react": "^1.5.0",

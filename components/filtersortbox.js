@@ -1,72 +1,47 @@
 import React from "react";
-import { getPropNames } from "../lib/players";
 
 import Dropdown from "./dropdown";
-import SortIcon from "./sorticon";
 
 export default function FilterSortBox(props) {
-    const { handleSorted, sortedBy, handleSortDirection } = props;
+    const { allProps, searchOptions, handleOptions, } = props;
 
-    const handleClick = (item, addT) => {
-        if (addT) {
-            item += "T";
-        }
-
-        handleSortDirection();
-        handleSorted(item);
+    const handleChange = (e) => {
+        console.log(e.target.value);
+        handleOptions({...searchOptions, searchValue: e.target.value })
     }
 
-    const getItemsByProp = async (prop) => {
-        switch(prop) {
-            case "stats": return await getPropNames("stats");
-            case "tendencies": return await getPropNames("tendencies");
-            case "badges": return await getPropNames("badges");
-            case "animations": return await getPropNames("sigs");
-        }
-    }
-
-    const renderDropdownItems = async (prop) => {
-        let addT = false;
-
-        if (prop === "tendencies")
-            addT = true;
-
-        let items = await getItemsByProp(prop).map((item, i) => {
-            return (
-                <a key={i} className="dropdown-item" onClick={() => handleClick(item, addT)} >
-                    {item}
-                </a>
-            )
-        })
-
-        return (
-            <div className="columns">
-                <div className="column is-half">
-                    {items.slice(0, items.length / 2)}
-                </div>
-                <div className="column is-half">
-                    {items.slice(items.length / 2 + 1)}
-                </div>
-            </div>
-        )
+    const handleFilter = (cat, prop, value) => {
+        handleOptions({ ...searchOptions, cat: cat, filterProp: prop, filterValue: value})
     }
 
     return (
-        <div className="box">
-            <div className="columns is-mobile">
-                <div className="column is-half">
-                    <Dropdown hover={true} items={async () => {renderDropdownItems("stats") }} title="Sort By Stats" />
-                    <Dropdown hover={true} items={async () => { renderDropdownItems("tendencies")} } title="Sort By Tendencies" />
-                </div>
-                <div className="column has-text-right">
-                    <button className="button" onClick={() => handleSortDirection()}>
-                        <SortIcon asc={sortedBy.asc} />
-                        <span>
-                            {sortedBy.asc ? "Asc" : "Desc" }
-                        </span>
-                    </button>
+        <div className="container">
+            <div className="field">
+                <div className="control">
+                    <input className="input" value={searchOptions.searchValue} onChange={handleChange} type="text" placeholder="Search players..." />
                 </div>
             </div>
+            <div className="container">
+                <p className="heading">Filter By Position: </p>
+                <div className="field has-addons">
+                    <p className="control">
+                        <button className="button is-small" onClick={() => handleFilter("info", "position", "PG")}>PG</button>
+                    </p>
+                    <p className="control">
+                        <button className="button is-small" onClick={() => handleFilter("info", "position", "SG")}>SG</button>
+                    </p>
+                    <p className="control">
+                        <button className="button is-small" onClick={() => handleFilter("info", "position", "SF")}>SF</button>
+                    </p>
+                    <p className="control">
+                        <button className="button is-small" onClick={() => handleFilter("info", "position", "PF")}>PF</button>
+                    </p>
+                    <p className="control">
+                        <button className="button is-small" onClick={() => handleFilter("info", "position", "C")}>C</button>
+                    </p>
+                </div>
+            </div>
+            
         </div>
     )
 }
