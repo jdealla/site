@@ -69,7 +69,7 @@ export default function Players({ allPlayers, allProps }) {
                 <div className="columns">
                     <div className="column is-full">
                         <nav className="pagination is-centered" role="navigation" aria-label="pagination">
-                            <a className="pagination-previous" onClick={() => handlePage("prev")} disabled={page <= 1}>Previous</a>
+                            <a className="pagination-previous" onClick={() => handlePage("prev")} disabled={page <= 0}>Previous</a>
                             <a className="pagination-next" onClick={() => handlePage("next")} disabled={page * 15 >= allPlayers.length}>Next page</a>
                         </nav>
                     </div>

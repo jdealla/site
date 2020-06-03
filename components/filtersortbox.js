@@ -1,4 +1,5 @@
 import React from "react";
+import { formatName } from "../lib/helpers";
 
 import Dropdown from "./dropdown";
 
@@ -25,10 +26,11 @@ export default function FilterSortBox(props) {
         }
     }
 
-    const renderDropdownItems = () => {
-        const statItems = allProps.stats.map(stat => (<a className="dropdown-item" >{stat}</a>))
-
-        const tendencyItems = allProps.tendencies.map(tendency => (<a className="dropdown-item">{tendency}</a>))
+    const getDropdownItems = (cat) => {
+        switch(cat) {
+            case "stat": return allProps.stats.map((stat, i) => (<a className="dropdown-item" key={i} >{formatName(stat)}</a>))
+            case "tendencies": return allProps.tendencies.map((tendency, i) => (<a className="dropdown-item" key={i}>{formatName(tendency)}</a>))
+        }
     }
 
     return (
@@ -40,7 +42,7 @@ export default function FilterSortBox(props) {
             </div>
             <div className="container">
                 <div className="columns">
-                    <div className="column">
+                    <div className="column is-2-widescreen">
                         <p className="heading">Filter By Position: </p>
                         <div className="field has-addons">
                             <p className="control">
@@ -60,12 +62,13 @@ export default function FilterSortBox(props) {
                             </p>
                         </div>
                     </div>
-                    <div className="column">
+                    <div className="column is-2-widescreen">
                         <p className="heading">Sort By Stat: </p>
-                        
+                        <Dropdown title="Stats" items={getDropdownItems("stat")} />
                     </div>
-                    <div className="column">
+                    <div className="column is-2-widescreen">
                         <p className="heading">Sort By Tendency: </p>
+                        <Dropdown title="Tendencies" items={getDropdownItems("tendencies")} />
                     </div>
                     <div className="column">
                         <p className="heading">Filter By Animation: </p>

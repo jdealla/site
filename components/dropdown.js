@@ -1,10 +1,10 @@
 import React from "react";
 
 export default function Dropdown(props) {
-    const { title, items, hover, customButton } = props;
+    const { title, items, customButton } = props;
 
     return (
-        <div className={`dropdown ${hover ? "is-hoverable" : "is-active"}`}>
+        <div className="dropdown is-hoverable">
             <div className="dropdown-trigger">
                 {
                     customButton != null ?
