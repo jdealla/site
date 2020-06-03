@@ -30,7 +30,7 @@ export default function PlayersList(props) {
                         <td style={{ textAlign: "center" }}>
                             <div className="container">
                                 <OverallImage overall={player.info.overall} />
-                                <p className="is-overlay has-text-white has-text-weight-semibold  inline-number-ovr">
+                                <p className="is-overlay has-text-white inline-number-ovr">
                                     {player.info.overall}
                                 </p>
                             </div>
