@@ -29,25 +29,25 @@ export default function PlayerHeader(props) {
 
     return (
         <div className="columns is-mobile is-multiline is-player-card mobile-padding">
-            <div className="column is-full-mobile is-full-desktop">
-                <div className="columns is-mobile is-multiline is-gapless">
-                    <div className="column is-full-mobile is-8-desktop">
+            <div className="column is-full-mobile is-full-desktop is-full-widescreen">
+                <div className="columns is-mobile is-multiline">
+                    <div className="column is-full-mobile is-8-desktop is-four-fifths-widescreen">
                         <div className="columns is-mobile is-multiline">
-                            <div className="column is-half-mobile is-5-desktop is-4-widescreen">
+                            <div className="column is-half-mobile is-5-desktop is-3-widescreen">
                                 <figure className="image is-3by4">
                                     <ImageCloud src={`players/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width={400} />
                                 </figure>
                             </div>
-                            <div className="column is-half-mobile is-half-tablet is-6-desktop is-7-widescreen is-7-fullhd is-player-info">
+                            <div className="column is-half-mobile is-half-tablet is-6-desktop is-8-widescreen is-player-info">
                                 <div className="columns is-mobile is-multiline">
-                                    <div className="column is-hidden-mobile is-one-third-tablet is-half-desktop">
+                                    <div className="column is-hidden-mobile is-one-third-tablet is-half-desktop is-2-widescreen">
                                         <p className="heading has-text-warning " style={{ marginBottom:0 }}>Overall</p>
-                                        <p className="title is-size-7-mobile is-size-4-tablet has-text-white">
+                                        <p className="title is-size-7-mobile is-size-4-desktop is-size-1-widescreen has-text-white">
                                             {playerData.info.overall}
                                         </p>
                                     </div>
-                                    <div className="column is-full-mobile is-half-desktop">
-                                        <p className="heading has-text-weight-bold has-text-white is-hidden-mobile">{playerData.info.name}</p>
+                                    <div className="column is-full-mobile is-half-desktop is-9-widescreen">
+                                        <p className="title is-size-3-widescreen has-text-weight-bold has-text-white is-hidden-mobile">{playerData.info.name}</p>
                                         <p className="subtitle is-size-7-mobile is-size-7-tablet has-text-weight-semibold"> 
                                             <a className="has-text-warning" href={`/collections`}>{playerData.info.collection} </a>
                                             / 
@@ -90,10 +90,10 @@ export default function PlayerHeader(props) {
                                     <div className={`column is-hidden-mobile ${playerData.info.nickname != " " ? "is-full-desktop is-full-widescreen" : ""}`}>
                                         <p className="heading has-text-warning">Plays</p>
                                         <div className="tags is-left is-rounded has-text-weight-bold">
-                                            {playerData.plays.map(play => {
+                                            {playerData.plays.map((play, i) => {
                                                 if (play != "None") {
                                                     return (
-                                                        <span className="tag is-dark">
+                                                        <span className="tag is-dark" key={i}>
                                                             <RiBasketballLine />
                                                             &nbsp;{play}
                                                         </span> 
@@ -106,18 +106,18 @@ export default function PlayerHeader(props) {
                             </div>
                         </div>
                     </div>
-                    <div className="column is-3-desktop">
+                    <div className="column is-3-desktop is-2-widescreen">
                         <div className="columns is-mobile is-multiline">
                             <div className="column is-full-mobile is-hidden-desktop is-invisible-desktop">
                                 <p className="heading has-text-warning">Plays</p>
                                 <div className="tags is-left is-rounded has-text-weight-bold">
-                                    {playerData.plays.map(play => {
+                                    {playerData.plays.map((play, i) => {
                                         if (play != "None") {
                                             return (
-                                                <span className="tag is-dark">
+                                                <span className="tag is-dark" key={i}>
                                                     <RiBasketballLine />
                                                     &nbsp;{play}
-                                                </span> 
+                                                </span>
                                             )
                                         } else return;
                                     })}
