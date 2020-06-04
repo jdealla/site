@@ -12,17 +12,17 @@ export default function FilterSortBox(props) {
 
     const handleFilter = (cat, prop, value, innerCat="") => {
         if (searchOptions.filterValue === value) {
-            handleOptions({ ...searchOptions, cat: "", filterProp: "", filterValue: "" })
+            handleOptions({ ...searchOptions, cat: "", filterProp: "", filterValue: "", innerCat: "" })
         } else {
-            handleOptions({ ...searchOptions, cat: cat, filterProp: prop, filterValue: value, innerCat: innerCat})
+            handleOptions({ ...searchOptions, cat: cat, filterProp: prop, filterValue: value, innerCat: innerCat, sortProp: "", sortValue: "" })
         }
     }
 
     const handleSort = (cat, prop, value) => {
         if (searchOptions.sortValue === value && searchOptions.sortProp === prop) {
-            handleOptions({ ...searchOptions, cat: "", sortProp: "", sortValue: value })
+            handleOptions({ ...searchOptions, cat: "", sortProp: "", sortValue: value, innerCat: "" })
         } else {
-            handleOptions({ ...searchOptions, cat: cat, sortProp: prop, sortValue: value })
+            handleOptions({ ...searchOptions, cat: cat, sortProp: prop, sortValue: value, innerCat: "", filterProp: "", filterValue: "" })
         }
     }
 
@@ -144,7 +144,7 @@ export default function FilterSortBox(props) {
                 </div>
             </div>
             <div className="container">
-                <div className="columns">
+                <div className="columns is-mobile is-multiline">
                     <div className="column is-2-widescreen">
                         <p className="heading">Filter By Position: </p>
                         <div className="field has-addons">
@@ -186,7 +186,7 @@ export default function FilterSortBox(props) {
                         <Dropdown title="Passing T" items={getDropdownItems("passingT")} />
                         <Dropdown title="Defense T" items={getDropdownItems("defenseT")} />
                     </div>
-                    <div className="column">
+                    <div className="column is-4-widescreen">
                         <p className="heading">Filter By Animations: </p>
                         <Dropdown title="Lower Base" items={getDropdownItems("lowerBase")} />
                         <Dropdown title="Upper Base" items={getDropdownItems("upperBase")} />
