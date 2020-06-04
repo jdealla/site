@@ -63,14 +63,46 @@ export default function FilterSortBox(props) {
                     {formatName(stat)}
                 </a>)
             )
-            case "insideT": return;
-            case "shootingT": return;
-            case "isoT": return;
-            case "driveT": return;
-            case "freelanceT": return;
-            case "postT": return;
-            case "passingT": return;
-            case "defenseT": return;
+            case "insideT": return allProps.tendencies.inside.map((tend, i) => 
+                (<a className="dropdown-item" key={i} onClick={() => handleSort("tendencies", "inside", tend)}>
+                    {formatName(tend)}
+                </a>)
+            );
+            case "shootingT": return allProps.tendencies.shooting.map((tend, i) => 
+                (<a className="dropdown-item" key={i} onClick={() => handleSort("tendencies", "shooting", tend)}>
+                    {formatName(tend)}
+                </a>)
+            );
+            case "isoT": return allProps.tendencies.iso.map((tend, i) => 
+                (<a className="dropdown-item" key={i} onClick={() => handleSort("tendencies", "iso", tend)}>
+                    {formatName(tend)}
+                </a>)
+            );
+            case "driveT": return allProps.tendencies.drive.map((tend, i) => 
+                (<a className="dropdown-item" key={i} onClick={() => handleSort("tendencies", "drive", tend)}>
+                    {formatName(tend)}
+                </a>)
+            );
+            case "freelanceT": return allProps.tendencies.freelance.map((tend, i) => 
+                (<a className="dropdown-item" key={i} onClick={() => handleSort("tendencies", "freelance", tend)}>
+                    {formatName(tend)}
+                </a>)
+            );
+            case "postT": return allProps.tendencies.post.map((tend, i) => 
+                (<a className="dropdown-item" key={i} onClick={() => handleSort("tendencies", "post", tend)}>
+                    {formatName(tend)}
+                </a>)
+            );
+            case "passingT": return allProps.tendencies.passing.map((tend, i) => 
+                (<a className="dropdown-item" key={i} onClick={() => handleSort("tendencies", "passing", tend)}>
+                    {formatName(tend)}
+                </a>)
+            );
+            case "defenseT": return allProps.tendencies.defense.map((tend, i) => 
+                (<a className="dropdown-item" key={i} onClick={() => handleSort("tendencies", "defense", tend)}>
+                    {formatName(tend)}
+                </a>)
+            );
         }
     }
 
@@ -103,7 +135,7 @@ export default function FilterSortBox(props) {
                             </p>
                         </div>
                     </div>
-                    <div className="column is-5-widescreen">
+                    <div className="column is-4-widescreen">
                         <p className="heading">Sort By Stats: </p>
                         <Dropdown title="Shooting Stats" items={getDropdownItems("shootingStats")} />
                         <Dropdown title="Inside Stats" items={getDropdownItems("insideStats")} />
@@ -113,12 +145,20 @@ export default function FilterSortBox(props) {
                         <Dropdown title="Rebound Stats" items={getDropdownItems("reboundStats")} />
                         <Dropdown title="Potential Stats" items={getDropdownItems("potentialStats")} />
                     </div>
-                    <div className="column is-2-widescreen">
-                        <p className="heading">Sort By Tendency: </p>
-                        {/* <Dropdown title="Tendencies" items={getDropdownItems("tendencies")} /> */}
+                    <div className="column is-4-widescreen">
+                        <p className="heading">Sort By Tendencies: </p>
+                        <Dropdown title="Inside T" items={getDropdownItems("insideT")} />
+                        <Dropdown title="Shooting T" items={getDropdownItems("shootingT")} />
+                        <Dropdown title="Iso T" items={getDropdownItems("isoT")} />
+                        <Dropdown title="Drive T" items={getDropdownItems("driveT")} />
+                        <Dropdown title="Freelance T" items={getDropdownItems("freelanceT")} />
+                        <Dropdown title="Post T" items={getDropdownItems("postT")} />
+                        <Dropdown title="Passing T" items={getDropdownItems("passingT")} />
+                        <Dropdown title="Defense T" items={getDropdownItems("defenseT")} />
+
                     </div>
                     <div className="column">
-                        <p className="heading">Filter By Animation: </p>
+                        <p className="heading">Filter By Animations: </p>
                     </div>
                 </div>
             </div>

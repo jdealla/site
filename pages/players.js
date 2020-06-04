@@ -47,9 +47,7 @@ export default function Players({ allPlayers, allProps }) {
                 } else
                     return 1;        
             })
-            console.log(filtered.slice(0, 2))
         }
-        console.log(searchOptions);
         setPlayers(filtered);
     }, [searchOptions])
 
