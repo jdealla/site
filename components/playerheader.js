@@ -1,21 +1,22 @@
 import React from "react";
+import { RiBasketballLine } from "react-icons/ri";
 
 import ShotChart from "./shotchart";
-import Dropdown from "./dropdown";
 import ImageCloud from "./imagecloud";
+// import Dropdown from "./dropdown";
 
 export default function PlayerHeader(props) {
     const { playerData, shoe, handleShoe, } = props;
 
-    const renderShoeList = () => {
-        return getAllShoes().map((shoe, i) => {
-            return (
-                <a key={i} className="dropdown-item" onClick={() => handleShoe(shoe)} >
-                    {shoe.name}
-                </a>
-            )
-        })
-    }
+    // const renderShoeList = () => {
+    //     return getAllShoes().map((shoe, i) => {
+    //         return (
+    //             <a key={i} className="dropdown-item" onClick={() => handleShoe(shoe)} >
+    //                 {shoe.name}
+    //             </a>
+    //         )
+    //     })
+    // }
 
     // const shoeButton = (
     //     <button className="button is-dark is-small is-centered">
@@ -27,169 +28,128 @@ export default function PlayerHeader(props) {
     // )
 
     return (
-        <div className="columns is-mobile is-multiline is-player-card mobile-padding" style={{ justifyContent:"space-around" }}>
-            <div className="column is-7-mobile is-4-tablet is-one-fifth-desktop is-one-fifth-fullhd ">
-                <ImageCloud src={`players/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width={489} />
-            </div>
-            <div className="column is-multiline is-centered is-full-mobile is-5-desktop is-5-tablet is-6-widescreen is-6-fullhd is-player-info">
-			    <div className="columns is-vcentered is-flex">
-                    <div className="column is-half-mobile is-3-desktop is-3-tablet is-2-widescreen is-2-fullhd">
-                        <p className="heading has-text-warning" style={{ marginBottom:0 }}>Overall</p>
-                        <p className="title is-1 title has-text-white">
-                            {playerData.info.overall}
-                        </p>
-                    </div>
-                    <div className="column is-half-mobile">
-                        <p className="title is-size-3 has-text-weight-bold has-text-white">{playerData.info.name}</p>
-                        <p className="subtitle is-paddingless is-size-6-desktop is-size-7-mobile has-text-weight-semibold is-size-7-tablet"> 
-                            <a className="has-text-warning" href={`/collections`}>{playerData.info.collection} </a>
-                            / 
-                            <a className="has-text-warning" href={`/collection/${playerData.info.collection.toLowerCase().replace(/ /g, "-")}/theme/${playerData.info.theme.toLowerCase().replace(/ /g, "-")}`}> {playerData.info.theme} </a>
-                        </p>
-                    </div>
-                </div>
-			  
-                <div className="subtitle is-size-6 is-size-7-mobile has-text-white">
-                    <div className="columns is-multiline is-vcentered has-text-left is-flex">
-                        <div className="column is-one-quarter is-3-mobile">
-                            <p className="heading has-text-warning">Offense</p>
-                            <p className="title is-5 title has-text-white">{playerData.info.off_overall}</p>
-                        </div>
-                        <div className="column is-one-quarter is-3-mobile">
-                            <p className="heading has-text-warning">Defense</p>
-                            <p className="title is-5 has-text-white">{playerData.info.def_overall}</p>
-                        </div>
-                        <div className="column is-one-quarter is-3-mobile">
-                            <p className="heading has-text-warning">Height</p>
-                            <p className="title is-5 has-text-white">{playerData.info.height}</p>
-                        </div>
-                        <div className="column is-one-quarter is-3-mobile">
-                            <p className="heading has-text-warning">Weight</p>
-                            <p className="title is-5 has-text-white">{playerData.info.weight} lbs</p>
-                        </div>
-						<div className="column is-one-quarter is-3-mobile">
-                            <p className="heading has-text-warning">Position</p>
-                            <p className="title is-5 has-text-white">{playerData.info.position}{playerData.info.secondary_position != null ? `/${playerData.info.secondary_position}` : ""}</p>
-                        </div>
-                        <div className="column is-one-quarter is-4-mobile">
-                                <p className="heading has-text-warning">Team</p>
-                                <p className="title is-6 has-text-white">{playerData.info.team}</p>
-                        </div>
-                        <div className="column is-one-quarter is-4-mobile">
-                                <p className="heading has-text-warning">From</p>
-                                <p className="title is-6 has-text-white">{playerData.info.college}</p>
-                        </div>
-                        {
-                            playerData.info.nickname != " " ? (
-                                <div className="column is-one-quarter is-4-mobile">
-                                    <div>
+        <div className="columns is-mobile is-multiline is-player-card mobile-padding">
+            <div className="column is-full-mobile is-full-desktop is-full-widescreen">
+                <div className="columns is-mobile is-multiline">
+                    <div className="column is-full-mobile is-8-desktop is-four-fifths-widescreen">
+                        <div className="columns is-mobile is-multiline">
+                            <div className="column is-half-mobile is-5-desktop is-3-widescreen">
+                                <figure className="image is-3by4">
+                                    <ImageCloud src={`players/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width={400} />
+                                </figure>
+                            </div>
+                            <div className="column is-half-mobile is-half-tablet is-6-desktop is-8-widescreen is-player-info">
+                                <div className="columns is-mobile is-multiline">
+                                    <div className="column is-hidden-mobile is-one-third-tablet is-half-desktop is-2-widescreen">
+                                        <p className="heading has-text-warning " style={{ marginBottom:0 }}>Overall</p>
+                                        <p className="title is-size-7-mobile is-size-4-desktop is-size-1-widescreen has-text-white">
+                                            {playerData.info.overall}
+                                        </p>
+                                    </div>
+                                    <div className="column is-full-mobile is-half-desktop is-9-widescreen">
+                                        <p className="title is-size-3-widescreen has-text-weight-bold has-text-white is-hidden-mobile">{playerData.info.name}</p>
+                                        <p className="subtitle is-size-7-mobile is-size-7-tablet has-text-weight-semibold"> 
+                                            <a className="has-text-warning" href={`/collections`}>{playerData.info.collection} </a>
+                                            / 
+                                            <a className="has-text-warning" href={`/collection/${playerData.info.collection.toLowerCase().replace(/ /g, "-")}/theme/${playerData.info.theme.toLowerCase().replace(/ /g, "-")}`}> {playerData.info.theme} </a>
+                                        </p>
+                                    </div>
+                                    <br />
+                                    <div className="column is-hidden-mobile is-3-desktop">
+                                        <p className="heading has-text-warning">Offense</p>
+                                        <p className="title is-size-6-mobile is-size-6-desktop has-text-white">{playerData.info.off_overall}</p>
+                                    </div>
+                                    <div className="column is-hidden-mobile is-3-desktop">
+                                        <p className="heading has-text-warning">Defense</p>
+                                        <p className="title is-size-7-mobile is-size-6-desktop has-text-white">{playerData.info.def_overall}</p>
+                                    </div>
+                                    <div className="column is-half-mobile is-2-desktop is-3-widescreen">
+                                        <p className="heading has-text-warning">Height</p>
+                                        <p className="title is-size-7-mobile is-size-6-desktop has-text-white">{playerData.info.height}"</p>
+                                    </div>
+                                    <div className="column is-half-mobile is-3-desktop">
+                                        <p className="heading has-text-warning">Weight</p>
+                                        <p className="title is-size-7-mobile is-size-6-desktop has-text-white">{playerData.info.weight} lbs</p>
+                                    </div>
+                                    <div className="column is-3-desktop">
+                                        <p className="heading has-text-warning">Position</p>
+                                        <p className="title is-size-7-mobile is-size-6-desktop has-text-white">{playerData.info.position}{playerData.info.secondary_position != null ? `/${playerData.info.secondary_position}` : ""}</p>
+                                    </div>
+                                    <div className="column is-3-desktop">
+                                        <p className="heading has-text-warning">Team</p>
+                                        <p className="title is-size-7-mobile is-size-6-desktop has-text-white">{playerData.info.team}</p>
+                                    </div>
+                                    <div className="column is-half-mobile is-4-desktop is-3-widescreen">
+                                        <p className="heading has-text-warning">From</p>
+                                        <p className="title is-size-7-mobile is-size-6-desktop has-text-white">{playerData.info.college}</p>
+                                    </div>
+                                    <div className={`column is-hidden-mobile ${playerData.info.nickname == " " ? "is-hidden" : "is-3-desktop"}`}>
                                         <p className="heading has-text-warning">Nickname</p>
-                                        <p className="title is-6 has-text-white">{playerData.info.nickname}</p>
+                                        <p className="title is-size-7-mobile is-size-6-desktop has-text-white">{playerData.info.nickname}</p>
+                                    </div>
+                                    <div className={`column is-hidden-mobile ${playerData.info.nickname != " " ? "is-full-desktop is-full-widescreen" : ""}`}>
+                                        <p className="heading has-text-warning">Plays</p>
+                                        <div className="tags is-left is-rounded has-text-weight-bold">
+                                            {playerData.plays.map((play, i) => {
+                                                if (play != "None") {
+                                                    return (
+                                                        <span className="tag is-dark" key={i}>
+                                                            <RiBasketballLine />
+                                                            &nbsp;{play}
+                                                        </span> 
+                                                    )
+                                                } else return;
+                                            })}
+                                        </div>
                                     </div>
                                 </div>
-                            ) : ""
-                        }
-                    </div>
-                    <div className="columns has-text-left">
-                        <div className="column">
-                            <p className="heading has-text-warning">Plays</p>
-                            <div className="tags is-left is-rounded has-text-weight-bold">
-                                {
-                                    playerData.info.play1 != "None" ? (
-                                        <span className="tag is-dark">
-                                            <span className="icon" style={{ color:"#aaa"}}>
-                                                <i className="fas fa-basketball-ball"></i>
-                                            </span> 
-                                            &nbsp;{playerData.info.play1}
-                                        </span> 
-                                    ) : ""    
-                                }
-                                
-                                {
-                                    playerData.info.play2 != "None" ? (
-                                        <span className="tag is-dark">
-                                            <span className="icon" style={{ color:"#aaa"}}>
-                                                <i className="fas fa-basketball-ball"></i>
-                                            </span>
-                                            &nbsp;{playerData.info.play2}
-                                        </span> 
-                                    ) : ""
-                                }
-                                
-                                {
-                                    playerData.info.play3 != "None" ? (
-                                        <span className="tag is-dark">
-                                            <span className="icon" style={{ color:"#aaa"}}>
-                                                <i className="fas fa-basketball-ball"></i>
-                                            </span> 
-                                            &nbsp;{playerData.info.play3}
-                                        </span> 
-                                    ) : ""
-                                }
-                                
-                                {
-                                    playerData.info.play4 != "None" ? (
-                                        <span className="tag is-dark">
-                                            <span className="icon" style={{ color:"#aaa"}}>
-                                                <i className="fas fa-basketball-ball"></i>
-                                            </span> 
-                                            &nbsp;{playerData.info.play4}
-                                        </span> 
-                                    ) : ""
-                                }
-                                
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="container">
-                    <div className="columns is-left">
-                        <div className="column is-half">
-                            {/* {
-                                (shoe == undefined || shoe == null) ? (
-                                    <Dropdown hover={true} items={renderShoeList()} customButton={shoeButton} />
-                                ) : (
-                                    <article className="media">
-                                        <div className="media-content">
-                                            <div className="content">
-                                                <p className="title">{shoe.brand}</p>
-                                                <p className="subtitle">{shoe.name}</p>
-                                            </div>
-                                        </div>
-                                        <div className="media-right">
-                                            <button className="delete" onClick={handleShoe(null)}></button>
-                                        </div>
-                                    </article>
-                                )
-                            } */}
+                    <div className="column is-3-desktop is-2-widescreen">
+                        <div className="columns is-mobile is-multiline">
+                            <div className="column is-full-mobile is-hidden-desktop is-invisible-desktop">
+                                <p className="heading has-text-warning">Plays</p>
+                                <div className="tags is-left is-rounded has-text-weight-bold">
+                                    {playerData.plays.map((play, i) => {
+                                        if (play != "None") {
+                                            return (
+                                                <span className="tag is-dark" key={i}>
+                                                    <RiBasketballLine />
+                                                    &nbsp;{play}
+                                                </span>
+                                            )
+                                        } else return;
+                                    })}
+                                </div>
+                            </div>
+                            <div className="column is-full-mobile">
+                                <p className="heading has-text-warning">Hot Zones</p>
+                                <ShotChart hotzones={playerData.hotzones} />  
+                                <p className="title"></p>
+                                <p className="heading has-text-warning">Badges</p>
+                                <div className="level">   
+                                    <div className="level-item is-size-5 has-text-centered" style={{ justifyContent:"space-evenly" }}>
+                                        <figure className="image is-64x64">
+                                            <ImageCloud src="icons/icon_badge_bronze.png" width={64} />
+                                            <p className="is-overlay inline-number-badge">{playerData.badges.totalBadges.bronzeBadges}</p>
+                                        </figure>
+                                        <figure className="image is-64x64">
+                                            <ImageCloud src="icons/icon_badge_silver.png" width={64} />
+                                            <p className="is-overlay inline-number-badge">{playerData.badges.totalBadges.silverBadges}</p>
+                                        </figure>
+                                        <figure className="image is-64x64">
+                                            <ImageCloud src="icons/icon_badge_gold.png" width={64} />
+                                            <p className="is-overlay inline-number-badge">{playerData.badges.totalBadges.goldBadges}</p>
+                                        </figure>
+                                        <figure className="image is-64x64">
+                                            <ImageCloud src="icons/icon_badge_hof.png" width={64} />
+                                            <p className="is-overlay inline-number-badge">{playerData.badges.totalBadges.hofBadges}</p>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div className="column is-11-mobile is-one-fifth-desktop is-3-tablet">
-                <p className="heading has-text-warning">Hot Zones</p>
-                <ShotChart hotzones={playerData.hotzones} />  
-                <p className="title"></p>
-                <p className="heading has-text-warning">Badges</p>
-                <div className="level ">   
-                    <div className="level-item is-size-5 has-text-centered" style={{ justifyContent:"space-evenly" }}>
-                        <figure className="image is-64x64">
-                            <ImageCloud src="icons/icon_badge_bronze.png" width={64} />
-                            <p className="is-overlay total_badges_style">{playerData.badges.totalBadges.bronzeBadges}</p>
-                        </figure>
-                        <figure className="image is-64x64">
-                            <ImageCloud src="icons/icon_badge_silver.png" width={64} />
-                            <p className="is-overlay total_badges_style">{playerData.badges.totalBadges.silverBadges}</p>
-                        </figure>
-                        <figure className="image is-64x64">
-                            <ImageCloud src="icons/icon_badge_gold.png" width={64} />
-                            <p className="is-overlay total_badges_style">{playerData.badges.totalBadges.goldBadges}</p>
-                        </figure>
-                        <figure className="image is-64x64">
-                            <ImageCloud src="icons/icon_badge_hof.png" width={64} />
-                            <p className="is-overlay total_badges_style">{playerData.badges.totalBadges.hofBadges}</p>
-                        </figure>
                     </div>
                 </div>
             </div>

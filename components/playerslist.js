@@ -1,11 +1,12 @@
 import React, { Fragment } from "react";
 import { useRouter } from "next/router";
+import { ratingColor } from "../lib/helpers";
 
 import OverallImage from "./overallimage";
 import ImageCloud from "./imagecloud";
 
 export default function PlayersList(props) {
-    const { players, perPage, page } = props;
+    const { players, page, searchOptions } = props;
     const router = useRouter()
 
     const handleClick = (e, playerId) => {
@@ -13,51 +14,62 @@ export default function PlayersList(props) {
         router.push(`/player/${playerId}`)
     }
 
-    return players.map(player => {
-        return (
-            <Fragment key={player.id}>
-                <div className="columns is-mobile is-gapless is-marginless" id="player-link" onClick={(e) => handleClick(e, player.id)}>
-                    <div className="column is-one-fifth-mobile is-2-tablet">
-                        <div className="columns is-mobile is-multiline">
-                            <div className="column is-3-desktop is-4-mobile">
-                                <figure className="image is-48x48">
-                                    <ImageCloud src={`players/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} width={48} />
+    return (
+        <tbody>
+            {players.map(player => {
+                return (
+                    <tr onClick={(e) => handleClick(e, player.info.id)} key={player.info.id}>
+                        <td>
+                            <div className="container is-flex">
+                                <figure className="image is-32x32">
+                                    <ImageCloud src={`players/${player.info.name.replace(/( |')/g, "_").toLowerCase()}_${player.info.id}.jpg`} width={48} />
                                 </figure>
+                                <p>{player.info.name}</p>
                             </div>
-                            <div className="column is-hidden-mobile is-size-7-mobile">
-                                {player.name}
+                        </td>
+                        <td style={{ textAlign: "center" }}>
+                            <div className="container">
+                                <OverallImage overall={player.info.overall} />
+                                <p className="is-overlay has-text-white inline-number-ovr">
+                                    {player.info.overall}
+                                </p>
                             </div>
-                        </div>
-                    </div>
-                    <div className="column is-one-fifth-mobile is-1-tablet">
-                        <OverallImage overall={player.overall} />
-                    </div>
-                    <div className="column is-one-fifth-mobile is-1-tablet">
-                        {player.overall}
-                    </div>
-                    <div className="column is-one-fifth-mobile is-1-tablet">
-                        {player.position}{player.secondary_position != null ? `/${player.secondary_position}` : ""}
-                    </div>
-                    <div className="column is-one-fifth-mobile is-1-tablet">
-                        {player.height}
-                    </div>
-                    <div className="column is-hidden-mobile is-1-tablet">
-                        {player.weight} lbs
-                    </div>
-                    {/* <div className="column is-hidden-mobile is-2-tablet">
-                        <div className="tags has-addons">
-                            <span className="tag HOF">{player.badges.totalBadges.hofBadges}</span>
-                            <span className="tag Gold">{player.badges.totalBadges.goldBadges}</span>
-                            <span className="tag Silver">{player.badges.totalBadges.silverBadges}</span>
-                            <span className="tag Bronze">{player.badges.totalBadges.bronzeBadges}</span>
-                        </div>
-                    </div> */}
-                    {/* <div className={`column is-2-tablet ${sortedBy == "" ? "is-hidden" : "has-text-weight-semibold"}`}>
-                        {player[sortedBy.propName]}
-                    </div> */}
-                </div>
-                <div className="divider is-right"></div>
-            </Fragment>
-        )
-    }).slice((page * perPage) - perPage);
+                        </td>
+                        <td style={{ textAlign: "center" }}>{player.info.position}{player.info.secondary_position != null ? `/${player.info.secondary_position}` : ""} </td>
+                        <td style={{ textAlign: "center" }}>{ratingColor(player.info.off_overall)}</td>
+                        <td style={{ textAlign: "center" }}>{ratingColor(player.info.def_overall)}</td>
+                        <td style={{ textAlign: "center" }}>{player.info.height}"</td>
+                        <td>
+                            <div className="level">   
+                                <div className="level-item has-text-centered" style={{ justifyContent:"space-evenly" }}>
+                                    <figure className="image is-24x24">
+                                        <ImageCloud src="icons/icon_badge_bronze.png" width={24} />
+                                        <p className="is-overlay has-text-white inline-number-ovr">{player.badges.totalBadges.bronzeBadges}</p>
+                                    </figure>
+                                    <figure className="image is-24x24">
+                                        <ImageCloud src="icons/icon_badge_silver.png" width={24} />
+                                        <p className="is-overlay has-text-white inline-number-ovr">{player.badges.totalBadges.silverBadges}</p>
+                                    </figure>
+                                    <figure className="image is-24x24">
+                                        <ImageCloud src="icons/icon_badge_gold.png" width={24} />
+                                        <p className="is-overlay has-text-white inline-number-ovr">{player.badges.totalBadges.goldBadges}</p>
+                                    </figure>
+                                    <figure className="image is-24x24">
+                                        <ImageCloud src="icons/icon_badge_hof.png" width={24} />
+                                        <p className="is-overlay has-text-white inline-number-ovr">{player.badges.totalBadges.hofBadges}</p>
+                                    </figure>
+                                </div>
+                            </div>
+                        </td>
+                        <td className={searchOptions.sortProp == "" ? "is-hidden" : ""}>
+                            {(searchOptions.cat != "" && searchOptions.sortProp != "" && searchOptions.sortValue != "") ?
+                                player[searchOptions.cat][searchOptions.sortProp][searchOptions.sortValue]
+                                : ""
+                            }
+                        </td>
+                    </tr>
+                )
+            }).slice(page * 15, (page * 15) + 15)}
+        </tbody>
+    )
 }

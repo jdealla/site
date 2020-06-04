@@ -4,12 +4,13 @@ import { useRouter } from "next/router";
 import { getDates, getPlayersByDate } from "../../lib/players";
 
 import PlayersCardView from "../../components/playerscardview";
+import Loader from "../../components/loader";
 
 export default function UpdatePage({ date, players }) {
     const router = useRouter();
 
     if (router.isFallback) {
-        return <h1>Loading...</h1>
+        return <Loader />
     }
 
     return (
@@ -17,6 +18,7 @@ export default function UpdatePage({ date, players }) {
             <Head>
                 <title>{`MyTeam Updates (${date}) | 2KDB`}</title>
                 <meta name="description" content={`NBA 2K20 MyTeam Card Update (${date})`} />
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
             </Head>
             <div className="container">
                 <section className="hero is-bold">

@@ -7,6 +7,7 @@ import { getPlayerData } from "../../pages/api/player/[id]";
 
 import BadgeContainer from "../../components/badgecontainer";
 import Attributes from "../../components/attributes";
+import Loader from "../../components/loader";
 
 const PlayerHeader = dynamic(import("../../components/playerheader"));
 
@@ -16,7 +17,7 @@ export default function Player({ playerData }) {
     const { isFallback } = useRouter();
 
     if (isFallback) {
-        return <h1>Loading...</h1>
+        return <Loader />
     }
 
     const handleShoe = (shoe) => {
@@ -33,7 +34,7 @@ export default function Player({ playerData }) {
                     <Attributes attributes={playerData.stats.playmaking} attrName="Playmaking" />
                 </div>
                 <div className="column is-one-fifth-tablet is-half-mobile is-one-fifth-desktop">
-				    <Attributes attributes={playerData.stats.atheleticism} attrName="Atheleticism" />
+				    <Attributes attributes={playerData.stats.athleticism} attrName="Athleticism" />
                     <Attributes attributes={playerData.stats.defense} attrName="Defense" />
                     <Attributes attributes={playerData.stats.rebound} attrName="Rebound" />
                     <Attributes attributes={playerData.stats.potential} attrName="Potential" />
@@ -114,13 +115,16 @@ export default function Player({ playerData }) {
         <>
             <Head>
                 <title>{`${playerData.info.name} MyTeam Player Page | 2KDB`}</title>
-                <meta name="description" content={`NBA 2K20 MyTeam Card Description of ${playerData.info.name}`} key={playerData.info.id} />
+                <meta property="og:title" content={`${playerData.info.name} MyTeam Player Page | 2KDB`} key={"title" + playerData.info.id} />
+                <meta name="description" content={`NBA 2K20 MyTeam Card Description of ${playerData.info.name}`} />
+                <meta property="og:description" content={`NBA 2K20 MyTeam Card Description of ${playerData.info.name}`} key={"description" + playerData.info.id} />
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                <html lang="en" key="lang-en" />
             </Head>
 			<div className="is-player-card-bg is-hidden-mobile">
                 <img src="/playercard_bg.png" alt="player card bg" />
             </div>
             <div className="container is-fluid mobile-nopadding">
-			
                 <PlayerHeader playerData={playerData} shoe={shoe} handleShoe={handleShoe} />
 
                 <div className="columns ">

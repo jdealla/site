@@ -1,5 +1,6 @@
 import React from "react";
 import { formatName, levelToNum } from "../lib/helpers";
+import { ratingColor } from "../lib/helpers";
 
 export default function CompareTable(props) {
     const { tableName, firstName, firstStats, secondName, secondStats, diff } = props;
@@ -18,19 +19,18 @@ export default function CompareTable(props) {
         }
 
         return (
-            <td className={`has-text-${diffColor} has-text-centered has-text-weight-semibold`}>{diff}</td>
+            <span style={{position: "absolute", marginLeft: 10 }} className={`has-text-${diffColor} has-text-weight-semibold`}>{diff}</span>
         )
     }
-
+	
     const getTableValues = () => {
         let table = [], i = 0;
         for(let key in firstStats) {
             let newRow = (
                 <tr key={i++}>
                     <td className="has-text-weight-semibold">{formatName(key)}</td>
-                    <td className="has-text-centered">{firstStats[key]}</td>
-                    {diff === false ? "" : difference(firstStats[key], secondStats[key])}
-                    <td className="has-text-centered">{secondStats[key]}</td>
+                    <td className="has-text-centered">{ratingColor(firstStats[key])} {diff === false ? "" : difference(firstStats[key], secondStats[key])}</td> 
+                    <td className="has-text-centered">{ratingColor(secondStats[key])} {diff === false ? "" : difference(secondStats[key], firstStats[key])}</td>
                 </tr>
             )
             table.push(newRow)
@@ -38,19 +38,15 @@ export default function CompareTable(props) {
         return table;
     }
 
-    return (
-        <table className="table is-striped is-fullwidth">
-            <thead>
-                <tr>
-                    <td className="has-text-weight-semibold">{tableName}</td>
-                    <td className="has-text-weight-semibold has-text-centered">{firstName}</td>
-                    {diff === false ? "" : <td className="has-text-weight-semibold has-text-centered">Difference</td>}
-                    <td className="has-text-weight-semibold has-text-centered">{secondName}</td>
-                </tr>
-            </thead>
-            <tbody>
-                {getTableValues()}
-            </tbody>
-        </table>
+    return ( 
+	    <tbody>
+            <tr>
+                <td className="compare-thead has-text-weight-semibold">{tableName}</td>
+                <td className="compare-thead has-text-weight-semibold has-text-centered">{firstName}</td>
+                <td className="compare-thead has-text-weight-semibold has-text-centered">{secondName}</td>
+            </tr>
+		    {getTableValues()}
+			<td style={{ border:0 }}></td> 
+		</tbody>
     )
 }
