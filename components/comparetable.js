@@ -15,7 +15,7 @@ export default function CompareTable(props) {
             diffColor = "";
             diff = "-";
         } else {
-            diffColor = "danger"	
+            diffColor = "danger"
         }
 
         return (
@@ -38,18 +38,15 @@ export default function CompareTable(props) {
         return table;
     }
 
-    return (
-        <table className="table is-striped is-fullwidth">
-            <thead>
-                <tr>
-                    <td className="has-text-weight-semibold">{tableName}</td>
-                    <td className="has-text-weight-semibold has-text-centered">{firstName}</td>
-                    <td className="has-text-weight-semibold has-text-centered">{secondName}</td>
-                </tr>
-            </thead>
-            <tbody>
-                {getTableValues()}
-            </tbody>
-        </table>
+    return ( 
+	    <tbody>
+            <tr>
+                <td className="compare-thead has-text-weight-semibold">{tableName}</td>
+                <td className="compare-thead has-text-weight-semibold has-text-centered">{firstName}</td>
+                <td className="compare-thead has-text-weight-semibold has-text-centered">{secondName}</td>
+            </tr>
+		    {getTableValues()}
+			<td style={{ border:0 }}></td> 
+		</tbody>
     )
 }
