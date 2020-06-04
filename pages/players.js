@@ -7,10 +7,10 @@ import { formatName } from "../lib/helpers"
 const FilterSortBox = dynamic(import("../components/filtersortbox"));
 const PlayersList = dynamic(import("../components/playerslist"));
 
-export default function Players({ allPlayers, allProps }) {
+export default function Players({ allPlayers, allProps, allAnimations }) {
     const [page, setPage] = useState(0)
     const [players, setPlayers] = useState(allPlayers);
-    const [searchOptions, setSearchOptions] = useState({ searchValue: "", direction: "", cat: "", filterProp: "", filterValue: "", sortProp: "", sortValue: "" })
+    const [searchOptions, setSearchOptions] = useState({ searchValue: "", direction: "", cat: "", innerCat: "", filterProp: "", filterValue: "", sortProp: "", sortValue: "" })
 
     const handlePage = (dir) => {
         if (dir === "prev") {
@@ -26,12 +26,16 @@ export default function Players({ allPlayers, allProps }) {
     }
 
     useEffect(() => {
-        const { searchValue, cat, filterProp, filterValue, sortProp, sortValue} = searchOptions;
+        const { searchValue, cat, innerCat, filterProp, filterValue, sortProp, sortValue} = searchOptions;
 
         let filtered = allPlayers.filter(player => player.info.name.toLowerCase().includes(searchValue));
 
         if (filterProp != "" && filterValue != "") {
-            filtered = filtered.filter(player => player[cat][filterProp] === filterValue);
+            if (innerCat != "") {
+                filtered = filtered.filter(player => player[cat][innerCat][filterProp] === filterValue)
+            } else {
+                filtered = filtered.filter(player => player[cat][filterProp] === filterValue);
+            }
         } else if (sortProp != "" && sortValue != "") {
             filtered = filtered.sort((a, b) => {
                 if (a[cat][sortProp][sortValue] > b[cat][sortProp][sortValue])
@@ -64,7 +68,7 @@ export default function Players({ allPlayers, allProps }) {
                     </div>
                 </div>
                 <div className="box">
-                    <FilterSortBox allProps={allProps} searchOptions={searchOptions} handleOptions={handleOptions} />
+                    <FilterSortBox allProps={allProps} allAnimations={allAnimations} searchOptions={searchOptions} handleOptions={handleOptions} />
 
                     <table className="table is-scrollable is-hoverable">
                         <thead>
@@ -87,7 +91,7 @@ export default function Players({ allPlayers, allProps }) {
                     <div className="column is-full">
                         <nav className="pagination is-centered" role="navigation" aria-label="pagination">
                             <a className="pagination-previous" onClick={() => handlePage("prev")} disabled={page <= 0}>Previous</a>
-                            <a className="pagination-next" onClick={() => handlePage("next")} disabled={page * 15 >= allPlayers.length}>Next page</a>
+                            <a className="pagination-next" onClick={() => handlePage("next")} disabled={page * 15 >= players.length}>Next page</a>
                         </nav>
                     </div>
                 </div>
@@ -103,11 +107,11 @@ export async function getStaticProps() {
 
     const allAnimations = getAllAnimations(allPlayers);
 
-    console.log(allAnimations);
     return {
         props: {
             allPlayers,
-            allProps
+            allProps,
+            allAnimations
         },
         unstable_revalidate: 1
     }

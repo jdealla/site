@@ -4,17 +4,17 @@ import { formatName } from "../lib/helpers";
 import Dropdown from "./dropdown";
 
 export default function FilterSortBox(props) {
-    const { allProps, searchOptions, handleOptions, } = props;
+    const { allProps, allAnimations, searchOptions, handleOptions, } = props;
 
     const handleChange = (e) => {
         handleOptions({...searchOptions, searchValue: e.target.value })
     }
 
-    const handleFilter = (cat, prop, value) => {
+    const handleFilter = (cat, prop, value, innerCat="") => {
         if (searchOptions.filterValue === value) {
             handleOptions({ ...searchOptions, cat: "", filterProp: "", filterValue: "" })
         } else {
-            handleOptions({ ...searchOptions, cat: cat, filterProp: prop, filterValue: value})
+            handleOptions({ ...searchOptions, cat: cat, filterProp: prop, filterValue: value, innerCat: innerCat})
         }
     }
 
@@ -103,6 +103,36 @@ export default function FilterSortBox(props) {
                     {formatName(tend)}
                 </a>)
             );
+            case "lowerBase": return allAnimations.shooting.lower_base_a.map((ani, i) =>
+                (<a className="dropdown-item" key={i} onClick={() => handleFilter("animations", "lower_base_a", ani, "shooting")}>
+                    {ani}
+                </a>)
+            );
+            case "upperBase": return allAnimations.shooting.upper_release_a.map((ani, i) =>
+                (<a className="dropdown-item" key={i} onClick={() => handleFilter("animations", "upper_base_a", ani, "shooting")}>
+                    {ani}
+                </a>)
+            );
+            case "dribbleStyle": return allAnimations.ballhandle.dribble_style_a.map((ani, i) =>
+                (<a className="dropdown-item" key={i} onClick={() => handleFilter("animations", "dribble_style_a", ani, "ballhandle")}>
+                    {ani}
+                </a>)
+            );
+            case "sizeUpPackage": return allAnimations.ballhandle.size_up_packages_a.map((ani, i) =>
+                (<a className="dropdown-item" key={i} onClick={() => handleFilter("animations", "size_up_package_a", ani, "ballhandle")}>
+                    {ani}
+                </a>)
+            );
+            case "movingCross": return allAnimations.ballhandle.moving_crossover_a.map((ani, i) =>
+                (<a className="dropdown-item" key={i} onClick={() => handleFilter("animations", "moving_crossover_a", ani, "ballhandle")}>
+                    {ani}
+                </a>)
+            );
+            case "movingBtb": return allAnimations.ballhandle.moving_behind_the_back_a.map((ani, i) =>
+                (<a className="dropdown-item" key={i} onClick={() => handleFilter("animations", "moving_behind_the_back_a", ani, "ballhandle")}>
+                    {ani}
+                </a>)
+            );
         }
     }
 
@@ -155,10 +185,16 @@ export default function FilterSortBox(props) {
                         <Dropdown title="Post T" items={getDropdownItems("postT")} />
                         <Dropdown title="Passing T" items={getDropdownItems("passingT")} />
                         <Dropdown title="Defense T" items={getDropdownItems("defenseT")} />
-
                     </div>
                     <div className="column">
                         <p className="heading">Filter By Animations: </p>
+                        <Dropdown title="Lower Base" items={getDropdownItems("lowerBase")} />
+                        <Dropdown title="Upper Base" items={getDropdownItems("upperBase")} />
+                        <Dropdown title="Dribble Style" items={getDropdownItems("dribbleStyle")} />
+                        <Dropdown title="Sizeup Package" items={getDropdownItems("sizeUpPackage")} />
+                        <Dropdown title="Moving Crossover" items={getDropdownItems("movingCross")} />
+                        <Dropdown title="Moving Btb" items={getDropdownItems("movingBtb")} />
+
                     </div>
                 </div>
             </div>
