@@ -6,7 +6,7 @@ import OverallImage from "./overallimage";
 import ImageCloud from "./imagecloud";
 
 export default function PlayersList(props) {
-    const { players, page } = props;
+    const { players, page, searchOptions } = props;
     const router = useRouter()
 
     const handleClick = (e, playerId) => {
@@ -60,6 +60,12 @@ export default function PlayersList(props) {
                                     </figure>
                                 </div>
                             </div>
+                        </td>
+                        <td className={searchOptions.sortProp == "" ? "is-hidden" : ""}>
+                            {(searchOptions.cat != "" && searchOptions.sortProp != "" && searchOptions.sortValue != "") ?
+                                player[searchOptions.cat][searchOptions.sortProp][searchOptions.sortValue]
+                                : ""
+                            }
                         </td>
                     </tr>
                 )

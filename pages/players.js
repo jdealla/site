@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { getAllPlayersWithAllStats, getAllProps } from "../lib/players";
+import { formatName } from "../lib/helpers"
 
 const FilterSortBox = dynamic(import("../components/filtersortbox"));
 const PlayersList = dynamic(import("../components/playerslist"));
@@ -25,13 +26,30 @@ export default function Players({ allPlayers, allProps }) {
     }
 
     useEffect(() => {
-        let filtered = allPlayers.filter(player => player.info.name.toLowerCase().includes(searchOptions.searchValue));
+        const { searchValue, cat, filterProp, filterValue, sortProp, sortValue} = searchOptions;
 
-        if (searchOptions.filterProp != "" && searchOptions.filterValue != "") {
-            console.log(searchOptions);
-            filtered = filtered.filter(player => player[searchOptions.cat][searchOptions.filterProp] === searchOptions.filterValue);
+        let filtered = allPlayers.filter(player => player.info.name.toLowerCase().includes(searchValue));
+
+        if (filterProp != "" && filterValue != "") {
+            filtered = filtered.filter(player => player[cat][filterProp] === filterValue);
+        } else if (sortProp != "" && sortValue != "") {
+            filtered = filtered.sort((a, b) => {
+                if (a[cat][sortProp][sortValue] > b[cat][sortProp][sortValue])
+                    return -1;
+                else if (a[cat][sortProp][sortValue] === b[cat][sortProp][sortValue]) {
+                    if (a.info.overall > b.info.overall) {
+                        return -1;
+                    } else if (a.info.overall === b.info.overall) {
+                        if (a.info.name > b.info.name)
+                            return 1;
+                        else return -1;
+                    } else return 1;
+                } else
+                    return 1;        
+            })
+            console.log(filtered.slice(0, 2))
         }
-
+        console.log(searchOptions);
         setPlayers(filtered);
     }, [searchOptions])
 
@@ -60,9 +78,10 @@ export default function Players({ allPlayers, allProps }) {
                                 <th>Def Overall</th>
                                 <th>Height</th>
                                 <th>Badges</th>
+                                <th className={searchOptions.sortProp == "" ? "is-hidden" : ""}>{formatName(searchOptions.sortValue)}</th>
                             </tr>
                         </thead>
-                        <PlayersList players={players} page={page} />
+                        <PlayersList players={players} page={page} searchOptions={searchOptions} />
                     </table>
                 </div>
 
@@ -82,7 +101,7 @@ export default function Players({ allPlayers, allProps }) {
 export async function getStaticProps() {
     const allPlayers = await getAllPlayersWithAllStats();
     
-    const allProps = await getAllProps();
+    const allProps = getAllProps(allPlayers[0]);
 
     return {
         props: {
