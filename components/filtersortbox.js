@@ -137,13 +137,13 @@ export default function FilterSortBox(props) {
                     </div>
                     <div className="column is-4-widescreen">
                         <p className="heading">Sort By Stats: </p>
-                        <Dropdown title="Shooting Stats" items={getDropdownItems("shootingStats")} />
-                        <Dropdown title="Inside Stats" items={getDropdownItems("insideStats")} />
-                        <Dropdown title="Athleticism Stats" items={getDropdownItems("athleticismStats")} />
-                        <Dropdown title="Playmaking Stats" items={getDropdownItems("playmakingStats")} />
-                        <Dropdown title="Defense Stats" items={getDropdownItems("defenseStats")} />
-                        <Dropdown title="Rebound Stats" items={getDropdownItems("reboundStats")} />
-                        <Dropdown title="Potential Stats" items={getDropdownItems("potentialStats")} />
+                        <Dropdown title="Shooting" items={getDropdownItems("shootingStats")} />
+                        <Dropdown title="Inside Scoring" items={getDropdownItems("insideStats")} />
+                        <Dropdown title="Athleticism" items={getDropdownItems("athleticismStats")} />
+                        <Dropdown title="Playmaking" items={getDropdownItems("playmakingStats")} />
+                        <Dropdown title="Defense" items={getDropdownItems("defenseStats")} />
+                        <Dropdown title="Rebounding" items={getDropdownItems("reboundStats")} />
+                        <Dropdown title="Potential" items={getDropdownItems("potentialStats")} />
                     </div>
                     <div className="column is-4-widescreen">
                         <p className="heading">Sort By Tendencies: </p>

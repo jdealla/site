@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import { getAllPlayersWithAllStats, getAllProps } from "../lib/players";
+import { getAllPlayersWithAllStats, getAllProps, getAllAnimations } from "../lib/players";
 import { formatName } from "../lib/helpers"
 
 const FilterSortBox = dynamic(import("../components/filtersortbox"));
@@ -101,6 +101,9 @@ export async function getStaticProps() {
     
     const allProps = getAllProps(allPlayers[0]);
 
+    const allAnimations = getAllAnimations(allPlayers);
+
+    console.log(allAnimations);
     return {
         props: {
             allPlayers,
