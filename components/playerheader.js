@@ -52,13 +52,13 @@ export default function PlayerHeader(props) {
                                 <figure className="image is-3by4">
                                     <ImageCloud src={`players/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width={400} />
                                 </figure>
-                                <div className="columns is-mobile is-gapless is-centered">
+                                <div className="columns is-mobile is-centered" style={{ padding:"1.7em 0", flexWrap:"wrap" }}>
                                     {altPlayers.map((player, i) => (
-                                        <div className="column is-narrow" key={i}>
+                                        <div className="column is-narrow" key={i} style={{ padding:"0.1em" }}>
                                             <div className="container">
                                                 <a href={`/player/${player.id}`}>
                                                     <OverallImage overall={player.overall} />
-                                                    <p className="is-overlay has-text-white has-text-weight-bold is-size-7 inline-number-ovr" style={{ left: "24%", top: "12% !important" }}>
+                                                    <p className="is-overlay is-size-6 has-text-white has-text-centered inline-number-ovr" >
                                                         {player.overall}
                                                     </p>
                                                 </a>

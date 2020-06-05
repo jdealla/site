@@ -105,9 +105,8 @@ $footer-padding: 1.2rem 1.5rem 1.2rem;
 }
 
 .inline-number-ovr {
-    top: 3% !important;
     font-family: "Rajdhani";
-    text-shadow: 1px 1px 3px #555;
+    text-shadow: 1px 1px 5px #000;
 }
 
 .compare-thead {
@@ -123,7 +122,7 @@ $footer-padding: 1.2rem 1.5rem 1.2rem;
             left: 0;
             width: 100vw;
             max-width: 100vw;
-            height: 28em;
+            height: 31em;
             z-index: -3 !important;
         }
     }
