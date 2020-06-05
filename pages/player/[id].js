@@ -1,8 +1,8 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, useEffect } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { getPlayersIds } from "../../lib/players";
+import { getPlayersIds, findAltPlayers, findEvos } from "../../lib/players";
 import { getPlayerData } from "../../pages/api/player/[id]";
 
 import BadgeContainer from "../../components/badgecontainer";
@@ -11,9 +11,10 @@ import Loader from "../../components/loader";
 
 const PlayerHeader = dynamic(import("../../components/playerheader"));
 
-export default function Player({ playerData }) {
+export default function Player({ playerData, altPlayers, evos }) {
     const [view, setView] = useState("stats");
-    const [shoe, setShoe] = useState()
+    const [shoe, setShoe] = useState();
+    const [evoLevel, setEvoLevel] = useState(0);
     const { isFallback } = useRouter();
 
     if (isFallback) {
@@ -24,6 +25,8 @@ export default function Player({ playerData }) {
         console.log('setting shoe to: ', shoe)
         setShoe(shoe)
     }
+
+    const handleEvo = (level) => setEvoLevel(level);
 
     const renderRatings = () => {
         return (
@@ -125,7 +128,7 @@ export default function Player({ playerData }) {
                 <img src="/playercard_bg.png" alt="player card bg" />
             </div>
             <div className="container is-fluid mobile-nopadding">
-                <PlayerHeader playerData={playerData} shoe={shoe} handleShoe={handleShoe} />
+                <PlayerHeader playerData={playerData} altPlayers={altPlayers} shoe={shoe} handleShoe={handleShoe} evoStars={evos.length} evoLevel={evoLevel} handleEvo={handleEvo} />
 
                 <div className="columns ">
                     <div className="column is-full">
@@ -159,9 +162,17 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     const playerData = await getPlayerData(params.id)
 
+    const res = await findAltPlayers(playerData.info.name);
+    
+    const altPlayers = res.filter(player => player.id != playerData.info.id).sort((a, b) => a.overall > b.overall ? -1 : 1);
+
+    const evos = await findEvos(playerData.info.id);
+
     return {
         props: {
             playerData,
+            altPlayers,
+            evos,
         },
     }
 }
