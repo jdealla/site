@@ -55,7 +55,7 @@ export default function PlayerHeader(props) {
                                 <div className="columns is-mobile is-centered" style={{ padding:"1.7em 0", flexWrap:"wrap" }}>
                                     {altPlayers.map((player, i) => (
                                         <div className="column is-narrow" key={i} style={{ padding:"0.1em" }}>
-                                            <div className="container">
+                                            <div className="container no-shadow">
                                                 <a href={`/player/${player.id}`}>
                                                     <OverallImage size="24x24" overall={player.overall} />
                                                     <p className="is-overlay is-size-6 has-text-white has-text-centered inline-number-ovr" >
@@ -69,8 +69,8 @@ export default function PlayerHeader(props) {
                             </div>
                             <div className="column is-half-mobile is-half-tablet is-6-desktop is-8-widescreen is-player-info">
                                 <div className="columns is-mobile is-multiline">
-                                    <div className="column is-hidden-mobile is-one-third-tablet is-half-desktop is-1-widescreen" style={{ margin:"auto 10px auto 0" }}>
-									  <div className="has-text-centered" style={{ position:"relative", width:"48px" }}>
+                                    <div className="column is-hidden-mobile is-one-third-tablet is-half-desktop is-1-widescreen" style={{ margin:"auto 5px auto 0" }}>
+									  <div className="has-text-centered no-shadow" style={{ position:"relative", width:"48px" }}>
                                           <OverallImage size="48x48" overall={playerData.info.overall} />
                                           <p className="is-overlay is-size-3 has-text-white inline-number-ovr">
                                               {playerData.info.overall}
