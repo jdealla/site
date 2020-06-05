@@ -47,7 +47,7 @@ export default function PlayerHeader(props) {
             <div className="column is-full-mobile is-full-desktop is-full-widescreen">
                 <div className="columns is-mobile is-multiline">
                     <div className="column is-full-mobile is-8-desktop is-four-fifths-widescreen">
-                        <div className="columns is-mobile is-multiline">
+                        <div className="columns is-mobile is-multiline" style={{ justifyContent:"space-between" }}>
                             <div className="column is-half-mobile is-5-desktop is-3-widescreen">
                                 <figure className="image is-3by4">
                                     <ImageCloud src={`players/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width={400} />
@@ -57,7 +57,7 @@ export default function PlayerHeader(props) {
                                         <div className="column is-narrow" key={i} style={{ padding:"0.1em" }}>
                                             <div className="container">
                                                 <a href={`/player/${player.id}`}>
-                                                    <OverallImage overall={player.overall} />
+                                                    <OverallImage size="24x24" overall={player.overall} />
                                                     <p className="is-overlay is-size-6 has-text-white has-text-centered inline-number-ovr" >
                                                         {player.overall}
                                                     </p>
@@ -69,27 +69,22 @@ export default function PlayerHeader(props) {
                             </div>
                             <div className="column is-half-mobile is-half-tablet is-6-desktop is-8-widescreen is-player-info">
                                 <div className="columns is-mobile is-multiline">
-                                    <div className="column is-hidden-mobile is-one-third-tablet is-half-desktop is-2-widescreen">
-                                        <p className="heading has-text-warning" style={{ marginBottom:0 }}>Overall</p>
-                                        <p className="title is-size-7-mobile is-size-4-desktop is-size-1-widescreen has-text-white">
-                                            {playerData.info.overall}
-                                        </p>
+                                    <div className="column is-hidden-mobile is-one-third-tablet is-half-desktop is-1-widescreen" style={{ margin:"auto 10px auto 0" }}>
+									  <div className="has-text-centered" style={{ position:"relative", width:"48px" }}>
+                                          <OverallImage size="48x48" overall={playerData.info.overall} />
+                                          <p className="is-overlay is-size-3 has-text-white inline-number-ovr">
+                                              {playerData.info.overall}
+                                         </p>
+                                      </div>  
                                     </div>
-                                    <div className="column is-full-mobile is-half-desktop is-6-widescreen">
+                                    <div className="column is-full-mobile is-half-desktop is-9-widescreen">
                                         <p className="title is-size-3-widescreen has-text-weight-bold has-text-white is-hidden-mobile">{playerData.info.name}</p>
-                                        <p className="subtitle is-size-7-mobile is-size-7-tablet has-text-weight-semibold"> 
+                                        <p className="subtitle is-size-7-mobile is-size-7-tablet has-text-weight-bold"> 
                                             <a className="has-text-warning" href={`/collections`}>{playerData.info.collection} </a>
                                             / 
                                             <a className="has-text-warning" href={`/collection/${playerData.info.collection.toLowerCase().replace(/ /g, "-")}/theme/${playerData.info.theme.toLowerCase().replace(/ /g, "-")}`}> {playerData.info.theme} </a>
                                         </p>
                                     </div>
-                                    <div className={evoStars == 0 ? "is-hidden" : "column is-3"}>
-                                        <p className="heading has-text-warning">Evolutions</p>
-                                        <div className="columns is-mobile">
-                                            {renderEvoStars()}
-                                        </div>
-                                    </div>
-
                                     <div className="column is-hidden-mobile is-3-desktop">
                                         <p className="heading has-text-warning">Offense</p>
                                         <p className="title is-size-6-mobile is-size-6-desktop has-text-white">{playerData.info.off_overall}</p>
@@ -135,6 +130,12 @@ export default function PlayerHeader(props) {
                                                     )
                                                 } else return;
                                             })}
+                                        </div>
+                                    </div>
+									<div className={evoStars == 0 ? "is-hidden" : "column is-3"}>
+                                        <p className="heading has-text-warning">Evolutions</p>
+                                        <div className="columns is-mobile">
+                                            {renderEvoStars()}
                                         </div>
                                     </div>
                                 </div>

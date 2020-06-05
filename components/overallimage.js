@@ -3,6 +3,7 @@ import ImageCloud from "./imagecloud";
 
 export default function OverallImage(props) {
     const { overall } = props;
+    const { size } = props;
 
     const renderOverall = () => {
         let tier = "";
@@ -22,8 +23,8 @@ export default function OverallImage(props) {
         }
 
         return (
-            <figure className="image is-24x24" style={{ marginLeft: "auto", marginRight: "auto" , filter:`drop-shadow(0px 0px 4px ${color})` }}>
-                <ImageCloud src={`icons/icon_${tier}.png`} width={32} />
+            <figure className={`image is-${size}`} style={{ filter:`drop-shadow(0px 0px 4px ${color})` }}>
+                <ImageCloud src={`icons/icon_${tier}.png`} width={48} />
             </figure>
         )
     }

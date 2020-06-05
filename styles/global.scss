@@ -36,10 +36,6 @@ $footer-padding: 1.2rem 1.5rem 1.2rem;
             background-size: 100% 100%;
         }
     }
-
-    .inline-number-ovr {
-        left: 38% !important;
-    }
 }
 
 @media only screen and (min-width: 769px) {
@@ -106,12 +102,16 @@ $footer-padding: 1.2rem 1.5rem 1.2rem;
 
 .inline-number-ovr {
     font-family: "Rajdhani";
-    text-shadow: 1px 1px 5px #000;
+    text-shadow: 1px 1px 5px #222;
 }
 
 .compare-thead {
     border-width: 0 0 2px !important;
-}	
+}
+
+.margin-auto-list figure {
+    margin: auto;
+}
 
 .is-player-card-bg {
         width: 100vw;
