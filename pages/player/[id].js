@@ -12,19 +12,16 @@ import Loader from "../../components/loader";
 const PlayerHeader = dynamic(import("../../components/playerheader"));
 
 export default function Player({ playerData, altPlayers, evos }) {
-    const [view, setView] = useState("stats");
-    const [shoe, setShoe] = useState();
-    const [evoLevel, setEvoLevel] = useState(0);
     const { isFallback } = useRouter();
-
     if (isFallback) {
         return <Loader />
     }
 
-    const handleShoe = (shoe) => {
-        console.log('setting shoe to: ', shoe)
-        setShoe(shoe)
-    }
+    const [view, setView] = useState("stats");
+    const [shoe, setShoe] = useState();
+    const [evoLevel, setEvoLevel] = useState(-1);
+
+    const handleShoe = (shoe) => setShoe(shoe)
 
     const handleEvo = (level) => setEvoLevel(level);
 
@@ -32,15 +29,22 @@ export default function Player({ playerData, altPlayers, evos }) {
         return (
             <Fragment>
                 <div className="column is-one-fifth-tablet is-half-mobile is-one-fifth-desktop">
-                    <Attributes attributes={playerData.stats.shooting} attrName="Shooting" bonus={shoe} />
-                    <Attributes attributes={playerData.stats.inside} attrName="Inside Scoring" />
-                    <Attributes attributes={playerData.stats.playmaking} attrName="Playmaking" />
+                    <Attributes attributes={playerData.stats.shooting} 
+                        attrName="Shooting" evoStats={evoLevel != -1 ? evos[evoLevel].stats.shooting : ""} />
+                    <Attributes attributes={playerData.stats.inside} 
+                        attrName="Inside Scoring" evoStats={evoLevel != -1 ? evos[evoLevel].stats.inside : ""} />
+                    <Attributes attributes={playerData.stats.playmaking} 
+                        attrName="Playmaking" evoStats={evoLevel != -1 ? evos[evoLevel].stats.playmaking : ""} />
                 </div>
                 <div className="column is-one-fifth-tablet is-half-mobile is-one-fifth-desktop">
-				    <Attributes attributes={playerData.stats.athleticism} attrName="Athleticism" />
-                    <Attributes attributes={playerData.stats.defense} attrName="Defense" />
-                    <Attributes attributes={playerData.stats.rebound} attrName="Rebound" />
-                    <Attributes attributes={playerData.stats.potential} attrName="Potential" />
+				    <Attributes attributes={playerData.stats.athleticism} 
+                        attrName="Athleticism" evoStats={evoLevel != -1 ? evos[evoLevel].stats.athleticism : ""} />
+                    <Attributes attributes={playerData.stats.defense} 
+                        attrName="Defense" evoStats={evoLevel != -1 ? evos[evoLevel].stats.defense : ""} />
+                    <Attributes attributes={playerData.stats.rebound} 
+                        attrName="Rebound" evoStats={evoLevel != -1 ? evos[evoLevel].stats.rebound : ""} />
+                    <Attributes attributes={playerData.stats.potential} 
+                        attrName="Potential" evoStats={evoLevel != -1 ? evos[evoLevel].stats.potential : ""} />
                 </div>
             </Fragment>
         )

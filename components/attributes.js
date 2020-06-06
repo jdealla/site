@@ -1,9 +1,20 @@
 import React from "react";
-import { formatName } from "../lib/helpers";
-import { ratingColor } from "../lib/helpers";
+import { formatName, ratingColor } from "../lib/helpers";
 
 export default function Attributes(props) {
-    const { attributes, attrName, bonus, reverse, } = props;
+    const { attributes, attrName, evoStats, reverse, } = props;
+
+    const renderEvoStat = (key) => {
+        if (evoStats == "")
+            return "";
+        else {
+            if (evoStats[key] !== 0) {
+                return <span className="tag">{`+${evoStats[key]}`}</span>
+            } else {
+                return "";
+            }
+        }
+    }
 
     const renderTags = () => {
         let tags = [];
@@ -16,9 +27,9 @@ export default function Attributes(props) {
                 </div>
             ) : (
                 <div className="tags has-addons is-marginless" key={i++} style={{ flex: "0 0 75%" }}>
-                    {/* {bonus != null ? `+${bonus} ` : ""} */}
                     {ratingColor(value)}
                     <span className="tag">{formatName(key)}</span>
+                    {renderEvoStat(key)}
                 </div>
             )
             tags.push(tag)
