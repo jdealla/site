@@ -16,6 +16,16 @@ export default function Attributes(props) {
         }
     }
 
+    const renderStat = (value, key) => {
+        if (evoStats == null || evoStats == "" || evoStats == undefined)
+            return ratingColor(value);
+        else 
+            if (evoStats[key] !== 0)
+                return ratingColor(value + evoStats[key]);
+            else
+                return ratingColor(value);
+    }
+
     const renderTags = () => {
         let tags = [];
         let i = 0;
@@ -27,7 +37,7 @@ export default function Attributes(props) {
                 </div>
             ) : (
                 <div className="tags has-addons is-marginless" key={i++} style={{ flex: "0 0 75%" }}>
-                    {ratingColor(value)}
+                    {renderStat(value, key)}
                     <span className="tag">{formatName(key)}</span>
                     {renderEvoStat(key)}
                 </div>

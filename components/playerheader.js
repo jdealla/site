@@ -9,38 +9,25 @@ import OverallImage from "./overallimage";
 export default function PlayerHeader(props) {
     const { playerData, altPlayers, evoStars, evoLevel, handleEvo, shoe, handleShoe, } = props;
 
-    // const renderShoeList = () => {
-    //     return getAllShoes().map((shoe, i) => {
-    //         return (
-    //             <a key={i} className="dropdown-item" onClick={() => handleShoe(shoe)} >
-    //                 {shoe.name}
-    //             </a>
-    //         )
-    //     })
-    // }
-
-    // const shoeButton = (
-    //     <button className="button is-dark is-small is-centered">
-    //         <span className="icon">
-    //             <ImageCloud src="icons/icon_shoes.png" width={100} />
-    //         </span>
-    //         <span>Add Diamond Shoe</span>
-    //     </button>
-    // )
+    const handleEvoStars = (level) => {
+        if (evoLevel === level)
+            handleEvo(level - 1);
+        else
+            handleEvo(level)
+    }
 
     const renderEvoStars = () => {
         let stars = []
         for(let i = 0; i < evoStars; i++) {
             let star = (
                 <div className="column is-1" key={i} style={{ cursor: "pointer" }}>
-                    <div className="container" onClick={() => handleEvo(i)}>
+                    <div className="container" onClick={() => handleEvoStars(i)}>
                         {evoLevel >= i ? <AiFillStar size="2em" /> : <AiOutlineStar size="2em" />}
                     </div>
                 </div>
             )
             stars.push(star);
         }
-
         return stars;
     }
 

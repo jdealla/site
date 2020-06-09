@@ -1,9 +1,9 @@
 import React from "react";
 import ImageCloud from "./imagecloud";
-import { formatName } from "../lib/helpers";
+import { formatName, numToLevel, levelToNum } from "../lib/helpers";
 
 export default function BadgesContainer(props) {
-    const { badges } = props;
+    const { badges, evoBadges } = props;
 
     const renderBadges = () => {
         let badgeImgs = [];
@@ -12,6 +12,14 @@ export default function BadgesContainer(props) {
         for(const [key, value] of Object.entries(badges)) {
             let name = key.replace(/_/g, "");
             let level = value.toLowerCase();
+            
+            if (evoBadges != null || evoBadges != undefined) {
+                if (evoBadges[key] != null || evoBadges[key] != undefined) {
+                    if (evoBadges[key] > levelToNum(value)) {
+                        level = numToLevel(evoBadges[key]).toLowerCase();
+                    }
+                }
+            }
 
             let imgSource = `badges/${name}_${level}.png`;
             
