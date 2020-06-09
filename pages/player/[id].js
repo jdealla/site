@@ -21,8 +21,6 @@ export default function Player({ playerData, altPlayers, evos }) {
         return <Loader />
     }
 
-    console.log(evos);
-    
     const handleShoe = (shoe) => setShoe(shoe)
     const handleEvo = (level) => setEvoLevel(level);
 
