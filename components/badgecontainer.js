@@ -5,6 +5,13 @@ import { formatName, numToLevel, levelToNum } from "../lib/helpers";
 export default function BadgesContainer(props) {
     const { badges, evoBadges } = props;
 
+    const renderNotification = (evod) => {
+        if (evod)
+            return <span className="badge is-success"></span>
+        else
+            return "";
+    }
+
     const renderBadges = () => {
         let badgeImgs = [];
         let i = 0;
@@ -12,10 +19,13 @@ export default function BadgesContainer(props) {
         for(const [key, value] of Object.entries(badges)) {
             let name = key.replace(/_/g, "");
             let level = value.toLowerCase();
+            let evod = false;
             
             if (evoBadges != null || evoBadges != undefined) {
                 if (evoBadges[key] != null || evoBadges[key] != undefined) {
                     level = numToLevel(levelToNum(value) + evoBadges[key]).toLowerCase();
+                    if (level != value.toLowerCase())
+                        evod = true;
                 }
             }
 
@@ -32,6 +42,7 @@ export default function BadgesContainer(props) {
                         <figure className="image is-48x48" style={{ marginLeft: "auto", marginRight: "auto" }}>
                             <ImageCloud src={`${imgSource}`} width={48} height={48} alt={name} />
                         </figure>
+                        {renderNotification(evod)}
                         <p className="is-size-7 has-text-centered"> {formatName(key)} </p>
                     </div>
                 </div>

@@ -17,7 +17,9 @@ $box-padding: 5px;
 $navbar-item-hover-color: $blue;
 $tabs-link-active-color: $blue;
 $footer-background-color: white;
-$footer-padding: 1.2rem 1.5rem 1.2rem;	
+$footer-padding: 1.2rem 1.5rem 1.2rem;
+$badge-height: 8px;
+$badge-padding: .03rem .10rem;
 
 @media only screen and (max-width: 768px) {
     $gap: 16px;
@@ -226,3 +228,5 @@ $footer-padding: 1.2rem 1.5rem 1.2rem;
 @import "../node_modules/bulma/sass/components/card.sass";
 @import "../node_modules/bulma/sass/components/dropdown.sass";
 @import "../node_modules/bulma/sass/form/_all.sass";
+
+@import '@creativebulma/bulma-badge'
