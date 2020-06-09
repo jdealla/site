@@ -5,11 +5,11 @@ export default function Attributes(props) {
     const { attributes, attrName, evoStats, reverse, } = props;
 
     const renderEvoStat = (key) => {
-        if (evoStats == "")
+        if (evoStats == null || evoStats == "")
             return "";
         else {
             if (evoStats[key] !== 0) {
-                return <span className="tag">{`+${evoStats[key]}`}</span>
+                return <span className="tag has-text-success">{`+${evoStats[key]}`}</span>
             } else {
                 return "";
             }

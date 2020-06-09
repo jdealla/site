@@ -176,7 +176,7 @@ export async function getStaticProps({ params }) {
         props: {
             playerData,
             altPlayers,
-            evos,
+            evos
         },
     }
 }

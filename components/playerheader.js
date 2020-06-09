@@ -30,7 +30,7 @@ export default function PlayerHeader(props) {
 
     const renderEvoStars = () => {
         let stars = []
-        for(let i = 1; i < evoStars + 1; i++) {
+        for(let i = 0; i < evoStars; i++) {
             let star = (
                 <div className="column is-1" key={i} style={{ cursor: "pointer" }}>
                     <div className="container" onClick={() => handleEvo(i)}>
