@@ -15,6 +15,8 @@ export default function BadgesContainer(props) {
             
             if (evoBadges != null || evoBadges != undefined) {
                 if (evoBadges[key] != null || evoBadges[key] != undefined) {
+                    if (numToLevel(levelToNum(value) + evoBadges[key]) == undefined)
+                        debugger
                     level = numToLevel(levelToNum(value) + evoBadges[key]).toLowerCase();
                 }
             }
