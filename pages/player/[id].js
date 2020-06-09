@@ -12,17 +12,16 @@ import Loader from "../../components/loader";
 const PlayerHeader = dynamic(import("../../components/playerheader"));
 
 export default function Player({ playerData, altPlayers, evos }) {
+    const [view, setView] = useState("stats");
+    const [shoe, setShoe] = useState();
+    const [evoLevel, setEvoLevel] = useState(-1);
+
     const { isFallback } = useRouter();
     if (isFallback) {
         return <Loader />
     }
 
-    const [view, setView] = useState("stats");
-    const [shoe, setShoe] = useState();
-    const [evoLevel, setEvoLevel] = useState(-1);
-
     const handleShoe = (shoe) => setShoe(shoe)
-
     const handleEvo = (level) => setEvoLevel(level);
 
     const renderRatings = () => {
