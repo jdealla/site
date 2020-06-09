@@ -36,7 +36,9 @@ export default function Players({ allPlayers, allProps, allAnimations }) {
             } else {
                 filtered = filtered.filter(player => player[cat][filterProp] === filterValue);
             }
-        } else if (sortProp != "" && sortValue != "") {
+        }
+
+        if (sortProp != "" && sortValue != "") {
             filtered = filtered.sort((a, b) => {
                 if (a[cat][sortProp][sortValue] > b[cat][sortProp][sortValue])
                     return -1;
