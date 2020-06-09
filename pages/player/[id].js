@@ -1,8 +1,8 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, useEffect } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { getPlayersIds } from "../../lib/players";
+import { getPlayersIds, findAltPlayers, findEvos } from "../../lib/players";
 import { getPlayerData } from "../../pages/api/player/[id]";
 
 import BadgeContainer from "../../components/badgecontainer";
@@ -11,33 +11,39 @@ import Loader from "../../components/loader";
 
 const PlayerHeader = dynamic(import("../../components/playerheader"));
 
-export default function Player({ playerData }) {
+export default function Player({ playerData, altPlayers, evos }) {
     const [view, setView] = useState("stats");
-    const [shoe, setShoe] = useState()
-    const { isFallback } = useRouter();
+    const [shoe, setShoe] = useState();
+    const [evoLevel, setEvoLevel] = useState(-1);
 
+    const { isFallback } = useRouter();
     if (isFallback) {
         return <Loader />
     }
 
-    const handleShoe = (shoe) => {
-        console.log('setting shoe to: ', shoe)
-        setShoe(shoe)
-    }
+    const handleShoe = (shoe) => setShoe(shoe)
+    const handleEvo = (level) => setEvoLevel(level);
 
     const renderRatings = () => {
         return (
             <Fragment>
                 <div className="column is-one-fifth-tablet is-half-mobile is-one-fifth-desktop">
-                    <Attributes attributes={playerData.stats.shooting} attrName="Shooting" bonus={shoe} />
-                    <Attributes attributes={playerData.stats.inside} attrName="Inside Scoring" />
-                    <Attributes attributes={playerData.stats.playmaking} attrName="Playmaking" />
+                    <Attributes attributes={playerData.stats.shooting} 
+                        attrName="Shooting" evoStats={evoLevel != -1 ? evos[evoLevel].stats.shooting : ""} />
+                    <Attributes attributes={playerData.stats.inside} 
+                        attrName="Inside Scoring" evoStats={evoLevel != -1 ? evos[evoLevel].stats.inside : ""} />
+                    <Attributes attributes={playerData.stats.playmaking} 
+                        attrName="Playmaking" evoStats={evoLevel != -1 ? evos[evoLevel].stats.playmaking : ""} />
                 </div>
                 <div className="column is-one-fifth-tablet is-half-mobile is-one-fifth-desktop">
-				    <Attributes attributes={playerData.stats.athleticism} attrName="Athleticism" />
-                    <Attributes attributes={playerData.stats.defense} attrName="Defense" />
-                    <Attributes attributes={playerData.stats.rebound} attrName="Rebound" />
-                    <Attributes attributes={playerData.stats.potential} attrName="Potential" />
+				    <Attributes attributes={playerData.stats.athleticism} 
+                        attrName="Athleticism" evoStats={evoLevel != -1 ? evos[evoLevel].stats.athleticism : ""} />
+                    <Attributes attributes={playerData.stats.defense} 
+                        attrName="Defense" evoStats={evoLevel != -1 ? evos[evoLevel].stats.defense : ""} />
+                    <Attributes attributes={playerData.stats.rebound} 
+                        attrName="Rebound" evoStats={evoLevel != -1 ? evos[evoLevel].stats.rebound : ""} />
+                    <Attributes attributes={playerData.stats.potential} 
+                        attrName="Potential" evoStats={evoLevel != -1 ? evos[evoLevel].stats.potential : ""} />
                 </div>
             </Fragment>
         )
@@ -48,13 +54,13 @@ export default function Player({ playerData }) {
             <div className="column ">
                 <div className="container">
                     <p className="subtitle is-6 has-text-weight-semibold "> Finishing Badges</p>
-                    <BadgeContainer badges={playerData.badges.finishing} />
+                    <BadgeContainer badges={playerData.badges.finishing} evoBadges={evoLevel != -1 ? evos[evoLevel].badges.finishing : ""} />
                     <p className="subtitle is-6 has-text-weight-semibold "> Shooting Badges </p>
-                    <BadgeContainer badges={playerData.badges.shooting} />
+                    <BadgeContainer badges={playerData.badges.shooting} evoBadges={evoLevel != -1 ? evos[evoLevel].badges.shooting : ""} />
                     <p className="subtitle is-6 has-text-weight-semibold "> Playmaking Badges </p>
-                    <BadgeContainer badges={playerData.badges.playmaking} />
+                    <BadgeContainer badges={playerData.badges.playmaking} evoBadges={evoLevel != -1 ? evos[evoLevel].badges.playmaking : ""} />
                     <p className="subtitle is-6 has-text-weight-semibold "> Defensive Badges </p>
-                    <BadgeContainer badges={playerData.badges.defensive} />
+                    <BadgeContainer badges={playerData.badges.defensive} evoBadges={evoLevel != -1 ? evos[evoLevel].badges.defensive : ""} />
                     <p className="subtitle is-6 has-text-weight-semibold "> Personality Badges </p>
                     <BadgeContainer badges={playerData.badges.personality} />
                 </div>
@@ -125,7 +131,7 @@ export default function Player({ playerData }) {
                 <img src="/playercard_bg.png" alt="player card bg" />
             </div>
             <div className="container is-fluid mobile-nopadding">
-                <PlayerHeader playerData={playerData} shoe={shoe} handleShoe={handleShoe} />
+                <PlayerHeader playerData={playerData} altPlayers={altPlayers} shoe={shoe} handleShoe={handleShoe} evoStars={evos.length} evoLevel={evoLevel} handleEvo={handleEvo} />
 
                 <div className="columns ">
                     <div className="column is-full">
@@ -159,9 +165,17 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     const playerData = await getPlayerData(params.id)
 
+    const res = await findAltPlayers(playerData.info.name);
+    
+    const altPlayers = res.filter(player => player.id != playerData.info.id).sort((a, b) => a.overall > b.overall ? -1 : 1);
+
+    const evos = await findEvos(playerData.info.id);
+
     return {
         props: {
             playerData,
+            altPlayers,
+            evos
         },
     }
 }

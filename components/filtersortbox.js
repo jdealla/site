@@ -119,7 +119,7 @@ export default function FilterSortBox(props) {
                 </a>)
             );
             case "sizeUpPackage": return allAnimations.ballhandle.size_up_packages_a.map((ani, i) =>
-                (<a className="dropdown-item" key={i} onClick={() => handleFilter("animations", "size_up_package_a", ani, "ballhandle")}>
+                (<a className="dropdown-item" key={i} onClick={() => handleFilter("animations", "size_up_packages_a", ani, "ballhandle")}>
                     {ani}
                 </a>)
             );

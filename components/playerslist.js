@@ -28,8 +28,8 @@ export default function PlayersList(props) {
                             </div>
                         </td>
                         <td style={{ textAlign: "center" }}>
-                            <div className="container">
-                                <OverallImage overall={player.info.overall} />
+                            <div className="container margin-auto-list">
+                                <OverallImage size="24x24" overall={player.info.overall} />
                                 <p className="is-overlay has-text-white inline-number-ovr">
                                     {player.info.overall}
                                 </p>
