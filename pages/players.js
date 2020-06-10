@@ -30,7 +30,24 @@ export default function Players({ allPlayers, allProps, allAnimations }) {
 
         let filtered = allPlayers.filter(player => player.info.name.toLowerCase().includes(searchValue));
 
-        if (filterProp != "" && filterValue != "") {
+        if (cat === "info" && filterProp === "overall" ) {
+            filtered = filtered.filter(player => {
+                let tier = 0;
+                switch(filterValue) {
+                    case "bronze": tier = 69; break;
+                    case "silver": tier = 75; break;
+                    case "gold": tier = 79; break;
+                    case "emerald": tier = 83; break;
+                    case "sapphire": tier = 86; break;
+                    case "ruby": tier = 89; break;
+                    case "amethyst": tier = 92; break;
+                    case "diamond": tier = 95; break;
+                    case "pink diamond": tier = 98; break;
+                    case "galaxy opal": tier = 99; break;
+                }
+                return player.info.overall <= tier;
+            })
+        } else if (filterProp != "" && filterValue != "") {
             if (innerCat != "") {
                 filtered = filtered.filter(player => player[cat][innerCat][filterProp] === filterValue)
             } else {
@@ -72,7 +89,7 @@ export default function Players({ allPlayers, allProps, allAnimations }) {
                 <div className="box">
                     <FilterSortBox allProps={allProps} allAnimations={allAnimations} searchOptions={searchOptions} handleOptions={handleOptions} />
 
-                    <table className="table is-scrollable is-hoverable">
+                    <table className="table is-scrollable is-hoverable is-bordered is-striped" style={{ marginTop: "5px"}}>
                         <thead>
                             <tr>
                                 <th>Name</th>

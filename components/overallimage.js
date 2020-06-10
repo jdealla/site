@@ -2,8 +2,7 @@ import React from "react";
 import ImageCloud from "./imagecloud";
 
 export default function OverallImage(props) {
-    const { overall } = props;
-    const { size } = props;
+    const { overall, size } = props;
 
     const renderOverall = () => {
         let tier = "";

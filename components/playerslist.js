@@ -18,7 +18,7 @@ export default function PlayersList(props) {
         <tbody>
             {players.map(player => {
                 return (
-                    <tr onClick={(e) => handleClick(e, player.info.id)} key={player.info.id}>
+                    <tr onClick={(e) => handleClick(e, player.info.id)} key={player.info.id} style={{ cursor: "pointer" }}>
                         <td>
                             <div className="container is-flex">
                                 <figure className="image is-32x32">
