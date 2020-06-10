@@ -21,8 +21,8 @@ export default function PlayersList(props) {
                     <tr onClick={(e) => handleClick(e, player.info.id)} key={player.info.id} style={{ cursor: "pointer" }}>
                         <td>
                             <div className="container is-flex">
-                                <figure className="image is-32x32">
-                                    <ImageCloud src={`players/${player.info.name.replace(/( |')/g, "_").toLowerCase()}_${player.info.id}.jpg`} width={48} />
+                                <figure className="image is-24x24" style={{ marginBottom: "5px" }}>
+                                    <ImageCloud src={`players/${player.info.name.replace(/( |')/g, "_").toLowerCase()}_${player.info.id}.jpg`} width={24} />
                                 </figure>
                                 <p>{player.info.name}</p>
                             </div>
