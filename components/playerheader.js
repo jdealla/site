@@ -20,9 +20,9 @@ export default function PlayerHeader(props) {
         let stars = []
         for(let i = 0; i < evoStars; i++) {
             let star = (
-                <div className="column is-1" key={i} style={{ cursor: "pointer" }}>
-                    <div className="container" onClick={() => handleEvoStars(i)}>
-                        {evoLevel >= i ? <AiFillStar size="2em" /> : <AiOutlineStar size="2em" />}
+                <div className="column is-2" key={i}>
+                    <div className="container star" onClick={() => handleEvoStars(i)}>
+                        {evoLevel >= i ? <AiFillStar className="star-selected" size="2em" /> : <AiOutlineStar size="2em" />}
                     </div>
                 </div>
             )

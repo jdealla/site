@@ -203,6 +203,20 @@ $badge-padding: .03rem .10rem;
     }
 }
 
+.star {
+	cursor: pointer;
+	&:hover {
+	    transition: .10s;
+	    color: #ffdd57;
+	}
+}
+
+.star-selected {
+    color: #ffdd57;
+	filter: drop-shadow(#ffdd57 0px 0px 3px);
+}
+	
+
 @import "../node_modules/bulma/sass/utilities/functions.sass";
 @import "../node_modules/bulma/sass/utilities/derived-variables.sass";
 @import "../node_modules/bulma/sass/utilities/controls.sass";
