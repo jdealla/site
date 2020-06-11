@@ -58,7 +58,8 @@ export default function Updates({ groupedByDate }) {
 }
 
 export async function getStaticProps() {
-    const groupedByDate = await getPlayersByDates();
+    const groupedByDate = await getPlayersByDates()
+                                .catch(console.error)
     
     return {
         props: {

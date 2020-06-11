@@ -37,7 +37,8 @@ export default function UpdatePage({ date, players }) {
 }
 
 export async function getStaticPaths() {
-    const paths = await getDates();
+    const paths = await getDates()
+                        .catch(console.error);
 
     return {
         paths,
@@ -47,7 +48,8 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
     const date = params.date;
-    const players = await getPlayersByDate(date);
+    const players = await getPlayersByDate(date)
+                            .catch(console.error)
     
     return {
         props: {

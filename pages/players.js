@@ -82,29 +82,24 @@ export default function Players({ allPlayers, allProps, allAnimations }) {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <div className="container">
-                <div className="columns">
-                    <div className="column is-full">
-                    </div>
-                </div>
                 <div className="box">
                     <FilterSortBox allProps={allProps} allAnimations={allAnimations} searchOptions={searchOptions} handleOptions={handleOptions} />
-
-                    <table className="table is-scrollable is-hoverable is-bordered is-striped" style={{ marginTop: "5px"}}>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Overall</th>
-                                <th>Position</th>
-                                <th>Off Overall</th>
-                                <th>Def Overall</th>
-                                <th>Height</th>
-                                <th>Badges</th>
-                                <th className={searchOptions.sortProp == "" ? "is-hidden" : ""}>{formatName(searchOptions.sortValue)}</th>
-                            </tr>
-                        </thead>
-                        <PlayersList players={players} page={page} searchOptions={searchOptions} />
-                    </table>
                 </div>
+                <table className="table is-scrollable is-hoverable is-bordered is-striped" style={{ marginTop: "5px"}}>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Overall</th>
+                            <th>Position</th>
+                            <th>Off Overall</th>
+                            <th>Def Overall</th>
+                            <th>Height</th>
+                            <th>Badges</th>
+                            <th className={searchOptions.sortProp == "" ? "is-hidden" : ""}>{formatName(searchOptions.sortValue)}</th>
+                        </tr>
+                    </thead>
+                    <PlayersList players={players} page={page} searchOptions={searchOptions} />
+                </table>
 
                 <div className="columns">
                     <div className="column is-full">
@@ -120,7 +115,8 @@ export default function Players({ allPlayers, allProps, allAnimations }) {
 }
 
 export async function getStaticProps() {
-    const allPlayers = await getAllPlayersWithAllStats();
+    const allPlayers = await getAllPlayersWithAllStats()
+                            .catch(console.error)
     
     const allProps = getAllProps(allPlayers[0]);
 
@@ -132,6 +128,6 @@ export async function getStaticProps() {
             allProps,
             allAnimations
         },
-        unstable_revalidate: 2
+        unstable_revalidate: 1
     }
 }

@@ -82,7 +82,8 @@ export default function Collections({ collections }) {
 }
 
 export async function getStaticProps() {
-    let collections = await getCollections();
+    let collections = await getCollections()
+                            .catch(console.error);
 
     return {
         props: {

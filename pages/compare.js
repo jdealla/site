@@ -170,7 +170,8 @@ export default function Compare({ players }) {
 }
 
 export async function getStaticProps() {
-    const players = await getAllPlayers();
+    const players = await getAllPlayers()
+                        .catch(console.error)
   
     for(let i = 0; i < players.length; i++) {
       delete players[i]["@metadata"]

@@ -309,6 +309,10 @@ export default function FilterSortBox(props) {
                             <SearchFilter suggestions={filterItems} handleFilter={handleFilter} filterCat={filterCat} placeholder={`Search ${filterCat.cat.replace(/_/g, " ")} here`} />
                         </div>
                     </div>
+                    <div className="column ">
+                        <p className="heading">Filter By Badges: </p>
+
+                    </div>
                 </div>
             </div>
         </div>
