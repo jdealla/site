@@ -132,6 +132,6 @@ export async function getStaticProps() {
             allProps,
             allAnimations
         },
-        unstable_revalidate: 1
+        unstable_revalidate: 2
     }
 }

@@ -10,8 +10,10 @@ export default function SearchFilter(props) {
     
     const onChange = (event, { newValue, method }) => setValue(newValue);
     const onSuggestionsFetchRequested = ({ value, reason }) => {
-        if (reason === 'input-focused' || reason === 'input-changed' || reason === 'escape-pressed')
+        if (reason === 'input-focused' || reason === 'input-changed')
             setItems(getItemsBySuggestion(value));
+        if (reason === 'escape-pressed')
+            setItems([]);
     }
     const onSuggestionsClearRequested = () => setItems([]);
     
@@ -25,10 +27,7 @@ export default function SearchFilter(props) {
         const inputLength = inputValue.length;
     
         return inputLength === 0 ? [] : suggestions.filter(suggestion => {
-            let name = suggestion.toLowerCase().split(" ");
             return (
-                name[0].slice(0, inputLength) === inputValue || 
-                name[1].slice(0, inputLength) === inputValue ||
                 suggestion.trim().toLowerCase().includes(inputValue)
             )
         });
@@ -56,6 +55,7 @@ export default function SearchFilter(props) {
             getSuggestionValue={getSuggestionValue}
             renderSuggestion={renderSuggestion}
             inputProps={inputProps} 
+            highlightFirstSuggestion={true}
         />
     )
 }

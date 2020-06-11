@@ -25,9 +25,9 @@
 }
 
 .suggestionsContainerOpen {
-    display: block;
+    display: inline-block;
     position: relative;
-    top: 32px;
+    top: 10px;
     margin-left: auto;
     margin-right: auto;
     left: 0;
@@ -42,7 +42,6 @@
     border-bottom-right-radius: 4px;
     max-height: 300px;
     overflow-y: auto;
-    z-index: 2;
 }
 
 .suggestionsList {

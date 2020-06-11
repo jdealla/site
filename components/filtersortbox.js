@@ -14,8 +14,8 @@ export default function FilterSortBox(props) {
         setFilterItems(allAnimations[filterCat.innerCat][filterCat.cat.replace(/ /g, "_") + "_a"])
     }, [filterCat])
 
-    const handleFilterCat = (cat) => {
-        setFilterCat({ ...filterCat, cat: cat.toLowerCase() })
+    const handleFilterCat = (cat, innerCat) => {
+        setFilterCat({ cat: cat, innerCat: innerCat })
     }
 
     const handleChange = (e) => handleOptions({...searchOptions, searchValue: e.target.value })
@@ -38,15 +38,33 @@ export default function FilterSortBox(props) {
 
     const getAnimationCats = () => {
         let cats = [
-            "Lower Base", "Upper Release", "Dribble Style", "Size Up Package", "Moving Cross", "Moving Btb", 
-            "Moving Hesi", "Triple Threat", "Layup Package", "Post Fade", "Post Hook"
+            "Lower Base", "Upper Release", "Dribble Style", "Size Up Packages", "Moving Crossover", "Moving Behind The Back", 
+            "Moving Hesitation", "Moving Spin", "Triple Threat Style", "Layup Package", "Post Fade", "Post Hook"
         ];
 
-        return cats.map((cat, i) => (
-            <a className="dropdown-item" key={i} onClick={() => handleFilterCat(cat)}>
-                {cat}
-            </a>
-        ))
+        return cats.map((cat, i) => {
+            let innerCat = ""
+            switch(cat) {
+                case "Lower Base": innerCat = "shooting"; break;
+                case "Upper Release": innerCat = "shooting"; break;
+                case "Dribble Style": innerCat = "ballhandle"; break;
+                case "Size Up Packages": innerCat = "ballhandle"; break;
+                case "Moving Crossover": innerCat = "ballhandle"; break;
+                case "Moving Behind The Back": innerCat = "ballhandle"; break;
+                case "Moving Hesitation": innerCat = "ballhandle"; break;
+                case "Moving Spin": innerCat = "ballhandle"; break;
+                case "Triple Threat Style": innerCat = "ballhandle"; break;
+                case "Layup Package": innerCat = "layup"; break;
+                case "Post Fade": innerCat = "post"; break;
+                case "Post Hook": innerCat = "post"; break;
+            }
+
+            return (
+                <a className="dropdown-item" key={i} onClick={() => handleFilterCat(cat.toLowerCase(), innerCat)}>
+                    {cat}
+                </a>
+            )}
+        )
     }
 
     const getDropdownItems = (cat) => {
@@ -287,8 +305,8 @@ export default function FilterSortBox(props) {
                     <div className="column is-6-widescreen">
                         <p className="heading">Filter By Animations: </p>
                         <div className="container is-flex">
-                            <Dropdown title="Animation Category" items={getAnimationCats()} />
-                            <SearchFilter suggestions={filterItems} handleFilter={handleFilter} filterCat={filterCat} placeholder="Search animations here" />
+                            <Dropdown title={filterCat.cat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())} items={getAnimationCats()} />
+                            <SearchFilter suggestions={filterItems} handleFilter={handleFilter} filterCat={filterCat} placeholder={`Search ${filterCat.cat.replace(/_/g, " ")} here`} />
                         </div>
                     </div>
                 </div>
