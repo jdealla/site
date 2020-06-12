@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Head from "next/head";
 
 import { getCollections } from "../lib/players";
-import ImageCloud from "../components/imagecloud";
 
 export default function Collections({ collections }) {
     const [view, setView] = useState("20 Current");
@@ -20,7 +19,7 @@ export default function Collections({ collections }) {
                         <div className="column is-2-desktop is-3-mobile" key={i++}>
                             <figure className="image is-96x96">
                                 <a className="title is-4" href={`/collection/${collection.toLowerCase().replace(/ /g, "-")}/theme/${obj.theme.toLowerCase().replace(/ /g, "-")}`}>
-                                    <ImageCloud src={`icons/icon_${name.toLowerCase().replace(/ /g, "_")}.png`} width="96" />
+                                    <img src={`https://2kdbimg.com/96x96/icon_${name.toLowerCase().replace(/ /g, "_")}.png`} />
                                 </a>
                             </figure>
                         </div>
@@ -28,23 +27,6 @@ export default function Collections({ collections }) {
                 })
             }
         }
-        // let themes = [], i = 0;
-        // for(let c of collections) {
-        //     if (c === view) {
-        //         let groupedBy = players.reduce((h, obj) => Object.assign(h, { [obj["theme"]]: ( h[obj["theme"]] || [] ).concat(obj) }), {});
-
-        //         let sorted = {};
-        //         Object.keys(groupedBy).sort((a, b) => {
-        //             return a < b ? -1 : 1;
-        //         }).forEach(key => {
-        //             sorted[key] = groupedBy[key];
-        //         })
-                
-        //         for(let theme of Object.keys(sorted)) {
-        //         }
-        //     }
-        // }
-        // return themes;
     }
 
     return (
@@ -82,7 +64,8 @@ export default function Collections({ collections }) {
 }
 
 export async function getStaticProps() {
-    let collections = await getCollections();
+    let collections = await getCollections()
+                            .catch(console.error);
 
     return {
         props: {

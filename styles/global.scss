@@ -203,6 +203,46 @@ $badge-padding: .03rem .10rem;
     }
 }
 
+.star {
+	cursor: pointer;
+	&:hover {
+	    transition: .10s;
+	    color: #ffdd57;
+	}
+}
+
+.star-selected {
+    color: #ffdd57;
+	filter: drop-shadow(#ffdd57 0px 0px 3px);
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #000;
+  border-color: #000 transparent #000 transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 @import "../node_modules/bulma/sass/utilities/functions.sass";
 @import "../node_modules/bulma/sass/utilities/derived-variables.sass";
 @import "../node_modules/bulma/sass/utilities/controls.sass";
@@ -227,6 +267,7 @@ $badge-padding: .03rem .10rem;
 @import "../node_modules/bulma/sass/components/tabs.sass";
 @import "../node_modules/bulma/sass/components/card.sass";
 @import "../node_modules/bulma/sass/components/dropdown.sass";
+@import "../node_modules/bulma/sass/components/panel.sass";
 @import "../node_modules/bulma/sass/form/_all.sass";
 
 @import '@creativebulma/bulma-badge'

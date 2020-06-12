@@ -154,7 +154,8 @@ export default function Player({ playerData, altPlayers, evos }) {
 }
 
 export async function getStaticPaths() {
-    const paths = await getPlayersIds();
+    const paths = await getPlayersIds()
+                        .catch(console.error);
 
     return {
         paths,
@@ -164,12 +165,15 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
     const playerData = await getPlayerData(params.id)
+                            .catch(console.error);
 
-    const res = await findAltPlayers(playerData.info.name);
+    const res = await findAltPlayers(playerData.info.name)
+                        .catch(console.error);
     
     const altPlayers = res.filter(player => player.id != playerData.info.id).sort((a, b) => a.overall > b.overall ? -1 : 1);
 
-    const evos = await findEvos(playerData.info.id);
+    const evos = await findEvos(playerData.info.id)
+                        .catch(console.error);
 
     return {
         props: {

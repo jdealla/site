@@ -1,7 +1,6 @@
 import React from "react";
 
 import SearchPlayers from "../components/searchplayers";
-import ImageCloud from "../components/imagecloud";
 
 export default function CompareHeader(props) {
     const { players, handlePlayer, compare } = props;
@@ -12,7 +11,7 @@ export default function CompareHeader(props) {
                 <div className="columns">
                     <div className="column is-half">
                         <figure className="is-3by4">
-                            <ImageCloud src={`players/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width={240} height={350} />
+                            <img src={`https://2kdbimg.com/240x350/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}_${playerData.info.id}.jpg`} />
                         </figure>
                     </div>
                     <div className="column ">

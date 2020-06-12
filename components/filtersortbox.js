@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { formatName } from "../lib/helpers";
 
 import Dropdown from "./dropdown";
+import SearchFilter from "./searchfilter";
 
 export default function FilterSortBox(props) {
     const { allProps, allAnimations, searchOptions, handleOptions, } = props;
+    const [filterCat, setFilterCat] = useState({ cat: "lower base", innerCat: "shooting" });
+    const [filterItems, setFilterItems] = useState(allAnimations.shooting.lower_base_a)
 
-    const handleChange = (e) => {
-        handleOptions({...searchOptions, searchValue: e.target.value })
+    useEffect(() => {
+        setFilterItems(allAnimations[filterCat.innerCat][filterCat.cat.replace(/ /g, "_") + "_a"])
+    }, [filterCat])
+
+    const handleFilterCat = (cat, innerCat) => {
+        setFilterCat({ cat: cat, innerCat: innerCat })
     }
 
-    const handleFilter = (cat, prop, value, innerCat="") => {
+    const handleChange = (e) => handleOptions({...searchOptions, searchValue: e.target.value })
+
+    const handleFilter = (cat, prop, value="", innerCat="") => {
         if (searchOptions.filterValue === value) {
             handleOptions({ ...searchOptions, cat: "", filterProp: "", filterValue: "", innerCat: "" })
         } else {
@@ -24,6 +33,37 @@ export default function FilterSortBox(props) {
         } else {
             handleOptions({ ...searchOptions, cat: cat, sortProp: prop, sortValue: value, innerCat: "", filterProp: "", filterValue: "" })
         }
+    }
+
+    const getAnimationCats = () => {
+        let cats = [
+            "Lower Base", "Upper Release", "Dribble Style", "Size Up Packages", "Moving Crossover", "Moving Behind The Back", 
+            "Moving Hesitation", "Moving Spin", "Triple Threat Style", "Layup Package", "Post Fade", "Post Hook"
+        ];
+
+        return cats.map((cat, i) => {
+            let innerCat = ""
+            switch(cat) {
+                case "Lower Base": innerCat = "shooting"; break;
+                case "Upper Release": innerCat = "shooting"; break;
+                case "Dribble Style": innerCat = "ballhandle"; break;
+                case "Size Up Packages": innerCat = "ballhandle"; break;
+                case "Moving Crossover": innerCat = "ballhandle"; break;
+                case "Moving Behind The Back": innerCat = "ballhandle"; break;
+                case "Moving Hesitation": innerCat = "ballhandle"; break;
+                case "Moving Spin": innerCat = "ballhandle"; break;
+                case "Triple Threat Style": innerCat = "ballhandle"; break;
+                case "Layup Package": innerCat = "layup"; break;
+                case "Post Fade": innerCat = "post"; break;
+                case "Post Hook": innerCat = "post"; break;
+            }
+
+            return (
+                <a className="dropdown-item" key={i} onClick={() => handleFilterCat(cat.toLowerCase(), innerCat)}>
+                    {cat}
+                </a>
+            )}
+        )
     }
 
     const getDropdownItems = (cat) => {
@@ -103,36 +143,6 @@ export default function FilterSortBox(props) {
                     {formatName(tend)}
                 </a>)
             );
-            case "lowerBase": return allAnimations.shooting.lower_base_a.map((ani, i) =>
-                (<a className="dropdown-item" key={i} onClick={() => handleFilter("animations", "lower_base_a", ani, "shooting")}>
-                    {ani}
-                </a>)
-            );
-            case "upperBase": return allAnimations.shooting.upper_release_a.map((ani, i) =>
-                (<a className="dropdown-item" key={i} onClick={() => handleFilter("animations", "upper_base_a", ani, "shooting")}>
-                    {ani}
-                </a>)
-            );
-            case "dribbleStyle": return allAnimations.ballhandle.dribble_style_a.map((ani, i) =>
-                (<a className="dropdown-item" key={i} onClick={() => handleFilter("animations", "dribble_style_a", ani, "ballhandle")}>
-                    {ani}
-                </a>)
-            );
-            case "sizeUpPackage": return allAnimations.ballhandle.size_up_packages_a.map((ani, i) =>
-                (<a className="dropdown-item" key={i} onClick={() => handleFilter("animations", "size_up_packages_a", ani, "ballhandle")}>
-                    {ani}
-                </a>)
-            );
-            case "movingCross": return allAnimations.ballhandle.moving_crossover_a.map((ani, i) =>
-                (<a className="dropdown-item" key={i} onClick={() => handleFilter("animations", "moving_crossover_a", ani, "ballhandle")}>
-                    {ani}
-                </a>)
-            );
-            case "movingBtb": return allAnimations.ballhandle.moving_behind_the_back_a.map((ani, i) =>
-                (<a className="dropdown-item" key={i} onClick={() => handleFilter("animations", "moving_behind_the_back_a", ani, "ballhandle")}>
-                    {ani}
-                </a>)
-            );
         }
     }
 
@@ -145,27 +155,132 @@ export default function FilterSortBox(props) {
             </div>
             <div className="container">
                 <div className="columns is-mobile is-multiline">
+                    <div className="column is-4-widescreen">
+                        <p className="heading">Filter By Overall: </p>
+                        <div className="field has-addons">
+                            <p className="control">
+                                <button 
+                                    className={`button is-small ${searchOptions.filterValue === "bronze" ? "is-active" : ""}`} 
+                                    onClick={() => handleFilter("info", "overall", "bronze")}
+                                >
+                                    <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #B2725C)` }}>
+                                        <img src={`https://2kdbimg.com/16/icon_bronze.png`} />
+                                    </figure>
+                                </button>
+                            </p>
+                            <p className="control">
+                                <button 
+                                    className={`button is-small ${searchOptions.filterValue === "silver" ? "is-active" : ""}`}
+                                    onClick={() => handleFilter("info", "overall", "silver")}
+                                >
+                                    <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #9A9A9A)` }}>
+                                        <img src={`https://2kdbimg.com/16/icon_silver.png`} />
+                                    </figure>
+                                </button>
+                            </p>
+                            <p className="control">
+                                <button 
+                                    className={`button is-small ${searchOptions.filterValue === "gold" ? "is-active" : ""}`}
+                                    onClick={() => handleFilter("info", "overall", "gold")}
+                                >
+                                    <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #EBE513)` }}>
+                                        <img src={`https://2kdbimg.com/16/icon_gold.png`} />
+                                    </figure>
+                                </button>
+                            </p>
+                            <p className="control">
+                                <button 
+                                    className={`button is-small ${searchOptions.filterValue === "emerald" ? "is-active" : ""}`}
+                                    onClick={() => handleFilter("info", "overall", "emerald")}
+                                >
+                                    <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #5AC573)` }}>
+                                        <img src={`https://2kdbimg.com/16/icon_emerald.png`} />
+                                    </figure>
+                                </button>
+                            </p>
+                            <p className="control">
+                                <button 
+                                    className={`button is-small ${searchOptions.filterValue === "sapphire" ? "is-active" : ""}`}
+                                    onClick={() => handleFilter("info", "overall", "sapphire")}
+                                >
+                                    <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #498AE8)` }}>
+                                        <img src={`https://2kdbimg.com/16/icon_sapphire.png`} />
+                                    </figure>
+                                </button>
+                            </p>
+                            <p className="control">
+                                <button 
+                                    className={`button is-small ${searchOptions.filterValue === "ruby" ? "is-active" : ""}`}
+                                    onClick={() => handleFilter("info", "overall", "ruby")}
+                                >
+                                    <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #EF5A5D)` }}>
+                                        <img src={`https://2kdbimg.com/16/icon_ruby.png`} />
+                                    </figure>
+                                </button>
+                            </p>
+                            <p className="control">
+                                <button 
+                                    className={`button is-small ${searchOptions.filterValue === "amethyst" ? "is-active" : ""}`}
+                                    onClick={() => handleFilter("info", "overall", "amethyst")}
+                                >
+                                    <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #CF67D7)` }}>
+                                        <img src={`https://2kdbimg.com/16/icon_amethyst.png`} />
+                                    </figure>
+                                </button>
+                            </p>
+                            <p className="control">
+                                <button 
+                                    className={`button is-small ${searchOptions.filterValue === "diamond" ? "is-active" : ""}`}
+                                    onClick={() => handleFilter("info", "overall", "diamond")}
+                                >
+                                    <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #22D2F2)` }}>
+                                        <img src={`https://2kdbimg.com/16/icon_diamond.png`} />
+                                    </figure>
+                                </button>
+                            </p>
+                            <p className="control">
+                                <button 
+                                    className={`button is-small ${searchOptions.filterValue === "pink diamond" ? "is-active" : ""}`}
+                                    onClick={() => handleFilter("info", "overall", "pink diamond")}
+                                >
+                                    <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #FF96DF)` }}>
+                                        <img src={`https://2kdbimg.com/16/icon_pink_diamond.png`} />
+                                    </figure>
+                                </button>
+                            </p>
+                            <p className="control">
+                                <button 
+                                    className={`button is-small ${searchOptions.filterValue === "galaxy opal" ? "is-active" : ""}`}
+                                    onClick={() => handleFilter("info", "overall", "galaxy opal")}
+                                >
+                                    <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #D389D7)` }}>
+                                        <img src={`https://2kdbimg.com/16/icon_galaxy_opal.png`} />
+                                    </figure>
+                                </button>
+                            </p>
+                        </div>
+                    </div>
                     <div className="column is-2-widescreen">
                         <p className="heading">Filter By Position: </p>
                         <div className="field has-addons">
                             <p className="control">
-                                <button className="button is-small" onClick={() => handleFilter("info", "position", "PG")}>PG</button>
+                                <button className={`button is-small ${searchOptions.filterValue === "PG" ? "is-active" : ""}`} onClick={() => handleFilter("info", "position", "PG")}>PG</button>
                             </p>
                             <p className="control">
-                                <button className="button is-small" onClick={() => handleFilter("info", "position", "SG")}>SG</button>
+                                <button className={`button is-small ${searchOptions.filterValue === "SG" ? "is-active" : ""}`} onClick={() => handleFilter("info", "position", "SG")}>SG</button>
                             </p>
                             <p className="control">
-                                <button className="button is-small" onClick={() => handleFilter("info", "position", "SF")}>SF</button>
+                                <button className={`button is-small ${searchOptions.filterValue === "SF" ? "is-active" : ""}`} onClick={() => handleFilter("info", "position", "SF")}>SF</button>
                             </p>
                             <p className="control">
-                                <button className="button is-small" onClick={() => handleFilter("info", "position", "PF")}>PF</button>
+                                <button className={`button is-small ${searchOptions.filterValue === "PF" ? "is-active" : ""}`} onClick={() => handleFilter("info", "position", "PF")}>PF</button>
                             </p>
                             <p className="control">
-                                <button className="button is-small" onClick={() => handleFilter("info", "position", "C")}>C</button>
+                                <button className={`button is-small ${searchOptions.filterValue === "C" ? "is-active" : ""}`} onClick={() => handleFilter("info", "position", "C")}>C</button>
                             </p>
                         </div>
                     </div>
-                    <div className="column is-4-widescreen">
+                    <div className="column is-6-widescreen">
                         <p className="heading">Sort By Stats: </p>
                         <Dropdown title="Shooting" items={getDropdownItems("shootingStats")} />
                         <Dropdown title="Inside Scoring" items={getDropdownItems("insideStats")} />
@@ -175,7 +290,7 @@ export default function FilterSortBox(props) {
                         <Dropdown title="Rebounding" items={getDropdownItems("reboundStats")} />
                         <Dropdown title="Potential" items={getDropdownItems("potentialStats")} />
                     </div>
-                    <div className="column is-4-widescreen">
+                    <div className="column is-6-widescreen">
                         <p className="heading">Sort By Tendencies: </p>
                         <Dropdown title="Inside T" items={getDropdownItems("insideT")} />
                         <Dropdown title="Shooting T" items={getDropdownItems("shootingT")} />
@@ -186,14 +301,15 @@ export default function FilterSortBox(props) {
                         <Dropdown title="Passing T" items={getDropdownItems("passingT")} />
                         <Dropdown title="Defense T" items={getDropdownItems("defenseT")} />
                     </div>
-                    <div className="column is-4-widescreen">
+                    <div className="column is-6-widescreen">
                         <p className="heading">Filter By Animations: </p>
-                        <Dropdown title="Lower Base" items={getDropdownItems("lowerBase")} />
-                        <Dropdown title="Upper Base" items={getDropdownItems("upperBase")} />
-                        <Dropdown title="Dribble Style" items={getDropdownItems("dribbleStyle")} />
-                        <Dropdown title="Sizeup Package" items={getDropdownItems("sizeUpPackage")} />
-                        <Dropdown title="Moving Crossover" items={getDropdownItems("movingCross")} />
-                        <Dropdown title="Moving Btb" items={getDropdownItems("movingBtb")} />
+                        <div className="container is-flex">
+                            <Dropdown title={filterCat.cat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())} items={getAnimationCats()} />
+                            <SearchFilter suggestions={filterItems} handleFilter={handleFilter} filterCat={filterCat} placeholder={`Search ${filterCat.cat.replace(/_/g, " ")} here`} />
+                        </div>
+                    </div>
+                    <div className="column ">
+                        <p className="heading">Filter By Badges: </p>
 
                     </div>
                 </div>

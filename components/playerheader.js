@@ -1,9 +1,8 @@
 import React from "react";
 import { RiBasketballLine } from "react-icons/ri";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai"
+
 import ShotChart from "./shotchart";
-import ImageCloud from "./imagecloud";
-// import Dropdown from "./dropdown";
 import OverallImage from "./overallimage";
 
 export default function PlayerHeader(props) {
@@ -20,9 +19,9 @@ export default function PlayerHeader(props) {
         let stars = []
         for(let i = 0; i < evoStars; i++) {
             let star = (
-                <div className="column is-1" key={i} style={{ cursor: "pointer" }}>
-                    <div className="container" onClick={() => handleEvoStars(i)}>
-                        {evoLevel >= i ? <AiFillStar size="2em" /> : <AiOutlineStar size="2em" />}
+                <div className="column is-2" key={i}>
+                    <div className="container star" onClick={() => handleEvoStars(i)}>
+                        {evoLevel >= i ? <AiFillStar className="star-selected" size="2em" /> : <AiOutlineStar size="2em" />}
                     </div>
                 </div>
             )
@@ -36,7 +35,7 @@ export default function PlayerHeader(props) {
             <div className="column is-full-mobile is-full-desktop is-full-widescreen">
 			       <div className="column is-full-mobile player-column-height is-hidden-tablet">
                                 <figure className="image is-3by4">
-                                    <ImageCloud src={`players/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width={489} />
+                                    <img src={`https://2kdbimg.com/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}_${playerData.info.id}.jpg`} />
                                 </figure>
                                 <div className="columns is-mobile is-centered" style={{ padding:"2em 0", flexWrap:"wrap" }}>
                                     {altPlayers.map((player, i) => (
@@ -58,7 +57,7 @@ export default function PlayerHeader(props) {
                         <div className="columns is-mobile is-multiline justify-header">
                             <div className="column is-4-tablet is-3-desktop player-column-height is-hidden-mobile">
                                 <figure className="image is-3by4">
-                                    <ImageCloud src={`players/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width={489} />
+                                    <img src={`https://2kdbimg.com/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}_${playerData.info.id}.jpg`} />
                                 </figure>
                                 <div className="columns is-mobile is-centered" style={{ padding:"2em 0", flexWrap:"wrap" }}>
                                     {altPlayers.map((player, i) => (
@@ -178,19 +177,19 @@ export default function PlayerHeader(props) {
                                 <div className="level">   
                                     <div className="level-item is-size-5 has-text-centered transform-badges" style={{ justifyContent:"space-evenly" }}>
                                         <figure className="image is-64x64">
-                                            <ImageCloud src="icons/icon_badge_bronze.png" width={64} />
+                                            <img src="https://2kdbimg.com/64/icon_badge_bronze.png" />
                                             <p className="is-overlay inline-number-badge">{playerData.badges.totalBadges.bronzeBadges}</p>
                                         </figure>
                                         <figure className="image is-64x64">
-                                            <ImageCloud src="icons/icon_badge_silver.png" width={64} />
+                                            <img src="https://2kdbimg.com/64/icon_badge_silver.png" />
                                             <p className="is-overlay inline-number-badge">{playerData.badges.totalBadges.silverBadges}</p>
                                         </figure>
                                         <figure className="image is-64x64">
-                                            <ImageCloud src="icons/icon_badge_gold.png" width={64} />
+                                            <img src="https://2kdbimg.com/64/icon_badge_gold.png" />
                                             <p className="is-overlay inline-number-badge">{playerData.badges.totalBadges.goldBadges}</p>
                                         </figure>
                                         <figure className="image is-64x64">
-                                            <ImageCloud src="icons/icon_badge_hof.png" width={64} />
+                                            <img src="https://2kdbimg.com/64/icon_badge_hof.png" />
                                             <p className="is-overlay inline-number-badge">{playerData.badges.totalBadges.hofBadges}</p>
                                         </figure>
                                     </div>
