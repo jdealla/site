@@ -22,7 +22,7 @@ export default function PlayersList(props) {
                         <td>
                             <div className="container is-flex">
                                 <figure className="image is-24x24" style={{ marginBottom: "5px" }}>
-                                    <ImageCloud src={`players/${player.info.name.replace(/( |')/g, "_").toLowerCase()}_${player.info.id}.jpg`} width={24} />
+                                    <img src={`https://2kdbimg.com/35/${player.info.name.replace(/( |')/g, "_").toLowerCase()}_${player.info.id}.jpg`} />
                                 </figure>
                                 <p>{player.info.name}</p>
                             </div>

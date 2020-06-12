@@ -20,7 +20,7 @@ export default function Collections({ collections }) {
                         <div className="column is-2-desktop is-3-mobile" key={i++}>
                             <figure className="image is-96x96">
                                 <a className="title is-4" href={`/collection/${collection.toLowerCase().replace(/ /g, "-")}/theme/${obj.theme.toLowerCase().replace(/ /g, "-")}`}>
-                                    <ImageCloud src={`icons/icon_${name.toLowerCase().replace(/ /g, "_")}.png`} width="96" />
+                                    <img src={`https://2kdbimg.com/96x96/icon_${name.toLowerCase().replace(/ /g, "_")}.png`} />
                                 </a>
                             </figure>
                         </div>

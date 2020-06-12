@@ -11,14 +11,16 @@ export default function Updates({ groupedByDate }) {
     const renderUpdates = () => {
         let updates = [], i = 0;
         for(let [date, players] of Object.entries(groupedByDate)) {
-            players.sort((a, b) => (a.overall > b.overall) ? 1 : (a.overall === b.overall) ? ((a.name > b.name) ? 1 : -1) : -1 )
-
+			
             let dateObj = (
-                <tr key={i++}>
-                    <td className="title is-size-7-mobile is-size-6-tablet is-marginless" onClick={() => router.push(`/updates/${date}`)} style={{ cursor: "pointer", width: "12%" }}>{date}</td>
-                    <td className="is-size-7-mobile is-size-6-tablet has-text-weight-medium has-text-success">+{players.length}</td>
-                    <UpdatesList date={date} players={players} amount={10} />
-                </tr>
+                <a href={`/updates/${date}`} className="panel-block" key={i++}>
+				    <span className="tags has-addons" style={{margin:0}}>
+                        <span className="tag">{date}</span>
+                        <span className="tag is-warning is-light">+ {players.length} cards</span>
+				    </span>	
+				    <span className="heading" style={{marginLeft:"20px"}}>"Name of the update righ here"</span>
+                </a>
+
             )
             updates.push(dateObj);
         }
@@ -33,25 +35,12 @@ export default function Updates({ groupedByDate }) {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <div className="container">
-                <section className="hero is-bold">
-                    <div className="hero-body" style={{ padding: "1.2rem" }}>
-                        <div className="container">
-                            <h1 className="title is-size-4">
-                                MyTeam Card Updates
-                            </h1>
-                        </div>
-                    </div>
-                </section>
-
-                <div className="box">
-                    <div className="table-container">
-                        <table className="table">
-                            <tbody>
-                                {renderUpdates()}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <nav className="panel">
+                    <p className="panel-heading">
+                        MyTeam Card Updates
+                    </p>
+                        {renderUpdates()}
+                </nav>
             </div>
         </>
     )

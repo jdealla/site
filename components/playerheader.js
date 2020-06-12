@@ -36,7 +36,7 @@ export default function PlayerHeader(props) {
             <div className="column is-full-mobile is-full-desktop is-full-widescreen">
 			       <div className="column is-full-mobile player-column-height is-hidden-tablet">
                                 <figure className="image is-3by4">
-                                    <ImageCloud src={`players/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width={489} />
+                                    <img src={`https://2kdbimg.com/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}_${playerData.info.id}.jpg`} />
                                 </figure>
                                 <div className="columns is-mobile is-centered" style={{ padding:"2em 0", flexWrap:"wrap" }}>
                                     {altPlayers.map((player, i) => (
@@ -58,7 +58,7 @@ export default function PlayerHeader(props) {
                         <div className="columns is-mobile is-multiline justify-header">
                             <div className="column is-4-tablet is-3-desktop player-column-height is-hidden-mobile">
                                 <figure className="image is-3by4">
-                                    <ImageCloud src={`players/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}_${playerData.info.id}.jpg`} width={489} />
+                                    <img src={`https://2kdbimg.com/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}_${playerData.info.id}.jpg`} />
                                 </figure>
                                 <div className="columns is-mobile is-centered" style={{ padding:"2em 0", flexWrap:"wrap" }}>
                                     {altPlayers.map((player, i) => (

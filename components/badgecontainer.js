@@ -29,7 +29,7 @@ export default function BadgesContainer(props) {
                 }
             }
 
-            let imgSource = `badges/${name}_${level}.png`;
+            let imgSource = `${name}_${level}.png`;
             
             if (level === "yes")
                 imgSource = "badges/personality.png";
@@ -40,7 +40,7 @@ export default function BadgesContainer(props) {
                 <div className="column is-paddingless is-2-mobile is-one-third-tablet is-1-desktop is-badge" key={i++}>
                     <div className="container is-vcentered">
                         <figure className="image is-48x48" style={{ marginLeft: "auto", marginRight: "auto" }}>
-                            <ImageCloud src={`${imgSource}`} width={48} height={48} alt={name} />
+                            <img src={`https://2kdbimg.com/48x48/${imgSource}`} />
                         </figure>
                         {renderNotification(evod)}
                         <p className="is-size-7 has-text-centered"> {formatName(key)} </p>
