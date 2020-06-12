@@ -1,5 +1,5 @@
 import React from "react";
-import ImageCloud from "./imagecloud";
+
 import { formatName, numToLevel, levelToNum } from "../lib/helpers";
 
 export default function BadgesContainer(props) {

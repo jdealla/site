@@ -1,7 +1,6 @@
 import React from "react";
 
 import SearchPlayers from "../components/searchplayers";
-import ImageCloud from "../components/imagecloud";
 
 export default function CompareHeader(props) {
     const { players, handlePlayer, compare } = props;

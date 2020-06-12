@@ -1,5 +1,4 @@
 import React from "react";
-import ImageCloud from "./imagecloud";
 
 export default function OverallImage(props) {
     const { overall, size } = props;
@@ -23,7 +22,7 @@ export default function OverallImage(props) {
 
         return (
             <figure className={`image is-${size}`} style={{ filter:`drop-shadow(0px 0px 4px ${color})` }}>
-                <ImageCloud src={`icons/icon_${tier}.png`} width={48} />
+                <img src={`https://2kdbimg.com/48/icon_${tier}.png`} />
             </figure>
         )
     }

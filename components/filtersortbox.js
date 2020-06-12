@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { formatName } from "../lib/helpers";
 
 import Dropdown from "./dropdown";
-import ImageCloud from "./imagecloud";
 import SearchFilter from "./searchfilter";
 
 export default function FilterSortBox(props) {
@@ -165,7 +164,7 @@ export default function FilterSortBox(props) {
                                     onClick={() => handleFilter("info", "overall", "bronze")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #B2725C)` }}>
-                                        <ImageCloud src={`icons/icon_bronze.png`} width={16} />
+                                        <img src={`https://2kdbimg.com/16/icon_bronze.png`} />
                                     </figure>
                                 </button>
                             </p>
@@ -175,7 +174,7 @@ export default function FilterSortBox(props) {
                                     onClick={() => handleFilter("info", "overall", "silver")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #9A9A9A)` }}>
-                                        <ImageCloud src={`icons/icon_silver.png`} width={16} />
+                                        <img src={`https://2kdbimg.com/16/icon_silver.png`} />
                                     </figure>
                                 </button>
                             </p>
@@ -185,7 +184,7 @@ export default function FilterSortBox(props) {
                                     onClick={() => handleFilter("info", "overall", "gold")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #EBE513)` }}>
-                                        <ImageCloud src={`icons/icon_gold.png`} width={16} />
+                                        <img src={`https://2kdbimg.com/16/icon_gold.png`} />
                                     </figure>
                                 </button>
                             </p>
@@ -195,7 +194,7 @@ export default function FilterSortBox(props) {
                                     onClick={() => handleFilter("info", "overall", "emerald")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #5AC573)` }}>
-                                        <ImageCloud src={`icons/icon_emerald.png`} width={16} />
+                                        <img src={`https://2kdbimg.com/16/icon_emerald.png`} />
                                     </figure>
                                 </button>
                             </p>
@@ -205,7 +204,7 @@ export default function FilterSortBox(props) {
                                     onClick={() => handleFilter("info", "overall", "sapphire")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #498AE8)` }}>
-                                        <ImageCloud src={`icons/icon_sapphire.png`} width={16} />
+                                        <img src={`https://2kdbimg.com/16/icon_sapphire.png`} />
                                     </figure>
                                 </button>
                             </p>
@@ -215,7 +214,7 @@ export default function FilterSortBox(props) {
                                     onClick={() => handleFilter("info", "overall", "ruby")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #EF5A5D)` }}>
-                                        <ImageCloud src={`icons/icon_ruby.png`} width={16} />
+                                        <img src={`https://2kdbimg.com/16/icon_ruby.png`} />
                                     </figure>
                                 </button>
                             </p>
@@ -225,7 +224,7 @@ export default function FilterSortBox(props) {
                                     onClick={() => handleFilter("info", "overall", "amethyst")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #CF67D7)` }}>
-                                        <ImageCloud src={`icons/icon_amethyst.png`} width={16} />
+                                        <img src={`https://2kdbimg.com/16/icon_amethyst.png`} />
                                     </figure>
                                 </button>
                             </p>
@@ -235,7 +234,7 @@ export default function FilterSortBox(props) {
                                     onClick={() => handleFilter("info", "overall", "diamond")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #22D2F2)` }}>
-                                        <ImageCloud src={`icons/icon_diamond.png`} width={16} />
+                                        <img src={`https://2kdbimg.com/16/icon_diamond.png`} />
                                     </figure>
                                 </button>
                             </p>
@@ -245,7 +244,7 @@ export default function FilterSortBox(props) {
                                     onClick={() => handleFilter("info", "overall", "pink diamond")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #FF96DF)` }}>
-                                        <ImageCloud src={`icons/icon_pink_diamond.png`} width={16} />
+                                        <img src={`https://2kdbimg.com/16/icon_pink_diamond.png`} />
                                     </figure>
                                 </button>
                             </p>
@@ -255,7 +254,7 @@ export default function FilterSortBox(props) {
                                     onClick={() => handleFilter("info", "overall", "galaxy opal")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #D389D7)` }}>
-                                        <ImageCloud src={`icons/icon_galaxy_opal.png`} width={16} />
+                                        <img src={`https://2kdbimg.com/16/icon_galaxy_opal.png`} />
                                     </figure>
                                 </button>
                             </p>

@@ -1,5 +1,4 @@
 import React from "react";
-import ImageCloud from "./imagecloud";
 
 export default function PlayersCardView(props) {
     const { players } = props;

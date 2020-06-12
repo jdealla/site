@@ -1,9 +1,8 @@
 import React from "react";
 import { RiBasketballLine } from "react-icons/ri";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai"
+
 import ShotChart from "./shotchart";
-import ImageCloud from "./imagecloud";
-// import Dropdown from "./dropdown";
 import OverallImage from "./overallimage";
 
 export default function PlayerHeader(props) {
@@ -178,19 +177,19 @@ export default function PlayerHeader(props) {
                                 <div className="level">   
                                     <div className="level-item is-size-5 has-text-centered transform-badges" style={{ justifyContent:"space-evenly" }}>
                                         <figure className="image is-64x64">
-                                            <ImageCloud src="icons/icon_badge_bronze.png" width={64} />
+                                            <img src="https://2kdbimg.com/64/icon_badge_bronze.png" />
                                             <p className="is-overlay inline-number-badge">{playerData.badges.totalBadges.bronzeBadges}</p>
                                         </figure>
                                         <figure className="image is-64x64">
-                                            <ImageCloud src="icons/icon_badge_silver.png" width={64} />
+                                            <img src="https://2kdbimg.com/64/icon_badge_silver.png" />
                                             <p className="is-overlay inline-number-badge">{playerData.badges.totalBadges.silverBadges}</p>
                                         </figure>
                                         <figure className="image is-64x64">
-                                            <ImageCloud src="icons/icon_badge_gold.png" width={64} />
+                                            <img src="https://2kdbimg.com/64/icon_badge_gold.png" />
                                             <p className="is-overlay inline-number-badge">{playerData.badges.totalBadges.goldBadges}</p>
                                         </figure>
                                         <figure className="image is-64x64">
-                                            <ImageCloud src="icons/icon_badge_hof.png" width={64} />
+                                            <img src="https://2kdbimg.com/64/icon_badge_hof.png" />
                                             <p className="is-overlay inline-number-badge">{playerData.badges.totalBadges.hofBadges}</p>
                                         </figure>
                                     </div>
