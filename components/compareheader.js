@@ -1,35 +1,50 @@
 import React from "react";
 
 import SearchPlayers from "../components/searchplayers";
+import OverallImage from "./overallimage";
 
 export default function CompareHeader(props) {
     const { players, handlePlayer, compare } = props;
 
     const playerInfoContainer = (playerData, playerId) => {
         return (
-            <div className="box">
-                <div className="columns">
-                    <div className="column is-half">
-                        <figure className="is-3by4">
-                            <img src={`https://2kdbimg.com/240x350/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}_${playerData.info.id}.jpg`} />
-                        </figure>
-                    </div>
-                    <div className="column ">
-                        <div className="columns is-multiline">
-                            <div className="column">
-                                Overall: {playerData.info.overall}
-                            </div>
-                            <div className="column">
-                                Height: {playerData.info.height}
-                            </div>
-                            <div className="column">
-                                Weight: {playerData.info.weight}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <a className="delete is-medium" aria-label="delete" style={{ position: "absolute", top: 0 }} onClick={() => handlePlayer(playerId, null)}></a>
-            </div>
+		   <div className="box" style={{  minWidth: "80%" }}>
+		       <div className="column">
+                   <article className="media">
+                       <div className="media-left">
+                           <img className="compare-img" src={`https://2kdbimg.com/240x350/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}_${playerData.info.id}.jpg`} />
+                       </div>
+                       <div className="media-content">
+                           <div className="content has-text-centered">
+                               <p> 
+							      <strong>{playerData.info.name}</strong> <br /> 
+							      <small><a className="has-text-dark" href={`/collections`}>{playerData.info.collection}</a> / 
+		                          <a className="has-text-dark" href={`/collection/${playerData.info.collection.toLowerCase().replace(/ /g, "-")}/theme/${playerData.info.theme.toLowerCase().replace(/ /g, "-")}`}> {playerData.info.theme} </a></small>
+                                  <br />
+		                          <br />
+		                       </p>
+                               <p className="heading">Overall</p>
+                               <p className="compare-ovr">
+                               <OverallImage size="24x24" overall={playerData.info.overall} />
+                                   <p className="is-overlay is-size-6 has-text-white inline-number-ovr" >
+                                       {playerData.info.overall}
+                                   </p>
+                                </p>
+                                <br />
+                                <p className="heading">Position</p>
+                                <p className="title is-size-6">{playerData.info.position}{playerData.info.secondary_position != null ? `/${playerData.info.secondary_position}` : ""}</p>
+                                <br />
+                                <p className="heading">Height</p>
+                                <p className="title is-size-6">{playerData.info.height}</p>
+                                <br />
+                                <p className="heading">Weight</p>
+                                <p className="title is-size-6">{playerData.info.weight}</p>
+                          </div>
+                      </div>
+                  </article>
+              </div>
+                 <a className="delete is-medium" aria-label="delete" style={{ position: "absolute", top: 0 }} onClick={() => handlePlayer(playerId, null)}></a>
+		  </div>    
         )
     };
 
