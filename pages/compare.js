@@ -70,14 +70,14 @@ export default function Compare({ players }) {
                         <Fragment>
                             <div className="column">
 							  <table className="table is-striped is-fullwidth">
-                                <CompareTable tableName="Finishing Badges" firstName={player1.info.name} firstStats={player1.badges.finishing} secondName={player2.info.name} secondStats={player2.badges.finishing} />
-                                <CompareTable tableName="Playmaking Badges" firstName={player1.info.name} firstStats={player1.badges.playmaking} secondName={player2.info.name} secondStats={player2.badges.playmaking} />
+                                <CompareTable isBadges={true} tableName="Finishing Badges" firstName={player1.info.name} firstStats={player1.badges.finishing} secondName={player2.info.name} secondStats={player2.badges.finishing} />
+                                <CompareTable isBadges={true} tableName="Playmaking Badges" firstName={player1.info.name} firstStats={player1.badges.playmaking} secondName={player2.info.name} secondStats={player2.badges.playmaking} />
                               </table>
 							</div>  
                             <div className="column">
 							  <table className="table is-striped is-fullwidth">
-                                <CompareTable tableName="Shooting Badges" firstName={player1.info.name} firstStats={player1.badges.shooting} secondName={player2.info.name} secondStats={player2.badges.shooting} />
-                                <CompareTable tableName="Defensive Badges" firstName={player1.info.name} firstStats={player1.badges.defensive} secondName={player2.info.name} secondStats={player2.badges.defensive} />
+                                <CompareTable isBadges={true} tableName="Shooting Badges" firstName={player1.info.name} firstStats={player1.badges.shooting} secondName={player2.info.name} secondStats={player2.badges.shooting} />
+                                <CompareTable isBadges={true} tableName="Defensive Badges" firstName={player1.info.name} firstStats={player1.badges.defensive} secondName={player2.info.name} secondStats={player2.badges.defensive} />
                               </table>
 							</div>
 						</Fragment>
