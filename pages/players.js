@@ -96,7 +96,7 @@ export default function Players({ allPlayers, allProps, allAnimations }) {
                             <th>Def Overall</th>
                             <th>Height</th>
                             <th>Badges</th>
-                            <th className={searchOptions.sortProp == "" ? "is-hidden" : ""}>{formatName(searchOptions.sortValue)}</th>
+                            <th className={searchOptions.sortProp == "" ? "is-hidden" : "players-sort-column"}>{formatName(searchOptions.sortValue)}</th>
                         </tr>
                     </thead>
                     <PlayersList players={players} page={page} searchOptions={searchOptions} />

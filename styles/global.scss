@@ -211,6 +211,20 @@ $badge-padding: .03rem .10rem;
 	}
 }
 
+.filter-button-active {
+    transition: .10s;
+	border: 0 !important;
+    background-color: #ffdd57 !important;
+    filter: drop-shadow(#aaa 0px 0px 5px);
+}
+
+.players-sort-column {
+    max-width: 6em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center !important;
+}
+
 .star-selected {
     color: #ffdd57;
 	filter: drop-shadow(#ffdd57 0px 0px 3px);
