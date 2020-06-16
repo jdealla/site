@@ -15,21 +15,20 @@ export default function UpdatedList(props) {
         }
         
         let newPlayers = playersToRender.map((player, i) => {
+			let imgBg = {
+                    backgroundImage: `url(https://2kdbimg.com/300/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg)`,
+            };
             return (
-                <td className="is-paddingless" key={i} onClick={() => router.push(`/player/${player.id}`)}>
-                    <img src={`https://2kdbimg.com/170/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} />
-                </td>
+			   <>
+                <a className="updates-cards" key={i} href={`/player/${player.id}`}>
+                    <img src={`https://2kdbimg.com/35/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} />
+                </a>
+				
+		        <span style={imgBg} className="popup-img" />
+			   </>
             )
         })
 
-        if (players.length > amount) {
-            let lastItem = (
-                <td className="is-size-7-mobile is-size-6-tablet" key={amount + 1} >
-                    <a className="heading" href={`/updates/${date}`} > +{players.length - amount} more players </a>
-                </td>
-            )
-            newPlayers.push(lastItem);
-        }
 
         return newPlayers;
     }

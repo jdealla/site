@@ -218,6 +218,25 @@ $badge-padding: .03rem .10rem;
     filter: drop-shadow(#aaa 0px 0px 5px);
 }
 
+.popup-img {
+    height: 300px;
+    width: 215px;
+    margin: -2.55em 0 0 -14em;
+    display:none;
+    position: absolute;
+}
+
+.updates-cards {
+    margin-right: 2px;
+	&:hover >img {
+	           opacity: 0.5; 
+			   transition: .10s; 
+	}
+	&:hover + .popup-img {
+	           display: block;
+	}
+}
+
 .players-sort-column {
     max-width: 6em;
     overflow: hidden;

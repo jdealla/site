@@ -23,11 +23,14 @@ export default function Updates({ groupedByDate, updateNames }) {
 			
             let dateObj = (
                 <a href={`/updates/${date}`} className="panel-block" key={i++}>
-				    <span className="tags has-addons" style={{margin:0}}>
-                        <span className="tag">{date}</span>
-                        <span className="tag is-warning is-light">+ {players.length} cards</span>
-				    </span>	
-				    <span className="heading" style={{marginLeft:"20px"}}> {findUpdateName(date)} </span>
+				    <span className="tags  has-addons" style={{margin:0}}>
+                        <span className="tag is-size-6 is-size-7-mobile">{date}</span>
+                        <span className="tag is-size-6 is-size-7-mobile is-warning is-light">+ {players.length} cards</span>
+                        <span className="tag is-size-6 is-size-7-mobile"> {findUpdateName(date)} </span>
+					</span>
+					<div style={{ marginLeft: "auto" }}>
+					    <UpdatesList date={date} players={players} amount={10} />
+					</div>
                 </a>
 
             )
