@@ -28,7 +28,7 @@ export default function Updates({ groupedByDate, updateNames }) {
                         <span className="tag is-size-6 is-size-7-mobile is-warning is-light">+ {players.length} cards</span>
                         <span className="tag is-size-6 is-size-7-mobile"> {findUpdateName(date)} </span>
 					</span>
-					<div style={{ marginLeft: "auto" }}>
+					<div className="is-hidden-mobile" style={{ marginLeft: "auto" }}>
 					    <UpdatesList date={date} players={players} amount={10} />
 					</div>
                 </a>

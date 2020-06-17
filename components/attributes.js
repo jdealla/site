@@ -9,7 +9,7 @@ export default function Attributes(props) {
             return "";
         else {
             if (evoStats[key] !== 0) {
-                return <span className="tag has-text-success">{`+${evoStats[key]}`}</span>
+                return <span className="tag has-text-info">{`+${evoStats[key]}`}</span>
             } else {
                 return "";
             }
