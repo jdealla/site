@@ -1,3 +1,5 @@
+import React from "react";
+import Head from "next/head";
 import { getAllDuos } from "../lib/duos";
 
 export default function DynamicDuos({ players }) {

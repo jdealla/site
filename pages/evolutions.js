@@ -1,3 +1,5 @@
+import React from "react";
+import Head from "next/head";
 import { getAllEvos } from "../lib/evos";
 
 export default function Evolutions({ players }) {
