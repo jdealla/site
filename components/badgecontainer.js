@@ -21,11 +21,27 @@ export default function BadgesContainer(props) {
             let level = value.toLowerCase();
             let upgraded = false;
             
-            if ( evoBadges != undefined || evoBadges != null) {
+            if (evoBadges != undefined || evoBadges != null) {
                 if (evoBadges[key] != undefined || evoBadges[key] != null) {
                     level = numToLevel(levelToNum(value) + evoBadges[key]).toLowerCase();
                     if (level != value.toLowerCase())
-                    upgraded = true;
+                        upgraded = true;
+                }
+            }
+
+            if (duoBadges != undefined || duoBadges != null) {
+                if (duoBadges[key] != undefined || duoBadges[key] != null) {
+                    level = numToLevel(levelToNum(value) + duoBadges[key]).toLowerCase();
+                    if(level != value.toLowerCase())
+                        upgraded = true;
+                }
+            }
+
+            if ((duoBadges != undefined || duoBadges != null) && (evoBadges != undefined || evoBadges != null)) {
+                if ((duoBadges[key] != undefined || duoBadges[key] != null) && (evoBadges[key] != undefined || evoBadges[key] != null)) {
+                    level = numToLevel(levelToNum(value) + duoBadges[key] + evoBadges[key]).toLowerCase();
+                    if(level != value.toLowerCase())
+                        upgraded = true;
                 }
             }
 
