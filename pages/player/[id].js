@@ -188,8 +188,11 @@ export async function getStaticProps({ params }) {
     const duo = await findDuos(playerData.info.id)
                         .catch(console.error);
 
-    const duoPartner = await findDuoPartner(duo.id2)
-                                .catch(console.error);
+    let duoPartner = {};
+    if (duo != null) {
+        duoPartner = await findDuoPartner(duo.id2)
+                    .catch(console.error);
+    }
 
     return {
         props: {
