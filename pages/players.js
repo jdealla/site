@@ -10,7 +10,9 @@ const PlayersList = dynamic(import("../components/playerslist"));
 export default function Players({ allPlayers, allProps, allAnimations }) {
     const [page, setPage] = useState(0)
     const [players, setPlayers] = useState(allPlayers);
-    const [searchOptions, setSearchOptions] = useState({ searchValue: "", direction: "", cat: "", innerCat: "", filterProp: "", filterValue: "", sortProp: "", sortValue: "" })
+    const [searchOptions, setSearchOptions] = useState({ 
+        searchValue: "", direction: "", innerCat: "", filterCat: "", filterProp: "", filterValue: "", sortCat: "", sortProp: "", sortValue: "" 
+    })
 
     const handlePage = (dir) => {
         if (dir === "prev") {
@@ -26,11 +28,12 @@ export default function Players({ allPlayers, allProps, allAnimations }) {
     }
 
     useEffect(() => {
-        const { searchValue, cat, innerCat, filterProp, filterValue, sortProp, sortValue} = searchOptions;
+        console.log(searchOptions);
+        const { searchValue, innerCat, filterCat, filterProp, filterValue, sortCat, sortProp, sortValue} = searchOptions;
 
         let filtered = allPlayers.filter(player => player.info.name.toLowerCase().includes(searchValue));
 
-        if (cat === "info" && filterProp === "overall" ) {
+        if (filterCat === "info" && filterProp === "overall" ) {
             filtered = filtered.filter(player => {
                 let tierStart = 0;
                 let tierEnd = 0;
@@ -50,17 +53,17 @@ export default function Players({ allPlayers, allProps, allAnimations }) {
             })
         } else if (filterProp != "" && filterValue != "") {
             if (innerCat != "") {
-                filtered = filtered.filter(player => player[cat][innerCat][filterProp] === filterValue)
+                filtered = filtered.filter(player => player[filterCat][innerCat][filterProp] === filterValue)
             } else {
-                filtered = filtered.filter(player => player[cat][filterProp] === filterValue);
+                filtered = filtered.filter(player => player[filterCat][filterProp] === filterValue);
             }
         }
 
         if (sortProp != "" && sortValue != "") {
             filtered = filtered.sort((a, b) => {
-                if (a[cat][sortProp][sortValue] > b[cat][sortProp][sortValue])
+                if (a[sortCat][sortProp][sortValue] > b[sortCat][sortProp][sortValue])
                     return -1;
-                else if (a[cat][sortProp][sortValue] === b[cat][sortProp][sortValue]) {
+                else if (a[sortCat][sortProp][sortValue] === b[sortCat][sortProp][sortValue]) {
                     if (a.info.overall > b.info.overall) {
                         return -1;
                     } else if (a.info.overall === b.info.overall) {

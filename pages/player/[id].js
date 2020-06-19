@@ -1,15 +1,16 @@
 import { useState, Fragment } from "react";
 import Head from "next/head";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { getPlayersIds, findAltPlayers, findEvos, findDuos, findDuoPartner } from "../../lib/players";
+import { getPlayersIds, findAltPlayers } from "../../lib/players";
+import { findEvos } from "../../lib/evos";
+import { findDuos, findDuoPartner } from "../../lib/duos";
 import { getPlayerData } from "../../pages/api/player/[id]";
 
+import PlayerHeader from "../../components/playerheader";
 import BadgeContainer from "../../components/badgecontainer";
 import Attributes from "../../components/attributes";
 import Loader from "../../components/loader";
 
-const PlayerHeader = dynamic(import("../../components/playerheader"));
 
 export default function Player({ playerData, altPlayers, evos, duo, duoPartner }) {
     const [view, setView] = useState("stats");

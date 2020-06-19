@@ -21,17 +21,17 @@ export default function FilterSortBox(props) {
 
     const handleFilter = (cat, prop, value="", innerCat="") => {
         if (searchOptions.filterValue === value) {
-            handleOptions({ ...searchOptions, cat: "", filterProp: "", filterValue: "", innerCat: "" })
+            handleOptions({ ...searchOptions, filterCat: "", filterProp: "", filterValue: "", innerCat: "" })
         } else {
-            handleOptions({ ...searchOptions, cat: cat, filterProp: prop, filterValue: value, innerCat: innerCat, sortProp: "", sortValue: "" })
+            handleOptions({ ...searchOptions, filterCat: cat, filterProp: prop, filterValue: value, innerCat: innerCat })
         }
     }
 
     const handleSort = (cat, prop, value) => {
         if (searchOptions.sortValue === value && searchOptions.sortProp === prop) {
-            handleOptions({ ...searchOptions, cat: "", sortProp: "", sortValue: value, innerCat: "" })
+            handleOptions({ ...searchOptions, sortCat: "", sortProp: "", sortValue: value, innerCat: "" })
         } else {
-            handleOptions({ ...searchOptions, cat: cat, sortProp: prop, sortValue: value, innerCat: "", filterProp: "", filterValue: "" })
+            handleOptions({ ...searchOptions, sortCat: cat, sortProp: prop, sortValue: value, innerCat: "" })
         }
     }
 
@@ -281,6 +281,13 @@ export default function FilterSortBox(props) {
                         </div>
                     </div>
                     <div className="column is-6-widescreen">
+                        <p className="heading">Filter By Animations: </p>
+                        <div className="container is-flex">
+                            <Dropdown title={filterCat.cat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())} items={getAnimationCats()} />
+                            <SearchFilter suggestions={filterItems} handleFilter={handleFilter} filterCat={filterCat} placeholder={`Search ${filterCat.cat.replace(/_/g, " ")} here`} />
+                        </div>
+                    </div>
+                    <div className="column is-6-widescreen">
                         <p className="heading">Sort By Stats: </p>
                         <Dropdown title="Shooting" items={getDropdownItems("shootingStats")} />
                         <Dropdown title="Inside Scoring" items={getDropdownItems("insideStats")} />
@@ -300,13 +307,6 @@ export default function FilterSortBox(props) {
                         <Dropdown title="Post T" items={getDropdownItems("postT")} />
                         <Dropdown title="Passing T" items={getDropdownItems("passingT")} />
                         <Dropdown title="Defense T" items={getDropdownItems("defenseT")} />
-                    </div>
-                    <div className="column is-6-widescreen">
-                        <p className="heading">Filter By Animations: </p>
-                        <div className="container is-flex">
-                            <Dropdown title={filterCat.cat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())} items={getAnimationCats()} />
-                            <SearchFilter suggestions={filterItems} handleFilter={handleFilter} filterCat={filterCat} placeholder={`Search ${filterCat.cat.replace(/_/g, " ")} here`} />
-                        </div>
                     </div>
                     <div className="column ">
                         <p className="heading">Filter By Badges: </p>
