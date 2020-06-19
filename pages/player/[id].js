@@ -54,13 +54,13 @@ export default function Player({ playerData, altPlayers, evos, duo, duoPartner }
             <div className="column ">
                 <div className="container">
                     <p className="subtitle is-6 has-text-weight-semibold "> Finishing Badges</p>
-                    <BadgeContainer badges={playerData.badges.finishing} evoBadges={evoLevel != -1 ? evos[evoLevel].badges.finishing : ""} />
+                    <BadgeContainer badges={playerData.badges.finishing} evoBadges={evoLevel != -1 ? evos[evoLevel].badges.finishing : ""} duoBadges={duoOn ? duo.badges.finishing : ""} />
                     <p className="subtitle is-6 has-text-weight-semibold "> Shooting Badges </p>
-                    <BadgeContainer badges={playerData.badges.shooting} evoBadges={evoLevel != -1 ? evos[evoLevel].badges.shooting : ""} />
+                    <BadgeContainer badges={playerData.badges.shooting} evoBadges={evoLevel != -1 ? evos[evoLevel].badges.shooting : ""} duoBadges={duoOn ? duo.badges.shooting : ""} />
                     <p className="subtitle is-6 has-text-weight-semibold "> Playmaking Badges </p>
-                    <BadgeContainer badges={playerData.badges.playmaking} evoBadges={evoLevel != -1 ? evos[evoLevel].badges.playmaking : ""} />
+                    <BadgeContainer badges={playerData.badges.playmaking} evoBadges={evoLevel != -1 ? evos[evoLevel].badges.playmaking : ""} duoBadges={duoOn ? duo.badges.playmaking : ""} />
                     <p className="subtitle is-6 has-text-weight-semibold "> Defensive Badges </p>
-                    <BadgeContainer badges={playerData.badges.defensive} evoBadges={evoLevel != -1 ? evos[evoLevel].badges.defensive : ""} />
+                    <BadgeContainer badges={playerData.badges.defensive} evoBadges={evoLevel != -1 ? evos[evoLevel].badges.defensive : ""} duoBadges={duoOn ? duo.badges.defensive : ""} />
                     <p className="subtitle is-6 has-text-weight-semibold "> Personality Badges </p>
                     <BadgeContainer badges={playerData.badges.personality} />
                 </div>
