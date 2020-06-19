@@ -256,9 +256,23 @@ $badge-padding: .03rem .10rem;
 	}
 }
 
-.star-selected {
+.icon-selected {
     color: #ffdd57;
 	filter: drop-shadow(#ffdd57 0px 0px 10px);
+}
+
+.duo-items {
+    >div {
+        position:relative;
+        width:24px;
+	}
+    >div, >figure, >a {
+        margin-right: 0.5em; 
+	}
+	>a:hover, >span:hover {
+        transition: .10s;
+        color: #ffdd57;	
+	}
 }
 
 .compare-img {

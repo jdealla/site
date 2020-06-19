@@ -22,7 +22,7 @@ export default function PlayerHeader(props) {
             let star = (
                 <div className="column is-2" key={i}>
                     <div className="container star" onClick={() => handleEvoStars(i)}>
-                        {evoLevel >= i ? <AiFillStar className="star-selected" size="2em" /> : <AiOutlineStar size="2em" />}
+                        {evoLevel >= i ? <AiFillStar className="icon-selected" size="2em" /> : <AiOutlineStar size="2em" />}
                     </div>
                 </div>
             )
@@ -35,7 +35,7 @@ export default function PlayerHeader(props) {
         return (
                 <span className="icon" onClick={() => handleDuo()} style={{ cursor: "pointer" }}>
                     {duoOn ? 
-                        <IoMdCheckbox size="1.7em" /> 
+                        <IoMdCheckbox className="icon-selected" size="1.7em" /> 
                         : <IoMdCheckboxOutline size="1.7em" />
                     }
                 </span>
@@ -157,10 +157,15 @@ export default function PlayerHeader(props) {
                                             {renderEvoStars()}
                                         </div>
                                     </div>
-                                    <div className={(duo != undefined || duo != null) ? "column is-3-tablet is-full-mobile" : "is-hidden"}>
+                                    <div className={(duo != undefined || duo != null) ? "column is-6-tablet is-full-mobile" : "is-hidden"}>
                                         <p className="heading has-text-warning">Dynamic Duo</p> 
-                                        <div className="container is-flex" style={{ marginRight: "5px" }}>
-                                            <OverallImage overall={duoPartner.overall} size={24} />
+                                        <div className="container is-flex duo-items">
+										    <div className="has-text-centered no-shadow">
+										        <OverallImage overall={duoPartner.overall} size={24} />
+                                                <p className="is-overlay is-size-6 has-text-white inline-number-ovr">
+                                                   {duoPartner.overall}
+                                                </p>
+                                            </div>
                                             <a href={`/player/${duoPartner.id}`}>{duoPartner.name}</a>
                                             {renderDuo()}
                                         </div>
