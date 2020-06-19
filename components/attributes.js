@@ -5,30 +5,33 @@ export default function Attributes(props) {
     const { attributes, attrName, evoStats, duoStats, reverse, } = props;
 
     const renderBonusStats = (key) => {
-        if (evoStats !== "" && duoStats !== "") {
-            if (evoStats[key] !== 0 || duoStats[key] !== 0)
-                return <span className="tag has-text-success">{`+${evoStats[key] + duoStats[key]}`}</span>
-        } else if (evoStats !== "" && duoStats === "") {
-            if (evoStats[key] !== 0)
-                return <span className="tag has-text-success">{`+${evoStats[key]}`}</span>
-        } else if (duoStats !== "" && evoStats === "") {
-            if (duoStats[key] !== 0)
-                return <span className="tag has-text-success">{`+${duoStats[key]}`}</span>
-        }
-
+        if ((evoStats != undefined || evoStats != null) && (duoStats != undefined || duoStats != null)) {
+            if (evoStats !== "" && duoStats !== "") {
+                if (evoStats[key] !== 0 || duoStats[key] !== 0)
+                    return <span className="tag has-text-success">{`+${evoStats[key] + duoStats[key]}`}</span>
+            } else if (evoStats !== "" && duoStats === "") {
+                if (evoStats[key] !== 0)
+                    return <span className="tag has-text-success">{`+${evoStats[key]}`}</span>
+            } else if (duoStats !== "" && evoStats === "") {
+                if (duoStats[key] !== 0)
+                    return <span className="tag has-text-success">{`+${duoStats[key]}`}</span>
+            }
+        }   
         return ""
     }
 
     const renderStat = (value, key) => {
-        if (evoStats !== "" && duoStats !== "") {
-            if (duoStats[key] !== 0 || evoStats[key] !== 0)
-                return ratingColor(value + duoStats[key] + evoStats[key]);
-        } else if (evoStats !== "" && duoStats === "") {
-            if (evoStats[key] !== 0)
-                return ratingColor(value + evoStats[key]);
-        } else if (duoStats !== "" && evoStats === "") {
-            if (duoStats[key] !== 0)
-                return ratingColor(value + duoStats[key]);
+        if ((evoStats != undefined || evoStats != null) && (duoStats != undefined || duoStats != null)) {
+            if (evoStats !== "" && duoStats !== "") {
+                if (duoStats[key] !== 0 || evoStats[key] !== 0)
+                    return ratingColor(value + duoStats[key] + evoStats[key]);
+            } else if (evoStats !== "" && duoStats === "") {
+                if (evoStats[key] !== 0)
+                    return ratingColor(value + evoStats[key]);
+            } else if (duoStats !== "" && evoStats === "") {
+                if (duoStats[key] !== 0)
+                    return ratingColor(value + duoStats[key]);
+            }
         }
         return ratingColor(value);
     }
