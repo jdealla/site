@@ -48,9 +48,9 @@ export default function BadgesContainer(props) {
             let imgSource = `${name}_${level}.png`;
             
             if (level === "yes")
-                imgSource = "badges/personality.png";
+                imgSource = "personality.png";
             if (level === "none")
-                imgSource = "badges/badge_none.png";
+                imgSource = "badge_none.png";
 
             let img = (
                 <div className="column is-paddingless is-2-mobile is-one-third-tablet is-1-desktop is-badge" key={i++}>

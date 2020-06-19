@@ -34,10 +34,10 @@ export default function PlayersList(props) {
                                 </p>
                             </div>
                         </td>
-                        <td style={{ textAlign: "center" }}>{player.info.position}{player.info.secondary_position != null ? `/${player.info.secondary_position}` : ""} </td>
-                        <td style={{ textAlign: "center" }}>{ratingColor(player.info.off_overall)}</td>
-                        <td style={{ textAlign: "center" }}>{ratingColor(player.info.def_overall)}</td>
-                        <td style={{ textAlign: "center" }}>{player.info.height}"</td>
+                        <td className="has-text-centered">{player.info.position}{player.info.secondary_position != null ? `/${player.info.secondary_position}` : ""} </td>
+                        <td className="has-text-centered">{ratingColor(player.info.off_overall)}</td>
+                        <td className="has-text-centered">{ratingColor(player.info.def_overall)}</td>
+                        <td className="has-text-centered">{player.info.height}"</td>
                         <td>
                             <div className="level">   
                                 <div className="level-item has-text-centered" style={{ justifyContent:"space-evenly" }}>
@@ -60,9 +60,9 @@ export default function PlayersList(props) {
                                 </div>
                             </div>
                         </td>
-                        <td className={searchOptions.sortProp == "" ? "is-hidden" : ""}>
+                        <td className={searchOptions.sortProp == "" ? "is-hidden" : "has-text-centered"}>
                             {(searchOptions.cat != "" && searchOptions.sortProp != "" && searchOptions.sortValue != "") ?
-                                player[searchOptions.cat][searchOptions.sortProp][searchOptions.sortValue]
+                                ratingColor(player[searchOptions.cat][searchOptions.sortProp][searchOptions.sortValue])
                                 : ""
                             }
                         </td>

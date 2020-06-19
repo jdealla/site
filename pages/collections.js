@@ -16,12 +16,10 @@ export default function Collections({ collections }) {
                         name = name.replace("Rewards", "").trim();
                     } 
                     return (
-                        <div className="column is-2-desktop is-3-mobile" key={i++}>
-                            <figure className="image is-96x96">
-                                <a className="title is-4" href={`/collection/${collection.toLowerCase().replace(/ /g, "-")}/theme/${obj.theme.toLowerCase().replace(/ /g, "-")}`}>
+                        <div className="column is-2-desktop is-3-mobile has-text-centered" key={i++}> 
+                                <a className="collection-icons" href={`/collection/${collection.toLowerCase().replace(/ /g, "-")}/theme/${obj.theme.toLowerCase().replace(/ /g, "-")}`}>
                                     <img src={`https://2kdbimg.com/96x96/icon_${name.toLowerCase().replace(/ /g, "_")}.png`} />
                                 </a>
-                            </figure>
                         </div>
                     )
                 })

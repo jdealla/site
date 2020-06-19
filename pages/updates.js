@@ -1,12 +1,21 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { getPlayersByDates } from "../lib/players";
+import { getPlayersByDates, getUpdatesNames } from "../lib/players";
 
 import UpdatesList from "../components/updateslist";
 import Head from "next/head";
 
-export default function Updates({ groupedByDate }) {
+export default function Updates({ groupedByDate, updateNames }) {
     const router = useRouter();
+	
+    const findUpdateName = (date) => {
+        let updateName = "";
+        let nameObj = updateNames.find( x => x.date === date);
+		
+        if (nameObj) {  updateName = nameObj["update_name"];  }
+		
+        return updateName;
+    }
 
     const renderUpdates = () => {
         let updates = [], i = 0;
@@ -14,11 +23,14 @@ export default function Updates({ groupedByDate }) {
 			
             let dateObj = (
                 <a href={`/updates/${date}`} className="panel-block" key={i++}>
-				    <span className="tags has-addons" style={{margin:0}}>
-                        <span className="tag">{date}</span>
-                        <span className="tag is-warning is-light">+ {players.length} cards</span>
-				    </span>	
-				    <span className="heading" style={{marginLeft:"20px"}}>"Name of the update righ here"</span>
+				    <span className="tags  has-addons" style={{margin:0}}>
+                        <span className="tag is-size-6 is-size-7-mobile">{date}</span>
+                        <span className="tag is-size-6 is-size-7-mobile is-warning is-light">+ {players.length} cards</span>
+                        <span className="tag is-size-6 is-size-7-mobile"> {findUpdateName(date)} </span>
+					</span>
+					<div className="is-hidden-mobile" style={{ marginLeft: "auto" }}>
+					    <UpdatesList date={date} players={players} amount={10} />
+					</div>
                 </a>
 
             )
@@ -48,11 +60,13 @@ export default function Updates({ groupedByDate }) {
 
 export async function getStaticProps() {
     const groupedByDate = await getPlayersByDates()
-                                .catch(console.error)
+                                .catch(console.error);
+	const updateNames = await getUpdatesNames();							
     
     return {
         props: {
-            groupedByDate
+            groupedByDate,
+            updateNames
         },
         unstable_revalidate: 1
     }

@@ -32,20 +32,21 @@ export default function Players({ allPlayers, allProps, allAnimations }) {
 
         if (cat === "info" && filterProp === "overall" ) {
             filtered = filtered.filter(player => {
-                let tier = 0;
+                let tierStart = 0;
+                let tierEnd = 0;
                 switch(filterValue) {
-                    case "bronze": tier = 69; break;
-                    case "silver": tier = 75; break;
-                    case "gold": tier = 79; break;
-                    case "emerald": tier = 83; break;
-                    case "sapphire": tier = 86; break;
-                    case "ruby": tier = 89; break;
-                    case "amethyst": tier = 92; break;
-                    case "diamond": tier = 95; break;
-                    case "pink diamond": tier = 98; break;
-                    case "galaxy opal": tier = 99; break;
+                    case "bronze": tierStart = 68; tierEnd = 69; break;
+                    case "silver": tierStart = 70; tierEnd = 75; break;
+                    case "gold": tierStart = 76; tierEnd = 79; break;
+                    case "emerald": tierStart = 80; tierEnd = 83; break;
+                    case "sapphire": tierStart = 84; tierEnd = 86; break;
+                    case "ruby": tierStart = 87; tierEnd = 89; break;
+                    case "amethyst": tierStart = 90; tierEnd = 92; break;
+                    case "diamond": tierStart = 93; tierEnd = 95; break;
+                    case "pink diamond": tierStart = 96; tierEnd = 98; break;
+                    case "galaxy opal": tierStart = tierEnd = 99; break;
                 }
-                return player.info.overall <= tier;
+                return (player.info.overall >= tierStart) && (player.info.overall <= tierEnd);
             })
         } else if (filterProp != "" && filterValue != "") {
             if (innerCat != "") {
@@ -95,7 +96,7 @@ export default function Players({ allPlayers, allProps, allAnimations }) {
                             <th>Def Overall</th>
                             <th>Height</th>
                             <th>Badges</th>
-                            <th className={searchOptions.sortProp == "" ? "is-hidden" : ""}>{formatName(searchOptions.sortValue)}</th>
+                            <th className={searchOptions.sortProp == "" ? "is-hidden" : "players-sort-column"}>{formatName(searchOptions.sortValue)}</th>
                         </tr>
                     </thead>
                     <PlayersList players={players} page={page} searchOptions={searchOptions} />
