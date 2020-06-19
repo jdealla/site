@@ -1,12 +1,13 @@
 import React from "react";
 import { RiBasketballLine } from "react-icons/ri";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai"
+import { IoMdCheckbox, IoMdCheckboxOutline } from "react-icons/io";
 
 import ShotChart from "./shotchart";
 import OverallImage from "./overallimage";
 
 export default function PlayerHeader(props) {
-    const { playerData, altPlayers, evoStars, evoLevel, handleEvo, shoe, handleShoe, } = props;
+    const { playerData, altPlayers, evoStars, evoLevel, handleEvo, duo, duoOn, handleDuo, duoPartner } = props;
 
     const handleEvoStars = (level) => {
         if (evoLevel === level)
@@ -28,6 +29,17 @@ export default function PlayerHeader(props) {
             stars.push(star);
         }
         return stars;
+    }
+
+    const renderDuo = () => {
+        return (
+                <span className="icon" onClick={() => handleDuo()} style={{ cursor: "pointer" }}>
+                    {duoOn ? 
+                        <IoMdCheckbox size="1.7em" /> 
+                        : <IoMdCheckboxOutline size="1.7em" />
+                    }
+                </span>
+        )
     }
 
     return (
@@ -139,10 +151,18 @@ export default function PlayerHeader(props) {
                                             })}
                                         </div>
                                     </div>
-									<div className={evoStars == 0 ? "is-hidden" : "is-full-mobile column is-3-tablet"}>
+									<div className={evoStars == 0 ? "is-hidden" : "column is-3-tablet is-full-mobile"}>
                                         <p className="heading has-text-warning">Evolutions</p>
                                         <div className="columns is-mobile">
                                             {renderEvoStars()}
+                                        </div>
+                                    </div>
+                                    <div className={(duo != undefined || duo != null) ? "column is-3-tablet is-full-mobile" : "is-hidden"}>
+                                        <p className="heading has-text-warning">Dynamic Duo</p> 
+                                        <div className="container is-flex" style={{ marginRight: "5px" }}>
+                                            <OverallImage overall={duoPartner.overall} size={24} />
+                                            <a href={`/player/${duoPartner.id}`}>{duoPartner.name}</a>
+                                            {renderDuo()}
                                         </div>
                                     </div>
                                 </div>

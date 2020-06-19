@@ -1,8 +1,8 @@
-import { useState, Fragment, useEffect } from "react";
+import { useState, Fragment } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { getPlayersIds, findAltPlayers, findEvos } from "../../lib/players";
+import { getPlayersIds, findAltPlayers, findEvos, findDuos, findDuoPartner } from "../../lib/players";
 import { getPlayerData } from "../../pages/api/player/[id]";
 
 import BadgeContainer from "../../components/badgecontainer";
@@ -11,39 +11,39 @@ import Loader from "../../components/loader";
 
 const PlayerHeader = dynamic(import("../../components/playerheader"));
 
-export default function Player({ playerData, altPlayers, evos }) {
+export default function Player({ playerData, altPlayers, evos, duo, duoPartner }) {
     const [view, setView] = useState("stats");
-    const [shoe, setShoe] = useState();
     const [evoLevel, setEvoLevel] = useState(-1);
+    const [duoOn, setDuoOn] = useState(false);
 
     const { isFallback } = useRouter();
     if (isFallback) {
         return <Loader />
     }
 
-    const handleShoe = (shoe) => setShoe(shoe)
     const handleEvo = (level) => setEvoLevel(level);
+    const handleDuo = () => setDuoOn(!duoOn);
 
     const renderRatings = () => {
         return (
             <Fragment>
                 <div className="column is-one-fifth-tablet is-half-mobile is-one-fifth-desktop">
                     <Attributes attributes={playerData.stats.shooting} 
-                        attrName="Shooting" evoStats={evoLevel != -1 ? evos[evoLevel].stats.shooting : ""} />
+                        attrName="Shooting" evoStats={evoLevel != -1 ? evos[evoLevel].stats.shooting : ""} duoStats={duoOn ? duo.stats.shooting : ""} />
                     <Attributes attributes={playerData.stats.inside} 
-                        attrName="Inside Scoring" evoStats={evoLevel != -1 ? evos[evoLevel].stats.inside : ""} />
+                        attrName="Inside Scoring" evoStats={evoLevel != -1 ? evos[evoLevel].stats.inside : ""} duoStats={duoOn ? duo.stats.inside : ""} />
                     <Attributes attributes={playerData.stats.playmaking} 
-                        attrName="Playmaking" evoStats={evoLevel != -1 ? evos[evoLevel].stats.playmaking : ""} />
+                        attrName="Playmaking" evoStats={evoLevel != -1 ? evos[evoLevel].stats.playmaking : ""} duoStats={duoOn ? duo.stats.playmaking : ""} />
                 </div>
                 <div className="column is-one-fifth-tablet is-half-mobile is-one-fifth-desktop">
 				    <Attributes attributes={playerData.stats.athleticism} 
-                        attrName="Athleticism" evoStats={evoLevel != -1 ? evos[evoLevel].stats.athleticism : ""} />
+                        attrName="Athleticism" evoStats={evoLevel != -1 ? evos[evoLevel].stats.athleticism : ""} duoStats={duoOn ? duo.stats.athleticism : ""} />
                     <Attributes attributes={playerData.stats.defense} 
-                        attrName="Defense" evoStats={evoLevel != -1 ? evos[evoLevel].stats.defense : ""} />
+                        attrName="Defense" evoStats={evoLevel != -1 ? evos[evoLevel].stats.defense : ""} duoStats={duoOn ? duo.stats.defense : ""} />
                     <Attributes attributes={playerData.stats.rebound} 
-                        attrName="Rebound" evoStats={evoLevel != -1 ? evos[evoLevel].stats.rebound : ""} />
+                        attrName="Rebound" evoStats={evoLevel != -1 ? evos[evoLevel].stats.rebound : ""} duoStats={duoOn ? duo.stats.rebound : ""} />
                     <Attributes attributes={playerData.stats.potential} 
-                        attrName="Potential" evoStats={evoLevel != -1 ? evos[evoLevel].stats.potential : ""} />
+                        attrName="Potential" evoStats={evoLevel != -1 ? evos[evoLevel].stats.potential : ""} duoStats={duoOn ? duo.stats.potential : ""} />
                 </div>
             </Fragment>
         )
@@ -54,13 +54,13 @@ export default function Player({ playerData, altPlayers, evos }) {
             <div className="column ">
                 <div className="container">
                     <p className="subtitle is-6 has-text-weight-semibold "> Finishing Badges</p>
-                    <BadgeContainer badges={playerData.badges.finishing} evoBadges={evoLevel != -1 ? evos[evoLevel].badges.finishing : ""} />
+                    <BadgeContainer badges={playerData.badges.finishing} evoBadges={evoLevel != -1 ? evos[evoLevel].badges.finishing : ""} duoBadges={duoOn ? duo.badges.finishing : ""} />
                     <p className="subtitle is-6 has-text-weight-semibold "> Shooting Badges </p>
-                    <BadgeContainer badges={playerData.badges.shooting} evoBadges={evoLevel != -1 ? evos[evoLevel].badges.shooting : ""} />
+                    <BadgeContainer badges={playerData.badges.shooting} evoBadges={evoLevel != -1 ? evos[evoLevel].badges.shooting : ""} duoBadges={duoOn ? duo.badges.shooting : ""} />
                     <p className="subtitle is-6 has-text-weight-semibold "> Playmaking Badges </p>
-                    <BadgeContainer badges={playerData.badges.playmaking} evoBadges={evoLevel != -1 ? evos[evoLevel].badges.playmaking : ""} />
+                    <BadgeContainer badges={playerData.badges.playmaking} evoBadges={evoLevel != -1 ? evos[evoLevel].badges.playmaking : ""} duoBadges={duoOn ? duo.badges.playmaking : ""} />
                     <p className="subtitle is-6 has-text-weight-semibold "> Defensive Badges </p>
-                    <BadgeContainer badges={playerData.badges.defensive} evoBadges={evoLevel != -1 ? evos[evoLevel].badges.defensive : ""} />
+                    <BadgeContainer badges={playerData.badges.defensive} evoBadges={evoLevel != -1 ? evos[evoLevel].badges.defensive : ""} duoBadges={duoOn ? duo.badges.defensive : ""} />
                     <p className="subtitle is-6 has-text-weight-semibold "> Personality Badges </p>
                     <BadgeContainer badges={playerData.badges.personality} />
                 </div>
@@ -131,7 +131,17 @@ export default function Player({ playerData, altPlayers, evos }) {
                 <img src="/playercard_bg.png" alt="player card bg" />
             </div>
             <div className="container is-fluid mobile-nopadding">
-                <PlayerHeader playerData={playerData} altPlayers={altPlayers} shoe={shoe} handleShoe={handleShoe} evoStars={evos.length} evoLevel={evoLevel} handleEvo={handleEvo} />
+                <PlayerHeader 
+                    playerData={playerData} 
+                    altPlayers={altPlayers} 
+                    evoStars={evos.length} 
+                    evoLevel={evoLevel} 
+                    handleEvo={handleEvo}
+                    duo={duo}
+                    duoPartner={duoPartner}
+                    duoOn={duoOn} 
+                    handleDuo={handleDuo}
+                />
 
                 <div className="columns ">
                     <div className="column is-full">
@@ -175,11 +185,19 @@ export async function getStaticProps({ params }) {
     const evos = await findEvos(playerData.info.id)
                         .catch(console.error);
 
+    const duo = await findDuos(playerData.info.id)
+                        .catch(console.error);
+
+    const duoPartner = await findDuoPartner(duo.id2)
+                                .catch(console.error);
+
     return {
         props: {
             playerData,
             altPlayers,
-            evos
+            evos,
+            duo,
+            duoPartner,
         },
     }
 }
