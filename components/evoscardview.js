@@ -2,7 +2,7 @@ import React from "react";
 import { AiFillStar } from "react-icons/ai"
 
 export default function EvosCardView(props) {
-    const { players, page, handlePage } = props;
+    const { players, page } = props;
 
     const renderPlayers = () => {
         let playerCards = [];

@@ -25,7 +25,7 @@ export default function Evolutions({ players }) {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <div className="container">
-                <EvosCardView players={players} page={page} handlePage={handlePage} />
+                <EvosCardView players={players} page={page} />
 
                 <div className="columns">
                     <div className="column is-full">
