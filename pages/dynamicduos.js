@@ -21,25 +21,9 @@ export default function DynamicDuos({ players }) {
 }
 
 export async function getStaticProps() {
-    const res = await getAllDuos()
+    const players = await getAllDuos()
                           .catch(console.error)
   
-    for(let i = 0; i < res.length - 1; i++) {
-        for(let j = i + 1; j < res.length; j++) {
-            if (res[i]["id1"] === res[j]["id2"]) {
-                res.splice(j, 1);
-            }
-        }
-    }
-
-    let promises = res.map(async player => {
-        let name1 = await getPlayerName(player.id1);
-        let name2 = await getPlayerName(player.id2);
-        return { ...player, name1, name2 }
-    })
-
-    let players = await Promise.all(promises);
-
     return {
       props: {
         players,

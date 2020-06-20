@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import { getAllEvos } from "../lib/evos";
-import { getPlayerName } from "../lib/players";
 
 import EvosCardView from "../components/evoscardview";
 
@@ -41,17 +40,8 @@ export default function Evolutions({ players }) {
 }
 
 export async function getStaticProps() {
-    const allEvos = await getAllEvos()
+    const players = await getAllEvos()
                           .catch(console.error)
-
-    let res = allEvos.map(async player => {
-        let name = await getPlayerName(player.pid);
-        return { ...player, name }
-    })
-
-    let resolved = await Promise.all(res);
-  
-    let players = resolved.reduce((h, obj) => Object.assign(h, { [obj["name"]]: ( h[obj["pid"]] || [] ).concat({ pid: obj["pid"], evo_num: obj["evo_num"] }) }), {})
 
     return {
       props: {

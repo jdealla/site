@@ -8,7 +8,6 @@ export default function EvosCardView(props) {
         let playerCards = [];
 
         for(let [name, evos] of Object.entries(players)) {
-            console.log(evos);
             let player = (
                 <div className="column is-1-desktop is-2-widescreen is-half-mobile" key={evos[0]["pid"]}>
                     <figure className="image is-3by4">
