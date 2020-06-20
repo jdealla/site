@@ -36,7 +36,7 @@ export default function NavBar() {
                             <a className="navbar-item" href="/players">
                                 All Players
                             </a>
-                            <a className="navbar-item">
+                            <a className="navbar-item" href="/evolutions">
                                 Evos
                             </a>
                             <a className="navbar-item">
