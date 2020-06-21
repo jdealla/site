@@ -1,7 +1,6 @@
 import React from "react";
 import Head from "next/head";
 import { getAllDuos } from "../lib/duos";
-import { getPlayerName } from "../lib/players";
 
 import DuosCardView from "../components/duoscardview"
 
