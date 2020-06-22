@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import { getAllPlayersWithAllStats, getAllProps, getAllAnimations } from "../lib/players";
+import { getAllPlayersWithAllStats, getAllAnimations } from "../lib/players";
 import { formatName } from "../lib/helpers"
 
 import FilterSortBox from "../components/filtersortbox";
 import PlayersList from "../components/playerslist";
 
-export default function Players({ allPlayers, allProps, allAnimations }) {
+export default function Players({ allPlayers, allAnimations }) {
     const [page, setPage] = useState(0)
     const [players, setPlayers] = useState(allPlayers);
     const [searchOptions, setSearchOptions] = useState({ 
@@ -26,7 +26,7 @@ export default function Players({ allPlayers, allProps, allAnimations }) {
         setSearchOptions(options);
     }
 
-    useEffect(() => {
+    // useEffect(() => {
         // console.log(searchOptions);
         // const { searchValue, innerCat, filterCat, filterProp, filterValue, sortCat, sortProp, sortValue} = searchOptions;
 
@@ -75,7 +75,7 @@ export default function Players({ allPlayers, allProps, allAnimations }) {
         //     })
         // }
         // setPlayers(filtered);
-    }, [searchOptions])
+    // }, [searchOptions])
 
     return (
         <>
@@ -125,21 +125,19 @@ export async function getStaticProps() {
     
     console.timeEnd("allPlayersStats");
 
-    // const allProps = getAllProps(allPlayers[0]);
-
-    // const allAnimations = getAllAnimations(allPlayers);
+    const allAnimations = getAllAnimations(allPlayers);
 
     const getJsonAsciiObjectSizeInBytes = (jsonObject) => {
         return JSON.stringify(jsonObject).length;
     }
 
-    console.log(getJsonAsciiObjectSizeInBytes(allPlayers))
+    // console.log(getJsonAsciiObjectSizeInBytes(allPlayers))
+    // console.log(getJsonAsciiObjectSizeInBytes(allAnimations))
 
     return {
         props: {
             allPlayers,
-            // allProps,
-            // allAnimations
+            allAnimations
         },
         unstable_revalidate: 1
     }
