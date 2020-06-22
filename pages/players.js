@@ -30,7 +30,7 @@ export default function Players({ allPlayers, allAnimations }) {
         const { searchValue, innerCat, filterCat, filterProp, filterValue, sortCat, sortProp, sortValue} = searchOptions;
 
         const fetchPlayers = async () => {
-            let parameters = "";
+            let parameters = "?";
             if (filterCat === "info" && filterProp === "overall") {
                 let tierStart = 0, tierEnd = 0;
                 switch(filterValue) {
@@ -45,16 +45,19 @@ export default function Players({ allPlayers, allAnimations }) {
                     case "pink diamond": tierStart = 96; tierEnd = 98; break;
                     case "galaxy opal": tierStart = tierEnd = 99; break;
                 }
-                parameters += `?overall=${tierStart}-${tierEnd}`;
+                parameters += `overall=${tierStart}-${tierEnd}&`;
             }
             
+            if (searchValue != "")
+                parameters += `searchValue=${searchValue}&`;
+
             const result = await fetch(`/api/search${parameters}`)
             const players = await result.json();
 
             setPlayers(players);
         }
 
-        if (filterCat != "") 
+        if (filterCat != "" || searchValue != "") 
             fetchPlayers();
     }, [searchOptions]);
 
