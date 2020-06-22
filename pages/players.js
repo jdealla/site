@@ -129,6 +129,12 @@ export async function getStaticProps() {
 
     // const allAnimations = getAllAnimations(allPlayers);
 
+    const getJsonAsciiObjectSizeInBytes = (jsonObject) => {
+        return JSON.stringify(jsonObject).length;
+    }
+
+    console.log(getJsonAsciiObjectSizeInBytes(allPlayers))
+
     return {
         props: {
             allPlayers,
