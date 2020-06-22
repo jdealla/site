@@ -5,7 +5,7 @@ import Dropdown from "./dropdown";
 import SearchFilter from "./searchfilter";
 
 export default function FilterSortBox(props) {
-    const { allProps, allAnimations, searchOptions, handleOptions, } = props;
+    const { allAnimations, searchOptions, handleOptions, } = props;
     const [filterCat, setFilterCat] = useState({ cat: "lower base", innerCat: "shooting" });
     const [filterItems, setFilterItems] = useState(allAnimations.shooting.lower_base_a)
 
@@ -27,124 +27,44 @@ export default function FilterSortBox(props) {
         }
     }
 
-    const handleSort = (cat, prop, value) => {
-        if (searchOptions.sortValue === value && searchOptions.sortProp === prop) {
-            handleOptions({ ...searchOptions, sortCat: "", sortProp: "", sortValue: value, innerCat: "" })
-        } else {
-            handleOptions({ ...searchOptions, sortCat: cat, sortProp: prop, sortValue: value, innerCat: "" })
-        }
-    }
+    // const handleSort = (cat, prop, value) => {
+    //     if (searchOptions.sortValue === value && searchOptions.sortProp === prop) {
+    //         handleOptions({ ...searchOptions, sortCat: "", sortProp: "", sortValue: value, innerCat: "" })
+    //     } else {
+    //         handleOptions({ ...searchOptions, sortCat: cat, sortProp: prop, sortValue: value, innerCat: "" })
+    //     }
+    // }
 
-    const getAnimationCats = () => {
-        let cats = [
-            "Lower Base", "Upper Release", "Dribble Style", "Size Up Packages", "Moving Crossover", "Moving Behind The Back", 
-            "Moving Hesitation", "Moving Spin", "Triple Threat Style", "Layup Package", "Post Fade", "Post Hook"
-        ];
+    // const getAnimationCats = () => {
+    //     let cats = [
+    //         "Lower Base", "Upper Release", "Dribble Style", "Size Up Packages", "Moving Crossover", "Moving Behind The Back", 
+    //         "Moving Hesitation", "Moving Spin", "Triple Threat Style", "Layup Package", "Post Fade", "Post Hook"
+    //     ];
 
-        return cats.map((cat, i) => {
-            let innerCat = ""
-            switch(cat) {
-                case "Lower Base": innerCat = "shooting"; break;
-                case "Upper Release": innerCat = "shooting"; break;
-                case "Dribble Style": innerCat = "ballhandle"; break;
-                case "Size Up Packages": innerCat = "ballhandle"; break;
-                case "Moving Crossover": innerCat = "ballhandle"; break;
-                case "Moving Behind The Back": innerCat = "ballhandle"; break;
-                case "Moving Hesitation": innerCat = "ballhandle"; break;
-                case "Moving Spin": innerCat = "ballhandle"; break;
-                case "Triple Threat Style": innerCat = "ballhandle"; break;
-                case "Layup Package": innerCat = "layup"; break;
-                case "Post Fade": innerCat = "post"; break;
-                case "Post Hook": innerCat = "post"; break;
-            }
+    //     return cats.map((cat, i) => {
+    //         let innerCat = ""
+    //         switch(cat) {
+    //             case "Lower Base": innerCat = "shooting"; break;
+    //             case "Upper Release": innerCat = "shooting"; break;
+    //             case "Dribble Style": innerCat = "ballhandle"; break;
+    //             case "Size Up Packages": innerCat = "ballhandle"; break;
+    //             case "Moving Crossover": innerCat = "ballhandle"; break;
+    //             case "Moving Behind The Back": innerCat = "ballhandle"; break;
+    //             case "Moving Hesitation": innerCat = "ballhandle"; break;
+    //             case "Moving Spin": innerCat = "ballhandle"; break;
+    //             case "Triple Threat Style": innerCat = "ballhandle"; break;
+    //             case "Layup Package": innerCat = "layup"; break;
+    //             case "Post Fade": innerCat = "post"; break;
+    //             case "Post Hook": innerCat = "post"; break;
+    //         }
 
-            return (
-                <a className="dropdown-item" key={i} onClick={() => handleFilterCat(cat.toLowerCase(), innerCat)}>
-                    {cat}
-                </a>
-            )}
-        )
-    }
-
-    const getDropdownItems = (cat) => {
-        switch(cat) {
-            case "shootingStats": return allProps.stats.shooting.map((stat, i) =>
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("stats", "shooting", stat)}>
-                    {formatName(stat)}
-                </a>)
-            )
-            case "insideStats": return allProps.stats.inside.map((stat, i) =>
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("stats", "inside", stat)}>
-                    {formatName(stat)}
-                </a>)
-            )
-            case "athleticismStats": return allProps.stats.athleticism.map((stat, i) =>
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("stats", "athleticism", stat)}>
-                    {formatName(stat)}
-                </a>)
-            )
-            case "playmakingStats": return allProps.stats.playmaking.map((stat, i) =>
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("stats", "playmaking", stat)}>
-                    {formatName(stat)}
-                </a>)
-            )
-            case "defenseStats": return allProps.stats.defense.map((stat, i) =>
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("stats", "defense", stat)}>
-                    {formatName(stat)}
-                </a>)
-            )
-            case "reboundStats": return allProps.stats.rebound.map((stat, i) =>
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("stats", "rebound", stat)}>
-                    {formatName(stat)}
-                </a>)
-            )
-            case "potentialStats": return allProps.stats.potential.map((stat, i) =>
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("stats", "potential", stat)}>
-                    {formatName(stat)}
-                </a>)
-            )
-            case "insideT": return allProps.tendencies.inside.map((tend, i) => 
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("tendencies", "inside", tend)}>
-                    {formatName(tend)}
-                </a>)
-            );
-            case "shootingT": return allProps.tendencies.shooting.map((tend, i) => 
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("tendencies", "shooting", tend)}>
-                    {formatName(tend)}
-                </a>)
-            );
-            case "isoT": return allProps.tendencies.iso.map((tend, i) => 
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("tendencies", "iso", tend)}>
-                    {formatName(tend)}
-                </a>)
-            );
-            case "driveT": return allProps.tendencies.drive.map((tend, i) => 
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("tendencies", "drive", tend)}>
-                    {formatName(tend)}
-                </a>)
-            );
-            case "freelanceT": return allProps.tendencies.freelance.map((tend, i) => 
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("tendencies", "freelance", tend)}>
-                    {formatName(tend)}
-                </a>)
-            );
-            case "postT": return allProps.tendencies.post.map((tend, i) => 
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("tendencies", "post", tend)}>
-                    {formatName(tend)}
-                </a>)
-            );
-            case "passingT": return allProps.tendencies.passing.map((tend, i) => 
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("tendencies", "passing", tend)}>
-                    {formatName(tend)}
-                </a>)
-            );
-            case "defenseT": return allProps.tendencies.defense.map((tend, i) => 
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("tendencies", "defense", tend)}>
-                    {formatName(tend)}
-                </a>)
-            );
-        }
-    }
+    //         return (
+    //             <a className="dropdown-item" key={i} onClick={() => handleFilterCat(cat.toLowerCase(), innerCat)}>
+    //                 {cat}
+    //             </a>
+    //         )}
+    //     )
+    // }
 
     return (
         <div className="container">
@@ -260,7 +180,7 @@ export default function FilterSortBox(props) {
                             </p>
                         </div>
                     </div>
-                    <div className="column is-2-widescreen">
+                    {/* <div className="column is-2-widescreen">
                         <p className="heading">Filter By Position: </p>
                         <div className="field has-addons">
                             <p className="control">
@@ -311,7 +231,7 @@ export default function FilterSortBox(props) {
                     <div className="column ">
                         <p className="heading">Filter By Badges: </p>
 
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

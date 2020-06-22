@@ -1,42 +1,18 @@
-import { store } from "../../lib/db";
-
-export async function getPlayersByName(name) {
-    const session = store.openSession();
-
-    const res = await session.query({ collection: "Players" })
-                            .search("name", name)
-                            .all();
-
-    await session.saveChanges();
-
-    for(let i = 0; i < res.length; i++) {
-        delete res[i]["@metadata"];
-    }
-    return res;
-}
-
-async function getSuggestion(word) {
-    const session = store.openSession();
-
-    const res = await session.query({ collection: "Players" })
-                            .suggestUsing(x => x.byField("name", word))
-                            .execute();
-
-    await session.saveChanges();
-
-    return res;
-}
+import { getAllPlayersWithAllStats } from "../../lib/players";
 
 export default async (req, res) => {
-    let result;
+    const { query } = req;
 
-    console.log(req.query);
+    let players = [];
+    players = await getAllPlayersWithAllStats();
 
-    if (req.query.name != undefined) {
-        result = await getSuggestion(req.query.name);
-    } else {
-        result = await getAllPlayers();
+    if (query?.overall) {
+        const tier = query.overall.split("-");
+        const tierStart = tier[0];
+        const tierEnd = tier[1];
+
+        players = players.filter(player => (player?.info?.overall >= tierStart) && (player?.info?.overall <= tierEnd)) 
     }
 
-    res.status(200).json(result);
+    res.status(200).json(players);
 }

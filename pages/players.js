@@ -26,6 +26,38 @@ export default function Players({ allPlayers, allAnimations }) {
         setSearchOptions(options);
     }
 
+    useEffect(() => {
+        const { searchValue, innerCat, filterCat, filterProp, filterValue, sortCat, sortProp, sortValue} = searchOptions;
+
+        const fetchPlayers = async () => {
+            let parameters = "";
+            if (filterCat === "info" && filterProp === "overall") {
+                let tierStart = 0, tierEnd = 0;
+                switch(filterValue) {
+                    case "bronze": tierStart = 68; tierEnd = 69; break;
+                    case "silver": tierStart = 70; tierEnd = 75; break;
+                    case "gold": tierStart = 76; tierEnd = 79; break;
+                    case "emerald": tierStart = 80; tierEnd = 83; break;
+                    case "sapphire": tierStart = 84; tierEnd = 86; break;
+                    case "ruby": tierStart = 87; tierEnd = 89; break;
+                    case "amethyst": tierStart = 90; tierEnd = 92; break;
+                    case "diamond": tierStart = 93; tierEnd = 95; break;
+                    case "pink diamond": tierStart = 96; tierEnd = 98; break;
+                    case "galaxy opal": tierStart = tierEnd = 99; break;
+                }
+                parameters += `?overall=${tierStart}-${tierEnd}`;
+            }
+            
+            const result = await fetch(`/api/search${parameters}`)
+            const players = await result.json();
+
+            setPlayers(players);
+        }
+
+        if (filterCat != "") 
+            fetchPlayers();
+    }, [searchOptions]);
+
     // useEffect(() => {
         // console.log(searchOptions);
         // const { searchValue, innerCat, filterCat, filterProp, filterValue, sortCat, sortProp, sortValue} = searchOptions;
@@ -86,7 +118,7 @@ export default function Players({ allPlayers, allAnimations }) {
             </Head>
             <div className="container">
                 <div className="box">
-                    {/* <FilterSortBox allProps={allProps} allAnimations={allAnimations} searchOptions={searchOptions} handleOptions={handleOptions} /> */}
+                    <FilterSortBox allAnimations={allAnimations} searchOptions={searchOptions} handleOptions={handleOptions} />
                 </div>
                 <table className="table is-scrollable is-hoverable is-bordered is-striped" style={{ marginTop: "5px"}}>
                     <thead>
@@ -98,6 +130,9 @@ export default function Players({ allPlayers, allAnimations }) {
                             <th>Def Overall</th>
                             <th>Height</th>
                             <th>Badges</th>
+                            <th>Collection</th>
+                            <th>Theme</th>
+                            <th>Team</th>
                             {/* <th className={searchOptions.sortProp == "" ? "is-hidden" : "players-sort-column"}>{formatName(searchOptions.sortValue)}</th> */}
                         </tr>
                     </thead>
@@ -118,12 +153,8 @@ export default function Players({ allPlayers, allAnimations }) {
 }
 
 export async function getStaticProps() {
-    console.time("allPlayersStats");
-
     const allPlayers = await getAllPlayersWithAllStats()
                             .catch(console.error);
-    
-    console.timeEnd("allPlayersStats");
 
     const allAnimations = getAllAnimations(allPlayers);
 
