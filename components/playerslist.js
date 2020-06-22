@@ -17,28 +17,28 @@ export default function PlayersList(props) {
         <tbody>
             {players.map(player => {
                 return (
-                    <tr onClick={(e) => handleClick(e, player.info.id)} key={player.info.id} style={{ cursor: "pointer" }}>
+                    <tr onClick={(e) => handleClick(e, player.id)} key={player.id} style={{ cursor: "pointer" }}>
                         <td>
                             <div className="container is-flex">
                                 <figure className="image is-24x24" style={{ marginBottom: "5px" }}>
-                                    <img src={`https://2kdbimg.com/35/${player.info.name.replace(/( |')/g, "_").toLowerCase()}_${player.info.id}.jpg`} />
+                                    <img src={`https://2kdbimg.com/35/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} />
                                 </figure>
-                                <p>{player.info.name}</p>
+                                <p>{player.name}</p>
                             </div>
                         </td>
                         <td style={{ textAlign: "center" }}>
                             <div className="container margin-auto-list">
-                                <OverallImage size="24x24" overall={player.info.overall} />
+                                <OverallImage size="24x24" overall={player.overall} />
                                 <p className="is-overlay has-text-white inline-number-ovr">
-                                    {player.info.overall}
+                                    {player.overall}
                                 </p>
                             </div>
                         </td>
-                        <td className="has-text-centered">{player.info.position}{player.info.secondary_position != null ? `/${player.info.secondary_position}` : ""} </td>
-                        <td className="has-text-centered">{ratingColor(player.info.off_overall)}</td>
-                        <td className="has-text-centered">{ratingColor(player.info.def_overall)}</td>
-                        <td className="has-text-centered">{player.info.height}"</td>
-                        <td>
+                        <td className="has-text-centered">{player.position}{player.secondary_position != null ? `/${player.secondary_position}` : ""} </td>
+                        <td className="has-text-centered">{ratingColor(player.off_overall)}</td>
+                        <td className="has-text-centered">{ratingColor(player.def_overall)}</td>
+                        <td className="has-text-centered">{player.height}"</td>
+                        {/* <td>
                             <div className="level">   
                                 <div className="level-item has-text-centered" style={{ justifyContent:"space-evenly" }}>
                                     <figure className="image is-24x24">
@@ -59,13 +59,13 @@ export default function PlayersList(props) {
                                     </figure>
                                 </div>
                             </div>
-                        </td>
-                        <td className={searchOptions.sortProp == "" ? "is-hidden" : "has-text-centered"}>
+                        </td> */}
+                        {/* <td className={searchOptions.sortProp == "" ? "is-hidden" : "has-text-centered"}>
                             {(searchOptions.sortCat != "" && searchOptions.sortProp != "" && searchOptions.sortValue != "") ?
                                 ratingColor(player[searchOptions.sortCat][searchOptions.sortProp][searchOptions.sortValue])
                                 : ""
                             }
-                        </td>
+                        </td> */}
                     </tr>
                 )
             }).slice(page * 15, (page * 15) + 15)}

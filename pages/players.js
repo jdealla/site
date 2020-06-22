@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import dynamic from "next/dynamic";
 import { getAllPlayersWithAllStats, getAllProps, getAllAnimations } from "../lib/players";
 import { formatName } from "../lib/helpers"
 
-const FilterSortBox = dynamic(import("../components/filtersortbox"));
-const PlayersList = dynamic(import("../components/playerslist"));
+import FilterSortBox from "../components/filtersortbox";
+import PlayersList from "../components/playerslist";
 
 export default function Players({ allPlayers, allProps, allAnimations }) {
     const [page, setPage] = useState(0)
@@ -28,54 +27,54 @@ export default function Players({ allPlayers, allProps, allAnimations }) {
     }
 
     useEffect(() => {
-        console.log(searchOptions);
-        const { searchValue, innerCat, filterCat, filterProp, filterValue, sortCat, sortProp, sortValue} = searchOptions;
+        // console.log(searchOptions);
+        // const { searchValue, innerCat, filterCat, filterProp, filterValue, sortCat, sortProp, sortValue} = searchOptions;
 
-        let filtered = allPlayers.filter(player => player.info.name.toLowerCase().includes(searchValue));
+        // let filtered = allPlayers.filter(player => player.info.name.toLowerCase().includes(searchValue));
 
-        if (filterCat === "info" && filterProp === "overall" ) {
-            filtered = filtered.filter(player => {
-                let tierStart = 0;
-                let tierEnd = 0;
-                switch(filterValue) {
-                    case "bronze": tierStart = 68; tierEnd = 69; break;
-                    case "silver": tierStart = 70; tierEnd = 75; break;
-                    case "gold": tierStart = 76; tierEnd = 79; break;
-                    case "emerald": tierStart = 80; tierEnd = 83; break;
-                    case "sapphire": tierStart = 84; tierEnd = 86; break;
-                    case "ruby": tierStart = 87; tierEnd = 89; break;
-                    case "amethyst": tierStart = 90; tierEnd = 92; break;
-                    case "diamond": tierStart = 93; tierEnd = 95; break;
-                    case "pink diamond": tierStart = 96; tierEnd = 98; break;
-                    case "galaxy opal": tierStart = tierEnd = 99; break;
-                }
-                return (player.info.overall >= tierStart) && (player.info.overall <= tierEnd);
-            })
-        } else if (filterProp != "" && filterValue != "") {
-            if (innerCat != "") {
-                filtered = filtered.filter(player => player[filterCat][innerCat][filterProp] === filterValue)
-            } else {
-                filtered = filtered.filter(player => player[filterCat][filterProp] === filterValue);
-            }
-        }
+        // if (filterCat === "info" && filterProp === "overall" ) {
+        //     filtered = filtered.filter(player => {
+        //         let tierStart = 0;
+        //         let tierEnd = 0;
+        //         switch(filterValue) {
+        //             case "bronze": tierStart = 68; tierEnd = 69; break;
+        //             case "silver": tierStart = 70; tierEnd = 75; break;
+        //             case "gold": tierStart = 76; tierEnd = 79; break;
+        //             case "emerald": tierStart = 80; tierEnd = 83; break;
+        //             case "sapphire": tierStart = 84; tierEnd = 86; break;
+        //             case "ruby": tierStart = 87; tierEnd = 89; break;
+        //             case "amethyst": tierStart = 90; tierEnd = 92; break;
+        //             case "diamond": tierStart = 93; tierEnd = 95; break;
+        //             case "pink diamond": tierStart = 96; tierEnd = 98; break;
+        //             case "galaxy opal": tierStart = tierEnd = 99; break;
+        //         }
+        //         return (player.info.overall >= tierStart) && (player.info.overall <= tierEnd);
+        //     })
+        // } else if (filterProp != "" && filterValue != "") {
+        //     if (innerCat != "") {
+        //         filtered = filtered.filter(player => player[filterCat][innerCat][filterProp] === filterValue)
+        //     } else {
+        //         filtered = filtered.filter(player => player[filterCat][filterProp] === filterValue);
+        //     }
+        // }
 
-        if (sortProp != "" && sortValue != "") {
-            filtered = filtered.sort((a, b) => {
-                if (a[sortCat][sortProp][sortValue] > b[sortCat][sortProp][sortValue])
-                    return -1;
-                else if (a[sortCat][sortProp][sortValue] === b[sortCat][sortProp][sortValue]) {
-                    if (a.info.overall > b.info.overall) {
-                        return -1;
-                    } else if (a.info.overall === b.info.overall) {
-                        if (a.info.name > b.info.name)
-                            return 1;
-                        else return -1;
-                    } else return 1;
-                } else
-                    return 1;        
-            })
-        }
-        setPlayers(filtered);
+        // if (sortProp != "" && sortValue != "") {
+        //     filtered = filtered.sort((a, b) => {
+        //         if (a[sortCat][sortProp][sortValue] > b[sortCat][sortProp][sortValue])
+        //             return -1;
+        //         else if (a[sortCat][sortProp][sortValue] === b[sortCat][sortProp][sortValue]) {
+        //             if (a.info.overall > b.info.overall) {
+        //                 return -1;
+        //             } else if (a.info.overall === b.info.overall) {
+        //                 if (a.info.name > b.info.name)
+        //                     return 1;
+        //                 else return -1;
+        //             } else return 1;
+        //         } else
+        //             return 1;        
+        //     })
+        // }
+        // setPlayers(filtered);
     }, [searchOptions])
 
     return (
@@ -87,7 +86,7 @@ export default function Players({ allPlayers, allProps, allAnimations }) {
             </Head>
             <div className="container">
                 <div className="box">
-                    <FilterSortBox allProps={allProps} allAnimations={allAnimations} searchOptions={searchOptions} handleOptions={handleOptions} />
+                    {/* <FilterSortBox allProps={allProps} allAnimations={allAnimations} searchOptions={searchOptions} handleOptions={handleOptions} /> */}
                 </div>
                 <table className="table is-scrollable is-hoverable is-bordered is-striped" style={{ marginTop: "5px"}}>
                     <thead>
@@ -99,7 +98,7 @@ export default function Players({ allPlayers, allProps, allAnimations }) {
                             <th>Def Overall</th>
                             <th>Height</th>
                             <th>Badges</th>
-                            <th className={searchOptions.sortProp == "" ? "is-hidden" : "players-sort-column"}>{formatName(searchOptions.sortValue)}</th>
+                            {/* <th className={searchOptions.sortProp == "" ? "is-hidden" : "players-sort-column"}>{formatName(searchOptions.sortValue)}</th> */}
                         </tr>
                     </thead>
                     <PlayersList players={players} page={page} searchOptions={searchOptions} />
@@ -126,15 +125,15 @@ export async function getStaticProps() {
     
     console.timeEnd("allPlayersStats");
 
-    const allProps = getAllProps(allPlayers[0]);
+    // const allProps = getAllProps(allPlayers[0]);
 
-    const allAnimations = getAllAnimations(allPlayers);
+    // const allAnimations = getAllAnimations(allPlayers);
 
     return {
         props: {
             allPlayers,
-            allProps,
-            allAnimations
+            // allProps,
+            // allAnimations
         },
         unstable_revalidate: 1
     }
