@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { formatName } from "../lib/helpers";
-
+import React, { Fragment } from "react";
+import { IoIosCheckmark } from "react-icons/io";
 import Dropdown from "./dropdown";
-import SearchFilter from "./searchfilter";
+// import SearchFilter from "./searchfilter";
 
 export default function FilterSortBox(props) {
     const { searchOptions, handleOptions, } = props;
@@ -17,11 +16,11 @@ export default function FilterSortBox(props) {
     //     setFilterCat({ cat: cat, innerCat: innerCat })
     // }
 
-    const handleChange = (e) => handleOptions({...searchOptions, searchValue: e.target.value })
+    const handleChange = (e) => handleOptions({...searchOptions, searchValue: e.target.value });
 
     const handleFilter = (prop, value="") => {
         const { filterProps, filterValues } = searchOptions;
-        let props = filterProps, values = filterValues
+        let props = filterProps, values = filterValues;
 
         if (props.indexOf(prop) === -1)
             props.push(prop);
@@ -33,16 +32,18 @@ export default function FilterSortBox(props) {
         else
             values = values.filter(item => item !== value);
 
-        handleOptions({ ...searchOptions, filterProps: props, filterValues: values })
+        handleOptions({ ...searchOptions, filterProps: props, filterValues: values });
     }
 
-    // const handleSort = (cat, prop, value) => {
-    //     if (searchOptions.sortValue === value && searchOptions.sortProp === prop) {
-    //         handleOptions({ ...searchOptions, sortCat: "", sortProp: "", sortValue: value, innerCat: "" })
-    //     } else {
-    //         handleOptions({ ...searchOptions, sortCat: cat, sortProp: prop, sortValue: value, innerCat: "" })
-    //     }
-    // }
+    const handleSort = (prop) => {
+        const { sortProp } = searchOptions;
+        let newProp = prop;
+
+        if (sortProp === prop)
+        newProp = "";
+
+        handleOptions({ ...searchOptions, sortProp: newProp });
+    }
 
     // const getAnimationCats = () => {
     //     let cats = [
@@ -74,6 +75,29 @@ export default function FilterSortBox(props) {
     //         )}
     //     )
     // }
+
+    const getDropdownItems = (cat) => {
+        let items = [];
+        switch(cat) {
+            case "shootingStats": items = ["Shot Close", "Shot Mid", "Shot 3pt", "Shot IQ", "Free Throw", "Offensive Consistency"]; break;
+            case "insideStats": items = ["Driving Layup", "Standing Dunk", "Driving Dunk", "Draw Foul", "Post Moves", "Post Hook", "Post Fade", "Hands"]; break;
+            case "playmakingStats": items = ["Speed With Ball", "Ball Handle", "Passing Accuracy", "Passing Vision", "Passing IQ"]; break;
+            case "athleticismStats": items = ["Speed", "Acceleration", "Vertical", "Strength", "Stamina", "Hustle"]; break;
+            case "defenseStats": items = ["Interior Defense", "Perimeter Defense", "Help Defense IQ", "Lateral Quickness", "Pass Perception", "Steal", "Block", "Defensive Consistency"]; break;
+            case "reboundStats": items = ["Offensive Rebound", "Defensive Rebound"]; break;
+            case "potentialStats": items= ["Intangibles", "Potential"]; break;
+        }
+
+        return items.map((stat, i) => (
+            <a 
+                key={i} 
+                className={`dropdown-item ${searchOptions.sortProp === stat.toLowerCase().replace(/ /g, "_") ? "is-active" : ""}`} 
+                onClick={() => handleSort(stat.toLowerCase().replace(/ /g, "_"))}
+            >
+                {stat}
+            </a>
+        ));
+    }
 
     return (
         <div className="container">
@@ -209,22 +233,22 @@ export default function FilterSortBox(props) {
                             </p>
                         </div>
                     </div>
+                    <div className="column is-6-widescreen">
+                        <p className="heading">Sort By Stats: </p>
+                        <Dropdown title="Shooting" items={getDropdownItems("shootingStats")} />
+                        <Dropdown title="Inside Scoring" items={getDropdownItems("insideStats")} />
+                        <Dropdown title="Playmaking" items={getDropdownItems("playmakingStats")} />
+                        <Dropdown title="Athleticism" items={getDropdownItems("athleticismStats")} />
+                        <Dropdown title="Defense" items={getDropdownItems("defenseStats")} />
+                        <Dropdown title="Rebounding" items={getDropdownItems("reboundStats")} />
+                        <Dropdown title="Potential" items={getDropdownItems("potentialStats")} />
+                    </div>
                     { /*<div className="column is-6-widescreen">
                         <p className="heading">Filter By Animations: </p>
                         <div className="container is-flex">
                             <Dropdown title={filterCat.cat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())} items={getAnimationCats()} />
                             <SearchFilter suggestions={filterItems} handleFilter={handleFilter} filterCat={filterCat} placeholder={`Search ${filterCat.cat.replace(/_/g, " ")} here`} />
                         </div>
-                    </div>
-                    <div className="column is-6-widescreen">
-                        <p className="heading">Sort By Stats: </p>
-                        <Dropdown title="Shooting" items={getDropdownItems("shootingStats")} />
-                        <Dropdown title="Inside Scoring" items={getDropdownItems("insideStats")} />
-                        <Dropdown title="Athleticism" items={getDropdownItems("athleticismStats")} />
-                        <Dropdown title="Playmaking" items={getDropdownItems("playmakingStats")} />
-                        <Dropdown title="Defense" items={getDropdownItems("defenseStats")} />
-                        <Dropdown title="Rebounding" items={getDropdownItems("reboundStats")} />
-                        <Dropdown title="Potential" items={getDropdownItems("potentialStats")} />
                     </div>
                     <div className="column is-6-widescreen">
                         <p className="heading">Sort By Tendencies: </p>

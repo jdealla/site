@@ -60,12 +60,9 @@ export default function PlayersList(props) {
                                 </div>
                             </div>
                         </td> */}
-                        {/* <td className={searchOptions.sortProp == "" ? "is-hidden" : "has-text-centered"}>
-                            {(searchOptions.sortCat != "" && searchOptions.sortProp != "" && searchOptions.sortValue != "") ?
-                                ratingColor(player[searchOptions.sortCat][searchOptions.sortProp][searchOptions.sortValue])
-                                : ""
-                            }
-                        </td> */}
+                        <td className={searchOptions.sortProp === "" ? "is-hidden" : "has-text-centered"}>
+                            {(searchOptions.sortProp !== "") ? ratingColor(player[searchOptions.sortProp]) : ""}
+                        </td>
                     </tr>
                 )
             })}

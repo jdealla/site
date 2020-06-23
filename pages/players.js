@@ -10,7 +10,7 @@ export default function Players({ allPlayers }) {
     const [page, setPage] = useState(0)
     const [players, setPlayers] = useState(allPlayers);
     const [searchOptions, setSearchOptions] = useState({ 
-        searchValue: "", direction: "", filterProps: [], filterValues: [], sortProp: "", sortValue: "" 
+        searchValue: "", direction: "", filterProps: [], filterValues: [], sortProp: ""
     })
 
     const handlePage = (dir) => {
@@ -53,30 +53,25 @@ export default function Players({ allPlayers }) {
                 })
             }
         }
-        // else if (filterProp != "" && filterValue != "") {
-        //     if (innerCat != "") {
-        //         filtered = filtered.filter(player => player[filterCat][innerCat][filterProp] === filterValue)
-        //     } else {
-        //         filtered = filtered.filter(player => player[filterCat][filterProp] === filterValue);
-        //     }
-        // }
 
-        // if (sortProp != "" && sortValue != "") {
-        //     filtered = filtered.sort((a, b) => {
-        //         if (a[sortCat][sortProp][sortValue] > b[sortCat][sortProp][sortValue])
-        //             return -1;
-        //         else if (a[sortCat][sortProp][sortValue] === b[sortCat][sortProp][sortValue]) {
-        //             if (a.info.overall > b.info.overall) {
-        //                 return -1;
-        //             } else if (a.info.overall === b.info.overall) {
-        //                 if (a.info.name > b.info.name)
-        //                     return 1;
-        //                 else return -1;
-        //             } else return 1;
-        //         } else
-        //             return 1;        
-        //     })
-        // }
+        if (sortProp !== "") {
+            filtered = filtered.sort((a, b) => {
+                if (a[sortProp] > b[sortProp])
+                    return -1;
+                else if (a[sortProp] === b[sortProp]) {
+                    if (a.overall > b.overall) {
+                        return -1;
+                    } else if (a.overall === b.overall) {
+                        if (a.name > b.name)
+                            return 1;
+                        else
+                            return -1;
+                    } else {
+                        return 1;
+                    }
+                }
+            })
+        }
 
         //filter by name value
         filtered = filtered.filter(player => player.name.toLowerCase().includes(searchValue));
@@ -104,11 +99,11 @@ export default function Players({ allPlayers }) {
                             <th>Off Overall</th>
                             <th>Def Overall</th>
                             <th>Height</th>
-                            <th>Badges</th>
+                            {/* <th>Badges</th>
                             <th>Collection</th>
                             <th>Theme</th>
-                            <th>Team</th>
-                            {/* <th className={searchOptions.sortProp == "" ? "is-hidden" : "players-sort-column"}>{formatName(searchOptions.sortValue)}</th> */}
+                            <th>Team</th> */}
+                            <th className={searchOptions.sortProp === "" ? "is-hidden" : "players-sort-column"}>{formatName(searchOptions.sortProp)}</th>
                         </tr>
                     </thead>
                     <PlayersList players={players.slice(page * 15, (page * 15) + 15)} page={page} searchOptions={searchOptions} />
