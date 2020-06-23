@@ -23,6 +23,7 @@ export async function getStaticProps() {
     // const players = await getAllDuos()
     //                       .catch(console.error)
     const players = [];
+    
     return {
       props: {
         players,

@@ -1,5 +1,5 @@
 import { store } from "../../../lib/db";
-import { formatPlayerObject } from "../../../lib/format-helpers";
+import { formatPlayerObject } from "../../../lib/format-helpers/player";
 
 export async function getPlayerData(id) {
     const session = store.openSession();

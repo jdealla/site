@@ -11,7 +11,6 @@ import BadgeContainer from "../../components/badgecontainer";
 import Attributes from "../../components/attributes";
 import Loader from "../../components/loader";
 
-
 export default function Player({ playerData, altPlayers, evos, duo, duoPartner }) {
     const [view, setView] = useState("stats");
     const [evoLevel, setEvoLevel] = useState(-1);
@@ -203,5 +202,6 @@ export async function getStaticProps({ params }) {
             duo,
             duoPartner,
         },
+        unstable_revalidate: 1
     }
 }

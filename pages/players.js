@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import { getAllPlayersWithAllStats, getAllAnimations } from "../lib/players";
+import { getAllPlayersWithAllStats } from "../lib/players";
 import { formatName, getFilterTiers } from "../lib/helpers"
 
 import FilterSortBox from "../components/filtersortbox";
 import PlayersList from "../components/playerslist";
 
-export default function Players({ allPlayers, allAnimations }) {
+export default function Players({ allPlayers }) {
     const [page, setPage] = useState(0)
     const [players, setPlayers] = useState(allPlayers);
     const [searchOptions, setSearchOptions] = useState({ 
-        searchValue: "", direction: "", innerCats: [], filterCats: [], filterProps: [], filterValues: [], sortCat: [], sortProp: "", sortValue: "" 
+        searchValue: "", direction: "", filterProps: [], filterValues: [], sortProp: "", sortValue: "" 
     })
 
     const handlePage = (dir) => {
@@ -28,21 +28,31 @@ export default function Players({ allPlayers, allAnimations }) {
 
     useEffect(() => {
         console.log(searchOptions);
-        const { searchValue, innerCats, filterCats, filterProps, filterValues, sortCat, sortProp, sortValue} = searchOptions;
+        const { searchValue, filterProps, filterValues, sortProp, sortValue} = searchOptions;
 
         let filtered = allPlayers
 
-        //filter by overall
-        if (filterCats.includes("info") && filterProps.includes("overall")) {
-            const tiers = getFilterTiers(filterValues);
-            filtered = filtered.filter(player => {
-                for(const tier of tiers) {
-                    if (player.info.overall >= tier[0] && player.info.overall <= tier[1])
-                        return true;
-                }
-                return false;
-            })
-        } 
+        if (filterProps.length > 0 && filterValues.length > 0) {
+            if (filterProps.includes("overall")) {
+                const tiers = getFilterTiers(filterValues);
+                filtered = filtered.filter(player => {
+                    for(const tier of tiers) {
+                        if (player.overall >= tier[0] && player.overall <= tier[1])
+                            return true;
+                    }
+                    return false;
+                })
+            }
+            if (filterProps.includes("position")) {
+                filtered = filtered.filter(player => {
+                    for(const value of filterValues) {
+                        if (player.position === value)
+                            return true;
+                    }
+                    return false;
+                })
+            }
+        }
         // else if (filterProp != "" && filterValue != "") {
         //     if (innerCat != "") {
         //         filtered = filtered.filter(player => player[filterCat][innerCat][filterProp] === filterValue)
@@ -69,7 +79,7 @@ export default function Players({ allPlayers, allAnimations }) {
         // }
 
         //filter by name value
-        filtered = filtered.filter(player => player.info.name.toLowerCase().includes(searchValue));
+        filtered = filtered.filter(player => player.name.toLowerCase().includes(searchValue));
 
         setPlayers(filtered);
     }, [searchOptions])
@@ -83,7 +93,7 @@ export default function Players({ allPlayers, allAnimations }) {
             </Head>
             <div className="container">
                 <div className="box">
-                    <FilterSortBox allAnimations={allAnimations} searchOptions={searchOptions} handleOptions={handleOptions} />
+                    <FilterSortBox searchOptions={searchOptions} handleOptions={handleOptions} />
                 </div>
                 <table className="table is-scrollable is-hoverable is-bordered is-striped" style={{ marginTop: "5px"}}>
                     <thead>
@@ -101,7 +111,7 @@ export default function Players({ allPlayers, allAnimations }) {
                             {/* <th className={searchOptions.sortProp == "" ? "is-hidden" : "players-sort-column"}>{formatName(searchOptions.sortValue)}</th> */}
                         </tr>
                     </thead>
-                    <PlayersList players={players} page={page} searchOptions={searchOptions} />
+                    <PlayersList players={players.slice(page * 15, (page * 15) + 15)} page={page} searchOptions={searchOptions} />
                 </table>
 
                 <div className="columns">
@@ -124,20 +134,9 @@ export async function getStaticProps() {
     const allPlayers = await getAllPlayersWithAllStats()
                             .catch(console.error);
 
-    const allAnimations = getAllAnimations(allPlayers);
-
-    const getJsonAsciiObjectSizeInBytes = (jsonObject) => {
-        return JSON.stringify(jsonObject).length;
-    }
-
-    // console.log(getJsonAsciiObjectSizeInBytes(allPlayers))
-    // console.log(getJsonAsciiObjectSizeInBytes(allAnimations))
-
     return {
         props: {
-            allPlayers,
-            allAnimations
-        },
-        unstable_revalidate: 1
+            allPlayers
+        }
     }
 }
