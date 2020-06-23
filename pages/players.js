@@ -10,7 +10,7 @@ export default function Players({ allPlayers }) {
     const [page, setPage] = useState(0)
     const [players, setPlayers] = useState(allPlayers);
     const [searchOptions, setSearchOptions] = useState({ 
-        searchValue: "", direction: "", filterProps: [], filterValues: [], sortProp: ""
+        searchValue: "", direction: "", filterOptions: { position: [], overall: [] }, sortProp: ""
     })
 
     const handlePage = (dir) => {
@@ -28,30 +28,27 @@ export default function Players({ allPlayers }) {
 
     useEffect(() => {
         console.log(searchOptions);
-        const { searchValue, filterProps, filterValues, sortProp, sortValue} = searchOptions;
+        const { searchValue, filterOptions, sortProp} = searchOptions;
 
         let filtered = allPlayers
 
-        if (filterProps.length > 0 && filterValues.length > 0) {
-            if (filterProps.includes("overall")) {
-                const tiers = getFilterTiers(filterValues);
-                filtered = filtered.filter(player => {
-                    for(const tier of tiers) {
-                        if (player.overall >= tier[0] && player.overall <= tier[1])
-                            return true;
-                    }
-                    return false;
-                })
-            }
-            if (filterProps.includes("position")) {
-                filtered = filtered.filter(player => {
-                    for(const value of filterValues) {
-                        if (player.position === value)
-                            return true;
-                    }
-                    return false;
-                })
-            }
+        if (filterOptions.overall.length > 0) {
+            const tiers = getFilterTiers(filterOptions.overall);
+            filtered = filtered.filter(player => {
+                for(const tier of tiers) {
+                    if (player.overall >= tier[0] && player.overall <= tier[1])
+                        return true;
+                }
+            })
+        }
+
+        if (filterOptions.position.length > 0) {
+            filtered = filtered.filter(player => {
+                for(const value of filterOptions.position) {
+                    if (player.position === value)
+                        return true;
+                }
+            })
         }
 
         if (sortProp !== "") {

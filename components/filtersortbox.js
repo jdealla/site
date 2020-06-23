@@ -19,20 +19,16 @@ export default function FilterSortBox(props) {
     const handleChange = (e) => handleOptions({...searchOptions, searchValue: e.target.value });
 
     const handleFilter = (prop, value="") => {
-        const { filterProps, filterValues } = searchOptions;
-        let props = filterProps, values = filterValues;
+        const { filterOptions } = searchOptions;
+        let values = filterOptions[prop];
 
-        if (props.indexOf(prop) === -1)
-            props.push(prop);
-        else
-            props = props.filter(item => item != prop);
-
-        if (values.indexOf(value) === -1)
+        if (filterOptions[prop].indexOf(value) === -1) {
             values.push(value);
-        else
+        } else {
             values = values.filter(item => item !== value);
+        }
 
-        handleOptions({ ...searchOptions, filterProps: props, filterValues: values });
+        handleOptions({ ...searchOptions, filterOptions: { ...filterOptions, [prop]: values } });
     }
 
     const handleSort = (prop) => {
@@ -113,7 +109,7 @@ export default function FilterSortBox(props) {
                         <div className="field has-addons">
                             <p className="control">
                                 <button 
-                                    className={`button is-small ${searchOptions.filterValues.includes("bronze") ? "is-active filter-button-active" : ""}`} 
+                                    className={`button is-small ${searchOptions.filterOptions.overall.includes("bronze") ? "is-active filter-button-active" : ""}`} 
                                     onClick={() => handleFilter("overall", "bronze")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #B2725C)` }}>
@@ -123,7 +119,7 @@ export default function FilterSortBox(props) {
                             </p>
                             <p className="control">
                                 <button 
-                                    className={`button is-small ${searchOptions.filterValues.includes("silver") ? "is-active filter-button-active" : ""}`}
+                                    className={`button is-small ${searchOptions.filterOptions.overall.includes("silver") ? "is-active filter-button-active" : ""}`}
                                     onClick={() => handleFilter("overall", "silver")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #9A9A9A)` }}>
@@ -133,7 +129,7 @@ export default function FilterSortBox(props) {
                             </p>
                             <p className="control">
                                 <button 
-                                    className={`button is-small ${searchOptions.filterValues.includes("gold") ? "is-active filter-button-active" : ""}`}
+                                    className={`button is-small ${searchOptions.filterOptions.overall.includes("gold") ? "is-active filter-button-active" : ""}`}
                                     onClick={() => handleFilter("overall", "gold")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #EBE513)` }}>
@@ -143,7 +139,7 @@ export default function FilterSortBox(props) {
                             </p>
                             <p className="control">
                                 <button 
-                                    className={`button is-small ${searchOptions.filterValues.includes("emerald") ? "is-active filter-button-active" : ""}`}
+                                    className={`button is-small ${searchOptions.filterOptions.overall.includes("emerald") ? "is-active filter-button-active" : ""}`}
                                     onClick={() => handleFilter("overall", "emerald")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #5AC573)` }}>
@@ -153,7 +149,7 @@ export default function FilterSortBox(props) {
                             </p>
                             <p className="control">
                                 <button 
-                                    className={`button is-small ${searchOptions.filterValues.includes("sapphire") ? "is-active filter-button-active" : ""}`}
+                                    className={`button is-small ${searchOptions.filterOptions.overall.includes("sapphire") ? "is-active filter-button-active" : ""}`}
                                     onClick={() => handleFilter("overall", "sapphire")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #498AE8)` }}>
@@ -163,7 +159,7 @@ export default function FilterSortBox(props) {
                             </p>
                             <p className="control">
                                 <button 
-                                    className={`button is-small ${searchOptions.filterValues.includes("ruby") ? "is-active filter-button-active" : ""}`}
+                                    className={`button is-small ${searchOptions.filterOptions.overall.includes("ruby") ? "is-active filter-button-active" : ""}`}
                                     onClick={() => handleFilter("overall", "ruby")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #EF5A5D)` }}>
@@ -173,7 +169,7 @@ export default function FilterSortBox(props) {
                             </p>
                             <p className="control">
                                 <button 
-                                    className={`button is-small ${searchOptions.filterValues.includes("amethyst") ? "is-active filter-button-active" : ""}`}
+                                    className={`button is-small ${searchOptions.filterOptions.overall.includes("amethyst") ? "is-active filter-button-active" : ""}`}
                                     onClick={() => handleFilter("overall", "amethyst")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #CF67D7)` }}>
@@ -183,7 +179,7 @@ export default function FilterSortBox(props) {
                             </p>
                             <p className="control">
                                 <button 
-                                    className={`button is-small ${searchOptions.filterValues.includes("diamond") ? "is-active filter-button-active" : ""}`}
+                                    className={`button is-small ${searchOptions.filterOptions.overall.includes("diamond") ? "is-active filter-button-active" : ""}`}
                                     onClick={() => handleFilter("overall", "diamond")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #22D2F2)` }}>
@@ -193,7 +189,7 @@ export default function FilterSortBox(props) {
                             </p>
                             <p className="control">
                                 <button 
-                                    className={`button is-small ${searchOptions.filterValues.includes("pink diamond") ? "is-active filter-button-active" : ""}`}
+                                    className={`button is-small ${searchOptions.filterOptions.overall.includes("pink diamond") ? "is-active filter-button-active" : ""}`}
                                     onClick={() => handleFilter("overall", "pink diamond")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #FF96DF)` }}>
@@ -203,7 +199,7 @@ export default function FilterSortBox(props) {
                             </p>
                             <p className="control">
                                 <button 
-                                    className={`button is-small ${searchOptions.filterValues.includes("galaxy opal") ? "is-active filter-button-active" : ""}`}
+                                    className={`button is-small ${searchOptions.filterOptions.overall.includes("galaxy opal") ? "is-active filter-button-active" : ""}`}
                                     onClick={() => handleFilter("overall", "galaxy opal")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #D389D7)` }}>
@@ -217,19 +213,19 @@ export default function FilterSortBox(props) {
                         <p className="heading">Filter By Position: </p>
                         <div className="field has-addons">
                             <p className="control">
-                                <button className={`button is-small ${searchOptions.filterValues.includes("PG") ? "is-active filter-button-active" : ""}`} onClick={() => handleFilter("position", "PG")}>PG</button>
+                                <button className={`button is-small ${searchOptions.filterOptions.position.includes("PG") ? "is-active filter-button-active" : ""}`} onClick={() => handleFilter("position", "PG")}>PG</button>
                             </p>
                             <p className="control">
-                                <button className={`button is-small ${searchOptions.filterValues.includes("SG") ? "is-active filter-button-active" : ""}`} onClick={() => handleFilter("position", "SG")}>SG</button>
+                                <button className={`button is-small ${searchOptions.filterOptions.position.includes("SG") ? "is-active filter-button-active" : ""}`} onClick={() => handleFilter("position", "SG")}>SG</button>
                             </p>
                             <p className="control">
-                                <button className={`button is-small ${searchOptions.filterValues.includes("SF") ? "is-active filter-button-active" : ""}`} onClick={() => handleFilter("position", "SF")}>SF</button>
+                                <button className={`button is-small ${searchOptions.filterOptions.position.includes("SF") ? "is-active filter-button-active" : ""}`} onClick={() => handleFilter("position", "SF")}>SF</button>
                             </p>
                             <p className="control">
-                                <button className={`button is-small ${searchOptions.filterValues.includes("PF") ? "is-active filter-button-active" : ""}`} onClick={() => handleFilter("position", "PF")}>PF</button>
+                                <button className={`button is-small ${searchOptions.filterOptions.position.includes("PF") ? "is-active filter-button-active" : ""}`} onClick={() => handleFilter("position", "PF")}>PF</button>
                             </p>
                             <p className="control">
-                                <button className={`button is-small ${searchOptions.filterValues.includes("C") ? "is-active filter-button-active" : ""}`} onClick={() => handleFilter("position", "C")}>C</button>
+                                <button className={`button is-small ${searchOptions.filterOptions.position.includes("C") ? "is-active filter-button-active" : ""}`} onClick={() => handleFilter("position", "C")}>C</button>
                             </p>
                         </div>
                     </div>
