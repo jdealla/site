@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { getAllPlayersWithAllStats, getAllAnimations } from "../lib/players";
-import { formatName } from "../lib/helpers"
+import { formatName, getFilterTiers } from "../lib/helpers"
 
 import FilterSortBox from "../components/filtersortbox";
 import PlayersList from "../components/playerslist";
@@ -10,7 +10,7 @@ export default function Players({ allPlayers, allAnimations }) {
     const [page, setPage] = useState(0)
     const [players, setPlayers] = useState(allPlayers);
     const [searchOptions, setSearchOptions] = useState({ 
-        searchValue: "", direction: "", innerCat: "", filterCat: "", filterProp: "", filterValue: "", sortCat: "", sortProp: "", sortValue: "" 
+        searchValue: "", direction: "", innerCats: [], filterCats: [], filterProps: [], filterValues: [], sortCat: [], sortProp: "", sortValue: "" 
     })
 
     const handlePage = (dir) => {
@@ -27,65 +27,23 @@ export default function Players({ allPlayers, allAnimations }) {
     }
 
     useEffect(() => {
-        const { searchValue, innerCat, filterCat, filterProp, filterValue, sortCat, sortProp, sortValue} = searchOptions;
+        console.log(searchOptions);
+        const { searchValue, innerCats, filterCats, filterProps, filterValues, sortCat, sortProp, sortValue} = searchOptions;
 
-        const fetchPlayers = async () => {
-            let parameters = "?";
-            if (filterCat === "info" && filterProp === "overall") {
-                let tierStart = 0, tierEnd = 0;
-                switch(filterValue) {
-                    case "bronze": tierStart = 68; tierEnd = 69; break;
-                    case "silver": tierStart = 70; tierEnd = 75; break;
-                    case "gold": tierStart = 76; tierEnd = 79; break;
-                    case "emerald": tierStart = 80; tierEnd = 83; break;
-                    case "sapphire": tierStart = 84; tierEnd = 86; break;
-                    case "ruby": tierStart = 87; tierEnd = 89; break;
-                    case "amethyst": tierStart = 90; tierEnd = 92; break;
-                    case "diamond": tierStart = 93; tierEnd = 95; break;
-                    case "pink diamond": tierStart = 96; tierEnd = 98; break;
-                    case "galaxy opal": tierStart = tierEnd = 99; break;
+        let filtered = allPlayers
+
+        //filter by overall
+        if (filterCats.includes("info") && filterProps.includes("overall")) {
+            const tiers = getFilterTiers(filterValues);
+            filtered = filtered.filter(player => {
+                for(const tier of tiers) {
+                    if (player.info.overall >= tier[0] && player.info.overall <= tier[1])
+                        return true;
                 }
-                parameters += `overall=${tierStart}-${tierEnd}&`;
-            }
-            
-            if (searchValue != "")
-                parameters += `searchValue=${searchValue}&`;
-
-            const result = await fetch(`/api/search${parameters}`)
-            const players = await result.json();
-
-            setPlayers(players);
-        }
-
-        if (filterCat != "" || searchValue != "") 
-            fetchPlayers();
-    }, [searchOptions]);
-
-    // useEffect(() => {
-        // console.log(searchOptions);
-        // const { searchValue, innerCat, filterCat, filterProp, filterValue, sortCat, sortProp, sortValue} = searchOptions;
-
-        // let filtered = allPlayers.filter(player => player.info.name.toLowerCase().includes(searchValue));
-
-        // if (filterCat === "info" && filterProp === "overall" ) {
-        //     filtered = filtered.filter(player => {
-        //         let tierStart = 0;
-        //         let tierEnd = 0;
-        //         switch(filterValue) {
-        //             case "bronze": tierStart = 68; tierEnd = 69; break;
-        //             case "silver": tierStart = 70; tierEnd = 75; break;
-        //             case "gold": tierStart = 76; tierEnd = 79; break;
-        //             case "emerald": tierStart = 80; tierEnd = 83; break;
-        //             case "sapphire": tierStart = 84; tierEnd = 86; break;
-        //             case "ruby": tierStart = 87; tierEnd = 89; break;
-        //             case "amethyst": tierStart = 90; tierEnd = 92; break;
-        //             case "diamond": tierStart = 93; tierEnd = 95; break;
-        //             case "pink diamond": tierStart = 96; tierEnd = 98; break;
-        //             case "galaxy opal": tierStart = tierEnd = 99; break;
-        //         }
-        //         return (player.info.overall >= tierStart) && (player.info.overall <= tierEnd);
-        //     })
-        // } else if (filterProp != "" && filterValue != "") {
+                return false;
+            })
+        } 
+        // else if (filterProp != "" && filterValue != "") {
         //     if (innerCat != "") {
         //         filtered = filtered.filter(player => player[filterCat][innerCat][filterProp] === filterValue)
         //     } else {
@@ -109,8 +67,12 @@ export default function Players({ allPlayers, allAnimations }) {
         //             return 1;        
         //     })
         // }
-        // setPlayers(filtered);
-    // }, [searchOptions])
+
+        //filter by name value
+        filtered = filtered.filter(player => player.info.name.toLowerCase().includes(searchValue));
+
+        setPlayers(filtered);
+    }, [searchOptions])
 
     return (
         <>
@@ -146,6 +108,9 @@ export default function Players({ allPlayers, allAnimations }) {
                     <div className="column is-full">
                         <nav className="pagination is-centered" role="navigation" aria-label="pagination">
                             <a className="pagination-previous" onClick={() => handlePage("prev")} disabled={page <= 0}>Previous</a>
+                            <ul className="pagination-list">
+                                <li><p className="pagination-link" aria-label="total-players">Total Players: {players.length}</p></li>
+                            </ul>
                             <a className="pagination-next" onClick={() => handlePage("next")} disabled={page * 15 >= players.length}>Next page</a>
                         </nav>
                     </div>
