@@ -10,7 +10,7 @@ export default function Players({ allPlayers }) {
     const [page, setPage] = useState(0)
     const [players, setPlayers] = useState(allPlayers);
     const [searchOptions, setSearchOptions] = useState({ 
-        searchValue: "", direction: "", filterOptions: { position: [], overall: [] }, sortProp: ""
+        searchValue: "", filterOptions: { position: [], overall: [] }, sortProp: "", asc: false, perPage: 15
     })
 
     const handlePage = (dir) => {
@@ -103,7 +103,7 @@ export default function Players({ allPlayers }) {
                             <th className={searchOptions.sortProp === "" ? "is-hidden" : "players-sort-column"}>{formatName(searchOptions.sortProp)}</th>
                         </tr>
                     </thead>
-                    <PlayersList players={players.slice(page * 15, (page * 15) + 15)} page={page} searchOptions={searchOptions} />
+                    <PlayersList players={players.slice(page * searchOptions.perPage, (page * searchOptions.perPage) + searchOptions.perPage)} page={page} searchOptions={searchOptions} />
                 </table>
 
                 <div className="columns">
@@ -113,7 +113,7 @@ export default function Players({ allPlayers }) {
                             <ul className="pagination-list">
                                 <li><p className="pagination-link" aria-label="total-players">Total Players: {players.length}</p></li>
                             </ul>
-                            <a className="pagination-next" onClick={() => handlePage("next")} disabled={page * 15 >= players.length}>Next page</a>
+                            <a className="pagination-next" onClick={() => handlePage("next")} disabled={page * searchOptions.perPage >= players.length}>Next page</a>
                         </nav>
                     </div>
                 </div>
