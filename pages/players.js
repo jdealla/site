@@ -75,8 +75,8 @@ export default function Players({ allPlayers, allAnimations }) {
                 for(let animation of filterOptions.animations) {
                     let temp = animation.split("-");
                     let [cat, value] = temp;
-
-                    if (player[cat] === value)
+                    
+                    if (player[cat] === value || (cat === "size_up_packages" && player["size-up_packages"] === value)) 
                         check.push(true);
                     else
                         check.push(false);

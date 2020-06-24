@@ -72,6 +72,7 @@ export default function FilterSortBox(props) {
         let newFilter = cat + "-" + value;
 
         let targetIndex = animations.findIndex(ani => ani === newFilter);
+
         if (targetIndex === -1) {
             animations.push(newFilter);
         } else {
@@ -102,13 +103,12 @@ export default function FilterSortBox(props) {
     }
 
     const showAnimationFilters = () => {
-        let filters = searchOptions.filterOptions.animations.map(ani => {
+        let filters = searchOptions.filterOptions.animations.map((ani, i) => {
             let [cat, value] = ani.split("-");
-
             return (
-                <span className="tag">
+                <span className="tag" key={i}>
                     {cat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())}: {value}
-                    <button class="delete is-small" onClick={() => removeAnimationFilter(ani)}></button>
+                    <button className="delete is-small" onClick={() => removeAnimationFilter(ani)}></button>
                 </span>
             )
         })

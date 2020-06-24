@@ -18,7 +18,6 @@ export default function SearchFilter(props) {
     const onSuggestionsClearRequested = () => setItems([]);
     
     const getSuggestionValue = (suggestion) => {
-        handleAnimationFilter(animationCat, suggestion);
         return suggestion;
     };
 
