@@ -10,7 +10,7 @@ export default function Players({ allPlayers }) {
     const [page, setPage] = useState(0)
     const [players, setPlayers] = useState(allPlayers);
     const [searchOptions, setSearchOptions] = useState({ 
-        searchValue: "", filterOptions: { position: [], overall: [] }, sortProp: "", asc: false, perPage: 15
+        searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: { } }, sortProp: "", asc: false, perPage: 15
     })
 
     const handlePage = (dir) => {
@@ -28,7 +28,7 @@ export default function Players({ allPlayers }) {
 
     useEffect(() => {
         console.log(searchOptions);
-        const { searchValue, filterOptions, sortProp} = searchOptions;
+        const { searchValue, filterOptions, sortProp, asc} = searchOptions;
 
         let filtered = allPlayers
 
@@ -51,10 +51,21 @@ export default function Players({ allPlayers }) {
             })
         }
 
+        if (filterOptions.badges.length > 0) {
+            filtered = filtered.filter(player => {
+                for(let badge of filterOptions.badges) {
+                    let temp = badge.split("-");
+                    let [name, level] = temp;
+                    
+                    if (player[name] === level)
+                        return true;
+                }
+            })
+        }
         if (sortProp !== "") {
             filtered = filtered.sort((a, b) => {
                 if (a[sortProp] > b[sortProp])
-                    return -1;
+                    return asc ? 1: -1;
                 else if (a[sortProp] === b[sortProp]) {
                     if (a.overall > b.overall) {
                         return -1;
@@ -66,6 +77,8 @@ export default function Players({ allPlayers }) {
                     } else {
                         return 1;
                     }
+                } else {
+                    return asc ? -1 : 1;
                 }
             })
         }

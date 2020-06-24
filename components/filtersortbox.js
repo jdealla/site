@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { IoIosCheckmark } from "react-icons/io";
+import { FaSortAmountDown, FaSortAmountUp } from "react-icons/fa";
 import Dropdown from "./dropdown";
 // import SearchFilter from "./searchfilter";
 
@@ -17,8 +17,8 @@ export default function FilterSortBox(props) {
     // }
 
     const handleChange = (e) => handleOptions({ ...searchOptions, searchValue: e.target.value });
-
     const handlePerPage = (num) => handleOptions({ ...searchOptions, perPage: num });
+    const handleSortDirection = () => handleOptions({ ...searchOptions, asc: !searchOptions.asc });
 
     const handleFilter = (prop, value="") => {
         const { filterOptions } = searchOptions;
@@ -43,6 +43,29 @@ export default function FilterSortBox(props) {
         handleOptions({ ...searchOptions, sortProp: newProp });
     }
 
+    const handleBadgeFilter = (value) => {
+        const { filterOptions } = searchOptions;
+        let values = filterOptions.badges;
+
+        if (values.length === 0)
+            values.push(value + "-Bronze");
+
+        for(let i = 0; i < values.length; i++) {
+            let badge = values[i].split("-");
+            if (badge[0] === value.toLowerCase().replace(/ /g, "_")) {
+                switch(badge[1]) {
+                    case "Bronze": values[i] = value + "-Silver"; break;
+                    case "Silver": values[i] = value + "-Gold"; break;
+                    case "Gold": values[i] = value + "-HOF"; break;
+                    case "HOF": values.splice(i, 1);
+                }
+            } else {
+                values.push(value + "-Bronze");
+            }
+        }
+
+        handleOptions({ ...searchOptions, filterOptions: { ...filterOptions, badges: values } })
+    }
     // const getAnimationCats = () => {
     //     let cats = [
     //         "Lower Base", "Upper Release", "Dribble Style", "Size Up Packages", "Moving Crossover", "Moving Behind The Back", 
@@ -112,6 +135,50 @@ export default function FilterSortBox(props) {
         ));
     }
 
+    const getBadgeItems = (cat) => {
+        let items = []
+        switch(cat) {
+            case "finishing": items = [
+                "Acrobat", "Backdown Punisher", "Consistent Finisher", "Contact Finisher", "Cross Key Scorer", "Deep Hooks", "Dropstepper", "Fancy Footwork",
+                "Fastbreak Finisher", "Giant Slayer", "Lob City Finisher", "Pick And Roller", "Pro Touch", "Putback Boss", "Relentless Finisher", "Showtime",
+                "Slithery Finisher", "Tear Dropper"
+            ]; break;
+            case "shooting": items = [
+                "Catch And Shoot", "Clutch Shooter", "Corner Specialist", "Deadeye", "Deep Fades", "Difficult Shots", "Flexible Release", "Green Machine",
+                "Hot Start", "Hot Zone Hunter", "Ice In Veins", "Pick And Popper", "Pump Fake Maestro", "Quick Draw", "Range Extender", "Slippery Off Ball",
+                "Steady Shooter", "Tireless Shooter", "Volume Shooter"
+            ]; break;
+            case "playmaking": items = [
+                "Ankle Breaker", "Bail Out", "Break Starter", "Dimer", "Downhill", "Dream Shake", "Flashy Passer", "Floor General", "Handles For Days", "Lob City Passer",
+                "Needle Threader", "Pass Fake Maestro", "Post Spin Technician", "Quick First Step", "Space Creator", "Stop And Go", "Tight Handles", "Unpluckable"
+            ]; break;
+            case "defense": items = [
+                "Box", "Brick Wall", "Chase Down Artist", "Clamps", "Defensive Leader", "Heart Crusher", "Interceptor", "Intimidator", "Lightning Reflexes", "Moving Truck",
+                "Off Ball Pest", "Pick Pocket", "Pogo Stick", "Post Move Lockdown", "Rebound Chaser", "Rim Protector", "Tireless Defender", "Trapper", "Worm"
+            ]; break;
+        }
+
+        return items.map((item, i) => {
+            let formatted = item.toLowerCase().replace(/ /g, "_");
+            let badge = searchOptions.filterOptions.badges.find(badge => {
+                let name = badge.split("-")[0];
+                return formatted === name;
+            })
+
+            let [badgeName, level] = (badge) ? badge.split("-") : ["", ""];
+
+            return (
+                <a
+                    key={i}
+                    className={`dropdown-item ${searchOptions.filterOptions.badges.includes(badge) ? `is-${level}` : ""}`}
+                    onClick={() => handleBadgeFilter(formatted)}
+                >
+                    {item}
+                </a>
+            )
+        })
+    }
+
     const getPlayerAmounts = () => {
         let amount = [15, 20, 30, 40, 50];
         return amount.map((num, i) => (
@@ -135,8 +202,8 @@ export default function FilterSortBox(props) {
             <div className="container">
                 <div className="columns is-mobile is-multiline">
                     <div className="column is-full">
-                        <button className="button is-small">
-                            {searchOptions.asc ? "Descending" : "Ascending"}
+                        <button className="button is-small" onClick={() => handleSortDirection()}>
+                            {searchOptions.asc ? <FaSortAmountUp /> : <FaSortAmountDown />}
                         </button>
                         <Dropdown title="Players Per Page" items={getPlayerAmounts()} />
                     </div>
@@ -265,6 +332,13 @@ export default function FilterSortBox(props) {
                             </p>
                         </div>
                     </div>
+                    <div className="column ">
+                        <p className="heading">Filter By Badges: </p>
+                        <Dropdown title="Finishing Badges" items={getBadgeItems("finishing")} />
+                        <Dropdown title="Shooting Badges" items={getBadgeItems("shooting")} />
+                        <Dropdown title="Playmaking Badges" items={getBadgeItems("playmaking")} />
+                        <Dropdown title="Defensive Badges" items={getBadgeItems("defense")} />
+                    </div>
                     <div className="column is-6-widescreen">
                         <p className="heading">Sort By Stats: </p>
                         <Dropdown title="Shooting" items={getDropdownItems("shootingStats")} />
@@ -292,10 +366,7 @@ export default function FilterSortBox(props) {
                         </div>
                     </div>
                     
-                    <div className="column ">
-                        <p className="heading">Filter By Badges: </p>
-
-                    </div> */}
+                     */}
                 </div>
             </div>
         </div>
