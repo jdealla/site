@@ -49,18 +49,20 @@ export default function FilterSortBox(props) {
 
         if (values.length === 0)
             values.push(value + "-Bronze");
+        else {
+            let targetIndex = values.findIndex(badge => badge.split("-")[0] === value.toLowerCase().replace(/ /g, "_"));
 
-        for(let i = 0; i < values.length; i++) {
-            let badge = values[i].split("-");
-            if (badge[0] === value.toLowerCase().replace(/ /g, "_")) {
-                switch(badge[1]) {
-                    case "Bronze": values[i] = value + "-Silver"; break;
-                    case "Silver": values[i] = value + "-Gold"; break;
-                    case "Gold": values[i] = value + "-HOF"; break;
-                    case "HOF": values.splice(i, 1);
-                }
-            } else {
+            if (targetIndex === -1) {
                 values.push(value + "-Bronze");
+            } else {
+                let level = values[targetIndex].split("-")[1];
+                
+                switch(level) {
+                    case "Bronze": values[targetIndex] = value + "-Silver"; break;
+                    case "Silver": values[targetIndex] = value + "-Gold"; break;
+                    case "Gold": values[targetIndex] = value + "-HOF"; break;
+                    case "HOF": values.splice(targetIndex, 1);
+                }
             }
         }
 

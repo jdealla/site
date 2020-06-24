@@ -53,13 +53,19 @@ export default function Players({ allPlayers }) {
 
         if (filterOptions.badges.length > 0) {
             filtered = filtered.filter(player => {
+                let check = [];
                 for(let badge of filterOptions.badges) {
                     let temp = badge.split("-");
                     let [name, level] = temp;
                     
-                    if (player[name] === level)
-                        return true;
+                    if (player[name] == level)
+                        check.push(true);
+                    else
+                        check.push(false);
                 }
+
+                if (!check.includes(false))
+                    return true;
             })
         }
         if (sortProp !== "") {
@@ -116,7 +122,7 @@ export default function Players({ allPlayers }) {
                             <th className={searchOptions.sortProp === "" ? "is-hidden" : "players-sort-column"}>{formatName(searchOptions.sortProp)}</th>
                         </tr>
                     </thead>
-                    <PlayersList players={players.slice(page * searchOptions.perPage, (page * searchOptions.perPage) + searchOptions.perPage)} page={page} searchOptions={searchOptions} />
+                    <PlayersList players={players.slice(page * searchOptions.perPage, (page * searchOptions.perPage) + searchOptions.perPage)} searchOptions={searchOptions} />
                 </table>
 
                 <div className="columns">

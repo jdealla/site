@@ -5,12 +5,12 @@ import { ratingColor } from "../lib/helpers";
 import OverallImage from "./overallimage";
 
 export default function PlayersList(props) {
-    const { players, page, searchOptions } = props;
+    const { players, searchOptions } = props;
     const router = useRouter()
 
     const handleClick = (e, playerId) => {
         e.preventDefault();
-        router.push(`/player/${playerId}`)
+        router.push("/player/[id]", `/player/${playerId}`)
     }
 
     return (
