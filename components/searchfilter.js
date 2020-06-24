@@ -4,7 +4,7 @@ import Autosuggest from "react-autosuggest";
 import styles from "./searchfilter.module.scss";
 
 export default function SearchFilter(props) {
-    const { suggestions, handleFilter, filterCat, placeholder } = props;
+    const { suggestions, handleAnimationFilter, animationCat, placeholder } = props;
     const [value, setValue] = useState('');
     const [items, setItems] = useState([]);
     
@@ -18,7 +18,7 @@ export default function SearchFilter(props) {
     const onSuggestionsClearRequested = () => setItems([]);
     
     const getSuggestionValue = (suggestion) => {
-        handleFilter("animations", filterCat.cat.replace(/ /g, "_") + "_a", suggestion, filterCat.innerCat)
+        handleAnimationFilter(animationCat, suggestion);
         return suggestion;
     };
 
@@ -34,7 +34,7 @@ export default function SearchFilter(props) {
     }
 
     const renderSuggestion = (suggestion) => (
-        <div className="has-text-black" onClick={() => handleFilter("animations", filterCat.cat.replace(/ /g, "_") + "_a", suggestion, filterCat.innerCat)}>
+        <div className="has-text-black" onClick={() => handleAnimationFilter(animationCat, suggestion)}>
             {suggestion}
         </div>
     );

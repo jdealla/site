@@ -1,21 +1,18 @@
-import React, { Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { FaSortAmountDown, FaSortAmountUp } from "react-icons/fa";
 import Dropdown from "./dropdown";
-// import SearchFilter from "./searchfilter";
+import SearchFilter from "./searchfilter";
 
 export default function FilterSortBox(props) {
-    const { searchOptions, handleOptions, } = props;
-    // const [filterCat, setFilterCat] = useState({ cat: "lower base", innerCat: "shooting" });
-    // const [filterItems, setFilterItems] = useState(allAnimations.shooting.lower_base_a)
+    const { allAnimations, searchOptions, handleOptions, } = props;
+    const [animationCat, setAnimationCat] = useState("lower_base_a");
+    const [filterItems, setFilterItems] = useState(allAnimations.lower_base_a)
 
-    // useEffect(() => {
-    //     setFilterItems(allAnimations[filterCat?.innerCat][filterCat?.cat.replace(/ /g, "_") + "_a"])
-    // }, [filterCat])
+    useEffect(() => {
+        setFilterItems(allAnimations[animationCat]);
+    }, [animationCat])
 
-    // const handleFilterCat = (cat, innerCat) => {
-    //     setFilterCat({ cat: cat, innerCat: innerCat })
-    // }
-
+    const handleAnimationCat = (cat) => setAnimationCat(cat);
     const handleChange = (e) => handleOptions({ ...searchOptions, searchValue: e.target.value });
     const handlePerPage = (num) => handleOptions({ ...searchOptions, perPage: num });
     const handleSortDirection = () => handleOptions({ ...searchOptions, asc: !searchOptions.asc });
@@ -68,36 +65,60 @@ export default function FilterSortBox(props) {
 
         handleOptions({ ...searchOptions, filterOptions: { ...filterOptions, badges: values } })
     }
-    // const getAnimationCats = () => {
-    //     let cats = [
-    //         "Lower Base", "Upper Release", "Dribble Style", "Size Up Packages", "Moving Crossover", "Moving Behind The Back", 
-    //         "Moving Hesitation", "Moving Spin", "Triple Threat Style", "Layup Package", "Post Fade", "Post Hook"
-    //     ];
 
-    //     return cats.map((cat, i) => {
-    //         let innerCat = ""
-    //         switch(cat) {
-    //             case "Lower Base": innerCat = "shooting"; break;
-    //             case "Upper Release": innerCat = "shooting"; break;
-    //             case "Dribble Style": innerCat = "ballhandle"; break;
-    //             case "Size Up Packages": innerCat = "ballhandle"; break;
-    //             case "Moving Crossover": innerCat = "ballhandle"; break;
-    //             case "Moving Behind The Back": innerCat = "ballhandle"; break;
-    //             case "Moving Hesitation": innerCat = "ballhandle"; break;
-    //             case "Moving Spin": innerCat = "ballhandle"; break;
-    //             case "Triple Threat Style": innerCat = "ballhandle"; break;
-    //             case "Layup Package": innerCat = "layup"; break;
-    //             case "Post Fade": innerCat = "post"; break;
-    //             case "Post Hook": innerCat = "post"; break;
-    //         }
+    const handleAnimationFilter = (cat, value) => {
+        const { filterOptions } = searchOptions;
+        let animations = filterOptions.animations;
+        let newFilter = cat + "-" + value;
 
-    //         return (
-    //             <a className="dropdown-item" key={i} onClick={() => handleFilterCat(cat.toLowerCase(), innerCat)}>
-    //                 {cat}
-    //             </a>
-    //         )}
-    //     )
-    // }
+        let targetIndex = animations.findIndex(ani => ani === newFilter);
+        if (targetIndex === -1) {
+            animations.push(newFilter);
+        } else {
+            animations.splice(targetIndex, 1);
+        }
+
+        handleOptions({ ...searchOptions, filterOptions: { ...filterOptions, animations: animations }})
+    }
+
+    const getAnimationCats = () => {
+        return Object.keys(allAnimations).map((cat, i) => {
+            return (
+                <a className="dropdown-item" key={i} onClick={() => handleAnimationCat(cat)}>
+                    {cat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/g, "")}
+                </a>
+            )
+        })
+    }
+
+    const removeAnimationFilter = (animation) => {
+        let animations = searchOptions.filterOptions.animations;
+        let targetIndex = animations.findIndex(ani => ani === animation);
+
+        if (targetIndex !== -1) {
+            animations.splice(targetIndex, 1);
+            handleOptions({ ...searchOptions, filterOptions: { ...searchOptions.filterOptions, animations: animations } });
+        }
+    }
+
+    const showAnimationFilters = () => {
+        let filters = searchOptions.filterOptions.animations.map(ani => {
+            let [cat, value] = ani.split("-");
+
+            return (
+                <span className="tag">
+                    {cat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())}: {value}
+                    <button class="delete is-small" onClick={() => removeAnimationFilter(ani)}></button>
+                </span>
+            )
+        })
+
+        return (
+            <div className="tags">
+                {filters}
+            </div>
+        )
+    }
 
     const getDropdownItems = (cat) => {
         let items = [];
@@ -167,7 +188,7 @@ export default function FilterSortBox(props) {
                 return formatted === name;
             })
 
-            let [badgeName, level] = (badge) ? badge.split("-") : ["", ""];
+            let level = (badge) ? badge.split("-")[1] : "";
 
             return (
                 <a
@@ -360,15 +381,14 @@ export default function FilterSortBox(props) {
                         <Dropdown title="Freelance T" items={getDropdownItems("freelanceT")} />
                         <Dropdown title="Passing T" items={getDropdownItems("passingT")} />
                     </div>
-                    { /*<div className="column is-6-widescreen">
+                    <div className="column is-6-widescreen">
                         <p className="heading">Filter By Animations: </p>
                         <div className="container is-flex">
-                            <Dropdown title={filterCat.cat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())} items={getAnimationCats()} />
-                            <SearchFilter suggestions={filterItems} handleFilter={handleFilter} filterCat={filterCat} placeholder={`Search ${filterCat.cat.replace(/_/g, " ")} here`} />
+                            <Dropdown title={animationCat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/g, "")} items={getAnimationCats()} />
+                            <SearchFilter suggestions={filterItems} handleAnimationFilter={handleAnimationFilter} animationCat={animationCat} placeholder={`Search ${animationCat.replace(/_/g, " ")} here`} />
+                            {showAnimationFilters()}
                         </div>
                     </div>
-                    
-                     */}
                 </div>
             </div>
         </div>

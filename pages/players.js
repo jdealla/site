@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import { getAllPlayersWithAllStats } from "../lib/players";
+import { getAllPlayersWithAllStats, getAllAnimations } from "../lib/players";
 import { formatName, getFilterTiers } from "../lib/helpers"
 
 import FilterSortBox from "../components/filtersortbox";
 import PlayersList from "../components/playerslist";
 
-export default function Players({ allPlayers }) {
+export default function Players({ allPlayers, allAnimations }) {
     const [page, setPage] = useState(0)
     const [players, setPlayers] = useState(allPlayers);
     const [searchOptions, setSearchOptions] = useState({ 
-        searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: { } }, sortProp: "", asc: false, perPage: 15
+        searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [] }, sortProp: "", asc: false, perPage: 15
     })
 
     const handlePage = (dir) => {
@@ -68,6 +68,25 @@ export default function Players({ allPlayers }) {
                     return true;
             })
         }
+
+        if (filterOptions.animations.length > 0) {
+            filtered = filtered.filter(player => {
+                let check = [];
+                for(let animation of filterOptions.animations) {
+                    let temp = animation.split("-");
+                    let [cat, value] = temp;
+
+                    if (player[cat] === value)
+                        check.push(true);
+                    else
+                        check.push(false);
+                }
+
+                if (!check.includes(false))
+                    return true;
+            })
+        }
+
         if (sortProp !== "") {
             filtered = filtered.sort((a, b) => {
                 if (a[sortProp] > b[sortProp])
@@ -104,7 +123,7 @@ export default function Players({ allPlayers }) {
             </Head>
             <div className="container">
                 <div className="box">
-                    <FilterSortBox searchOptions={searchOptions} handleOptions={handleOptions} />
+                    <FilterSortBox allAnimations={allAnimations} searchOptions={searchOptions} handleOptions={handleOptions} />
                 </div>
                 <table className="table is-scrollable is-hoverable is-bordered is-striped" style={{ marginTop: "5px"}}>
                     <thead>
@@ -145,9 +164,12 @@ export async function getStaticProps() {
     const allPlayers = await getAllPlayersWithAllStats()
                             .catch(console.error);
 
+    const allAnimations = getAllAnimations(allPlayers);
+
     return {
         props: {
-            allPlayers
+            allPlayers,
+            allAnimations
         }
     }
 }
