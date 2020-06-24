@@ -78,11 +78,9 @@ export default function Players({ allPlayers, allAnimations }) {
                     
                     if (player[cat] === value || (cat === "size_up_packages" && player["size-up_packages"] === value)) 
                         check.push(true);
-                    else
-                        check.push(false);
                 }
 
-                if (!check.includes(false))
+                if (check.includes(true))
                     return true;
             })
         }

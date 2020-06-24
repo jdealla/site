@@ -107,7 +107,7 @@ export default function FilterSortBox(props) {
             let [cat, value] = ani.split("-");
             return (
                 <span className="tag" key={i}>
-                    {cat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())}: {value}
+                    {cat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/, "")}: {value}
                     <button className="delete is-small" onClick={() => removeAnimationFilter(ani)}></button>
                 </span>
             )
@@ -224,11 +224,19 @@ export default function FilterSortBox(props) {
             </div>
             <div className="container">
                 <div className="columns is-mobile is-multiline">
-                    <div className="column is-full">
+                    <div className="column is-2-widescreen">
                         <button className="button is-small" onClick={() => handleSortDirection()}>
                             {searchOptions.asc ? <FaSortAmountUp /> : <FaSortAmountDown />}
                         </button>
                         <Dropdown title="Players Per Page" items={getPlayerAmounts()} />
+                    </div>
+                    <div className="column is-6-widescreen">
+                        <p className="heading">Filter By Animations: </p>
+                        <div className="container is-flex">
+                            <Dropdown title={animationCat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/g, "")} items={getAnimationCats()} />
+                            <SearchFilter suggestions={filterItems} handleAnimationFilter={handleAnimationFilter} animationCat={animationCat} placeholder={`Search ${animationCat.replace(/_/g, " ")} here`} />
+                            {showAnimationFilters()}
+                        </div>
                     </div>
                     <div className="column is-4-widescreen">
                         <p className="heading">Filter By Overall: </p>
@@ -380,14 +388,6 @@ export default function FilterSortBox(props) {
                         <Dropdown title="Defense T" items={getDropdownItems("defenseT")} />
                         <Dropdown title="Freelance T" items={getDropdownItems("freelanceT")} />
                         <Dropdown title="Passing T" items={getDropdownItems("passingT")} />
-                    </div>
-                    <div className="column is-6-widescreen">
-                        <p className="heading">Filter By Animations: </p>
-                        <div className="container is-flex">
-                            <Dropdown title={animationCat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/g, "")} items={getAnimationCats()} />
-                            <SearchFilter suggestions={filterItems} handleAnimationFilter={handleAnimationFilter} animationCat={animationCat} placeholder={`Search ${animationCat.replace(/_/g, " ")} here`} />
-                            {showAnimationFilters()}
-                        </div>
                     </div>
                 </div>
             </div>

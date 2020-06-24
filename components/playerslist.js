@@ -10,7 +10,7 @@ export default function PlayersList(props) {
 
     const handleClick = (e, playerId) => {
         e.preventDefault();
-        router.push("/player/[id]", `/player/${playerId}`)
+        router.push(`/player/${playerId}`);
     }
 
     return (
