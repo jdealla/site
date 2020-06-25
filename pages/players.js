@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { getAllPlayersWithAllStats, getAllAnimations } from "../lib/players";
 import { getFilterTiers } from "../lib/helpers"
+import sizeof from 'object-sizeof'
 
 import FilterSortBox from "../components/filtersortbox";
 import PlayersList from "../components/playerslist";
@@ -152,6 +153,7 @@ export async function getStaticProps() {
 
     const allAnimations = getAllAnimations(allPlayers);
 
+    console.log(sizeof(allPlayers));
     return {
         props: {
             allPlayers,
