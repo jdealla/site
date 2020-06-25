@@ -226,6 +226,10 @@ export default function FilterSortBox(props) {
                                 {searchOptions.asc ? <FaSortAmountUp /> : <FaSortAmountDown />}
                             </button>
                             <Dropdown title="Players Per Page" items={getPlayerAmounts()} />
+                            <button className={`button is-small ${searchOptions.evos ? "is-active filter-button-active" : ""}`} 
+                                onClick={() => handleOptions({ ...searchOptions, evos: !searchOptions.evos })}>Evos</button>
+                            <button className={`button is-small ${searchOptions.duos ? "is-active filter-button-active" : ""}`} 
+                                onClick={() => handleOptions({ ...searchOptions, duos: !searchOptions.duos })}>Duos</button>
                             <div className="control" style={{ width: "100%" }}>
                                 <input className="input is-small" value={searchOptions.searchValue} onChange={handleChange} type="text" placeholder="Search players..."/>
                             </div>

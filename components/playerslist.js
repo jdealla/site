@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { ratingColor, formatName } from "../lib/helpers";
+import { ratingColor, formatName, getTotalNumOfBadges } from "../lib/helpers";
 
 import OverallImage from "./overallimage";
 
@@ -24,16 +24,16 @@ export default function PlayersList(props) {
                         <th className="has-text-centered">Off Overall</th>
                         <th className="has-text-centered">Def Overall</th>
                         <th className="has-text-centered">Height</th>
+                        <th className="has-text-centered">Badges</th>
                         <th className="has-text-centered">Collection</th>
                         <th className="has-text-centered">Theme</th>
                         <th className="has-text-centered">Team</th>
-                        {/* <th>Badges</th>
-                            */}
                         <th className={searchOptions.sortProp === "" ? "is-hidden" : "players-sort-column"}>{formatName(searchOptions.sortProp)}</th>
                     </tr>
                 </thead>
                 <tbody>
                     {players.map(player => {
+                        let totalBadges = getTotalNumOfBadges(player);
                         return (
                             <tr onClick={(e) => handleClick(e, player.id)} key={player.id} style={{ cursor: "pointer" }}>
                                 <td>
@@ -56,31 +56,31 @@ export default function PlayersList(props) {
                                 <td className="has-text-centered">{ratingColor(player.off_overall)}</td>
                                 <td className="has-text-centered">{ratingColor(player.def_overall)}</td>
                                 <td className="has-text-centered">{player.height}"</td>
-                                <td className="has-text-centered">{player.collection}</td>
-                                <td className="has-text-centered">{player.theme}</td>
-                                <td className="has-text-centered">{player.team}</td>
-                                {/* <td>
+                                <td>
                                     <div className="level">   
                                         <div className="level-item has-text-centered" style={{ justifyContent:"space-evenly" }}>
                                             <figure className="image is-24x24">
                                                 <img src="https://2kdbimg.com/24/icon_badge_bronze.png" />
-                                                <p className="is-overlay has-text-white inline-number-ovr">{player.badges.totalBadges.bronzeBadges}</p>
+                                                <p className="is-overlay has-text-white inline-number-ovr">{totalBadges.bronze}</p>
                                             </figure>
                                             <figure className="image is-24x24">
                                                 <img src="https://2kdbimg.com/24/icon_badge_silver.png" />
-                                                <p className="is-overlay has-text-white inline-number-ovr">{player.badges.totalBadges.silverBadges}</p>
+                                                <p className="is-overlay has-text-white inline-number-ovr">{totalBadges.silver}</p>
                                             </figure>
                                             <figure className="image is-24x24">
                                                 <img src="https://2kdbimg.com/24/icon_badge_gold.png" />
-                                                <p className="is-overlay has-text-white inline-number-ovr">{player.badges.totalBadges.goldBadges}</p>
+                                                <p className="is-overlay has-text-white inline-number-ovr">{totalBadges.gold}</p>
                                             </figure>
                                             <figure className="image is-24x24">
                                                 <img src="https://2kdbimg.com/24/icon_badge_hof.png" />
-                                                <p className="is-overlay has-text-white inline-number-ovr">{player.badges.totalBadges.hofBadges}</p>
+                                                <p className="is-overlay has-text-white inline-number-ovr">{totalBadges.hof}</p>
                                             </figure>
                                         </div>
                                     </div>
-                                </td> */}
+                                </td>
+                                <td className="has-text-centered">{player.collection}</td>
+                                <td className="has-text-centered">{player.theme}</td>
+                                <td className="has-text-centered">{player.team}</td>
                                 <td className={searchOptions.sortProp === "" ? "is-hidden" : "has-text-centered"}>
                                     {(searchOptions.sortProp !== "") ? ratingColor(player[searchOptions.sortProp]) : ""}
                                 </td>
