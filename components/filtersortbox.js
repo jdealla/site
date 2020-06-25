@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaSortAmountDown, FaSortAmountUp } from "react-icons/fa";
+import { FaSortAmountDown, FaSortAmountUp, FaTimes } from "react-icons/fa";
 import Dropdown from "./dropdown";
 import SearchFilter from "./searchfilter";
 
@@ -106,10 +106,10 @@ export default function FilterSortBox(props) {
         let filters = searchOptions.filterOptions.animations.map((ani, i) => {
             let [cat, value] = ani.split("-");
             return (
-                <span className="tag" key={i}>
-                    {cat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/, "")}: {value}
-                    <button className="delete is-small" onClick={() => removeAnimationFilter(ani)}></button>
-                </span>
+                <button className="button is-small" key={i} onClick={() => handleAnimationFilter(cat, value)}>
+                    <span>{cat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/, "")}: {value}</span>
+                    <FaTimes />
+                </button>
             )
         })
 
@@ -344,8 +344,8 @@ export default function FilterSortBox(props) {
                         <p className="heading">Filter By Animations: </p>
                         <div className="container is-flex">
                             <Dropdown title={animationCat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/g, "")} items={getAnimationCats()} />
-                            <SearchFilter suggestions={filterItems} handleAnimationFilter={handleAnimationFilter} animationCat={animationCat} placeholder={`Search ${animationCat.replace(/_/g, " ")} here`} />
                             {showAnimationFilters()}
+                            <SearchFilter suggestions={filterItems} handleAnimationFilter={handleAnimationFilter} animationCat={animationCat} placeholder={`Search ${animationCat.replace(/_/g, " ")} here`} />
                         </div>
                     </div>
                     <div className="column is-2-widescreen">
@@ -368,7 +368,7 @@ export default function FilterSortBox(props) {
                             </p>
                         </div>
                     </div>
-                    <div className="column is-4-widescreen">
+                    <div className="column is-3-widescreen">
                         <p className="heading">Filter By Badges: </p>
                         <Dropdown title="Finishing" items={getBadgeItems("finishing")} />
                         <Dropdown title="Shooting" items={getBadgeItems("shooting")} />
@@ -376,7 +376,7 @@ export default function FilterSortBox(props) {
                         <Dropdown title="Defensive" items={getBadgeItems("defense")} />
                     </div>
                     
-                    <div className="column is-6-widescreen is-full-mobile">
+                    <div className="column is-5-widescreen is-full-mobile">
                         <p className="heading">Sort By Stats: </p>
                         <Dropdown title="Shooting" items={getDropdownItems("shootingStats")} />
                         <Dropdown title="Inside Scoring" items={getDropdownItems("insideStats")} />
@@ -386,15 +386,23 @@ export default function FilterSortBox(props) {
                         <Dropdown title="Rebound" items={getDropdownItems("reboundStats")} />
                         <Dropdown title="Potential" items={getDropdownItems("potentialStats")} />
                     </div>
-                    <div className="column is-6-widescreen is-full-mobile">
+                    <div className="column is-4-widescreen is-full-mobile">
                         <p className="heading">Sort By Tendencies: </p>
-                        <Dropdown title="Inside T" items={getDropdownItems("insideT")} />
-                        <Dropdown title="Shooting T" items={getDropdownItems("shootingT")} />
-                        <Dropdown title="Drive T" items={getDropdownItems("driveT")} />
-                        <Dropdown title="Defense T" items={getDropdownItems("defenseT")} />
-                        <Dropdown title="Freelance T" items={getDropdownItems("freelanceT")} />
-                        <Dropdown title="Passing T" items={getDropdownItems("passingT")} />
+                        <Dropdown title="Inside" items={getDropdownItems("insideT")} />
+                        <Dropdown title="Shooting" items={getDropdownItems("shootingT")} />
+                        <Dropdown title="Drive" items={getDropdownItems("driveT")} />
+                        <Dropdown title="Defense" items={getDropdownItems("defenseT")} />
+                        <Dropdown title="Freelance" items={getDropdownItems("freelanceT")} />
+                        <Dropdown title="Passing" items={getDropdownItems("passingT")} />
                     </div>
+                    <div className="column is-3-widescreen is-full-mobile">
+                        <p className="heading">Sort By Misc: </p>
+                        <button className={`button is-small`} onClick={() => handleSort("date")}>By Date</button>
+                    </div>
+                    {/* <div className="column is-3-widescreen is-full-mobile">
+                        <p className="heading">Filter By Misc: </p>
+                        
+                    </div> */}
                 </div>
             </div>
         </div>
