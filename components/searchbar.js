@@ -32,14 +32,18 @@ export default function SearchBar(props) {
     }
 
     const renderSuggestion = (suggestion) => (
-        <div className="has-text-black" onClick={() => handleClick(suggestion.id)}>
-            {suggestion.name} | {suggestion.overall} | {suggestion.position}
+        <div className="is-flex has-text-black" onClick={() => handleClick(suggestion.id)}>
+            <img src={`https://2kdbimg.com/35/${suggestion.name.replace(/( |')/g, "_").toLowerCase()}_${suggestion.id}.jpg`} />
+            <div className="is-vcentered">
+                {suggestion.name} | {suggestion.overall} | {suggestion.position}
+            </div>
         </div>
     );
     
     const inputProps = {
         placeholder,
         value,
+        type: "search",
         onChange
     };
 
@@ -51,7 +55,8 @@ export default function SearchBar(props) {
             onSuggestionsClearRequested={onSuggestionsClearRequested}
             getSuggestionValue={getSuggestionValue}
             renderSuggestion={renderSuggestion}
-            inputProps={inputProps} 
+            inputProps={inputProps}
+            highlightFirstSuggestion={true}
         />
     )
 }

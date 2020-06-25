@@ -9,7 +9,7 @@ export default function PlayersCardView(props) {
                 <div className="column is-1-desktop is-2-widescreen is-half-mobile" key={i}>
                     <figure className="image is-3by4">
                         <a href={`/player/${player.id}`}>
-                            <img src={`https://2kdbimg.com/390/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} />
+                            <img alt={`${player.overall} ${player.name} | ${player.theme}`} src={`https://2kdbimg.com/390/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} />
                         </a>
                     </figure>
                 </div>

@@ -1,12 +1,13 @@
 import React from "react";
 import { RiBasketballLine } from "react-icons/ri";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai"
+import { IoMdCheckbox, IoMdCheckboxOutline } from "react-icons/io";
 
 import ShotChart from "./shotchart";
 import OverallImage from "./overallimage";
 
 export default function PlayerHeader(props) {
-    const { playerData, altPlayers, evoStars, evoLevel, handleEvo, shoe, handleShoe, } = props;
+    const { playerData, altPlayers, evoStars, evoLevel, handleEvo, duo, duoOn, handleDuo, duoPartner } = props;
 
     const handleEvoStars = (level) => {
         if (evoLevel === level)
@@ -21,13 +22,24 @@ export default function PlayerHeader(props) {
             let star = (
                 <div className="column is-2" key={i}>
                     <div className="container star" onClick={() => handleEvoStars(i)}>
-                        {evoLevel >= i ? <AiFillStar className="star-selected" size="2em" /> : <AiOutlineStar size="2em" />}
+                        {evoLevel >= i ? <AiFillStar className="icon-selected" size="2em" /> : <AiOutlineStar size="2em" />}
                     </div>
                 </div>
             )
             stars.push(star);
         }
         return stars;
+    }
+
+    const renderDuo = () => {
+        return (
+                <span className="icon" onClick={() => handleDuo()} style={{ cursor: "pointer" }}>
+                    {duoOn ? 
+                        <IoMdCheckbox className="icon-selected" size="1.7em" /> 
+                        : <IoMdCheckboxOutline size="1.7em" />
+                    }
+                </span>
+        )
     }
 
     return (
@@ -76,8 +88,8 @@ export default function PlayerHeader(props) {
                             </div>
                             <div className="column is-full-mobile is-8-tablet is-player-info">
                                 <div className="columns is-mobile is-multiline">
-                                    <div className="column is-1-mobile is-1-tablet ovr-margin" style={{ margin:"auto 5px auto 0" }}>
-									  <div className="has-text-centered no-shadow" style={{ position:"relative", width:"48px" }}>
+                                    <div className="column is-1-mobile is-1-tablet ovr-margin" style={{ margin: "auto 5px auto 0" }}>
+									  <div className="has-text-centered no-shadow" style={{ position: "relative", width: "48px" }}>
                                           <OverallImage size="48x48" overall={playerData.info.overall} />
                                           <p className="is-overlay is-size-3 has-text-white inline-number-ovr">
                                               {playerData.info.overall}
@@ -139,10 +151,23 @@ export default function PlayerHeader(props) {
                                             })}
                                         </div>
                                     </div>
-									<div className={evoStars == 0 ? "is-hidden" : "is-full-mobile column is-3-tablet"}>
+									<div className={evoStars == 0 ? "is-hidden" : "column is-3-tablet is-full-mobile"}>
                                         <p className="heading has-text-warning">Evolutions</p>
                                         <div className="columns is-mobile">
                                             {renderEvoStars()}
+                                        </div>
+                                    </div>
+                                    <div className={(duo != undefined || duo != null) ? "column is-6-tablet is-full-mobile" : "is-hidden"}>
+                                        <p className="heading has-text-warning">Dynamic Duo</p> 
+                                        <div className="container is-flex duo-items">
+										    <div className="has-text-centered no-shadow">
+										        <OverallImage overall={duoPartner.overall} size={24} />
+                                                <p className="is-overlay is-size-6 has-text-white inline-number-ovr">
+                                                   {duoPartner.overall}
+                                                </p>
+                                            </div>
+                                            <a href={`/player/${duoPartner.id}`}>{duoPartner.name}</a>
+                                            {renderDuo()}
                                         </div>
                                     </div>
                                 </div>

@@ -2,28 +2,38 @@ import React from "react";
 import { formatName, ratingColor } from "../lib/helpers";
 
 export default function Attributes(props) {
-    const { attributes, attrName, evoStats, reverse, } = props;
+    const { attributes, attrName, evoStats, duoStats, reverse, } = props;
 
-    const renderEvoStat = (key) => {
-        if (evoStats == null || evoStats == "")
-            return "";
-        else {
-            if (evoStats[key] !== 0) {
-                return <span className="tag has-text-success">{`+${evoStats[key]}`}</span>
-            } else {
-                return "";
+    const renderBonusStats = (key) => {
+        if ((evoStats != undefined || evoStats != null) && (duoStats != undefined || duoStats != null)) {
+            if (evoStats !== "" && duoStats !== "") {
+                if (evoStats[key] !== 0 || duoStats[key] !== 0)
+                    return <span className="tag has-text-success">{`+${evoStats[key] + duoStats[key]}`}</span>
+            } else if (evoStats !== "" && duoStats === "") {
+                if (evoStats[key] !== 0)
+                    return <span className="tag has-text-success">{`+${evoStats[key]}`}</span>
+            } else if (duoStats !== "" && evoStats === "") {
+                if (duoStats[key] !== 0)
+                    return <span className="tag has-text-success">{`+${duoStats[key]}`}</span>
             }
-        }
+        }   
+        return ""
     }
 
     const renderStat = (value, key) => {
-        if (evoStats == null || evoStats == "" || evoStats == undefined)
-            return ratingColor(value);
-        else 
-            if (evoStats[key] !== 0)
-                return ratingColor(value + evoStats[key]);
-            else
-                return ratingColor(value);
+        if ((evoStats != undefined || evoStats != null) && (duoStats != undefined || duoStats != null)) {
+            if (evoStats !== "" && duoStats !== "") {
+                if (duoStats[key] !== 0 || evoStats[key] !== 0)
+                    return ratingColor(value + duoStats[key] + evoStats[key]);
+            } else if (evoStats !== "" && duoStats === "") {
+                if (evoStats[key] !== 0)
+                    return ratingColor(value + evoStats[key]);
+            } else if (duoStats !== "" && evoStats === "") {
+                if (duoStats[key] !== 0)
+                    return ratingColor(value + duoStats[key]);
+            }
+        }
+        return ratingColor(value);
     }
 
     const renderTags = () => {
@@ -39,7 +49,7 @@ export default function Attributes(props) {
                 <div className="tags has-addons is-marginless" key={i++} style={{ flex: "0 0 75%" }}>
                     {renderStat(value, key)}
                     <span className="tag">{formatName(key)}</span>
-                    {renderEvoStat(key)}
+                    {renderBonusStats(key)}
                 </div>
             )
             tags.push(tag)

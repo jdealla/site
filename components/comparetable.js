@@ -3,7 +3,7 @@ import { formatName, levelToNum } from "../lib/helpers";
 import { ratingColor } from "../lib/helpers";
 
 export default function CompareTable(props) {
-    const { tableName, firstName, firstStats, secondName, secondStats, diff } = props;
+    const { tableName, firstName, firstStats, secondName, secondStats, diff, isBadges } = props;
 
     const difference = (value, value2) => {
         let diff = levelToNum(value) - levelToNum(value2)
@@ -19,18 +19,43 @@ export default function CompareTable(props) {
         }
 
         return (
-            <span style={{position: "absolute", marginLeft: 10 }} className={`has-text-${diffColor} has-text-weight-semibold`}>{diff}</span>
+            <span style={{  position: "absolute", marginLeft: 10 }} className={`has-text-${diffColor} has-text-weight-semibold`}>{diff}</span>
         )
     }
+	
+	const renderBadgeCompare = (cbadge, name) => {	
+	    let badgeLevel = cbadge.toLowerCase();
+		let badgeImg = `${name}_${badgeLevel}.png`;
+        
+		if (badgeLevel === "none")
+            badgeImg = "badge_none.png";
+			
+        return (
+            <img src={`https://2kdbimg.com/40x40/${badgeImg}`}></img>
+		)
+	}
 	
     const getTableValues = () => {
         let table = [], i = 0;
         for(let key in firstStats) {
+            let name = key.replace(/_/g, "");
             let newRow = (
                 <tr key={i++}>
-                    <td className="has-text-weight-semibold">{formatName(key)}</td>
-                    <td className="has-text-centered">{ratingColor(firstStats[key])} {diff === false ? "" : difference(firstStats[key], secondStats[key])}</td> 
-                    <td className="has-text-centered">{ratingColor(secondStats[key])} {diff === false ? "" : difference(secondStats[key], firstStats[key])}</td>
+                    <td className="has-text-weight-semibold" style={{ verticalAlign: "middle" }}>{formatName(key)}</td>
+					  { isBadges ? (
+						    <>
+						        <td className="has-text-centered">{renderBadgeCompare(firstStats[key], name)} {diff === false ? "" : difference(firstStats[key], secondStats[key])}</td> 
+						        <td className="has-text-centered">{renderBadgeCompare(secondStats[key], name)} {diff === false ? "" : difference(secondStats[key], firstStats[key])}</td>
+						    </>
+						)
+						 :
+						  (
+						     <>
+						        <td className="has-text-centered">{ratingColor(firstStats[key])} {diff === false ? "" : difference(firstStats[key], secondStats[key])}</td> 
+						        <td className="has-text-centered">{ratingColor(secondStats[key])} {diff === false ? "" : difference(secondStats[key], firstStats[key])}</td>
+						     </>
+						  )
+				      }
                 </tr>
             )
             table.push(newRow)
