@@ -147,18 +147,16 @@ export default function Players({ allPlayers, allAnimations }) {
     )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const allPlayers = await getAllPlayersWithAllStats()
                             .catch(console.error);
 
     const allAnimations = getAllAnimations(allPlayers);
 
-    console.log(sizeof(allPlayers));
     return {
         props: {
             allPlayers,
             allAnimations
-        },
-        unstable_revalidate: 10
+        }
     }
 }

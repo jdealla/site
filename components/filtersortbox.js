@@ -131,15 +131,8 @@ export default function FilterSortBox(props) {
                 "Interior Defense", "Perimeter Defense", "Help Defense IQ", "Lateral Quickness", "Pass Perception", "Steal", "Block", "Defensive Consistency"
             ]; break;
             case "reboundStats": items = ["Offensive Rebound", "Defensive Rebound"]; break;
-            case "potentialStats": items = ["Intangibles", "Potential"]; break;
-            case "insideT": items = [
-                "Standing Dunk T", "Driving Dunk T", "Flashy Dunk T", "Alley Oop T", "Putback Dunk T", "Crash T", "Driving Layup T", "Spin Layup T", "Hop Step Layup T", 
-                "Euro Step Layup T"
-            ]; break;
-            case "shootingT": items = [
-                "Shot Mid T", "Shot 3pt T", "Spot Up Shot 3pt T", "Off Screen Shot 3pt T", "Spin Jumper T", "Transition Pull Up 3pt T"
-            ]; break;
-            case "driveT": items = ["Drive", "Spot Up Drive T", "Off Screen Drive T", "Attack Strong On Drive"]; break;
+            case "insideT": items = ["Standing Dunk T", "Driving Dunk T", "Flashy Dunk T", "Alley Oop T", "Putback Dunk T", "Crash T", "Driving Layup T"]; break;
+            case "shootingT": items = ["Shot 3pt T", "Spot Up Shot 3pt T", "Off Screen Shot 3pt T", "Transition Pull Up 3pt T"]; break;
             case "defenseT": items = ["Pass Interception T", "Take Charge T", "On Ball Steal T", "Contest Shot T", "Block Shot T", "Foul T", "Hard Foul T"]; break;
             case "freelanceT": items = ["Roll Vs Pop T", "Transition Spot Up T"]; break;
             case "passingT": items = ["Flashy Pass T", "Alley Oop Pass T"]; break;
@@ -382,13 +375,11 @@ export default function FilterSortBox(props) {
                         <Dropdown title="Athleticism" items={getDropdownItems("athleticismStats")} />
                         <Dropdown title="Defense" items={getDropdownItems("defenseStats")} />
                         <Dropdown title="Rebound" items={getDropdownItems("reboundStats")} />
-                        <Dropdown title="Potential" items={getDropdownItems("potentialStats")} />
                     </div>
                     <div className="column is-4-widescreen is-full-mobile">
                         <p className="heading">Sort By Tendencies: </p>
                         <Dropdown title="Inside" items={getDropdownItems("insideT")} />
                         <Dropdown title="Shooting" items={getDropdownItems("shootingT")} />
-                        <Dropdown title="Drive" items={getDropdownItems("driveT")} />
                         <Dropdown title="Defense" items={getDropdownItems("defenseT")} />
                         <Dropdown title="Freelance" items={getDropdownItems("freelanceT")} />
                         <Dropdown title="Passing" items={getDropdownItems("passingT")} />
