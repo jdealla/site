@@ -147,7 +147,7 @@ export default function Players({ allPlayers, allAnimations }) {
     )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
     const allPlayers = await getAllPlayersWithAllStats()
                             .catch(console.error);
 
