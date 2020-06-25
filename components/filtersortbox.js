@@ -123,9 +123,9 @@ export default function FilterSortBox(props) {
     const getDropdownItems = (cat) => {
         let items = [];
         switch(cat) {
-            case "shootingStats": items = ["Shot Close", "Shot Mid", "Shot 3pt", "Shot IQ", "Free Throw", "Offensive Consistency"]; break;
+            case "shootingStats": items = ["Shot Close", "Shot Mid", "Shot 3pt", "Free Throw", "Offensive Consistency"]; break;
             case "insideStats": items = ["Driving Layup", "Standing Dunk", "Driving Dunk", "Draw Foul", "Post Moves", "Post Hook", "Post Fade", "Hands"]; break;
-            case "playmakingStats": items = ["Speed With Ball", "Ball Handle", "Passing Accuracy", "Passing Vision", "Passing IQ"]; break;
+            case "playmakingStats": items = ["Speed With Ball", "Ball Handle", "Passing Accuracy", "Passing Vision"]; break;
             case "athleticismStats": items = ["Speed", "Acceleration", "Vertical", "Strength", "Stamina", "Hustle"]; break;
             case "defenseStats": items = [
                 "Interior Defense", "Perimeter Defense", "Help Defense IQ", "Lateral Quickness", "Pass Perception", "Steal", "Block", "Defensive Consistency"
@@ -137,11 +137,11 @@ export default function FilterSortBox(props) {
                 "Euro Step Layup T"
             ]; break;
             case "shootingT": items = [
-                "Step Through Shot T", "Shot Mid T", "Shot 3pt T", "Spot Up Shot 3pt T", "Off Screen Shot 3pt T", "Spin Jumper T", "Transition Pull Up 3pt T"
+                "Shot Mid T", "Shot 3pt T", "Spot Up Shot 3pt T", "Off Screen Shot 3pt T", "Spin Jumper T", "Transition Pull Up 3pt T"
             ]; break;
             case "driveT": items = ["Drive", "Spot Up Drive T", "Off Screen Drive T", "Attack Strong On Drive"]; break;
             case "defenseT": items = ["Pass Interception T", "Take Charge T", "On Ball Steal T", "Contest Shot T", "Block Shot T", "Foul T", "Hard Foul T"]; break;
-            case "freelanceT": items = ["Roll Vs Pop T", "Transition Spot Up T", "Play Discipline T"]; break;
+            case "freelanceT": items = ["Roll Vs Pop T", "Transition Spot Up T"]; break;
             case "passingT": items = ["Flashy Pass T", "Alley Oop Pass T"]; break;
         }
 
