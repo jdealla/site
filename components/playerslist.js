@@ -1,16 +1,12 @@
 import React from "react";
-import { useRouter } from "next/router";
 import { ratingColor, formatName, getTotalNumOfBadges } from "../lib/helpers";
-
 import OverallImage from "./overallimage";
 
 export default function PlayersList(props) {
     const { players, searchOptions } = props;
-    const router = useRouter()
 
-    const handleClick = (e, playerId) => {
-        e.preventDefault();
-        router.push(`/player/${playerId}`);
+    const handleClick = (playerId) => {
+        window.location = `/player/${playerId}`
     }
 
     return (
@@ -35,7 +31,7 @@ export default function PlayersList(props) {
                     {players.map(player => {
                         let totalBadges = getTotalNumOfBadges(player);
                         return (
-                            <tr onClick={(e) => handleClick(e, player.id)} key={player.id} style={{ cursor: "pointer" }}>
+                            <tr data-href={`/player/${player.id}`} onClick={() => handleClick(player.id)} key={player.id} style={{ cursor: "pointer" }}>
                                 <td>
                                     <div className="container is-flex">
                                         <figure className="image is-24x24" style={{ marginBottom: "5px" }}>

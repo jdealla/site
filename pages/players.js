@@ -26,7 +26,6 @@ export default function Players({ allPlayers, allAnimations }) {
     const handleOptions = (options) => setSearchOptions(options);
 
     useEffect(() => {
-        console.log(searchOptions);
         const { searchValue, filterOptions, sortProp, asc, evos, duos } = searchOptions;
 
         let filtered = allPlayers
