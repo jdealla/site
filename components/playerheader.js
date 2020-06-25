@@ -2,12 +2,14 @@ import React from "react";
 import { RiBasketballLine } from "react-icons/ri";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai"
 import { IoMdCheckbox, IoMdCheckboxOutline } from "react-icons/io";
+import { getTotalUpgradedBadges } from "../lib/helpers";
 
 import ShotChart from "./shotchart";
 import OverallImage from "./overallimage";
 
 export default function PlayerHeader(props) {
-    const { playerData, altPlayers, evoStars, evoLevel, handleEvo, duo, duoOn, handleDuo, duoPartner } = props;
+    const { playerData, altPlayers, evos, evoLevel, handleEvo, duo, duoOn, handleDuo, duoPartner } = props;
+    const totalBadges = getTotalUpgradedBadges(playerData, duo, duoOn, evos, evoLevel);
 
     const handleEvoStars = (level) => {
         if (evoLevel === level)
@@ -18,7 +20,7 @@ export default function PlayerHeader(props) {
 
     const renderEvoStars = () => {
         let stars = []
-        for(let i = 0; i < evoStars; i++) {
+        for(let i = 0; i < evos.length; i++) {
             let star = (
                 <div className="column is-2" key={i}>
                     <div className="container star" onClick={() => handleEvoStars(i)}>
@@ -151,7 +153,7 @@ export default function PlayerHeader(props) {
                                             })}
                                         </div>
                                     </div>
-									<div className={evoStars == 0 ? "is-hidden" : "column is-3-tablet is-full-mobile"}>
+									<div className={evos.length == 0 ? "is-hidden" : "column is-3-tablet is-full-mobile"}>
                                         <p className="heading has-text-warning">Evolutions</p>
                                         <div className="columns is-mobile">
                                             {renderEvoStars()}
@@ -203,19 +205,19 @@ export default function PlayerHeader(props) {
                                     <div className="level-item is-size-5 has-text-centered transform-badges" style={{ justifyContent:"space-evenly" }}>
                                         <figure className="image is-64x64">
                                             <img src="https://2kdbimg.com/64/icon_badge_bronze.png" />
-                                            <p className="is-overlay inline-number-badge">{playerData.badges.totalBadges.bronzeBadges}</p>
+                                            <p className="is-overlay inline-number-badge">{totalBadges.bronze}</p>
                                         </figure>
                                         <figure className="image is-64x64">
                                             <img src="https://2kdbimg.com/64/icon_badge_silver.png" />
-                                            <p className="is-overlay inline-number-badge">{playerData.badges.totalBadges.silverBadges}</p>
+                                            <p className="is-overlay inline-number-badge">{totalBadges.silver}</p>
                                         </figure>
                                         <figure className="image is-64x64">
                                             <img src="https://2kdbimg.com/64/icon_badge_gold.png" />
-                                            <p className="is-overlay inline-number-badge">{playerData.badges.totalBadges.goldBadges}</p>
+                                            <p className="is-overlay inline-number-badge">{totalBadges.gold}</p>
                                         </figure>
                                         <figure className="image is-64x64">
                                             <img src="https://2kdbimg.com/64/icon_badge_hof.png" />
-                                            <p className="is-overlay inline-number-badge">{playerData.badges.totalBadges.hofBadges}</p>
+                                            <p className="is-overlay inline-number-badge">{totalBadges.hof}</p>
                                         </figure>
                                     </div>
                                 </div>

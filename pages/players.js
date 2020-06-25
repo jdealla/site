@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { getAllPlayersWithAllStats, getAllAnimations } from "../lib/players";
 import { getFilterTiers } from "../lib/helpers"
 
 import FilterSortBox from "../components/filtersortbox";
 import PlayersList from "../components/playerslist";
-import { Router } from "next/router";
 
 export default function Players({ allPlayers, allAnimations }) {
     const [page, setPage] = useState(0)
     const [players, setPlayers] = useState(allPlayers);
     const [searchOptions, setSearchOptions] = useState({ 
-        searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [] }, sortProp: "", asc: false, perPage: 15
+        searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [] }, sortProp: "", asc: false, perPage: 15,
+        evos: false, duos: false
     })
-    const router = useRouter();
 
     const handlePage = (dir) => {
         if (dir === "prev") {
@@ -25,29 +23,21 @@ export default function Players({ allPlayers, allAnimations }) {
         }
     }
 
-    const handleOptions = (options) => {
-        let { filterOptions } = options;
-
-        // let url = "/players";
-        // if (filterOptions.position.length > 0)
-        //     url += `/position/${filterOptions.position.join(",")}`
-        // if (filterOptions.overall.length > 0)
-        //     url += `/overall/${JSON.stringify(filterOptions.overall)}`
-        // if (filterOptions.badges.length > 0)
-        //     url += `/badges/${JSON.stringify(filterOptions.badges)}`
-        // if (filterOptions.animations.length > 0)
-        //     url += `/animations/${JSON.stringify(filterOptions.animations)}`
-
-        // router.push(url, undefined, { shallow: true });
-
-        setSearchOptions(options);
-    }
+    const handleOptions = (options) => setSearchOptions(options);
 
     useEffect(() => {
         console.log(searchOptions);
-        const { searchValue, filterOptions, sortProp, asc} = searchOptions;
+        const { searchValue, filterOptions, sortProp, asc, evos, duos } = searchOptions;
 
         let filtered = allPlayers
+
+        if (duos) {
+            filtered = filtered.filter(player => player.is_duo);
+        }
+
+        if (evos) {
+            filtered = filtered.filter(player => player.is_evo);
+        }
 
         if (filterOptions.overall.length > 0) {
             const tiers = getFilterTiers(filterOptions.overall);

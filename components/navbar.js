@@ -28,22 +28,7 @@ export default function NavBar() {
                     <div className="navbar-item">
                         {/* <SearchBar handleClick={handleClickPlayer} /> */}
                     </div>
-                    <div className="navbar-item has-dropdown is-hoverable">
-                        <a className="navbar-link">
-                            Players
-                        </a>
-                        <div className="navbar-dropdown">
-                            <a className="navbar-item" href="/players">
-                                All Players
-                            </a>
-                            <a className="navbar-item" href="/evolutions">
-                                Evos
-                            </a>
-                            <a className="navbar-item" href="/dynamicduos">
-                                Duos
-                            </a>
-                        </div>
-                    </div>
+                    <a className="navbar-item" href="/players">All Players</a>
                     <a className="navbar-item" href="/compare">Compare</a>
                     <a className="navbar-item" href="/updates">Updates</a>
                     <a className="navbar-item" href="/collections">Collections</a>
