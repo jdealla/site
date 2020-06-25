@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaSortAmountDown, FaSortAmountUp } from "react-icons/fa";
+import { FaSortAmountDown, FaSortAmountUp, FaTimes } from "react-icons/fa";
 import Dropdown from "./dropdown";
 import SearchFilter from "./searchfilter";
 
@@ -106,10 +106,10 @@ export default function FilterSortBox(props) {
         let filters = searchOptions.filterOptions.animations.map((ani, i) => {
             let [cat, value] = ani.split("-");
             return (
-                <span className="tag" key={i}>
-                    {cat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/, "")}: {value}
-                    <button className="delete is-small" onClick={() => removeAnimationFilter(ani)}></button>
-                </span>
+                <button className="button is-small" key={i} onClick={() => handleAnimationFilter(cat, value)}>
+                    <span>{cat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/, "")}: {value}</span>
+                    <FaTimes />
+                </button>
             )
         })
 
@@ -123,27 +123,18 @@ export default function FilterSortBox(props) {
     const getDropdownItems = (cat) => {
         let items = [];
         switch(cat) {
-            case "shootingStats": items = ["Shot Close", "Shot Mid", "Shot 3pt", "Shot IQ", "Free Throw", "Offensive Consistency"]; break;
+            case "shootingStats": items = ["Shot Close", "Shot Mid", "Shot 3pt", "Free Throw", "Offensive Consistency"]; break;
             case "insideStats": items = ["Driving Layup", "Standing Dunk", "Driving Dunk", "Draw Foul", "Post Moves", "Post Hook", "Post Fade", "Hands"]; break;
-            case "playmakingStats": items = ["Speed With Ball", "Ball Handle", "Passing Accuracy", "Passing Vision", "Passing IQ"]; break;
+            case "playmakingStats": items = ["Speed With Ball", "Ball Handle", "Passing Accuracy", "Passing Vision"]; break;
             case "athleticismStats": items = ["Speed", "Acceleration", "Vertical", "Strength", "Stamina", "Hustle"]; break;
             case "defenseStats": items = [
                 "Interior Defense", "Perimeter Defense", "Help Defense IQ", "Lateral Quickness", "Pass Perception", "Steal", "Block", "Defensive Consistency"
             ]; break;
             case "reboundStats": items = ["Offensive Rebound", "Defensive Rebound"]; break;
-            case "potentialStats": items = ["Intangibles", "Potential"]; break;
-            case "insideT": items = [
-                "Standing Dunk T", "Driving Dunk T", "Flashy Dunk T", "Alley Oop T", "Putback Dunk T", "Crash T", "Driving Layup T", "Spin Layup T", "Hop Step Layup T", 
-                "Euro Step Layup T", "Floater T"
-            ]; break;
-            case "shootingT": items = [
-                "Step Through Shot T", "Shot Under Basket T", "Shot Close T", "Shot Mid T", "Shot 3pt T", "Spot Up Shot 3pt T", "Off Screen Shot 3pt T", "Contested Jumper Mid T", 
-                "Contested Jumper 3pt T", "Stepback Jumper Mid T", "Stepback Jumper 3pt T", "Spin Jumper T", "Transition Pull Up 3pt T", "Drive Pull Up 3pt T", "Drive Pull Up Mid T",
-                "Use Glass"
-            ]; break;
-            case "driveT": items = ["Drive", "Spot Up Drive T", "Off Screen Drive T", "Attack Strong On Drive"]; break;
+            case "insideT": items = ["Standing Dunk T", "Driving Dunk T", "Flashy Dunk T", "Alley Oop T", "Putback Dunk T", "Crash T", "Driving Layup T"]; break;
+            case "shootingT": items = ["Shot 3pt T", "Spot Up Shot 3pt T", "Off Screen Shot 3pt T", "Transition Pull Up 3pt T"]; break;
             case "defenseT": items = ["Pass Interception T", "Take Charge T", "On Ball Steal T", "Contest Shot T", "Block Shot T", "Foul T", "Hard Foul T"]; break;
-            case "freelanceT": items = ["Shoot T", "Touches T", "Roll Vs Pop T", "Transition Spot Up T", "Play Discipline T"]; break;
+            case "freelanceT": items = ["Roll Vs Pop T", "Transition Spot Up T"]; break;
             case "passingT": items = ["Flashy Pass T", "Alley Oop Pass T"]; break;
         }
 
@@ -344,8 +335,8 @@ export default function FilterSortBox(props) {
                         <p className="heading">Filter By Animations: </p>
                         <div className="container is-flex">
                             <Dropdown title={animationCat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/g, "")} items={getAnimationCats()} />
-                            <SearchFilter suggestions={filterItems} handleAnimationFilter={handleAnimationFilter} animationCat={animationCat} placeholder={`Search ${animationCat.replace(/_/g, " ")} here`} />
                             {showAnimationFilters()}
+                            <SearchFilter suggestions={filterItems} handleAnimationFilter={handleAnimationFilter} animationCat={animationCat} placeholder={`Search ${animationCat.replace(/_/g, " ")} here`} />
                         </div>
                     </div>
                     <div className="column is-2-widescreen">
@@ -368,7 +359,7 @@ export default function FilterSortBox(props) {
                             </p>
                         </div>
                     </div>
-                    <div className="column is-4-widescreen">
+                    <div className="column is-3-widescreen">
                         <p className="heading">Filter By Badges: </p>
                         <Dropdown title="Finishing" items={getBadgeItems("finishing")} />
                         <Dropdown title="Shooting" items={getBadgeItems("shooting")} />
@@ -376,7 +367,7 @@ export default function FilterSortBox(props) {
                         <Dropdown title="Defensive" items={getBadgeItems("defense")} />
                     </div>
                     
-                    <div className="column is-6-widescreen is-full-mobile">
+                    <div className="column is-5-widescreen is-full-mobile">
                         <p className="heading">Sort By Stats: </p>
                         <Dropdown title="Shooting" items={getDropdownItems("shootingStats")} />
                         <Dropdown title="Inside Scoring" items={getDropdownItems("insideStats")} />
@@ -384,17 +375,23 @@ export default function FilterSortBox(props) {
                         <Dropdown title="Athleticism" items={getDropdownItems("athleticismStats")} />
                         <Dropdown title="Defense" items={getDropdownItems("defenseStats")} />
                         <Dropdown title="Rebound" items={getDropdownItems("reboundStats")} />
-                        <Dropdown title="Potential" items={getDropdownItems("potentialStats")} />
                     </div>
-                    <div className="column is-6-widescreen is-full-mobile">
+                    <div className="column is-4-widescreen is-full-mobile">
                         <p className="heading">Sort By Tendencies: </p>
-                        <Dropdown title="Inside T" items={getDropdownItems("insideT")} />
-                        <Dropdown title="Shooting T" items={getDropdownItems("shootingT")} />
-                        <Dropdown title="Drive T" items={getDropdownItems("driveT")} />
-                        <Dropdown title="Defense T" items={getDropdownItems("defenseT")} />
-                        <Dropdown title="Freelance T" items={getDropdownItems("freelanceT")} />
-                        <Dropdown title="Passing T" items={getDropdownItems("passingT")} />
+                        <Dropdown title="Inside" items={getDropdownItems("insideT")} />
+                        <Dropdown title="Shooting" items={getDropdownItems("shootingT")} />
+                        <Dropdown title="Defense" items={getDropdownItems("defenseT")} />
+                        <Dropdown title="Freelance" items={getDropdownItems("freelanceT")} />
+                        <Dropdown title="Passing" items={getDropdownItems("passingT")} />
                     </div>
+                    <div className="column is-3-widescreen is-full-mobile">
+                        <p className="heading">Sort By Misc: </p>
+                        <button className={`button is-small`} onClick={() => handleSort("date")}>By Date</button>
+                    </div>
+                    {/* <div className="column is-3-widescreen is-full-mobile">
+                        <p className="heading">Filter By Misc: </p>
+                        
+                    </div> */}
                 </div>
             </div>
         </div>

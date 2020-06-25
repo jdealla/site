@@ -4,17 +4,17 @@ import { formatName, ratingColor } from "../lib/helpers";
 export default function Attributes(props) {
     const { attributes, attrName, evoStats, duoStats, reverse, } = props;
 
-    const renderBonusStats = (key) => {
+    const renderBonusStats = (baseStat, key) => {
         if ((evoStats != undefined || evoStats != null) && (duoStats != undefined || duoStats != null)) {
             if (evoStats !== "" && duoStats !== "") {
                 if (evoStats[key] !== 0 || duoStats[key] !== 0)
-                    return <span className="tag has-text-success">{`+${evoStats[key] + duoStats[key]}`}</span>
+                    return <span className="tag has-text-success">{`+${(evoStats[key] + duoStats[key] > 99) ? (99 - baseStat) : (evoStats[key] + duoStats[key])}`}</span>
             } else if (evoStats !== "" && duoStats === "") {
                 if (evoStats[key] !== 0)
-                    return <span className="tag has-text-success">{`+${evoStats[key]}`}</span>
+                    return <span className="tag has-text-success">{`+${(evoStats[key] > 99) ? (99 - baseStat) : evoStats[key]}`}</span>
             } else if (duoStats !== "" && evoStats === "") {
                 if (duoStats[key] !== 0)
-                    return <span className="tag has-text-success">{`+${duoStats[key]}`}</span>
+                    return <span className="tag has-text-success">{`+${(duoStats[key] > 99) ? (99 - baseStat) : duoStats[key]}`}</span>
             }
         }   
         return ""
@@ -49,7 +49,7 @@ export default function Attributes(props) {
                 <div className="tags has-addons is-marginless" key={i++} style={{ flex: "0 0 75%" }}>
                     {renderStat(value, key)}
                     <span className="tag">{formatName(key)}</span>
-                    {renderBonusStats(key)}
+                    {renderBonusStats(value, key)}
                 </div>
             )
             tags.push(tag)
