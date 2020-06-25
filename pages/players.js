@@ -156,6 +156,7 @@ export async function getStaticProps() {
         props: {
             allPlayers,
             allAnimations
-        }
+        },
+        unstable_revalidate: 10
     }
 }

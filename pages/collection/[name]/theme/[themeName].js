@@ -69,6 +69,6 @@ export async function getStaticProps({ params }) {
             theme,
             players
         },
-        unstable_revalidate: 1
+        unstable_revalidate: 10
     }
 }

@@ -202,6 +202,6 @@ export async function getStaticProps({ params }) {
             duo,
             duoPartner,
         },
-        unstable_revalidate: 1
+        unstable_revalidate: 10
     }
 }
