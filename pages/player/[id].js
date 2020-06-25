@@ -134,7 +134,7 @@ export default function Player({ playerData, altPlayers, evos, duo, duoPartner }
                 <PlayerHeader 
                     playerData={playerData} 
                     altPlayers={altPlayers} 
-                    evoStars={evos.length} 
+                    evos={evos}
                     evoLevel={evoLevel} 
                     handleEvo={handleEvo}
                     duo={duo}
