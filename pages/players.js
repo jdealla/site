@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { getAllPlayersWithAllStats, getAllAnimations } from "../lib/players";
-import { formatName, getFilterTiers } from "../lib/helpers"
+import { getFilterTiers } from "../lib/helpers"
 
 import FilterSortBox from "../components/filtersortbox";
 import PlayersList from "../components/playerslist";
+import { Router } from "next/router";
 
 export default function Players({ allPlayers, allAnimations }) {
     const [page, setPage] = useState(0)
@@ -12,6 +14,7 @@ export default function Players({ allPlayers, allAnimations }) {
     const [searchOptions, setSearchOptions] = useState({ 
         searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [] }, sortProp: "", asc: false, perPage: 15
     })
+    const router = useRouter();
 
     const handlePage = (dir) => {
         if (dir === "prev") {
@@ -23,6 +26,20 @@ export default function Players({ allPlayers, allAnimations }) {
     }
 
     const handleOptions = (options) => {
+        let { filterOptions } = options;
+
+        // let url = "/players";
+        // if (filterOptions.position.length > 0)
+        //     url += `/position/${filterOptions.position.join(",")}`
+        // if (filterOptions.overall.length > 0)
+        //     url += `/overall/${JSON.stringify(filterOptions.overall)}`
+        // if (filterOptions.badges.length > 0)
+        //     url += `/badges/${JSON.stringify(filterOptions.badges)}`
+        // if (filterOptions.animations.length > 0)
+        //     url += `/animations/${JSON.stringify(filterOptions.animations)}`
+
+        // router.push(url, undefined, { shallow: true });
+
         setSearchOptions(options);
     }
 
@@ -123,25 +140,7 @@ export default function Players({ allPlayers, allAnimations }) {
                 <div className="box">
                     <FilterSortBox allAnimations={allAnimations} searchOptions={searchOptions} handleOptions={handleOptions} />
                 </div>
-                <table className="table is-scrollable is-hoverable is-bordered is-striped" style={{ marginTop: "5px"}}>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Overall</th>
-                            <th>Position</th>
-                            <th>Off Overall</th>
-                            <th>Def Overall</th>
-                            <th>Height</th>
-                            {/* <th>Badges</th>
-                            <th>Collection</th>
-                            <th>Theme</th>
-                            <th>Team</th> */}
-                            <th className={searchOptions.sortProp === "" ? "is-hidden" : "players-sort-column"}>{formatName(searchOptions.sortProp)}</th>
-                        </tr>
-                    </thead>
-                    <PlayersList players={players.slice(page * searchOptions.perPage, (page * searchOptions.perPage) + searchOptions.perPage)} searchOptions={searchOptions} />
-                </table>
-
+                <PlayersList players={players.slice(page * searchOptions.perPage, (page * searchOptions.perPage) + searchOptions.perPage)} searchOptions={searchOptions} />
                 <div className="columns">
                     <div className="column is-full">
                         <nav className="pagination is-centered" role="navigation" aria-label="pagination">

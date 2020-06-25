@@ -217,28 +217,21 @@ export default function FilterSortBox(props) {
 
     return (
         <div className="container">
-            <div className="field">
-                <div className="control">
-                    <input className="input" value={searchOptions.searchValue} onChange={handleChange} type="text" placeholder="Search players..." />
-                </div>
-            </div>
             <div className="container">
                 <div className="columns is-mobile is-multiline">
-                    <div className="column is-2-widescreen">
-                        <button className="button is-small" onClick={() => handleSortDirection()}>
-                            {searchOptions.asc ? <FaSortAmountUp /> : <FaSortAmountDown />}
-                        </button>
-                        <Dropdown title="Players Per Page" items={getPlayerAmounts()} />
-                    </div>
-                    <div className="column is-6-widescreen">
-                        <p className="heading">Filter By Animations: </p>
+                    <div className="column is-full">
+                        <p className="heading">Search Settings: </p>
                         <div className="container is-flex">
-                            <Dropdown title={animationCat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/g, "")} items={getAnimationCats()} />
-                            <SearchFilter suggestions={filterItems} handleAnimationFilter={handleAnimationFilter} animationCat={animationCat} placeholder={`Search ${animationCat.replace(/_/g, " ")} here`} />
-                            {showAnimationFilters()}
+                            <button className="button is-small" onClick={() => handleSortDirection()}>
+                                {searchOptions.asc ? <FaSortAmountUp /> : <FaSortAmountDown />}
+                            </button>
+                            <Dropdown title="Players Per Page" items={getPlayerAmounts()} />
+                            <div className="control" style={{ width: "100%" }}>
+                                <input className="input is-small" value={searchOptions.searchValue} onChange={handleChange} type="text" placeholder="Search players..."/>
+                            </div>
                         </div>
                     </div>
-                    <div className="column is-4-widescreen">
+                    <div className="column is-4-widescreen is-full-mobile">
                         <p className="heading">Filter By Overall: </p>
                         <div className="field has-addons">
                             <p className="control">
@@ -343,6 +336,14 @@ export default function FilterSortBox(props) {
                             </p>
                         </div>
                     </div>
+                    <div className="column is-6-widescreen">
+                        <p className="heading">Filter By Animations: </p>
+                        <div className="container is-flex">
+                            <Dropdown title={animationCat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/g, "")} items={getAnimationCats()} />
+                            <SearchFilter suggestions={filterItems} handleAnimationFilter={handleAnimationFilter} animationCat={animationCat} placeholder={`Search ${animationCat.replace(/_/g, " ")} here`} />
+                            {showAnimationFilters()}
+                        </div>
+                    </div>
                     <div className="column is-2-widescreen">
                         <p className="heading">Filter By Position: </p>
                         <div className="field has-addons">
@@ -363,24 +364,25 @@ export default function FilterSortBox(props) {
                             </p>
                         </div>
                     </div>
-                    <div className="column ">
+                    <div className="column is-4-widescreen">
                         <p className="heading">Filter By Badges: </p>
-                        <Dropdown title="Finishing Badges" items={getBadgeItems("finishing")} />
-                        <Dropdown title="Shooting Badges" items={getBadgeItems("shooting")} />
-                        <Dropdown title="Playmaking Badges" items={getBadgeItems("playmaking")} />
-                        <Dropdown title="Defensive Badges" items={getBadgeItems("defense")} />
+                        <Dropdown title="Finishing" items={getBadgeItems("finishing")} />
+                        <Dropdown title="Shooting" items={getBadgeItems("shooting")} />
+                        <Dropdown title="Playmaking" items={getBadgeItems("playmaking")} />
+                        <Dropdown title="Defensive" items={getBadgeItems("defense")} />
                     </div>
-                    <div className="column is-6-widescreen">
+                    
+                    <div className="column is-6-widescreen is-full-mobile">
                         <p className="heading">Sort By Stats: </p>
                         <Dropdown title="Shooting" items={getDropdownItems("shootingStats")} />
                         <Dropdown title="Inside Scoring" items={getDropdownItems("insideStats")} />
                         <Dropdown title="Playmaking" items={getDropdownItems("playmakingStats")} />
                         <Dropdown title="Athleticism" items={getDropdownItems("athleticismStats")} />
                         <Dropdown title="Defense" items={getDropdownItems("defenseStats")} />
-                        <Dropdown title="Rebounding" items={getDropdownItems("reboundStats")} />
+                        <Dropdown title="Rebound" items={getDropdownItems("reboundStats")} />
                         <Dropdown title="Potential" items={getDropdownItems("potentialStats")} />
                     </div>
-                    <div className="column is-6-widescreen">
+                    <div className="column is-6-widescreen is-full-mobile">
                         <p className="heading">Sort By Tendencies: </p>
                         <Dropdown title="Inside T" items={getDropdownItems("insideT")} />
                         <Dropdown title="Shooting T" items={getDropdownItems("shootingT")} />
