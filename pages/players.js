@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import dynamic from "next/dynamic";
-import { getAllPlayersWithAllStats, getAllProps, getAllAnimations } from "../lib/players";
-import { formatName } from "../lib/helpers"
+import { useRouter } from "next/router";
+import { getAllPlayersWithAllStats, getAllAnimations } from "../lib/players";
+import { getFilterTiers } from "../lib/helpers"
 
-const FilterSortBox = dynamic(import("../components/filtersortbox"));
-const PlayersList = dynamic(import("../components/playerslist"));
+import FilterSortBox from "../components/filtersortbox";
+import PlayersList from "../components/playerslist";
+import { Router } from "next/router";
 
-export default function Players({ allPlayers, allProps, allAnimations }) {
+export default function Players({ allPlayers, allAnimations }) {
     const [page, setPage] = useState(0)
     const [players, setPlayers] = useState(allPlayers);
     const [searchOptions, setSearchOptions] = useState({ 
-        searchValue: "", direction: "", innerCat: "", filterCat: "", filterProp: "", filterValue: "", sortCat: "", sortProp: "", sortValue: "" 
+        searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [] }, sortProp: "", asc: false, perPage: 15
     })
+    const router = useRouter();
 
     const handlePage = (dir) => {
         if (dir === "prev") {
@@ -24,57 +26,106 @@ export default function Players({ allPlayers, allProps, allAnimations }) {
     }
 
     const handleOptions = (options) => {
+        let { filterOptions } = options;
+
+        // let url = "/players";
+        // if (filterOptions.position.length > 0)
+        //     url += `/position/${filterOptions.position.join(",")}`
+        // if (filterOptions.overall.length > 0)
+        //     url += `/overall/${JSON.stringify(filterOptions.overall)}`
+        // if (filterOptions.badges.length > 0)
+        //     url += `/badges/${JSON.stringify(filterOptions.badges)}`
+        // if (filterOptions.animations.length > 0)
+        //     url += `/animations/${JSON.stringify(filterOptions.animations)}`
+
+        // router.push(url, undefined, { shallow: true });
+
         setSearchOptions(options);
     }
 
     useEffect(() => {
         console.log(searchOptions);
-        const { searchValue, innerCat, filterCat, filterProp, filterValue, sortCat, sortProp, sortValue} = searchOptions;
+        const { searchValue, filterOptions, sortProp, asc} = searchOptions;
 
-        let filtered = allPlayers.filter(player => player.info.name.toLowerCase().includes(searchValue));
+        let filtered = allPlayers
 
-        if (filterCat === "info" && filterProp === "overall" ) {
+        if (filterOptions.overall.length > 0) {
+            const tiers = getFilterTiers(filterOptions.overall);
             filtered = filtered.filter(player => {
-                let tierStart = 0;
-                let tierEnd = 0;
-                switch(filterValue) {
-                    case "bronze": tierStart = 68; tierEnd = 69; break;
-                    case "silver": tierStart = 70; tierEnd = 75; break;
-                    case "gold": tierStart = 76; tierEnd = 79; break;
-                    case "emerald": tierStart = 80; tierEnd = 83; break;
-                    case "sapphire": tierStart = 84; tierEnd = 86; break;
-                    case "ruby": tierStart = 87; tierEnd = 89; break;
-                    case "amethyst": tierStart = 90; tierEnd = 92; break;
-                    case "diamond": tierStart = 93; tierEnd = 95; break;
-                    case "pink diamond": tierStart = 96; tierEnd = 98; break;
-                    case "galaxy opal": tierStart = tierEnd = 99; break;
+                for(const tier of tiers) {
+                    if (player.overall >= tier[0] && player.overall <= tier[1])
+                        return true;
                 }
-                return (player.info.overall >= tierStart) && (player.info.overall <= tierEnd);
             })
-        } else if (filterProp != "" && filterValue != "") {
-            if (innerCat != "") {
-                filtered = filtered.filter(player => player[filterCat][innerCat][filterProp] === filterValue)
-            } else {
-                filtered = filtered.filter(player => player[filterCat][filterProp] === filterValue);
-            }
         }
 
-        if (sortProp != "" && sortValue != "") {
-            filtered = filtered.sort((a, b) => {
-                if (a[sortCat][sortProp][sortValue] > b[sortCat][sortProp][sortValue])
-                    return -1;
-                else if (a[sortCat][sortProp][sortValue] === b[sortCat][sortProp][sortValue]) {
-                    if (a.info.overall > b.info.overall) {
-                        return -1;
-                    } else if (a.info.overall === b.info.overall) {
-                        if (a.info.name > b.info.name)
-                            return 1;
-                        else return -1;
-                    } else return 1;
-                } else
-                    return 1;        
+        if (filterOptions.position.length > 0) {
+            filtered = filtered.filter(player => {
+                for(const value of filterOptions.position) {
+                    if (player.position === value)
+                        return true;
+                }
             })
         }
+
+        if (filterOptions.badges.length > 0) {
+            filtered = filtered.filter(player => {
+                let check = [];
+                for(let badge of filterOptions.badges) {
+                    let temp = badge.split("-");
+                    let [name, level] = temp;
+                    
+                    if (player[name] == level)
+                        check.push(true);
+                    else
+                        check.push(false);
+                }
+
+                if (!check.includes(false))
+                    return true;
+            })
+        }
+
+        if (filterOptions.animations.length > 0) {
+            filtered = filtered.filter(player => {
+                let check = [];
+                for(let animation of filterOptions.animations) {
+                    let temp = animation.split("-");
+                    let [cat, value] = temp;
+                    
+                    if (player[cat] === value || (cat === "size_up_packages" && player["size-up_packages"] === value)) 
+                        check.push(true);
+                }
+
+                if (check.includes(true))
+                    return true;
+            })
+        }
+
+        if (sortProp !== "") {
+            filtered = filtered.sort((a, b) => {
+                if (a[sortProp] > b[sortProp])
+                    return asc ? 1: -1;
+                else if (a[sortProp] === b[sortProp]) {
+                    if (a.overall > b.overall) {
+                        return -1;
+                    } else if (a.overall === b.overall) {
+                        if (a.name > b.name)
+                            return 1;
+                        else
+                            return -1;
+                    } else {
+                        return 1;
+                    }
+                } else {
+                    return asc ? -1 : 1;
+                }
+            })
+        }
+
+        //filter by name value
+        filtered = filtered.filter(player => player.name.toLowerCase().includes(searchValue));
+
         setPlayers(filtered);
     }, [searchOptions])
 
@@ -87,29 +138,17 @@ export default function Players({ allPlayers, allProps, allAnimations }) {
             </Head>
             <div className="container">
                 <div className="box">
-                    <FilterSortBox allProps={allProps} allAnimations={allAnimations} searchOptions={searchOptions} handleOptions={handleOptions} />
+                    <FilterSortBox allAnimations={allAnimations} searchOptions={searchOptions} handleOptions={handleOptions} />
                 </div>
-                <table className="table is-scrollable is-hoverable is-bordered is-striped" style={{ marginTop: "5px"}}>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Overall</th>
-                            <th>Position</th>
-                            <th>Off Overall</th>
-                            <th>Def Overall</th>
-                            <th>Height</th>
-                            <th>Badges</th>
-                            <th className={searchOptions.sortProp == "" ? "is-hidden" : "players-sort-column"}>{formatName(searchOptions.sortValue)}</th>
-                        </tr>
-                    </thead>
-                    <PlayersList players={players} page={page} searchOptions={searchOptions} />
-                </table>
-
+                <PlayersList players={players.slice(page * searchOptions.perPage, (page * searchOptions.perPage) + searchOptions.perPage)} searchOptions={searchOptions} />
                 <div className="columns">
                     <div className="column is-full">
                         <nav className="pagination is-centered" role="navigation" aria-label="pagination">
                             <a className="pagination-previous" onClick={() => handlePage("prev")} disabled={page <= 0}>Previous</a>
-                            <a className="pagination-next" onClick={() => handlePage("next")} disabled={page * 15 >= players.length}>Next page</a>
+                            <ul className="pagination-list">
+                                <li><p className="pagination-link" aria-label="total-players">Total Players: {players.length}</p></li>
+                            </ul>
+                            <a className="pagination-next" onClick={() => handlePage("next")} disabled={page * searchOptions.perPage >= players.length}>Next page</a>
                         </nav>
                     </div>
                 </div>
@@ -119,23 +158,15 @@ export default function Players({ allPlayers, allProps, allAnimations }) {
 }
 
 export async function getStaticProps() {
-    console.time("allPlayersStats");
-
     const allPlayers = await getAllPlayersWithAllStats()
                             .catch(console.error);
-    
-    console.timeEnd("allPlayersStats");
-
-    const allProps = getAllProps(allPlayers[0]);
 
     const allAnimations = getAllAnimations(allPlayers);
 
     return {
         props: {
             allPlayers,
-            allProps,
             allAnimations
-        },
-        unstable_revalidate: 1
+        }
     }
 }

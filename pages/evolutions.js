@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import Head from "next/head";
 import { getAllEvos } from "../lib/evos";
 
-import EvosCardView from "../components/evoscardview";
-
 export default function Evolutions({ players }) {
     const [page, setPage] = useState(0);
 
@@ -24,26 +22,14 @@ export default function Evolutions({ players }) {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <div className="container">
-                <EvosCardView players={players} page={page} />
-
-                <div className="columns">
-                    <div className="column is-full">
-                        <nav className="pagination is-centered" role="navigation" aria-label="pagination">
-                            <a className="pagination-previous" onClick={() => handlePage("prev")} disabled={page <= 0}>Previous</a>
-                            <a className="pagination-next" onClick={() => handlePage("next")} disabled={page * 18 >= players.length}>Next page</a>
-                        </nav>
-                    </div>
-                </div>
             </div>
         </>
     )
 }
 
 export async function getStaticProps() {
-    // const players = await getAllEvos()
-    //                       .catch(console.error)
-
-    const players = [];
+    const players = await getAllEvos()
+                          .catch(console.error)
     
     return {
       props: {

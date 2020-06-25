@@ -1,167 +1,243 @@
 import React, { useState, useEffect } from "react";
-import { formatName } from "../lib/helpers";
-
+import { FaSortAmountDown, FaSortAmountUp } from "react-icons/fa";
 import Dropdown from "./dropdown";
 import SearchFilter from "./searchfilter";
 
 export default function FilterSortBox(props) {
-    const { allProps, allAnimations, searchOptions, handleOptions, } = props;
-    const [filterCat, setFilterCat] = useState({ cat: "lower base", innerCat: "shooting" });
-    const [filterItems, setFilterItems] = useState(allAnimations.shooting.lower_base_a)
+    const { allAnimations, searchOptions, handleOptions, } = props;
+    const [animationCat, setAnimationCat] = useState("lower_base_a");
+    const [filterItems, setFilterItems] = useState(allAnimations.lower_base_a)
 
     useEffect(() => {
-        setFilterItems(allAnimations[filterCat.innerCat][filterCat.cat.replace(/ /g, "_") + "_a"])
-    }, [filterCat])
+        setFilterItems(allAnimations[animationCat]);
+    }, [animationCat])
 
-    const handleFilterCat = (cat, innerCat) => {
-        setFilterCat({ cat: cat, innerCat: innerCat })
+    const handleAnimationCat = (cat) => setAnimationCat(cat);
+    const handleChange = (e) => handleOptions({ ...searchOptions, searchValue: e.target.value });
+    const handlePerPage = (num) => handleOptions({ ...searchOptions, perPage: num });
+    const handleSortDirection = () => handleOptions({ ...searchOptions, asc: !searchOptions.asc });
+
+    const handleFilter = (prop, value="") => {
+        const { filterOptions } = searchOptions;
+        let values = filterOptions[prop];
+
+        if (filterOptions[prop].indexOf(value) === -1) {
+            values.push(value);
+        } else {
+            values = values.filter(item => item !== value);
+        }
+
+        handleOptions({ ...searchOptions, filterOptions: { ...filterOptions, [prop]: values } });
     }
 
-    const handleChange = (e) => handleOptions({...searchOptions, searchValue: e.target.value })
+    const handleSort = (prop) => {
+        const { sortProp } = searchOptions;
+        let newProp = prop;
 
-    const handleFilter = (cat, prop, value="", innerCat="") => {
-        if (searchOptions.filterValue === value) {
-            handleOptions({ ...searchOptions, filterCat: "", filterProp: "", filterValue: "", innerCat: "" })
-        } else {
-            handleOptions({ ...searchOptions, filterCat: cat, filterProp: prop, filterValue: value, innerCat: innerCat })
-        }
+        if (sortProp === prop)
+        newProp = "";
+
+        handleOptions({ ...searchOptions, sortProp: newProp });
     }
 
-    const handleSort = (cat, prop, value) => {
-        if (searchOptions.sortValue === value && searchOptions.sortProp === prop) {
-            handleOptions({ ...searchOptions, sortCat: "", sortProp: "", sortValue: value, innerCat: "" })
-        } else {
-            handleOptions({ ...searchOptions, sortCat: cat, sortProp: prop, sortValue: value, innerCat: "" })
+    const handleBadgeFilter = (value) => {
+        const { filterOptions } = searchOptions;
+        let values = filterOptions.badges;
+
+        if (values.length === 0)
+            values.push(value + "-Bronze");
+        else {
+            let targetIndex = values.findIndex(badge => badge.split("-")[0] === value.toLowerCase().replace(/ /g, "_"));
+
+            if (targetIndex === -1) {
+                values.push(value + "-Bronze");
+            } else {
+                let level = values[targetIndex].split("-")[1];
+                
+                switch(level) {
+                    case "Bronze": values[targetIndex] = value + "-Silver"; break;
+                    case "Silver": values[targetIndex] = value + "-Gold"; break;
+                    case "Gold": values[targetIndex] = value + "-HOF"; break;
+                    case "HOF": values.splice(targetIndex, 1);
+                }
+            }
         }
+
+        handleOptions({ ...searchOptions, filterOptions: { ...filterOptions, badges: values } })
+    }
+
+    const handleAnimationFilter = (cat, value) => {
+        const { filterOptions } = searchOptions;
+        let animations = filterOptions.animations;
+        let newFilter = cat + "-" + value;
+
+        let targetIndex = animations.findIndex(ani => ani === newFilter);
+
+        if (targetIndex === -1) {
+            animations.push(newFilter);
+        } else {
+            animations.splice(targetIndex, 1);
+        }
+
+        handleOptions({ ...searchOptions, filterOptions: { ...filterOptions, animations: animations }})
     }
 
     const getAnimationCats = () => {
-        let cats = [
-            "Lower Base", "Upper Release", "Dribble Style", "Size Up Packages", "Moving Crossover", "Moving Behind The Back", 
-            "Moving Hesitation", "Moving Spin", "Triple Threat Style", "Layup Package", "Post Fade", "Post Hook"
-        ];
-
-        return cats.map((cat, i) => {
-            let innerCat = ""
-            switch(cat) {
-                case "Lower Base": innerCat = "shooting"; break;
-                case "Upper Release": innerCat = "shooting"; break;
-                case "Dribble Style": innerCat = "ballhandle"; break;
-                case "Size Up Packages": innerCat = "ballhandle"; break;
-                case "Moving Crossover": innerCat = "ballhandle"; break;
-                case "Moving Behind The Back": innerCat = "ballhandle"; break;
-                case "Moving Hesitation": innerCat = "ballhandle"; break;
-                case "Moving Spin": innerCat = "ballhandle"; break;
-                case "Triple Threat Style": innerCat = "ballhandle"; break;
-                case "Layup Package": innerCat = "layup"; break;
-                case "Post Fade": innerCat = "post"; break;
-                case "Post Hook": innerCat = "post"; break;
-            }
-
+        return Object.keys(allAnimations).map((cat, i) => {
             return (
-                <a className="dropdown-item" key={i} onClick={() => handleFilterCat(cat.toLowerCase(), innerCat)}>
-                    {cat}
+                <a className="dropdown-item" key={i} onClick={() => handleAnimationCat(cat)}>
+                    {cat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/g, "")}
                 </a>
-            )}
+            )
+        })
+    }
+
+    const removeAnimationFilter = (animation) => {
+        let animations = searchOptions.filterOptions.animations;
+        let targetIndex = animations.findIndex(ani => ani === animation);
+
+        if (targetIndex !== -1) {
+            animations.splice(targetIndex, 1);
+            handleOptions({ ...searchOptions, filterOptions: { ...searchOptions.filterOptions, animations: animations } });
+        }
+    }
+
+    const showAnimationFilters = () => {
+        let filters = searchOptions.filterOptions.animations.map((ani, i) => {
+            let [cat, value] = ani.split("-");
+            return (
+                <span className="tag" key={i}>
+                    {cat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/, "")}: {value}
+                    <button className="delete is-small" onClick={() => removeAnimationFilter(ani)}></button>
+                </span>
+            )
+        })
+
+        return (
+            <div className="tags">
+                {filters}
+            </div>
         )
     }
 
     const getDropdownItems = (cat) => {
+        let items = [];
         switch(cat) {
-            case "shootingStats": return allProps.stats.shooting.map((stat, i) =>
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("stats", "shooting", stat)}>
-                    {formatName(stat)}
-                </a>)
-            )
-            case "insideStats": return allProps.stats.inside.map((stat, i) =>
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("stats", "inside", stat)}>
-                    {formatName(stat)}
-                </a>)
-            )
-            case "athleticismStats": return allProps.stats.athleticism.map((stat, i) =>
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("stats", "athleticism", stat)}>
-                    {formatName(stat)}
-                </a>)
-            )
-            case "playmakingStats": return allProps.stats.playmaking.map((stat, i) =>
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("stats", "playmaking", stat)}>
-                    {formatName(stat)}
-                </a>)
-            )
-            case "defenseStats": return allProps.stats.defense.map((stat, i) =>
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("stats", "defense", stat)}>
-                    {formatName(stat)}
-                </a>)
-            )
-            case "reboundStats": return allProps.stats.rebound.map((stat, i) =>
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("stats", "rebound", stat)}>
-                    {formatName(stat)}
-                </a>)
-            )
-            case "potentialStats": return allProps.stats.potential.map((stat, i) =>
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("stats", "potential", stat)}>
-                    {formatName(stat)}
-                </a>)
-            )
-            case "insideT": return allProps.tendencies.inside.map((tend, i) => 
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("tendencies", "inside", tend)}>
-                    {formatName(tend)}
-                </a>)
-            );
-            case "shootingT": return allProps.tendencies.shooting.map((tend, i) => 
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("tendencies", "shooting", tend)}>
-                    {formatName(tend)}
-                </a>)
-            );
-            case "isoT": return allProps.tendencies.iso.map((tend, i) => 
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("tendencies", "iso", tend)}>
-                    {formatName(tend)}
-                </a>)
-            );
-            case "driveT": return allProps.tendencies.drive.map((tend, i) => 
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("tendencies", "drive", tend)}>
-                    {formatName(tend)}
-                </a>)
-            );
-            case "freelanceT": return allProps.tendencies.freelance.map((tend, i) => 
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("tendencies", "freelance", tend)}>
-                    {formatName(tend)}
-                </a>)
-            );
-            case "postT": return allProps.tendencies.post.map((tend, i) => 
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("tendencies", "post", tend)}>
-                    {formatName(tend)}
-                </a>)
-            );
-            case "passingT": return allProps.tendencies.passing.map((tend, i) => 
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("tendencies", "passing", tend)}>
-                    {formatName(tend)}
-                </a>)
-            );
-            case "defenseT": return allProps.tendencies.defense.map((tend, i) => 
-                (<a className="dropdown-item" key={i} onClick={() => handleSort("tendencies", "defense", tend)}>
-                    {formatName(tend)}
-                </a>)
-            );
+            case "shootingStats": items = ["Shot Close", "Shot Mid", "Shot 3pt", "Shot IQ", "Free Throw", "Offensive Consistency"]; break;
+            case "insideStats": items = ["Driving Layup", "Standing Dunk", "Driving Dunk", "Draw Foul", "Post Moves", "Post Hook", "Post Fade", "Hands"]; break;
+            case "playmakingStats": items = ["Speed With Ball", "Ball Handle", "Passing Accuracy", "Passing Vision", "Passing IQ"]; break;
+            case "athleticismStats": items = ["Speed", "Acceleration", "Vertical", "Strength", "Stamina", "Hustle"]; break;
+            case "defenseStats": items = [
+                "Interior Defense", "Perimeter Defense", "Help Defense IQ", "Lateral Quickness", "Pass Perception", "Steal", "Block", "Defensive Consistency"
+            ]; break;
+            case "reboundStats": items = ["Offensive Rebound", "Defensive Rebound"]; break;
+            case "potentialStats": items = ["Intangibles", "Potential"]; break;
+            case "insideT": items = [
+                "Standing Dunk T", "Driving Dunk T", "Flashy Dunk T", "Alley Oop T", "Putback Dunk T", "Crash T", "Driving Layup T", "Spin Layup T", "Hop Step Layup T", 
+                "Euro Step Layup T", "Floater T"
+            ]; break;
+            case "shootingT": items = [
+                "Step Through Shot T", "Shot Under Basket T", "Shot Close T", "Shot Mid T", "Shot 3pt T", "Spot Up Shot 3pt T", "Off Screen Shot 3pt T", "Contested Jumper Mid T", 
+                "Contested Jumper 3pt T", "Stepback Jumper Mid T", "Stepback Jumper 3pt T", "Spin Jumper T", "Transition Pull Up 3pt T", "Drive Pull Up 3pt T", "Drive Pull Up Mid T",
+                "Use Glass"
+            ]; break;
+            case "driveT": items = ["Drive", "Spot Up Drive T", "Off Screen Drive T", "Attack Strong On Drive"]; break;
+            case "defenseT": items = ["Pass Interception T", "Take Charge T", "On Ball Steal T", "Contest Shot T", "Block Shot T", "Foul T", "Hard Foul T"]; break;
+            case "freelanceT": items = ["Shoot T", "Touches T", "Roll Vs Pop T", "Transition Spot Up T", "Play Discipline T"]; break;
+            case "passingT": items = ["Flashy Pass T", "Alley Oop Pass T"]; break;
         }
+
+        return items.map((stat, i) => (
+            <a 
+                key={i} 
+                className={`dropdown-item ${searchOptions.sortProp === stat.toLowerCase().replace(/ /g, "_") ? "is-active" : ""}`} 
+                onClick={() => handleSort(stat.toLowerCase().replace(/ /g, "_"))}
+            >
+                {stat}
+            </a>
+        ));
+    }
+
+    const getBadgeItems = (cat) => {
+        let items = []
+        switch(cat) {
+            case "finishing": items = [
+                "Acrobat", "Backdown Punisher", "Consistent Finisher", "Contact Finisher", "Cross Key Scorer", "Deep Hooks", "Dropstepper", "Fancy Footwork",
+                "Fastbreak Finisher", "Giant Slayer", "Lob City Finisher", "Pick And Roller", "Pro Touch", "Putback Boss", "Relentless Finisher", "Showtime",
+                "Slithery Finisher", "Tear Dropper"
+            ]; break;
+            case "shooting": items = [
+                "Catch And Shoot", "Clutch Shooter", "Corner Specialist", "Deadeye", "Deep Fades", "Difficult Shots", "Flexible Release", "Green Machine",
+                "Hot Start", "Hot Zone Hunter", "Ice In Veins", "Pick And Popper", "Pump Fake Maestro", "Quick Draw", "Range Extender", "Slippery Off Ball",
+                "Steady Shooter", "Tireless Shooter", "Volume Shooter"
+            ]; break;
+            case "playmaking": items = [
+                "Ankle Breaker", "Bail Out", "Break Starter", "Dimer", "Downhill", "Dream Shake", "Flashy Passer", "Floor General", "Handles For Days", "Lob City Passer",
+                "Needle Threader", "Pass Fake Maestro", "Post Spin Technician", "Quick First Step", "Space Creator", "Stop And Go", "Tight Handles", "Unpluckable"
+            ]; break;
+            case "defense": items = [
+                "Box", "Brick Wall", "Chase Down Artist", "Clamps", "Defensive Leader", "Heart Crusher", "Interceptor", "Intimidator", "Lightning Reflexes", "Moving Truck",
+                "Off Ball Pest", "Pick Pocket", "Pogo Stick", "Post Move Lockdown", "Rebound Chaser", "Rim Protector", "Tireless Defender", "Trapper", "Worm"
+            ]; break;
+        }
+
+        return items.map((item, i) => {
+            let formatted = item.toLowerCase().replace(/ /g, "_");
+            let badge = searchOptions.filterOptions.badges.find(badge => {
+                let name = badge.split("-")[0];
+                return formatted === name;
+            })
+
+            let level = (badge) ? badge.split("-")[1] : "";
+
+            return (
+                <a
+                    key={i}
+                    className={`dropdown-item ${searchOptions.filterOptions.badges.includes(badge) ? `is-${level}` : ""}`}
+                    onClick={() => handleBadgeFilter(formatted)}
+                >
+                    {item}
+                </a>
+            )
+        })
+    }
+
+    const getPlayerAmounts = () => {
+        let amount = [15, 20, 30, 40, 50];
+        return amount.map((num, i) => (
+            <a 
+                key={i} 
+                className={`dropdown-item ${searchOptions.perPage === num ? "is-active" : ""}`} 
+                onClick={() => handlePerPage(num)}
+            >
+                {num}
+            </a>
+        ));
     }
 
     return (
         <div className="container">
-            <div className="field">
-                <div className="control">
-                    <input className="input" value={searchOptions.searchValue} onChange={handleChange} type="text" placeholder="Search players..." />
-                </div>
-            </div>
             <div className="container">
                 <div className="columns is-mobile is-multiline">
-                    <div className="column is-4-widescreen">
+                    <div className="column is-full">
+                        <p className="heading">Search Settings: </p>
+                        <div className="container is-flex">
+                            <button className="button is-small" onClick={() => handleSortDirection()}>
+                                {searchOptions.asc ? <FaSortAmountUp /> : <FaSortAmountDown />}
+                            </button>
+                            <Dropdown title="Players Per Page" items={getPlayerAmounts()} />
+                            <div className="control" style={{ width: "100%" }}>
+                                <input className="input is-small" value={searchOptions.searchValue} onChange={handleChange} type="text" placeholder="Search players..."/>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="column is-4-widescreen is-full-mobile">
                         <p className="heading">Filter By Overall: </p>
                         <div className="field has-addons">
                             <p className="control">
                                 <button 
-                                    className={`button is-small ${searchOptions.filterValue === "bronze" ? "is-active filter-button-active" : ""}`} 
-                                    onClick={() => handleFilter("info", "overall", "bronze")}
+                                    className={`button is-small ${searchOptions.filterOptions.overall.includes("bronze") ? "is-active filter-button-active" : ""}`} 
+                                    onClick={() => handleFilter("overall", "bronze")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #B2725C)` }}>
                                         <img src={`https://2kdbimg.com/16/icon_bronze.png`} />
@@ -170,8 +246,8 @@ export default function FilterSortBox(props) {
                             </p>
                             <p className="control">
                                 <button 
-                                    className={`button is-small ${searchOptions.filterValue === "silver" ? "is-active filter-button-active" : ""}`}
-                                    onClick={() => handleFilter("info", "overall", "silver")}
+                                    className={`button is-small ${searchOptions.filterOptions.overall.includes("silver") ? "is-active filter-button-active" : ""}`}
+                                    onClick={() => handleFilter("overall", "silver")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #9A9A9A)` }}>
                                         <img src={`https://2kdbimg.com/16/icon_silver.png`} />
@@ -180,8 +256,8 @@ export default function FilterSortBox(props) {
                             </p>
                             <p className="control">
                                 <button 
-                                    className={`button is-small ${searchOptions.filterValue === "gold" ? "is-active filter-button-active" : ""}`}
-                                    onClick={() => handleFilter("info", "overall", "gold")}
+                                    className={`button is-small ${searchOptions.filterOptions.overall.includes("gold") ? "is-active filter-button-active" : ""}`}
+                                    onClick={() => handleFilter("overall", "gold")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #EBE513)` }}>
                                         <img src={`https://2kdbimg.com/16/icon_gold.png`} />
@@ -190,8 +266,8 @@ export default function FilterSortBox(props) {
                             </p>
                             <p className="control">
                                 <button 
-                                    className={`button is-small ${searchOptions.filterValue === "emerald" ? "is-active filter-button-active" : ""}`}
-                                    onClick={() => handleFilter("info", "overall", "emerald")}
+                                    className={`button is-small ${searchOptions.filterOptions.overall.includes("emerald") ? "is-active filter-button-active" : ""}`}
+                                    onClick={() => handleFilter("overall", "emerald")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #5AC573)` }}>
                                         <img src={`https://2kdbimg.com/16/icon_emerald.png`} />
@@ -200,8 +276,8 @@ export default function FilterSortBox(props) {
                             </p>
                             <p className="control">
                                 <button 
-                                    className={`button is-small ${searchOptions.filterValue === "sapphire" ? "is-active filter-button-active" : ""}`}
-                                    onClick={() => handleFilter("info", "overall", "sapphire")}
+                                    className={`button is-small ${searchOptions.filterOptions.overall.includes("sapphire") ? "is-active filter-button-active" : ""}`}
+                                    onClick={() => handleFilter("overall", "sapphire")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #498AE8)` }}>
                                         <img src={`https://2kdbimg.com/16/icon_sapphire.png`} />
@@ -210,8 +286,8 @@ export default function FilterSortBox(props) {
                             </p>
                             <p className="control">
                                 <button 
-                                    className={`button is-small ${searchOptions.filterValue === "ruby" ? "is-active filter-button-active" : ""}`}
-                                    onClick={() => handleFilter("info", "overall", "ruby")}
+                                    className={`button is-small ${searchOptions.filterOptions.overall.includes("ruby") ? "is-active filter-button-active" : ""}`}
+                                    onClick={() => handleFilter("overall", "ruby")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #EF5A5D)` }}>
                                         <img src={`https://2kdbimg.com/16/icon_ruby.png`} />
@@ -220,8 +296,8 @@ export default function FilterSortBox(props) {
                             </p>
                             <p className="control">
                                 <button 
-                                    className={`button is-small ${searchOptions.filterValue === "amethyst" ? "is-active filter-button-active" : ""}`}
-                                    onClick={() => handleFilter("info", "overall", "amethyst")}
+                                    className={`button is-small ${searchOptions.filterOptions.overall.includes("amethyst") ? "is-active filter-button-active" : ""}`}
+                                    onClick={() => handleFilter("overall", "amethyst")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #CF67D7)` }}>
                                         <img src={`https://2kdbimg.com/16/icon_amethyst.png`} />
@@ -230,8 +306,8 @@ export default function FilterSortBox(props) {
                             </p>
                             <p className="control">
                                 <button 
-                                    className={`button is-small ${searchOptions.filterValue === "diamond" ? "is-active filter-button-active" : ""}`}
-                                    onClick={() => handleFilter("info", "overall", "diamond")}
+                                    className={`button is-small ${searchOptions.filterOptions.overall.includes("diamond") ? "is-active filter-button-active" : ""}`}
+                                    onClick={() => handleFilter("overall", "diamond")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #22D2F2)` }}>
                                         <img src={`https://2kdbimg.com/16/icon_diamond.png`} />
@@ -240,8 +316,8 @@ export default function FilterSortBox(props) {
                             </p>
                             <p className="control">
                                 <button 
-                                    className={`button is-small ${searchOptions.filterValue === "pink diamond" ? "is-active filter-button-active" : ""}`}
-                                    onClick={() => handleFilter("info", "overall", "pink diamond")}
+                                    className={`button is-small ${searchOptions.filterOptions.overall.includes("pink diamond") ? "is-active filter-button-active" : ""}`}
+                                    onClick={() => handleFilter("overall", "pink diamond")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #FF96DF)` }}>
                                         <img src={`https://2kdbimg.com/16/icon_pink_diamond.png`} />
@@ -250,8 +326,8 @@ export default function FilterSortBox(props) {
                             </p>
                             <p className="control">
                                 <button 
-                                    className={`button is-small ${searchOptions.filterValue === "galaxy opal" ? "is-active filter-button-active" : ""}`}
-                                    onClick={() => handleFilter("info", "overall", "galaxy opal")}
+                                    className={`button is-small ${searchOptions.filterOptions.overall.includes("galaxy opal") ? "is-active filter-button-active" : ""}`}
+                                    onClick={() => handleFilter("overall", "galaxy opal")}
                                 >
                                     <figure className={`image is-16`} style={{ filter: `drop-shadow(0px 0px 1px #D389D7)` }}>
                                         <img src={`https://2kdbimg.com/16/icon_galaxy_opal.png`} />
@@ -260,57 +336,60 @@ export default function FilterSortBox(props) {
                             </p>
                         </div>
                     </div>
+                    <div className="column is-6-widescreen">
+                        <p className="heading">Filter By Animations: </p>
+                        <div className="container is-flex">
+                            <Dropdown title={animationCat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/g, "")} items={getAnimationCats()} />
+                            <SearchFilter suggestions={filterItems} handleAnimationFilter={handleAnimationFilter} animationCat={animationCat} placeholder={`Search ${animationCat.replace(/_/g, " ")} here`} />
+                            {showAnimationFilters()}
+                        </div>
+                    </div>
                     <div className="column is-2-widescreen">
                         <p className="heading">Filter By Position: </p>
                         <div className="field has-addons">
                             <p className="control">
-                                <button className={`button is-small ${searchOptions.filterValue === "PG" ? "is-active filter-button-active" : ""}`} onClick={() => handleFilter("info", "position", "PG")}>PG</button>
+                                <button className={`button is-small ${searchOptions.filterOptions.position.includes("PG") ? "is-active filter-button-active" : ""}`} onClick={() => handleFilter("position", "PG")}>PG</button>
                             </p>
                             <p className="control">
-                                <button className={`button is-small ${searchOptions.filterValue === "SG" ? "is-active filter-button-active" : ""}`} onClick={() => handleFilter("info", "position", "SG")}>SG</button>
+                                <button className={`button is-small ${searchOptions.filterOptions.position.includes("SG") ? "is-active filter-button-active" : ""}`} onClick={() => handleFilter("position", "SG")}>SG</button>
                             </p>
                             <p className="control">
-                                <button className={`button is-small ${searchOptions.filterValue === "SF" ? "is-active filter-button-active" : ""}`} onClick={() => handleFilter("info", "position", "SF")}>SF</button>
+                                <button className={`button is-small ${searchOptions.filterOptions.position.includes("SF") ? "is-active filter-button-active" : ""}`} onClick={() => handleFilter("position", "SF")}>SF</button>
                             </p>
                             <p className="control">
-                                <button className={`button is-small ${searchOptions.filterValue === "PF" ? "is-active filter-button-active" : ""}`} onClick={() => handleFilter("info", "position", "PF")}>PF</button>
+                                <button className={`button is-small ${searchOptions.filterOptions.position.includes("PF") ? "is-active filter-button-active" : ""}`} onClick={() => handleFilter("position", "PF")}>PF</button>
                             </p>
                             <p className="control">
-                                <button className={`button is-small ${searchOptions.filterValue === "C" ? "is-active filter-button-active" : ""}`} onClick={() => handleFilter("info", "position", "C")}>C</button>
+                                <button className={`button is-small ${searchOptions.filterOptions.position.includes("C") ? "is-active filter-button-active" : ""}`} onClick={() => handleFilter("position", "C")}>C</button>
                             </p>
                         </div>
                     </div>
-                    <div className="column is-6-widescreen">
-                        <p className="heading">Filter By Animations: </p>
-                        <div className="container is-flex">
-                            <Dropdown title={filterCat.cat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())} items={getAnimationCats()} />
-                            <SearchFilter suggestions={filterItems} handleFilter={handleFilter} filterCat={filterCat} placeholder={`Search ${filterCat.cat.replace(/_/g, " ")} here`} />
-                        </div>
+                    <div className="column is-4-widescreen">
+                        <p className="heading">Filter By Badges: </p>
+                        <Dropdown title="Finishing" items={getBadgeItems("finishing")} />
+                        <Dropdown title="Shooting" items={getBadgeItems("shooting")} />
+                        <Dropdown title="Playmaking" items={getBadgeItems("playmaking")} />
+                        <Dropdown title="Defensive" items={getBadgeItems("defense")} />
                     </div>
-                    <div className="column is-6-widescreen">
+                    
+                    <div className="column is-6-widescreen is-full-mobile">
                         <p className="heading">Sort By Stats: </p>
                         <Dropdown title="Shooting" items={getDropdownItems("shootingStats")} />
                         <Dropdown title="Inside Scoring" items={getDropdownItems("insideStats")} />
-                        <Dropdown title="Athleticism" items={getDropdownItems("athleticismStats")} />
                         <Dropdown title="Playmaking" items={getDropdownItems("playmakingStats")} />
+                        <Dropdown title="Athleticism" items={getDropdownItems("athleticismStats")} />
                         <Dropdown title="Defense" items={getDropdownItems("defenseStats")} />
-                        <Dropdown title="Rebounding" items={getDropdownItems("reboundStats")} />
+                        <Dropdown title="Rebound" items={getDropdownItems("reboundStats")} />
                         <Dropdown title="Potential" items={getDropdownItems("potentialStats")} />
                     </div>
-                    <div className="column is-6-widescreen">
+                    <div className="column is-6-widescreen is-full-mobile">
                         <p className="heading">Sort By Tendencies: </p>
                         <Dropdown title="Inside T" items={getDropdownItems("insideT")} />
                         <Dropdown title="Shooting T" items={getDropdownItems("shootingT")} />
-                        <Dropdown title="Iso T" items={getDropdownItems("isoT")} />
                         <Dropdown title="Drive T" items={getDropdownItems("driveT")} />
-                        <Dropdown title="Freelance T" items={getDropdownItems("freelanceT")} />
-                        <Dropdown title="Post T" items={getDropdownItems("postT")} />
-                        <Dropdown title="Passing T" items={getDropdownItems("passingT")} />
                         <Dropdown title="Defense T" items={getDropdownItems("defenseT")} />
-                    </div>
-                    <div className="column ">
-                        <p className="heading">Filter By Badges: </p>
-
+                        <Dropdown title="Freelance T" items={getDropdownItems("freelanceT")} />
+                        <Dropdown title="Passing T" items={getDropdownItems("passingT")} />
                     </div>
                 </div>
             </div>

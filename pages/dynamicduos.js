@@ -2,8 +2,6 @@ import React from "react";
 import Head from "next/head";
 import { getAllDuos } from "../lib/duos";
 
-import DuosCardView from "../components/duoscardview"
-
 export default function DynamicDuos({ players }) {
     return (
         <>
@@ -13,16 +11,15 @@ export default function DynamicDuos({ players }) {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <div className="container">
-                <DuosCardView players={players} />
             </div>
         </>
     )
 }
 
 export async function getStaticProps() {
-    // const players = await getAllDuos()
-    //                       .catch(console.error)
-    const players = [];
+    const players = await getAllDuos()
+                          .catch(console.error)
+    
     return {
       props: {
         players,
