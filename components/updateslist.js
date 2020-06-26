@@ -20,7 +20,7 @@ export default function UpdatedList(props) {
             };
             return (
 			   <>
-                <a className="updates-cards" key={i} href={`/player/${player.id}`}>
+                <a className="updates-cards hvr-float" key={i} href={`/player/${player.id}`}>
                     <img src={`https://2kdbimg.com/35/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} />
                 </a>
 				

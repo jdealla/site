@@ -246,14 +246,12 @@ $badge-padding: .03rem .10rem;
     margin: -2.55em 0 0 -14em;
     display:none;
     position: absolute;
+	z-index: 999;
 }
 
 .updates-cards {
     margin-right: 2px;
-	&:hover >img {
-	           opacity: 0.5; 
-			   transition: .10s; 
-	}
+	
 	&:hover + .popup-img {
 	           display: block;
 	}
@@ -356,14 +354,6 @@ $badge-padding: .03rem .10rem;
   }
 }
 
-.player-card-hovering {
-	transition: opacity .15s ease;
-	
-    &:hover {
-	    opacity: 0.5;
-	}
-}
-
 @import "../node_modules/bulma/sass/utilities/functions.sass";
 @import "../node_modules/bulma/sass/utilities/derived-variables.scss";
 @import "../node_modules/bulma/sass/utilities/controls.sass";
@@ -391,5 +381,6 @@ $badge-padding: .03rem .10rem;
 @import "../node_modules/bulma/sass/components/panel.sass";
 @import "../node_modules/bulma/sass/components/media.sass";
 @import "../node_modules/bulma/sass/form/_all.sass";
+@import "./animations.css";
 
 @import '@creativebulma/bulma-badge'
