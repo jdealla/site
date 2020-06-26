@@ -11,7 +11,7 @@ const fetcher = url => fetch(url).then(r => r.json())
 
 export default function Players({ allPlayers, allAnimations }) {
     const { data: total } = useSWR("/api/totalplayers", fetcher);
-    const { data: updatedPlayers } = useSWR(total.totalResults > allPlayers.length ? "/api/addplayers" : null, fetcher);
+    const { data: updatedPlayers } = useSWR((total && total.totalResults > allPlayers.length) ? "/api/addplayers" : null, fetcher);
     const [page, setPage] = useState(0)
     const [players, setPlayers] = useState(allPlayers);
     const [searchOptions, setSearchOptions] = useState({ 
