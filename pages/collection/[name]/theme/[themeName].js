@@ -32,17 +32,12 @@ export default function Collection({ collection, theme, players }) {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
             </Head>
             <div className="container">
-                <section className="hero is-bold">
-                    <div className="hero-body" style={{ padding: "1.2rem" }}>
-                        <div className="container">
-                            <h1 className="title is-size-5">
-                                {collection.charAt(0).toUpperCase() + collection.slice(1)} / {formatThemeName(theme)}
-                            </h1>
-                        </div>
-                    </div>
-                </section>
-
-                <PlayersCardView players={players} />
+			    <nav className="panel">
+                    <p className="panel-heading mb-1">
+                        {collection.charAt(0).toUpperCase() + collection.slice(1)} / {formatThemeName(theme)}
+                    </p>
+				    <PlayersCardView players={players} />
+			    </nav>        
             </div>
         </>
     )
