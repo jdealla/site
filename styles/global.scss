@@ -333,7 +333,7 @@ $badge-padding: .03rem .10rem;
 }
 
 @import "../node_modules/bulma/sass/utilities/functions.sass";
-@import "../node_modules/bulma/sass/utilities/derived-variables.sass";
+@import "../node_modules/bulma/sass/utilities/derived-variables.scss";
 @import "../node_modules/bulma/sass/utilities/controls.sass";
 @import "../node_modules/bulma/sass/utilities/mixins.sass";
 @import "../node_modules/bulma/sass/base/_all.sass";
@@ -351,7 +351,6 @@ $badge-padding: .03rem .10rem;
 @import "../node_modules/bulma/sass/elements/icon.sass";
 @import "../node_modules/bulma/sass/components/navbar.sass";
 @import "../node_modules/bulma/sass/components/level.sass";
-@import "../node_modules/bulma/sass/components/list.sass";
 @import "../node_modules/bulma/sass/components/pagination.sass";
 @import "../node_modules/bulma/sass/components/tabs.sass";
 @import "../node_modules/bulma/sass/components/card.sass";
