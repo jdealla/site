@@ -11,6 +11,7 @@ const fetcher = url => fetch(url).then(r => r.json())
 
 export default function Players({ allPlayers, allAnimations }) {
     const { data: total } = useSWR("/api/totalplayers", fetcher);
+    const { data: updatedPlayers } = useSWR(total.totalResults > allPlayers.length ? "/api/addplayers" : null, fetcher);
     const [page, setPage] = useState(0)
     const [players, setPlayers] = useState(allPlayers);
     const [searchOptions, setSearchOptions] = useState({ 
@@ -30,14 +31,9 @@ export default function Players({ allPlayers, allAnimations }) {
     const handleOptions = (options) => setSearchOptions(options);
 
     useEffect(() => {
-        console.log(total);
-        if (total) {
-            // if (total.totalResults > allPlayers.length) {
-            // }
+        if (updatedPlayers) {
+            setPlayers([...allPlayers, ...updatedPlayers]);
         }
-        // mutate("/api/addplayers", data => {
-        //     console.log(data);
-        // }, false);
     }, [total])
 
     useEffect(() => {
@@ -171,7 +167,6 @@ export async function getStaticProps() {
         props: {
             allPlayers,
             allAnimations
-        },
-        unstable_revalidate: 10
+        }
     }
 }
