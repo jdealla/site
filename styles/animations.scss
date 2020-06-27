@@ -9,6 +9,7 @@
   -webkit-transition-property: transform;
   transition-property: transform;
 }
+
 .hvr-float-shadow:before {
   pointer-events: none;
   position: absolute;
@@ -27,10 +28,12 @@
   -webkit-transition-property: transform, opacity;
   transition-property: transform, opacity;
 }
+
 .hvr-float-shadow:hover, .hvr-float-shadow:focus, .hvr-float-shadow:active {
   -webkit-transform: translateY(-10px);
   transform: translateY(-10px);
 }
+
 .hvr-float-shadow:hover:before, .hvr-float-shadow:focus:before, .hvr-float-shadow:active:before {
   opacity: 1;
   -webkit-transform: translateY(10px);
@@ -51,7 +54,67 @@
   -webkit-transition-timing-function: ease-out;
   transition-timing-function: ease-out;
 }
+
 .hvr-float:hover, .hvr-float:focus, .hvr-float:active {
   -webkit-transform: translateY(-8px);
   transform: translateY(-8px);
+}
+
+.icon-spin {
+  -webkit-animation: icon-spin 2s infinite linear;
+          animation: icon-spin 2s infinite linear;
+}
+
+@-webkit-keyframes icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+  }
+}
+
+@keyframes icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+  }
+}
+
+.header-loading {
+	opacity: 0.5;
+}
+
+.badges-loading figure {
+    margin: auto;
+}
+
+.loading {
+  position: relative;
+  overflow:hidden;
+  
+   &:after {
+    display: block;
+    content: '';
+    position: absolute;
+	
+	top:0;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(200, 200, 200, .2), transparent);
+    animation: loading 1.5s infinite; 
+	}
+}
+
+@keyframes loading {
+  100% {
+    transform: translateX(100%);
+  }
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import { GiBasketballBall } from "react-icons/gi"
 
 export default function PlayersCardView(props) {
     const { players } = props;
