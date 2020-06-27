@@ -21,15 +21,6 @@ $footer-padding: 1.2rem 1.5rem 1.2rem;
 $badge-height: 8px;
 $badge-padding: .03rem .10rem;
 
-.navbar-start >a {
-   transition: .10s;
-   border-radius: 0 0 7px 7px;
-   
-   &:hover {
-       background-color: #444 !important;
-   }
-}
-
 @media only screen and (max-width: 768px) {
     $gap: 16px;
 	
@@ -381,6 +372,6 @@ $badge-padding: .03rem .10rem;
 @import "../node_modules/bulma/sass/components/panel.sass";
 @import "../node_modules/bulma/sass/components/media.sass";
 @import "../node_modules/bulma/sass/form/_all.sass";
-@import "./animations.css";
+@import "./animations.scss";
 
 @import '@creativebulma/bulma-badge'

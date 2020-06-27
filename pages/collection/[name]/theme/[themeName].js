@@ -35,7 +35,7 @@ export default function Collection({ collection, theme, allPlayers, players }) {
             <div className="container">
 			    <nav className="panel">
                     <p className="panel-heading mb-1">
-                        {collection.charAt(0).toUpperCase() + collection.slice(1)} / {formatThemeName(theme)}
+                        {collection.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase())} / {formatThemeName(theme)}
                     </p>
 				    <PlayersCardView players={allPlayers} />
 			    </nav>        
@@ -57,7 +57,7 @@ export async function getStaticProps({ params }) {
     const collection = params.name;
     const theme = params.themeName;
 
-    const allPlayers = await getPlayersByTheme(theme);
+    const allPlayers = await getPlayersByTheme(collection, theme);
 
     const players = await getAllPlayers()
                             .catch(console.error);

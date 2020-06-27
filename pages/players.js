@@ -39,7 +39,7 @@ export default function Players({ players, allAnimations }) {
 
     useEffect(() => {
         const { searchValue, filterOptions, sortProp, asc, evos, duos } = searchOptions;
-
+        console.log(filterOptions);
         let filtered = players;
 
         if (duos) {
@@ -93,12 +93,14 @@ export default function Players({ players, allAnimations }) {
                 for(let animation of filterOptions.animations) {
                     let temp = animation.split("-");
                     let [cat, value] = temp;
-                    
-                    if (player[cat] === value || (cat === "size_up_packages" && player["size-up_packages"] === value)) 
+                
+                    if (player[cat] === value) 
                         check.push(true);
+                    else
+                        check.push(false);
                 }
 
-                if (check.includes(true))
+                if (!check.includes(false))
                     return true;
             })
         }
@@ -155,7 +157,7 @@ export default function Players({ players, allAnimations }) {
                                 <li><a className="pagination-link" aria-label="Goto page 86">86</a></li> */}
                                 <li><p className="pagination-link" aria-label="total-players">Total Players: {allPlayers.length}</p></li>
                             </ul>
-                            <a className="pagination-next" onClick={() => handlePage("next")} disabled={page * searchOptions.perPage >= players.length}>Next page</a>
+                            <a className="pagination-next" onClick={() => handlePage("next")} disabled={page * searchOptions.perPage >= allPlayers.length}>Next page</a>
                         </nav>
                     </div>
                 </div>

@@ -10,7 +10,7 @@ import Layout from "../../components/layout";
 import PlayerHeader from "../../components/playerheader";
 import BadgeContainer from "../../components/badgecontainer";
 import Attributes from "../../components/attributes";
-import Loader from "../../components/loader";
+import Loader from "../../components/idloader";
 
 export default function Player({ playerData, altPlayers, evos, duo, duoPartner, players }) {
     const [view, setView] = useState("stats");
