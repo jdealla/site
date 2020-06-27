@@ -153,9 +153,9 @@ export default function Players({ players, allAnimations }) {
                                 <li><span className="pagination-ellipsis">&hellip;</span></li>
                                 <li><a className="pagination-link" aria-label="Goto page 47">47</a></li>
                                 <li><a className="pagination-link" aria-label="Goto page 86">86</a></li> */}
-                                <li><p className="pagination-link" aria-label="total-players">Total Players: {players.length}</p></li>
+                                <li><p className="pagination-link" aria-label="total-players">Total Players: {allPlayers.length}</p></li>
                             </ul>
-                            <a className="pagination-next" onClick={() => handlePage("next")} disabled={page * searchOptions.perPage >= players.length}>Next page</a>
+                            <a className="pagination-next" onClick={() => handlePage("next")} disabled={page * searchOptions.perPage >= allPlayers.length}>Next page</a>
                         </nav>
                     </div>
                 </div>
