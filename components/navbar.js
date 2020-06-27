@@ -29,10 +29,10 @@ export default function NavBar(props) {
                     <div className="navbar-item">
                         {searchOn ? <NavSearch handleClick={handleClickPlayer} players={players} placeholder="Search players here" /> : ""}
                     </div>
-                    <a className="navbar-item" href="/players">All Players</a>
-                    <a className="navbar-item" href="/compare">Compare</a>
-                    <a className="navbar-item" href="/updates">Updates</a>
-                    <a className="navbar-item" href="/collections">Collections</a>
+                    <a className="navbar-item hvr-underline-reveal" href="/players">All Players</a>
+                    <a className="navbar-item hvr-underline-reveal" href="/compare">Compare</a>
+                    <a className="navbar-item hvr-underline-reveal" href="/updates">Updates</a>
+                    <a className="navbar-item hvr-underline-reveal" href="/collections">Collections</a>
                 </div>
             </div>
         </nav>
