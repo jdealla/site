@@ -3,7 +3,7 @@ import NavBar from "./navbar";
 export default function Layout(props) {
     return (
         <>
-            <NavBar />
+            <NavBar players={props.players} />
             {props.children}
             <footer className="footer">
                 <div className="container has-text-centered">

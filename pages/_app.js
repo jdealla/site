@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }) {
     }, [])
   
     return (
-        <Layout>
+        <Layout players={pageProps.players}>
             <Component {...pageProps} />
         </Layout>
     )

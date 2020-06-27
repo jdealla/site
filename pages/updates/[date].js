@@ -1,12 +1,12 @@
 import React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { getDates, getPlayersByDate } from "../../lib/players";
+import { getDates, getPlayersByDate, getAllPlayers } from "../../lib/players";
 
 import PlayersCardView from "../../components/playerscardview";
 import Loader from "../../components/loader";
 
-export default function UpdatePage({ date, players }) {
+export default function UpdatePage({ date, allPlayers }) {
     const router = useRouter();
 
     if (router.isFallback) {
@@ -25,7 +25,7 @@ export default function UpdatePage({ date, players }) {
                     <p className="panel-heading mb-1">
                         MyTeam Update ({date})
                     </p>
-				    <PlayersCardView players={players} />
+				    <PlayersCardView players={allPlayers} />
 			    </nav>
             </div>
         </>
@@ -44,12 +44,15 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
     const date = params.date;
-    const players = await getPlayersByDate(date)
+    const allPlayers = await getPlayersByDate(date)
                             .catch(console.error)
     
+    const players = await getAllPlayers()
+                        .catch(console.error);
     return {
         props: {
             date,
+            allPlayers,
             players
         },
         unstable_revalidate: 1

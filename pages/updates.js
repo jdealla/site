@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { getPlayersByDates, getUpdatesNames } from "../lib/players";
+import { getPlayersByDates, getUpdatesNames, getAllPlayers } from "../lib/players";
 
 import UpdatesList from "../components/updateslist";
 import Head from "next/head";
@@ -63,10 +63,13 @@ export async function getStaticProps() {
                                 .catch(console.error);
 	const updateNames = await getUpdatesNames();							
     
+    const players = await getAllPlayers()
+                        .catch(console.error);
     return {
         props: {
             groupedByDate,
-            updateNames
+            updateNames,
+            players
         },
         unstable_revalidate: 1
     }
