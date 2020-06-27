@@ -3,9 +3,10 @@ import { useRouter } from "next/router";
 import { getPlayersByDates, getUpdatesNames, getAllPlayers } from "../lib/players";
 
 import UpdatesList from "../components/updateslist";
+import Layout from "../components/layout";
 import Head from "next/head";
 
-export default function Updates({ groupedByDate, updateNames }) {
+export default function Updates({ groupedByDate, updateNames, players }) {
     const router = useRouter();
 	
     const findUpdateName = (date) => {
@@ -40,7 +41,7 @@ export default function Updates({ groupedByDate, updateNames }) {
     }
 
     return (
-        <>
+        <Layout players={players} searchOn={true}>
             <Head>
                 <title>NBA 2K20 MyTeam Updated Players | 2KDB</title>
                 <meta name="description" content="List of player cards updated in NBA 2K20 MyTeam" key="updates" />
@@ -54,7 +55,7 @@ export default function Updates({ groupedByDate, updateNames }) {
                         {renderUpdates()}
                 </nav>
             </div>
-        </>
+        </Layout>
     )
 }
 

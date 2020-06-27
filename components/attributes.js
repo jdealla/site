@@ -2,7 +2,7 @@ import React from "react";
 import { formatName, ratingColor } from "../lib/helpers";
 
 export default function Attributes(props) {
-    const { attributes, attrName, evoStats, duoStats, reverse, } = props;
+    const { attributes, attrName, evoStats, duoStats, reverse, tendency } = props;
 
     const renderBonusStats = (baseStat, key) => {
         if ((evoStats != undefined || evoStats != null) && (duoStats != undefined || duoStats != null)) {
@@ -33,7 +33,11 @@ export default function Attributes(props) {
                     return ratingColor(value + duoStats[key]);
             }
         }
-        return ratingColor(value);
+
+        if (tendency)
+            return ratingColor(value, true);
+        else
+            return ratingColor(value);
     }
 
     const renderTags = () => {

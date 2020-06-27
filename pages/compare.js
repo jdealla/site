@@ -2,6 +2,7 @@ import React, { useState, Fragment } from "react";
 import Head from "next/head";
 import { getAllPlayers } from "../lib/players";
 
+import Layout from "../components/layout";
 import CompareTable from "../components/comparetable";
 import CompareHeader from "../components/compareheader";
 
@@ -142,7 +143,7 @@ export default function Compare({ players }) {
     };
 
     return (
-        <>
+        <Layout players={players} searchOn={true}>
             <Head>
                 <title>Compare NBA 2K20 MyTeam Players Page | 2KDB</title>
                 <meta name="description" content="Compare 2 NBA 2K20 MyTeam player cards for their stats, badges, tendencies, and animations"/>
@@ -165,7 +166,7 @@ export default function Compare({ players }) {
                     {renderView()}
                 </div>
             </div>
-        </>
+        </Layout>
     )
 }
 

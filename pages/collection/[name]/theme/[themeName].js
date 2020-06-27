@@ -3,10 +3,11 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { getThemes, getPlayersByTheme, getAllPlayers } from "../../../../lib/players";
 
+import Layout from "../../../../components/layout";
 import PlayersCardView from "../../../../components/playerscardview";
 import Loader from "../../../../components/loader";
 
-export default function Collection({ collection, theme, allPlayers }) {
+export default function Collection({ collection, theme, allPlayers, players }) {
     const router = useRouter();
 
     if (router.isFallback) {
@@ -25,7 +26,7 @@ export default function Collection({ collection, theme, allPlayers }) {
     }
 
     return (
-        <>
+        <Layout players={players} searchOn={true}>
             <Head>
                 <title>{`NBA 2K20 MyTeam ${theme} collection | 2KDB`}</title>
                 <meta name="description" content={`NBA 2K20 MyTeam Theme Collection ${theme}`} />
@@ -39,7 +40,7 @@ export default function Collection({ collection, theme, allPlayers }) {
 				    <PlayersCardView players={allPlayers} />
 			    </nav>        
             </div>
-        </>
+        </Layout>
     )
 }
 

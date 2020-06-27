@@ -16,6 +16,12 @@ export default function FilterSortBox(props) {
     const handleChange = (e) => handleOptions({ ...searchOptions, searchValue: e.target.value });
     const handlePerPage = (num) => handleOptions({ ...searchOptions, perPage: num });
     const handleSortDirection = () => handleOptions({ ...searchOptions, asc: !searchOptions.asc });
+    const clearOptions = () => {
+        handleOptions({
+            searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [] }, sortProp: "", asc: false, perPage: 15,
+            evos: false, duos: false
+        });
+    }
 
     const handleFilter = (prop, value="") => {
         const { filterOptions } = searchOptions;
@@ -108,7 +114,7 @@ export default function FilterSortBox(props) {
             return (
                 <button className="button is-small" key={i} onClick={() => handleAnimationFilter(cat, value)}>
                     <span>{cat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/, "")}: {value}</span>
-                    <FaTimes />
+                    <FaTimes onClick={() => removeAnimationFilter(ani)} />
                 </button>
             )
         })
@@ -221,6 +227,7 @@ export default function FilterSortBox(props) {
                                 onClick={() => handleOptions({ ...searchOptions, evos: !searchOptions.evos })}>Evos</button>
                             <button className={`button is-small ${searchOptions.duos ? "is-active filter-button-active" : ""}`} 
                                 onClick={() => handleOptions({ ...searchOptions, duos: !searchOptions.duos })}>Duos</button>
+                            <button className="button is-small" onClick={() => clearOptions()}>Clear Filters/Sort</button>
                             <div className="control" style={{ width: "100%" }}>
                                 <input className="input is-small" value={searchOptions.searchValue} onChange={handleChange} type="text" placeholder="Search players..."/>
                             </div>
