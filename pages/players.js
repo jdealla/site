@@ -2,14 +2,18 @@ import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { getAllPlayersWithAllStats, getAllAnimations } from "../lib/players";
 import { getFilterTiers } from "../lib/helpers"
-import sizeof from 'object-sizeof'
+import useSWR, { mutate } from "swr";
 
 import FilterSortBox from "../components/filtersortbox";
 import PlayersList from "../components/playerslist";
 
-export default function Players({ allPlayers, allAnimations }) {
+const fetcher = url => fetch(url).then(r => r.json())
+
+export default function Players({ players, allAnimations }) {
+    const { data: total } = useSWR("/api/totalplayers", fetcher);
+    const { data: updatedPlayers } = useSWR((total && total.totalResults > players.length) ? "/api/addplayers" : null, fetcher);
     const [page, setPage] = useState(0)
-    const [players, setPlayers] = useState(allPlayers);
+    const [allPlayers, setAllPlayers] = useState(players);
     const [searchOptions, setSearchOptions] = useState({ 
         searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [] }, sortProp: "", asc: false, perPage: 15,
         evos: false, duos: false
@@ -27,9 +31,15 @@ export default function Players({ allPlayers, allAnimations }) {
     const handleOptions = (options) => setSearchOptions(options);
 
     useEffect(() => {
+        if (updatedPlayers) {
+            setAllPlayers([...players, ...updatedPlayers]);
+        }
+    }, [total])
+
+    useEffect(() => {
         const { searchValue, filterOptions, sortProp, asc, evos, duos } = searchOptions;
 
-        let filtered = allPlayers
+        let filtered = players;
 
         if (duos) {
             filtered = filtered.filter(player => player.is_duo);
@@ -116,7 +126,7 @@ export default function Players({ allPlayers, allAnimations }) {
         //filter by name value
         filtered = filtered.filter(player => player.name.toLowerCase().includes(searchValue));
 
-        setPlayers(filtered);
+        setAllPlayers(filtered);
     }, [searchOptions])
 
     return (
@@ -130,7 +140,7 @@ export default function Players({ allPlayers, allAnimations }) {
                 <div className="box">
                     <FilterSortBox allAnimations={allAnimations} searchOptions={searchOptions} handleOptions={handleOptions} />
                 </div>
-                <PlayersList players={players.slice(page * searchOptions.perPage, (page * searchOptions.perPage) + searchOptions.perPage)} searchOptions={searchOptions} />
+                <PlayersList players={allPlayers.slice(page * searchOptions.perPage, (page * searchOptions.perPage) + searchOptions.perPage)} searchOptions={searchOptions} />
                 <div className="columns">
                     <div className="column is-full">
                         <nav className="pagination is-centered" role="navigation" aria-label="pagination">
@@ -148,16 +158,15 @@ export default function Players({ allPlayers, allAnimations }) {
 }
 
 export async function getStaticProps() {
-    const allPlayers = await getAllPlayersWithAllStats()
+    const players = await getAllPlayersWithAllStats()
                             .catch(console.error);
 
-    const allAnimations = getAllAnimations(allPlayers);
+    const allAnimations = getAllAnimations(players);
 
     return {
         props: {
-            allPlayers,
-            allAnimations
-        },
-        unstable_revalidate: 10
+            players,
+            allAnimations,
+        }
     }
 }

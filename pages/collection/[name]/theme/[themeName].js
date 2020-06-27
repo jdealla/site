@@ -1,12 +1,12 @@
 import React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { getThemes, getPlayersByTheme } from "../../../../lib/players";
+import { getThemes, getPlayersByTheme, getAllPlayers } from "../../../../lib/players";
 
 import PlayersCardView from "../../../../components/playerscardview";
 import Loader from "../../../../components/loader";
 
-export default function Collection({ collection, theme, players }) {
+export default function Collection({ collection, theme, allPlayers }) {
     const router = useRouter();
 
     if (router.isFallback) {
@@ -32,17 +32,12 @@ export default function Collection({ collection, theme, players }) {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
             </Head>
             <div className="container">
-                <section className="hero is-bold">
-                    <div className="hero-body" style={{ padding: "1.2rem" }}>
-                        <div className="container">
-                            <h1 className="title is-size-5">
-                                {collection.charAt(0).toUpperCase() + collection.slice(1)} / {formatThemeName(theme)}
-                            </h1>
-                        </div>
-                    </div>
-                </section>
-
-                <PlayersCardView players={players} />
+			    <nav className="panel">
+                    <p className="panel-heading mb-1">
+                        {collection.charAt(0).toUpperCase() + collection.slice(1)} / {formatThemeName(theme)}
+                    </p>
+				    <PlayersCardView players={allPlayers} />
+			    </nav>        
             </div>
         </>
     )
@@ -61,12 +56,15 @@ export async function getStaticProps({ params }) {
     const collection = params.name;
     const theme = params.themeName;
 
-    const players = await getPlayersByTheme(theme);
+    const allPlayers = await getPlayersByTheme(theme);
 
+    const players = await getAllPlayers()
+                            .catch(console.error);
     return {
         props: {
             collection,
             theme,
+            allPlayers,
             players
         },
         unstable_revalidate: 10

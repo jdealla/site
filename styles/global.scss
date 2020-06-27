@@ -21,8 +21,21 @@ $footer-padding: 1.2rem 1.5rem 1.2rem;
 $badge-height: 8px;
 $badge-padding: .03rem .10rem;
 
+.navbar-start >a {
+   transition: .10s;
+   border-radius: 0 0 7px 7px;
+   
+   &:hover {
+       background-color: #444 !important;
+   }
+}
+
 @media only screen and (max-width: 768px) {
     $gap: 16px;
+	
+	.navbar {
+	    margin-bottom: 0 !important;
+	}
 	
 	.mobile-nopadding {
 	       padding:0 !important;
@@ -34,8 +47,7 @@ $badge-padding: .03rem .10rem;
 
     .columns {
         &.is-player-card {
-            background: url('/playercard_bg.png') no-repeat top fixed;
-            background-size: 100% 100%;
+		    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(70,17,15,1) 100%, rgba(85,20,19,1) 100%);
         }
     }
 	
@@ -49,9 +61,19 @@ $badge-padding: .03rem .10rem;
 }
 
 @media only screen and (min-width: 769px) {
-    .column {
+    
+	.navbar {
+	    margin-bottom: 1rem !important;
+	}
+	
+	.column {
         &.is-badge {
             width: 13% !important;
+        }
+		
+		&.is-player-card {
+            background: url('/playercard_bg.png') no-repeat top fixed;
+            background-size: 100% 100%;
         }
     }
 	
@@ -204,9 +226,9 @@ $badge-padding: .03rem .10rem;
 }
 
 .star {
+    transition: .10s;
 	cursor: pointer;
 	&:hover {
-	    transition: .10s;
 	    color: #ffdd57;
 	}
 }
@@ -224,14 +246,12 @@ $badge-padding: .03rem .10rem;
     margin: -2.55em 0 0 -14em;
     display:none;
     position: absolute;
+	z-index: 999;
 }
 
 .updates-cards {
     margin-right: 2px;
-	&:hover >img {
-	           opacity: 0.5; 
-			   transition: .10s; 
-	}
+	
 	&:hover + .popup-img {
 	           display: block;
 	}
@@ -245,10 +265,10 @@ $badge-padding: .03rem .10rem;
 }
 
 .collection-icons {
+    transition: .15s;
     display: block;
 	margin: auto;
 	&:hover {
-	    transition: .15s;
 		background-color: #eee;
 		opacity: 0.5;
 		border-radius: 6px;
@@ -269,8 +289,10 @@ $badge-padding: .03rem .10rem;
     >div, >figure, >a {
         margin-right: 0.5em; 
 	}
+	>a, >span {
+	    transition: .10s;
+	}
 	>a:hover, >span:hover {
-        transition: .10s;
         color: #ffdd57;	
 	}
 }
@@ -333,9 +355,10 @@ $badge-padding: .03rem .10rem;
 }
 
 @import "../node_modules/bulma/sass/utilities/functions.sass";
-@import "../node_modules/bulma/sass/utilities/derived-variables.sass";
+@import "../node_modules/bulma/sass/utilities/derived-variables.scss";
 @import "../node_modules/bulma/sass/utilities/controls.sass";
 @import "../node_modules/bulma/sass/utilities/mixins.sass";
+@import "../node_modules/bulma/sass/helpers/_all.sass";
 @import "../node_modules/bulma/sass/base/_all.sass";
 @import "../node_modules/bulma/sass/layout/_all.sass";
 @import "../node_modules/bulma/sass/grid/columns.sass";
@@ -351,7 +374,6 @@ $badge-padding: .03rem .10rem;
 @import "../node_modules/bulma/sass/elements/icon.sass";
 @import "../node_modules/bulma/sass/components/navbar.sass";
 @import "../node_modules/bulma/sass/components/level.sass";
-@import "../node_modules/bulma/sass/components/list.sass";
 @import "../node_modules/bulma/sass/components/pagination.sass";
 @import "../node_modules/bulma/sass/components/tabs.sass";
 @import "../node_modules/bulma/sass/components/card.sass";
@@ -359,5 +381,6 @@ $badge-padding: .03rem .10rem;
 @import "../node_modules/bulma/sass/components/panel.sass";
 @import "../node_modules/bulma/sass/components/media.sass";
 @import "../node_modules/bulma/sass/form/_all.sass";
+@import "./animations.css";
 
 @import '@creativebulma/bulma-badge'

@@ -48,10 +48,10 @@ export default function PlayerHeader(props) {
         <div className="columns is-mobile is-multiline is-player-card mobile-padding">
             <div className="column is-full-mobile is-full-desktop is-full-widescreen">
 			       <div className="column is-full-mobile player-column-height is-hidden-tablet">
-                                <figure className="image is-3by4">
+                                <figure className="image is-3by4 mb-1">
                                     <img src={`https://2kdbimg.com/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}_${playerData.info.id}.jpg`} />
                                 </figure>
-                                <div className="columns is-mobile is-centered" style={{ padding:"2em 0", flexWrap:"wrap" }}>
+                                <div className="columns is-mobile is-centered py-5" style={{ flexWrap:"wrap" }}>
                                     {altPlayers.map((player, i) => (
                                         <div className="column is-narrow" key={i} style={{ padding:"0.1em" }}>
                                             <div className="container no-shadow">
@@ -70,10 +70,10 @@ export default function PlayerHeader(props) {
                     <div className="column is-full-mobile is-9-tablet is-four-fifths-fullhd">
                         <div className="columns is-mobile is-multiline justify-header">
                             <div className="column is-4-tablet is-3-desktop player-column-height is-hidden-mobile">
-                                <figure className="image is-3by4">
+                                <figure className="image is-3by4 mb-1">
                                     <img src={`https://2kdbimg.com/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}_${playerData.info.id}.jpg`} />
                                 </figure>
-                                <div className="columns is-mobile is-centered" style={{ padding:"2em 0", flexWrap:"wrap" }}>
+                                <div className="columns is-mobile is-centered py-5" style={{ flexWrap:"wrap" }}>
                                     {altPlayers.map((player, i) => (
                                         <div className="column is-narrow" key={i} style={{ padding:"0.1em" }}>
                                             <div className="container no-shadow">

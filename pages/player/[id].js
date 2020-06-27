@@ -1,7 +1,7 @@
 import { useState, Fragment } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { getPlayersIds, findAltPlayers } from "../../lib/players";
+import { getPlayersIds, findAltPlayers, getAllPlayers } from "../../lib/players";
 import { findEvos } from "../../lib/evos";
 import { findDuos, findDuoPartner } from "../../lib/duos";
 import { getPlayerData } from "../../pages/api/player/[id]";
@@ -194,6 +194,9 @@ export async function getStaticProps({ params }) {
                     .catch(console.error);
     }
 
+    const players = await getAllPlayers()
+                        .catch(console.error);
+
     return {
         props: {
             playerData,
@@ -201,6 +204,7 @@ export async function getStaticProps({ params }) {
             evos,
             duo,
             duoPartner,
+            players,
         },
         unstable_revalidate: 10
     }

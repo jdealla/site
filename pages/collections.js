@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Head from "next/head";
 
-import { getCollections } from "../lib/players";
+import { getCollections, getAllPlayers } from "../lib/players";
 
 export default function Collections({ collections }) {
     const [view, setView] = useState("20 Current");
@@ -65,9 +65,13 @@ export async function getStaticProps() {
     let collections = await getCollections()
                             .catch(console.error);
 
+    const players = await getAllPlayers()
+                        .catch(console.error);
+
     return {
         props: {
-            collections
+            collections,
+            players,
         },
         unstable_revalidate: 10
     }
