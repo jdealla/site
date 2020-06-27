@@ -40,6 +40,10 @@ export default function SearchBar(props) {
         </div>
     );
     
+    const shouldRenderSuggestions = (value) => {
+        return value.trim().length > 2;
+    }
+
     const inputProps = {
         placeholder,
         value,
@@ -57,6 +61,7 @@ export default function SearchBar(props) {
             renderSuggestion={renderSuggestion}
             inputProps={inputProps}
             highlightFirstSuggestion={true}
+            shouldRenderSuggestions={shouldRenderSuggestions}
         />
     )
 }
