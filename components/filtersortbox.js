@@ -98,23 +98,13 @@ export default function FilterSortBox(props) {
         })
     }
 
-    const removeAnimationFilter = (animation) => {
-        let animations = searchOptions.filterOptions.animations;
-        let targetIndex = animations.findIndex(ani => ani === animation);
-
-        if (targetIndex !== -1) {
-            animations.splice(targetIndex, 1);
-            handleOptions({ ...searchOptions, filterOptions: { ...searchOptions.filterOptions, animations: animations } });
-        }
-    }
-
     const showAnimationFilters = () => {
         let filters = searchOptions.filterOptions.animations.map((ani, i) => {
             let [cat, value] = ani.split("-");
             return (
                 <button className="button is-small" key={i} onClick={() => handleAnimationFilter(cat, value)}>
                     <span>{cat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/, "")}: {value}</span>
-                    <FaTimes onClick={() => removeAnimationFilter(ani)} />
+                    <FaTimes />
                 </button>
             )
         })
@@ -219,6 +209,9 @@ export default function FilterSortBox(props) {
                     <div className="column is-full">
                         <p className="heading">Search Settings: </p>
                         <div className="container is-flex">
+                            <div className="control" style={{ width: "100%" }}>
+                                <input className="input is-small" value={searchOptions.searchValue} onChange={handleChange} type="text" placeholder="Search players..."/>
+                            </div>
                             <button className="button is-small" onClick={() => handleSortDirection()}>
                                 {searchOptions.asc ? <FaSortAmountUp /> : <FaSortAmountDown />}
                             </button>
@@ -228,9 +221,6 @@ export default function FilterSortBox(props) {
                             <button className={`button is-small ${searchOptions.duos ? "is-active filter-button-active" : ""}`} 
                                 onClick={() => handleOptions({ ...searchOptions, duos: !searchOptions.duos })}>Duos</button>
                             <button className="button is-small" onClick={() => clearOptions()}>Clear Filters/Sort</button>
-                            <div className="control" style={{ width: "100%" }}>
-                                <input className="input is-small" value={searchOptions.searchValue} onChange={handleChange} type="text" placeholder="Search players..."/>
-                            </div>
                         </div>
                     </div>
                     <div className="column is-4-widescreen is-full-mobile">
@@ -338,14 +328,6 @@ export default function FilterSortBox(props) {
                             </p>
                         </div>
                     </div>
-                    <div className="column is-6-widescreen">
-                        <p className="heading">Filter By Animations: </p>
-                        <div className="container is-flex">
-                            <Dropdown title={animationCat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/g, "")} items={getAnimationCats()} />
-                            {showAnimationFilters()}
-                            <SearchFilter suggestions={filterItems} handleAnimationFilter={handleAnimationFilter} animationCat={animationCat} placeholder={`Search ${animationCat.replace(/_/g, " ")} here`} />
-                        </div>
-                    </div>
                     <div className="column is-2-widescreen">
                         <p className="heading">Filter By Position: </p>
                         <div className="field has-addons">
@@ -364,6 +346,14 @@ export default function FilterSortBox(props) {
                             <p className="control">
                                 <button className={`button is-small ${searchOptions.filterOptions.position.includes("C") ? "is-active filter-button-active" : ""}`} onClick={() => handleFilter("position", "C")}>C</button>
                             </p>
+                        </div>
+                    </div>
+                    <div className="column is-6-widescreen">
+                        <p className="heading">Filter By Animations: </p>
+                        <div className="container is-flex">
+                            <Dropdown title={animationCat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/g, "")} items={getAnimationCats()} />
+                            {showAnimationFilters()}
+                            <SearchFilter suggestions={filterItems} handleAnimationFilter={handleAnimationFilter} animationCat={animationCat} placeholder={`Search ${animationCat.replace(/_/g, " ")} here`} />
                         </div>
                     </div>
                     <div className="column is-3-widescreen">
@@ -397,7 +387,8 @@ export default function FilterSortBox(props) {
                     </div>
                     {/* <div className="column is-3-widescreen is-full-mobile">
                         <p className="heading">Filter By Misc: </p>
-                        
+                        <Dropdown title="By Collection" items={getDropdownItems("collection")} />
+                        <Dropdown title="By Team" items={getDropdownItems("team")} />
                     </div> */}
                 </div>
             </div>
