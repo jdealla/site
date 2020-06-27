@@ -6,6 +6,7 @@ import useSWR, { mutate } from "swr";
 
 import FilterSortBox from "../components/filtersortbox";
 import PlayersList from "../components/playerslist";
+import Layout from "../components/layout";
 
 const fetcher = url => fetch(url).then(r => r.json())
 
@@ -130,7 +131,7 @@ export default function Players({ players, allAnimations }) {
     }, [searchOptions])
 
     return (
-        <>
+        <Layout players={[]} searchOn={false}>
             <Head>
                 <title>All Players List | 2KDB </title>
                 <meta name="description" content="List of all players in NBA 2K20 MyTeam" key="description"/>
@@ -146,6 +147,12 @@ export default function Players({ players, allAnimations }) {
                         <nav className="pagination is-centered" role="navigation" aria-label="pagination">
                             <a className="pagination-previous" onClick={() => handlePage("prev")} disabled={page <= 0}>Previous</a>
                             <ul className="pagination-list">
+                                {/* <li><a className="pagination-link" aria-label="Goto page 1">1</a></li>
+                                <li><a className="pagination-link" aria-label="Goto page 2">2</a></li>
+                                <li><a className="pagination-link is-current" aria-label="Page 3">3</a></li>
+                                <li><span className="pagination-ellipsis">&hellip;</span></li>
+                                <li><a className="pagination-link" aria-label="Goto page 47">47</a></li>
+                                <li><a className="pagination-link" aria-label="Goto page 86">86</a></li> */}
                                 <li><p className="pagination-link" aria-label="total-players">Total Players: {players.length}</p></li>
                             </ul>
                             <a className="pagination-next" onClick={() => handlePage("next")} disabled={page * searchOptions.perPage >= players.length}>Next page</a>
@@ -153,7 +160,7 @@ export default function Players({ players, allAnimations }) {
                     </div>
                 </div>
             </div>
-        </>
+        </Layout>
     )
 }
 

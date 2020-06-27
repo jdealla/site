@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { getAllPlayers } from "../lib/players";
 
+import Layout from "../components/layout";
 import SearchBar from "../components/searchbar";
 
 export default function Home({ players }) {
@@ -11,7 +12,7 @@ export default function Home({ players }) {
   const handleClick = (playerId) => router.push(`/player/${playerId}`);
 
   return (
-    <>
+    <Layout players={[]} searchOn={false}>
       <Head>
         <title>2KDB Homepage</title>
         <meta name="description" content="NBA 2K20 MyTeam Database Index Page" />
@@ -27,7 +28,7 @@ export default function Home({ players }) {
           </div>
         </div>
       </section>
-    </>
+    </Layout>
   )
 }
 

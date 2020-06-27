@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import Router from "next/router";
 import * as gtag from "../lib/gtag";
 
-import Layout from "../components/layout";
 import "../styles/global.scss"
 
 export default function App({ Component, pageProps }) {
@@ -17,12 +16,8 @@ export default function App({ Component, pageProps }) {
             Router.events.off('routeChangeComplete', handleRouteChange)
         }
     }, [])
-  
-    return (
-        <Layout players={pageProps.players}>
-            <Component {...pageProps} />
-        </Layout>
-    )
+
+    return <Component {...pageProps} />
 }
 
 

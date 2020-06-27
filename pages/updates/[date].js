@@ -3,10 +3,11 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { getDates, getPlayersByDate, getAllPlayers } from "../../lib/players";
 
+import Layout from "../../components/layout";
 import PlayersCardView from "../../components/playerscardview";
 import Loader from "../../components/loader";
 
-export default function UpdatePage({ date, allPlayers }) {
+export default function UpdatePage({ date, allPlayers, players }) {
     const router = useRouter();
 
     if (router.isFallback) {
@@ -14,7 +15,7 @@ export default function UpdatePage({ date, allPlayers }) {
     }
 
     return (
-        <>
+        <Layout players={players} searchOn={true}>
             <Head>
                 <title>{`MyTeam Updates (${date}) | 2KDB`}</title>
                 <meta name="description" content={`NBA 2K20 MyTeam Card Update (${date})`} />
@@ -28,7 +29,7 @@ export default function UpdatePage({ date, allPlayers }) {
 				    <PlayersCardView players={allPlayers} />
 			    </nav>
             </div>
-        </>
+        </Layout>
     )
 }
 

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Head from "next/head";
-
 import { getCollections, getAllPlayers } from "../lib/players";
 
-export default function Collections({ collections }) {
+import Layout from "../components/layout";
+
+export default function Collections({ collections, players }) {
     const [view, setView] = useState("20 Current");
 
     const renderCollection = () => {
@@ -28,7 +29,7 @@ export default function Collections({ collections }) {
     }
 
     return (
-        <>
+        <Layout players={players} searchOn={true} >
             <Head>
                 <title>NBA2K20 MyTeam Collections | 2KDB</title>
                 <meta name="description" content="NBA 2K20 MyTeam collections page including every collection in the game" />
@@ -57,7 +58,7 @@ export default function Collections({ collections }) {
                     </div>
                 </div>
             </div>
-        </>
+        </Layout>
     )
 }
 

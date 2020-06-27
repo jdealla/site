@@ -6,12 +6,13 @@ import { findEvos } from "../../lib/evos";
 import { findDuos, findDuoPartner } from "../../lib/duos";
 import { getPlayerData } from "../../pages/api/player/[id]";
 
+import Layout from "../../components/layout";
 import PlayerHeader from "../../components/playerheader";
 import BadgeContainer from "../../components/badgecontainer";
 import Attributes from "../../components/attributes";
 import Loader from "../../components/loader";
 
-export default function Player({ playerData, altPlayers, evos, duo, duoPartner }) {
+export default function Player({ playerData, altPlayers, evos, duo, duoPartner, players }) {
     const [view, setView] = useState("stats");
     const [evoLevel, setEvoLevel] = useState(-1);
     const [duoOn, setDuoOn] = useState(false);
@@ -79,22 +80,22 @@ export default function Player({ playerData, altPlayers, evos, duo, duoPartner }
             case "tendencies": return (
                 <Fragment>
 				    <div className="column is-one-fifth-tablet is-half-mobile">
-                        <Attributes attributes={playerData.tendencies.inside} attrName="Inside" />
+                        <Attributes attributes={playerData.tendencies.inside} attrName="Inside" tendency={true}/>
                     </div>
                     <div className="column is-one-fifth-tablet is-half-mobile">
-                        <Attributes attributes={playerData.tendencies.shooting} attrName="Shooting" />
+                        <Attributes attributes={playerData.tendencies.shooting} attrName="Shooting" tendency={true}/>
                     </div>
                     <div className="column is-one-fifth-tablet is-half-mobile">
-                        <Attributes attributes={playerData.tendencies.iso} attrName="Iso" />
-                        <Attributes attributes={playerData.tendencies.drive} attrName="Drive" />
+                        <Attributes attributes={playerData.tendencies.iso} attrName="Iso" tendency={true}/>
+                        <Attributes attributes={playerData.tendencies.drive} attrName="Drive" tendency={true}/>
                     </div>
 					<div className="column is-one-fifth-tablet is-half-mobile">
-                        <Attributes attributes={playerData.tendencies.post} attrName="Post" />
+                        <Attributes attributes={playerData.tendencies.post} attrName="Post" tendency={true}/>
                     </div>
                     <div className="column is-one-fifth-tablet is-half-mobile">
-					    <Attributes attributes={playerData.tendencies.defense} attrName="Defense" />
-                        <Attributes attributes={playerData.tendencies.freelance} attrName="Freelance" />
-						<Attributes attributes={playerData.tendencies.passing} attrName="Passing" />        
+					    <Attributes attributes={playerData.tendencies.defense} attrName="Defense" tendency={true}/>
+                        <Attributes attributes={playerData.tendencies.freelance} attrName="Freelance" tendency={true}/>
+						<Attributes attributes={playerData.tendencies.passing} attrName="Passing" tendency={true}/>        
                     </div>
                 </Fragment>
             )
@@ -118,7 +119,7 @@ export default function Player({ playerData, altPlayers, evos, duo, duoPartner }
     }
 
     return (
-        <>
+        <Layout players={players} searchOn={true}>
             <Head>
                 <title>{`${playerData.info.name} MyTeam Player Page | 2KDB`}</title>
                 <meta property="og:title" content={`${playerData.info.name} MyTeam Player Page | 2KDB`} key={"title" + playerData.info.id} />
@@ -159,7 +160,7 @@ export default function Player({ playerData, altPlayers, evos, duo, duoPartner }
                     {renderView()}
                 </div>
             </div>
-        </>
+        </Layout>
     )
 }
 

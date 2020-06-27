@@ -78,7 +78,7 @@ export default function PlayersList(props) {
                                 <td className="has-text-centered">{player.theme}</td>
                                 <td className="has-text-centered">{player.team}</td>
                                 <td className={searchOptions.sortProp === "" ? "is-hidden" : "has-text-centered"}>
-                                    {(searchOptions.sortProp !== "") ? ratingColor(player[searchOptions.sortProp]) : ""}
+                                    {(searchOptions.sortProp !== "") ? ratingColor(player[searchOptions.sortProp], searchOptions.sortProp.includes("_t")) : ""}
                                 </td>
                             </tr>
                         )

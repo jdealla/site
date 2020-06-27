@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import NavSearch from "../components/navsearch";
 
 export default function NavBar(props) {
-    const { players } = props;
+    const { players, searchOn } = props;
     const [view, setView] = useState(false);
     const router = useRouter();
 
@@ -27,7 +27,7 @@ export default function NavBar(props) {
             <div className={`navbar-menu is-transparent ${view ? "is-active" : ""}`}>
                 <div className="navbar-start">
                     <div className="navbar-item">
-                        <NavSearch handleClick={handleClickPlayer} players={players} placeholder="Search players here" />
+                        {searchOn ? <NavSearch handleClick={handleClickPlayer} players={players} placeholder="Search players here" /> : ""}
                     </div>
                     <a className="navbar-item" href="/players">All Players</a>
                     <a className="navbar-item" href="/compare">Compare</a>
