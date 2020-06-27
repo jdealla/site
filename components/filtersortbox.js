@@ -71,7 +71,7 @@ export default function FilterSortBox(props) {
 
         handleOptions({ ...searchOptions, filterOptions: { ...filterOptions, badges: values } })
     }
-
+ 
     const handleAnimationFilter = (cat, value) => {
         const { filterOptions } = searchOptions;
         let animations = filterOptions.animations;
