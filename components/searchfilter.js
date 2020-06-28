@@ -33,7 +33,7 @@ export default function SearchFilter(props) {
     }
 
     const renderSuggestion = (suggestion) => (
-        <div className="has-text-black" onClick={() => handleAnimationFilter(animationCat, suggestion)}>
+        <div className="has-text-black animations-padding" onClick={() => handleAnimationFilter(animationCat, suggestion)}>
             {suggestion}
         </div>
     );
