@@ -96,11 +96,9 @@ export default function Players({ players, allAnimations }) {
                 
                     if (player[cat] === value) 
                         check.push(true);
-                    else
-                        check.push(false);
                 }
 
-                if (!check.includes(false))
+                if (check.includes(true))
                     return true;
             })
         }
