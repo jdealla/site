@@ -14,7 +14,7 @@ export default function PlayersList(props) {
         if (animations.length > 0) {
             let rows = [], cats = [];
             for(let ani of animations) {
-                let i = 0;
+                let i = 100;
                 let cat = ani.split("-")[0];
                 
                 let row = (
