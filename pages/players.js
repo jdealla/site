@@ -39,15 +39,15 @@ export default function Players({ players, allAnimations }) {
 
     useEffect(() => {
         const { searchValue, filterOptions, sortProp, asc, evos, duos } = searchOptions;
-        console.log(filterOptions);
+        console.log(searchOptions);
         let filtered = players;
 
         if (duos) {
-            filtered = filtered.filter(player => player.is_duo);
+            filtered = filtered.filter(player => player.is_duo === "True");
         }
 
         if (evos) {
-            filtered = filtered.filter(player => player.is_evo);
+            filtered = filtered.filter(player => player.is_evo === "True");
         }
 
         if (filterOptions.overall.length > 0) {
