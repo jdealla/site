@@ -76,7 +76,7 @@ export default function FilterSortBox(props) {
         const { filterOptions } = searchOptions;
         let animations = filterOptions.animations;
         let newFilter = cat + "-" + value;
-        console.log(newFilter);
+
         let targetIndex = animations.findIndex(ani => ani === newFilter);
 
         if (targetIndex === -1) {
