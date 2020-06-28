@@ -12,27 +12,26 @@ export default function PlayersList(props) {
     const displayHeaders = () => {
         let animations = searchOptions.filterOptions.animations
         if (animations.length > 0) {
-            let rows = [], cats = [];
+            let headerRows = [], headerCats = [];
             for(let ani of animations) {
-                let i = 100;
                 let cat = ani.split("-")[0];
-                
+
                 let row = (
-                    <th key={i++} className="has-text-centered">{cat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/g, "")}</th>
+                    <th key={cat + "header"} className="has-text-centered">{cat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/g, "")}</th>
                 )
                     
-                if (!cats.includes(cat)) {
-                    cats.push(cat);
-                    rows.push(row);
+                if (!headerCats.includes(cat)) {
+                    headerCats.push(cat);
+                    headerRows.push(row);
                 }
             }
-            if (rows.length < 3) {
-                rows.unshift((<th className="has-text-centered">Theme</th>));
-                if (rows.length < 3) {
-                    rows.unshift((<th className="has-text-centered">Team</th>))
+            if (headerRows.length < 3) {
+                headerRows.unshift((<th className="has-text-centered">Theme</th>));
+                if (headerRows.length < 3) {
+                    headerRows.unshift((<th className="has-text-centered">Team</th>))
                 }
             }
-            return rows;
+            return headerRows;
         } else {
             return (
                 <>
@@ -47,28 +46,27 @@ export default function PlayersList(props) {
     const displayColumns = (player) => {
         let animations = searchOptions.filterOptions.animations
         if (animations.length > 0) {
-            let rows = [], cats = [];
+            let tableRows = [], cats = [];
             for(let ani of animations) {
-                let i = 0;
                 let cat = ani.split("-")[0];
                 
                 let row = (
-                    <td key={i++} className="has-text-centered">{ratingColor(player[cat])}</td>
+                    <td key={cat + "table"} className="has-text-centered">{ratingColor(player[cat])}</td>
                 )
                     
                 if (!cats.includes(cat)) {
                     cats.push(cat);
-                    rows.push(row);
+                    tableRows.push(row);
                 }
             }
                 
-            if (rows.length < 3) {
-                rows.unshift((<td className="has-text-centered">{player.theme}</td>));
-                if (rows.length < 3) {
-                    rows.unshift((<td className="has-text-centered">{player.team}</td>))
+            if (tableRows.length < 3) {
+                tableRows.unshift((<td className="has-text-centered">{player.theme}</td>));
+                if (tableRows.length < 3) {
+                    tableRows.unshift((<td className="has-text-centered">{player.team}</td>))
                 }
             }
-            return rows;
+            return tableRows;
         } else {
             return (
                 <>
@@ -77,6 +75,14 @@ export default function PlayersList(props) {
                     <td className="has-text-centered">{player.theme}</td>
                 </>
             )
+        }
+    }
+
+    const displaySortProp = (player, totalBadges) => {
+        if (searchOptions.sortProp !== "" && searchOptions.sortProp !== "totalBadges") {
+            return ratingColor(player[searchOptions.sortProp], searchOptions.sortProp.includes("_t"))
+        } else if (searchOptions.sortProp === "totalBadges") {
+            return <span className="tag is-dark has-text-weight-semibold">{totalBadges.bronze + totalBadges.silver + totalBadges.gold + totalBadges.hof} {'   '}</span>
         }
     }
 
@@ -145,7 +151,7 @@ export default function PlayersList(props) {
                                 </td>
                                 {displayColumns(player)}
                                 <td className={searchOptions.sortProp === "" ? "is-hidden" : "has-text-centered"}>
-                                    {(searchOptions.sortProp !== "") ? ratingColor(player[searchOptions.sortProp], searchOptions.sortProp.includes("_t")) : ""}
+                                    {displaySortProp(player, totalBadges)}
                                 </td>
                             </tr>
                         )

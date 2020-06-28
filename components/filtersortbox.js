@@ -383,7 +383,8 @@ export default function FilterSortBox(props) {
                     </div>
                     <div className="column is-3-widescreen is-full-mobile">
                         <p className="heading">Sort By Misc: </p>
-                        <button className={`button is-small ${searchOptions.sortProp === "date" ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("date")}>By Date</button>
+                        <button className={`button is-small ${searchOptions.sortProp === "date" ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("date")}>Date</button>
+                        <button className={`button is-small ${searchOptions.sortProp === "totalBadges" ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("totalBadges")}>Total Badges</button>
                     </div>
                     {/* <div className="column is-3-widescreen is-full-mobile">
                         <p className="heading">Filter By Misc: </p>
