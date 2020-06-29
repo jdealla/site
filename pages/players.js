@@ -54,11 +54,11 @@ export default function Players({ players, allAnimations }) {
                     return 1;
                 }
             })
-
+            
             setAllPlayers(newPlayers);
             setUpdate(newPlayers);
         }
-    }, [total])
+    }, [updatedPlayers])
 
     useEffect(() => {
         const { searchValue, filterOptions, sortProp, asc, evos, duos } = searchOptions;

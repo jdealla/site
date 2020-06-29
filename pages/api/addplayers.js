@@ -13,8 +13,7 @@ export async function getNewPlayers() {
     const session = store.openSession();
 
     let date = getFormattedDate();
-    console.log(date);
-    const query = await session.query({ collection: "Players" }).whereEquals("date", "06-25-2020").all();
+    const query = await session.query({ collection: "Players" }).whereEquals("date", date).all();
     
     await session.saveChanges();
 
