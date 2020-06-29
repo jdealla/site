@@ -106,31 +106,35 @@ export default function PlayerHeader(props) {
                                             <a className="has-text-warning" href={`/collection/${playerData.info.collection.toLowerCase().replace(/ /g, "-")}/theme/${playerData.info.theme.toLowerCase().replace(/ /g, "-")}`}> {playerData.info.theme} </a>
                                         </p>
                                     </div>
-                                    <div className="column is-3-mobile is-2-tablet is-3-widescreen">
+                                    <div className="column is-3-mobile is-2-tablet ">
                                         <p className="heading has-text-warning">Offense</p>
                                         <p className="title is-size-6 has-text-white">{playerData.info.off_overall}</p>
                                     </div>
-                                    <div className="column is-3-mobile is-2-tablet is-3-widescreen">
+                                    <div className="column is-3-mobile is-2-tablet">
                                         <p className="heading has-text-warning">Defense</p>
                                         <p className="title is-size-6 has-text-white">{playerData.info.def_overall}</p>
                                     </div>
-                                    <div className="column is-3-mobile is-2-tablet is-3-widescreen">
+                                    <div className="column is-3-mobile is-2-tablet">
                                         <p className="heading has-text-warning">Height</p>
                                         <p className="title is-size-6 has-text-white">{playerData.info.height}</p>
                                     </div>
-                                    <div className="column is-3-mobile is-3-tablet is-2-desktop is-3-widescreen">
+									<div className="column is-3-mobile is-2-tablet">
+                                        <p className="heading has-text-warning">Wingspan</p>
+                                        <p className="title is-size-6 has-text-white">{playerData.info.wingspan}</p>
+                                    </div>
+                                    <div className="column is-3-mobile is-3-tablet">
                                         <p className="heading has-text-warning">Weight</p>
                                         <p className="title is-size-6 has-text-white">{playerData.info.weight} lbs</p>
                                     </div>
-                                    <div className="column is-3-mobile is-3-tablet is-3-widescreen">
+                                    <div className="column is-3-mobile is-2-tablet">
                                         <p className="heading has-text-warning">Position</p>
                                         <p className="title is-size-6 has-text-white">{playerData.info.position}{playerData.info.secondary_position != null ? `/${playerData.info.secondary_position}` : ""}</p>
                                     </div>
-                                    <div className="column is-half-mobile is-4-tablet is-3-widescreen">
+                                    <div className="column is-half-mobile is-2-tablet">
                                         <p className="heading has-text-warning">Team</p>
                                         <p className="title is-size-6 has-text-white">{playerData.info.team}</p>
                                     </div>
-                                    <div className="column is-half-mobile is-4-tablet is-3-widescreen">
+                                    <div className="column is-half-mobile is-4-tablet">
                                         <p className="heading has-text-warning">From</p>
                                         <p className="title is-size-6 has-text-white">{playerData.info.college}</p>
                                     </div>
