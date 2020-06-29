@@ -13,19 +13,18 @@ const fetcher = url => fetch(url).then(r => r.json())
 export default function Players({ players, allAnimations }) {
     // const { data: total } = useSWR("/api/totalplayers", fetcher);
     // const { data: updatedPlayers } = useSWR((total && total.totalResults > players.length) ? "/api/addplayers" : null, fetcher);
-    const [page, setPage] = useState(0)
     const [allPlayers, setAllPlayers] = useState(players);
     const [searchOptions, setSearchOptions] = useState({ 
-        searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [] }, sortProp: "", asc: false, perPage: 15,
+        searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [] }, sortProp: "", asc: false, page: 0, perPage: 15,
         evos: false, duos: false
     })
 
     const handlePage = (dir) => {
         if (dir === "prev") {
-            if (page > 0)
-                setPage(page - 1);
+            if (searchOptions.page > 0)
+                setSearchOptions({ ...searchOptions, page: searchOptions.page - 1 });
         } else {
-            setPage(page + 1);
+            setSearchOptions({ ...searchOptions, page: searchOptions.page + 1 });
         }
     }
 
@@ -103,35 +102,26 @@ export default function Players({ players, allAnimations }) {
             })
         }
 
-        if (sortProp !== "" && sortProp != "totalBadges") {
+        if (sortProp !== "") {
             filtered.sort((a, b) => {
-                if (a[sortProp] > b[sortProp])
-                    return asc ? 1 : -1;
-                else if (a[sortProp] === b[sortProp]) {
-                    if (a.overall > b.overall) {
-                        return -1;
-                    } else if (a.overall === b.overall) {
-                        if (a.name > b.name)
-                            return 1;
-                        else
-                            return -1;
-                    } else {
-                        return 1;
-                    }
-                } else {
-                    return asc ? -1 : 1;
-                }
-            })
-        } else if (sortProp === "totalBadges") {
-            filtered.sort((a, b) => {
-                let aBadges = getTotalNumOfBadges(a);
-                let bBadges = getTotalNumOfBadges(b);
-                let aTotal = aBadges.bronze + aBadges.silver + aBadges.gold + aBadges.hof;
-                let bTotal = bBadges.bronze + bBadges.silver + bBadges.gold + bBadges.hof;
+                let aCompare = a[sortProp];
+                let bCompare = b[sortProp];
 
-                if (aTotal > bTotal)
+                if (sortProp === "totalBadges") {
+                    let aBadges = getTotalNumOfBadges(a);
+                    let bBadges = getTotalNumOfBadges(b);
+                    aCompare = aBadges.bronze + aBadges.silver + aBadges.gold + aBadges.hof;
+                    bCompare = bBadges.bronze + bBadges.silver + bBadges.gold + bBadges.hof;
+                } else if (sortProp === "wingspan") {
+                    let aWingspan = a[sortProp].replace(/\"/g, "").split("'");
+                    let bWingspan = b[sortProp].replace(/\"/g, "").split("'");
+                    aCompare = Number(aWingspan[0] * 12) + Number(aWingspan[1]);
+                    bCompare = Number(bWingspan[0] * 12) + Number(bWingspan[1]);
+                }
+
+                if (aCompare > bCompare)
                     return asc ? 1 : -1;
-                else if (aTotal === bTotal) {
+                else if (aCompare === bCompare) {
                     if (a.overall > b.overall) {
                         return -1;
                     } else if (a.overall === b.overall) {
@@ -165,11 +155,11 @@ export default function Players({ players, allAnimations }) {
                 <div className="box">
                     <FilterSortBox allAnimations={allAnimations} searchOptions={searchOptions} handleOptions={handleOptions} />
                 </div>
-                <PlayersList players={allPlayers.slice(page * searchOptions.perPage, (page * searchOptions.perPage) + searchOptions.perPage)} searchOptions={searchOptions} />
+                <PlayersList players={allPlayers.slice(searchOptions.page * searchOptions.perPage, (searchOptions.page * searchOptions.perPage) + searchOptions.perPage)} searchOptions={searchOptions} />
                 <div className="columns">
                     <div className="column is-full">
                         <nav className="pagination is-centered" role="navigation" aria-label="pagination">
-                            <a className="pagination-previous" onClick={() => handlePage("prev")} disabled={page <= 0}>Previous</a>
+                            <a className="pagination-previous" onClick={() => handlePage("prev")} disabled={searchOptions.page <= 0}>Previous</a>
                             <ul className="pagination-list">
                                 {/* <li><a className="pagination-link" aria-label="Goto page 1">1</a></li>
                                 <li><a className="pagination-link" aria-label="Goto page 2">2</a></li>
@@ -179,7 +169,7 @@ export default function Players({ players, allAnimations }) {
                                 <li><a className="pagination-link" aria-label="Goto page 86">86</a></li> */}
                                 <li><p className="pagination-link" aria-label="total-players">Total Players: {allPlayers.length}</p></li>
                             </ul>
-                            <a className="pagination-next" onClick={() => handlePage("next")} disabled={page * searchOptions.perPage > allPlayers.length}>Next page</a>
+                            <a className="pagination-next" onClick={() => handlePage("next")} disabled={searchOptions.page * searchOptions.perPage > (allPlayers.length - searchOptions.page * searchOptions.perPage)}>Next page</a>
                         </nav>
                     </div>
                 </div>

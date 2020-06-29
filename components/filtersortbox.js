@@ -18,7 +18,7 @@ export default function FilterSortBox(props) {
     const handleSortDirection = () => handleOptions({ ...searchOptions, asc: !searchOptions.asc });
     const clearOptions = () => {
         handleOptions({
-            searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [] }, sortProp: "", asc: false, perPage: 15,
+            searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [] }, sortProp: "", asc: false, page: 0, perPage: 15,
             evos: false, duos: false
         });
     }
@@ -33,7 +33,7 @@ export default function FilterSortBox(props) {
             values = values.filter(item => item !== value);
         }
 
-        handleOptions({ ...searchOptions, filterOptions: { ...filterOptions, [prop]: values } });
+        handleOptions({ ...searchOptions, page: 0, filterOptions: { ...filterOptions, [prop]: values } });
     }
 
     const handleSort = (prop) => {
@@ -43,7 +43,7 @@ export default function FilterSortBox(props) {
         if (sortProp === prop)
         newProp = "";
 
-        handleOptions({ ...searchOptions, sortProp: newProp });
+        handleOptions({ ...searchOptions, page: 0, sortProp: newProp });
     }
 
     const handleBadgeFilter = (value) => {
@@ -69,7 +69,7 @@ export default function FilterSortBox(props) {
             }
         }
 
-        handleOptions({ ...searchOptions, filterOptions: { ...filterOptions, badges: values } })
+        handleOptions({ ...searchOptions, page: 0, filterOptions: { ...filterOptions, badges: values } })
     }
  
     const handleAnimationFilter = (cat, value) => {
@@ -85,7 +85,7 @@ export default function FilterSortBox(props) {
             animations.splice(targetIndex, 1);
         }
 
-        handleOptions({ ...searchOptions, filterOptions: { ...filterOptions, animations: animations }})
+        handleOptions({ ...searchOptions, page: 0, filterOptions: { ...filterOptions, animations: animations }})
     }
 
     const getAnimationCats = () => {
