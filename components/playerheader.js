@@ -116,7 +116,7 @@ export default function PlayerHeader(props) {
                                     </div>
                                     <div className="column is-3-mobile is-2-tablet">
                                         <p className="heading has-text-warning">Height</p>
-                                        <p className="title is-size-6 has-text-white">{playerData.info.height}</p>
+                                        <p className="title is-size-6 has-text-white">{playerData.info.height}"</p>
                                     </div>
 									<div className="column is-3-mobile is-2-tablet">
                                         <p className="heading has-text-warning">Wingspan</p>
@@ -134,7 +134,7 @@ export default function PlayerHeader(props) {
                                         <p className="heading has-text-warning">Team</p>
                                         <p className="title is-size-6 has-text-white">{playerData.info.team}</p>
                                     </div>
-                                    <div className="column is-half-mobile is-4-tablet">
+                                    <div className="column is-half-mobile is-2-tablet">
                                         <p className="heading has-text-warning">From</p>
                                         <p className="title is-size-6 has-text-white">{playerData.info.college}</p>
                                     </div>

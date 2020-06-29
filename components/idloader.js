@@ -74,13 +74,13 @@ const Loader = () => (
                            <p className="heading has-text-warning">Team</p>
                            <p className="title is-size-6 has-text-white"><span className="tag is-dark loading header-loading" style={{ width:"8em" }}></span></p>
                         </div>
-                        <div className="column is-half-mobile is-4-tablet">
+                        <div className="column is-half-mobile is-2-tablet">
                            <p className="heading has-text-warning">From</p>
-                           <p className="title is-size-6 has-text-white"><span className="tag is-dark loading header-loading" style={{ width:"13em" }}></span></p>
+                           <p className="title is-size-6 has-text-white"><span className="tag is-dark loading header-loading" style={{ width:"8em" }}></span></p>
                         </div>
                         <div className="column is-3-tablet">
                            <p className="heading has-text-warning">Nickname</p>
-                           <p className="title is-size-6 has-text-white"><span className="tag is-dark loading header-loading" style={{ width:"5em" }}></span></p>
+                           <p className="title is-size-6 has-text-white"><span className="tag is-dark loading header-loading" style={{ width:"8em" }}></span></p>
                         </div>
                         <div className="column is-hidden-mobile is-full-tablet">
                            <p className="heading has-text-warning">Plays</p>
