@@ -13,8 +13,8 @@ export default function NavBar(props) {
     return (
         <nav className="navbar is-black" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
-                <a className="navbar-item" onClick={() => router.push(`/`)}>
-                    2KDB
+                <a className="navbar-item hvr-underline-reveal logo ml-5" onClick={() => router.push(`/`)}>
+                    <img src="/logo.png" />
                 </a>
 
                 <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={handleClick}>

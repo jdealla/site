@@ -355,6 +355,10 @@ $badge-padding: .03rem .10rem;
     padding: 10px 20px;
 }
 
+.logo {
+   padding: 0 12px 0 0 !important;
+}
+
 @import "../node_modules/bulma/sass/utilities/functions.sass";
 @import "../node_modules/bulma/sass/utilities/derived-variables.scss";
 @import "../node_modules/bulma/sass/utilities/controls.sass";
