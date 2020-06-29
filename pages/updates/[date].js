@@ -5,7 +5,7 @@ import { getDates, getPlayersByDate, getAllPlayers } from "../../lib/players";
 
 import Layout from "../../components/layout";
 import PlayersCardView from "../../components/playerscardview";
-import Loader from "../../components/loader";
+import Loader from "../../components/updatesloader";
 
 export default function UpdatePage({ date, allPlayers, players }) {
     const router = useRouter();

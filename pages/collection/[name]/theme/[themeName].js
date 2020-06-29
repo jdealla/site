@@ -5,7 +5,7 @@ import { getThemes, getPlayersByTheme, getAllPlayers } from "../../../../lib/pla
 
 import Layout from "../../../../components/layout";
 import PlayersCardView from "../../../../components/playerscardview";
-import Loader from "../../../../components/loader";
+import Loader from "../../../../components/updatesloader";
 
 export default function Collection({ collection, theme, allPlayers, players }) {
     const router = useRouter();

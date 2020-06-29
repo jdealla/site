@@ -129,8 +129,8 @@
 }
 
 .loading {
-  position: relative;
-  overflow:hidden;
+    position: relative;
+    overflow: hidden;
   
    &:after {
     display: block;
@@ -144,6 +144,10 @@
     background: linear-gradient(90deg, transparent, rgba(200, 200, 200, .2), transparent);
     animation: loading 1.5s infinite; 
 	}
+}
+
+.loading-updates {
+    width: 100%;
 }
 
 @keyframes loading {
