@@ -39,7 +39,7 @@ export default function Players({ players, allAnimations }) {
 
     useEffect(() => {
         const { searchValue, filterOptions, sortProp, asc, evos, duos } = searchOptions;
-        console.log(searchOptions);
+
         let filtered = players;
 
         if (duos) {

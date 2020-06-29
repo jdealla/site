@@ -26,9 +26,9 @@ export default function PlayersList(props) {
                 }
             }
             if (headerRows.length < 3) {
-                headerRows.unshift((<th className="has-text-centered">Theme</th>));
+                headerRows.unshift((<th key={"themeheader"} className="has-text-centered">Theme</th>));
                 if (headerRows.length < 3) {
-                    headerRows.unshift((<th className="has-text-centered">Team</th>))
+                    headerRows.unshift((<th key={"teamheader"} className="has-text-centered">Team</th>))
                 }
             }
             return headerRows;
@@ -61,9 +61,9 @@ export default function PlayersList(props) {
             }
                 
             if (tableRows.length < 3) {
-                tableRows.unshift((<td className="has-text-centered">{player.theme}</td>));
+                tableRows.unshift((<td key={"themetable"} className="has-text-centered">{player.theme}</td>));
                 if (tableRows.length < 3) {
-                    tableRows.unshift((<td className="has-text-centered">{player.team}</td>))
+                    tableRows.unshift((<td key={"teamtable"} className="has-text-centered">{player.team}</td>))
                 }
             }
             return tableRows;

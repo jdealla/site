@@ -9,12 +9,7 @@ export default function SearchFilter(props) {
     const [items, setItems] = useState([]);
     
     const onChange = (event, { newValue, method }) => setValue(newValue);
-    const onSuggestionsFetchRequested = ({ value, reason }) => {
-        if (reason === 'input-focused' || reason === 'input-changed')
-            setItems(getItemsBySuggestion(value));
-        if (reason === 'escape-pressed')
-            setItems([]);
-    }
+    const onSuggestionsFetchRequested = ({ value }) => setItems(getItemsBySuggestion(value));
     const onSuggestionsClearRequested = () => setItems([]);
     
     const getSuggestionValue = (suggestion) => {
@@ -24,8 +19,8 @@ export default function SearchFilter(props) {
     const getItemsBySuggestion = (value) => {
         const inputValue = value.trim().toLowerCase();
         const inputLength = inputValue.length;
-    
-        return inputLength === 0 ? [] : suggestions.filter(suggestion => {
+        
+        return inputLength === 0 ? suggestions : suggestions.filter(suggestion => {
             return (
                 suggestion.trim().toLowerCase().includes(inputValue)
             )
@@ -38,10 +33,13 @@ export default function SearchFilter(props) {
         </div>
     );
 
+    const onSuggestionSelected = () => setValue('');
+
+    const shouldRenderSuggestions = () => true;
+
     const inputProps = {
         placeholder,
         value,
-        type: "search",
         onChange
     };
 
@@ -52,9 +50,11 @@ export default function SearchFilter(props) {
             onSuggestionsFetchRequested={onSuggestionsFetchRequested}
             onSuggestionsClearRequested={onSuggestionsClearRequested}
             getSuggestionValue={getSuggestionValue}
+            shouldRenderSuggestions={shouldRenderSuggestions}
+            highlightFirstSuggestion={true}
+            onSuggestionSelected={onSuggestionSelected}
             renderSuggestion={renderSuggestion}
             inputProps={inputProps} 
-            highlightFirstSuggestion={true}
         />
     )
 }
