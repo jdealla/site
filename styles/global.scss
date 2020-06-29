@@ -38,7 +38,7 @@ $badge-padding: .03rem .10rem;
 
     .columns {
         &.is-player-card {
-		    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(70,17,15,1) 100%, rgba(85,20,19,1) 100%);
+		    background: linear-gradient(180deg, rgba(0,0,0,1) 45%, rgba(85,20,19,1) 100%);
         }
     }
 	
@@ -343,6 +343,16 @@ $badge-padding: .03rem .10rem;
   100% {
     transform: rotate(360deg);
   }
+}
+
+.li-nopadding {
+    ul > li {
+	   padding: 0 !important;
+	}
+}
+
+.animations-padding {
+    padding: 10px 20px;
 }
 
 @import "../node_modules/bulma/sass/utilities/functions.sass";

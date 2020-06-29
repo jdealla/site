@@ -9,6 +9,83 @@ export default function PlayersList(props) {
         window.location = `/player/${playerId}`
     }
 
+    const displayHeaders = () => {
+        let animations = searchOptions.filterOptions.animations
+        if (animations.length > 0) {
+            let headerRows = [], headerCats = [];
+            for(let ani of animations) {
+                let cat = ani.split("-")[0];
+
+                let row = (
+                    <th key={cat + "header"} className="has-text-centered">{cat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/g, "")}</th>
+                )
+                    
+                if (!headerCats.includes(cat)) {
+                    headerCats.push(cat);
+                    headerRows.push(row);
+                }
+            }
+            if (headerRows.length < 3) {
+                headerRows.unshift((<th key={"themeheader"} className="has-text-centered">Theme</th>));
+                if (headerRows.length < 3) {
+                    headerRows.unshift((<th key={"teamheader"} className="has-text-centered">Team</th>))
+                }
+            }
+            return headerRows;
+        } else {
+            return (
+                <>
+                    <th className="has-text-centered">Collection</th>
+                    <th className="has-text-centered">Theme</th>
+                    <th className="has-text-centered">Team</th>
+                </>
+            )
+        }
+    }
+
+    const displayColumns = (player) => {
+        let animations = searchOptions.filterOptions.animations
+        if (animations.length > 0) {
+            let tableRows = [], cats = [];
+            for(let ani of animations) {
+                let cat = ani.split("-")[0];
+                
+                let row = (
+                    <td key={cat + "table"} className="has-text-centered">{ratingColor(player[cat])}</td>
+                )
+                    
+                if (!cats.includes(cat)) {
+                    cats.push(cat);
+                    tableRows.push(row);
+                }
+            }
+                
+            if (tableRows.length < 3) {
+                tableRows.unshift((<td key={"themetable"} className="has-text-centered">{player.theme}</td>));
+                if (tableRows.length < 3) {
+                    tableRows.unshift((<td key={"teamtable"} className="has-text-centered">{player.team}</td>))
+                }
+            }
+            return tableRows;
+        } else {
+            return (
+                <>
+                    <td className="has-text-centered">{player.collection}</td>
+                    <td className="has-text-centered">{player.theme}</td>
+                    <td className="has-text-centered">{player.team}</td>
+                </>
+            )
+        }
+    }
+
+    const displaySortProp = (player, totalBadges) => {
+        if (searchOptions.sortProp !== "" && searchOptions.sortProp !== "totalBadges") {
+            return ratingColor(player[searchOptions.sortProp], searchOptions.sortProp.includes("_t"))
+        } else if (searchOptions.sortProp === "totalBadges") {
+            return <span className="tag is-dark has-text-weight-semibold">{totalBadges.bronze + totalBadges.silver + totalBadges.gold + totalBadges.hof} {'   '}</span>
+        }
+    }
+
     return (
         <div className="table-container">
             <table className="table is-fullwidth is-hoverable is-bordered is-striped" style={{ marginTop: "5px"}}>
@@ -21,9 +98,7 @@ export default function PlayersList(props) {
                         <th className="has-text-centered">Def Overall</th>
                         <th className="has-text-centered">Height</th>
                         <th className="has-text-centered">Badges</th>
-                        <th className="has-text-centered">Collection</th>
-                        <th className="has-text-centered">Theme</th>
-                        <th className="has-text-centered">Team</th>
+                        {displayHeaders()}
                         <th className={searchOptions.sortProp === "" ? "is-hidden" : "players-sort-column"}>{formatName(searchOptions.sortProp)}</th>
                     </tr>
                 </thead>
@@ -74,11 +149,9 @@ export default function PlayersList(props) {
                                         </div>
                                     </div>
                                 </td>
-                                <td className="has-text-centered">{player.collection}</td>
-                                <td className="has-text-centered">{player.theme}</td>
-                                <td className="has-text-centered">{player.team}</td>
+                                {displayColumns(player)}
                                 <td className={searchOptions.sortProp === "" ? "is-hidden" : "has-text-centered"}>
-                                    {(searchOptions.sortProp !== "") ? ratingColor(player[searchOptions.sortProp], searchOptions.sortProp.includes("_t")) : ""}
+                                    {displaySortProp(player, totalBadges)}
                                 </td>
                             </tr>
                         )

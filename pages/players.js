@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { getAllPlayersWithAllStats, getAllAnimations } from "../lib/players";
-import { getFilterTiers } from "../lib/helpers"
-import useSWR, { mutate } from "swr";
+import { getFilterTiers, getTotalNumOfBadges } from "../lib/helpers"
+// import useSWR from "swr";
 
 import FilterSortBox from "../components/filtersortbox";
 import PlayersList from "../components/playerslist";
@@ -11,8 +11,8 @@ import Layout from "../components/layout";
 const fetcher = url => fetch(url).then(r => r.json())
 
 export default function Players({ players, allAnimations }) {
-    const { data: total } = useSWR("/api/totalplayers", fetcher);
-    const { data: updatedPlayers } = useSWR((total && total.totalResults > players.length) ? "/api/addplayers" : null, fetcher);
+    // const { data: total } = useSWR("/api/totalplayers", fetcher);
+    // const { data: updatedPlayers } = useSWR((total && total.totalResults > players.length) ? "/api/addplayers" : null, fetcher);
     const [page, setPage] = useState(0)
     const [allPlayers, setAllPlayers] = useState(players);
     const [searchOptions, setSearchOptions] = useState({ 
@@ -31,15 +31,15 @@ export default function Players({ players, allAnimations }) {
 
     const handleOptions = (options) => setSearchOptions(options);
 
-    useEffect(() => {
-        if (updatedPlayers) {
-            setAllPlayers([...players, ...updatedPlayers]);
-        }
-    }, [total])
+    // useEffect(() => {
+    //     if (updatedPlayers) {
+    //         setAllPlayers([...players, ...updatedPlayers]);
+    //     }
+    // }, [total])
 
     useEffect(() => {
         const { searchValue, filterOptions, sortProp, asc, evos, duos } = searchOptions;
-        console.log(searchOptions);
+
         let filtered = players;
 
         if (duos) {
@@ -96,20 +96,42 @@ export default function Players({ players, allAnimations }) {
                 
                     if (player[cat] === value) 
                         check.push(true);
-                    else
-                        check.push(false);
                 }
 
-                if (!check.includes(false))
+                if (check.includes(true))
                     return true;
             })
         }
 
-        if (sortProp !== "") {
-            filtered = filtered.sort((a, b) => {
+        if (sortProp !== "" && sortProp != "totalBadges") {
+            filtered.sort((a, b) => {
                 if (a[sortProp] > b[sortProp])
-                    return asc ? 1: -1;
+                    return asc ? 1 : -1;
                 else if (a[sortProp] === b[sortProp]) {
+                    if (a.overall > b.overall) {
+                        return -1;
+                    } else if (a.overall === b.overall) {
+                        if (a.name > b.name)
+                            return 1;
+                        else
+                            return -1;
+                    } else {
+                        return 1;
+                    }
+                } else {
+                    return asc ? -1 : 1;
+                }
+            })
+        } else if (sortProp === "totalBadges") {
+            filtered.sort((a, b) => {
+                let aBadges = getTotalNumOfBadges(a);
+                let bBadges = getTotalNumOfBadges(b);
+                let aTotal = aBadges.bronze + aBadges.silver + aBadges.gold + aBadges.hof;
+                let bTotal = bBadges.bronze + bBadges.silver + bBadges.gold + bBadges.hof;
+
+                if (aTotal > bTotal)
+                    return asc ? 1 : -1;
+                else if (aTotal === bTotal) {
                     if (a.overall > b.overall) {
                         return -1;
                     } else if (a.overall === b.overall) {
@@ -157,7 +179,7 @@ export default function Players({ players, allAnimations }) {
                                 <li><a className="pagination-link" aria-label="Goto page 86">86</a></li> */}
                                 <li><p className="pagination-link" aria-label="total-players">Total Players: {allPlayers.length}</p></li>
                             </ul>
-                            <a className="pagination-next" onClick={() => handlePage("next")} disabled={page * searchOptions.perPage >= allPlayers.length}>Next page</a>
+                            <a className="pagination-next" onClick={() => handlePage("next")} disabled={page * searchOptions.perPage > allPlayers.length}>Next page</a>
                         </nav>
                     </div>
                 </div>
@@ -169,6 +191,26 @@ export default function Players({ players, allAnimations }) {
 export async function getStaticProps() {
     const players = await getAllPlayersWithAllStats()
                             .catch(console.error);
+
+    players.sort((a, b) => {
+        let aBadges = getTotalNumOfBadges(a);
+        let bBadges = getTotalNumOfBadges(b);
+
+        if (a.overall > b.overall) {
+            return -1;
+        } else if (a.overall === b.overall) {
+            if (aBadges.hof > bBadges.hof) {
+                return -1;
+            } else if (aBadges.hof === bBadges.hof) {
+                if (a.name > b.name)
+                    return 1;
+                else
+                    return -1;
+            }
+        } else {
+            return 1;
+        }
+    })
 
     const allAnimations = getAllAnimations(players);
 

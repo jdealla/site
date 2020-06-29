@@ -43,36 +43,40 @@ const Loader = () => (
                               <figure className="image is-48x48 tag is-dark loading header-loading"></figure>
                            </div>
                         </div>
-                        <div className="column is-9-mobile is-9-tablet">
+                        <div className="column is-9-mobile is-10-tablet">
                            <p className="title is-size-4-mobile is-size-3-widescreen has-text-weight-bold has-text-white">Loading Player...</p>
                         </div>
-                        <div className="column is-3-mobile is-2-tablet is-3-widescreen">
+                        <div className="column is-3-mobile is-2-tablet">
                            <p className="heading has-text-warning">Offense</p>
                            <p className="title is-size-6 has-text-white"><span className="tag is-dark loading header-loading" style={{ width:"3em" }}></span></p>
                         </div>
-                        <div className="column is-3-mobile is-2-tablet is-3-widescreen">
+                        <div className="column is-3-mobile is-2-tablet">
                            <p className="heading has-text-warning">Defense</p>
                            <p className="title is-size-6 has-text-white"><span className="tag is-dark loading header-loading" style={{ width:"3em" }}></span></p>
                         </div>
-                        <div className="column is-3-mobile is-2-tablet is-3-widescreen">
+                        <div className="column is-3-mobile is-2-tablet">
                            <p className="heading has-text-warning">Height</p>
                            <p className="title is-size-6 has-text-white"><span className="tag is-dark loading header-loading" style={{ width:"3em" }}></span></p>
                         </div>
-                        <div className="column is-3-mobile is-3-tablet is-2-desktop is-3-widescreen">
+						<div className="column is-3-mobile is-2-tablet">
+                           <p className="heading has-text-warning">Wingspan</p>
+                           <p className="title is-size-6 has-text-white"><span className="tag is-dark loading header-loading" style={{ width:"3em" }}></span></p>
+                        </div>
+                        <div className="column is-3-mobile is-3-tablet">
                            <p className="heading has-text-warning">Weight</p>
                            <p className="title is-size-6 has-text-white"><span className="tag is-dark loading header-loading" style={{ width:"3em" }}></span></p>
                         </div>
-                        <div className="column is-3-mobile is-3-tablet is-3-widescreen">
+                        <div className="column is-3-mobile is-2-tablet">
                            <p className="heading has-text-warning">Position</p>
                            <p className="title is-size-6 has-text-white"><span className="tag is-dark loading header-loading" style={{ width:"4em" }}></span></p>
                         </div>
-                        <div className="column is-half-mobile is-4-tablet is-3-widescreen">
+                        <div className="column is-half-mobile is-2-tablet">
                            <p className="heading has-text-warning">Team</p>
                            <p className="title is-size-6 has-text-white"><span className="tag is-dark loading header-loading" style={{ width:"8em" }}></span></p>
                         </div>
-                        <div className="column is-half-mobile is-4-tablet is-3-widescreen">
+                        <div className="column is-half-mobile is-4-tablet">
                            <p className="heading has-text-warning">From</p>
-                           <p className="title is-size-6 has-text-white"><span className="tag is-dark loading header-loading" style={{ width:"8em" }}></span></p>
+                           <p className="title is-size-6 has-text-white"><span className="tag is-dark loading header-loading" style={{ width:"13em" }}></span></p>
                         </div>
                         <div className="column is-3-tablet">
                            <p className="heading has-text-warning">Nickname</p>

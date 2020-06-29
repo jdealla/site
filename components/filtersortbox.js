@@ -76,7 +76,7 @@ export default function FilterSortBox(props) {
         const { filterOptions } = searchOptions;
         let animations = filterOptions.animations;
         let newFilter = cat + "-" + value;
-        console.log(newFilter);
+
         let targetIndex = animations.findIndex(ani => ani === newFilter);
 
         if (targetIndex === -1) {
@@ -350,7 +350,7 @@ export default function FilterSortBox(props) {
                     </div>
                     <div className="column is-6-widescreen">
                         <p className="heading">Filter By Animations: </p>
-                        <div className="container is-flex">
+                        <div className="container is-flex li-nopadding">
                             <Dropdown title={animationCat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/g, "")} items={getAnimationCats()} />
                             {showAnimationFilters()}
                             <SearchFilter suggestions={filterItems} handleAnimationFilter={handleAnimationFilter} animationCat={animationCat} placeholder={`Search ${animationCat.replace(/_/g, " ")} here`} />
@@ -383,7 +383,9 @@ export default function FilterSortBox(props) {
                     </div>
                     <div className="column is-3-widescreen is-full-mobile">
                         <p className="heading">Sort By Misc: </p>
-                        <button className={`button is-small ${searchOptions.sortProp === "date" ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("date")}>By Date</button>
+                        <button className={`button is-small ${searchOptions.sortProp === "date" ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("date")}>Date</button>
+                        <button className={`button is-small ${searchOptions.sortProp === "totalBadges" ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("totalBadges")}>Total Badges</button>
+                        <button className={`button is-small ${searchOptions.sortProp === "wingspan" ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("wingspan")}>Wingspan</button>
                     </div>
                     {/* <div className="column is-3-widescreen is-full-mobile">
                         <p className="heading">Filter By Misc: </p>
