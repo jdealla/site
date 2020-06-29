@@ -71,8 +71,8 @@ export default function PlayersList(props) {
             return (
                 <>
                     <td className="has-text-centered">{player.collection}</td>
-                    <td className="has-text-centered">{player.team}</td>
                     <td className="has-text-centered">{player.theme}</td>
+                    <td className="has-text-centered">{player.team}</td>
                 </>
             )
         }
