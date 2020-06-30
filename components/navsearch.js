@@ -36,7 +36,7 @@ export default function SearchBar(props) {
         <div className="is-flex has-text-black" onClick={() => handleClick(suggestion.id)}>
             <img src={`https://2kdbimg.com/35/${suggestion.name.replace(/( |')/g, "_").toLowerCase()}_${suggestion.id}.jpg`} />
                 <div className="is-flex navsearch-item-div">
-                    <div className="ml-1"> 
+                    <div className="ml-1 has-text-left"> 
                         <p className="title is-7">{suggestion.name}</p> 
                         <p className="subtitle">{suggestion.collection} / {suggestion.theme}</p>
                     </div>
