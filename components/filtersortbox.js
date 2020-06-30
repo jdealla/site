@@ -41,7 +41,7 @@ export default function FilterSortBox(props) {
         let newProp = prop;
 
         if (sortProp === prop)
-        newProp = "";
+            newProp = "";
 
         handleOptions({ ...searchOptions, page: 0, sortProp: newProp });
     }

@@ -1,11 +1,10 @@
 import React from "react";
 import { ratingColor, formatName, getTotalNumOfBadges } from "../lib/helpers";
-import OverallImage from "./overallimage";
 import TagOverall from "./tagoverall";
 
 export default function PlayersList(props) {
     const { players, searchOptions } = props;
-
+    
     const handleClick = (playerId) => {
         window.location = `/player/${playerId}`
     }

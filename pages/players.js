@@ -126,23 +126,44 @@ export default function Players({ players, allAnimations }) {
             })
         }
 
-        if (sortProp !== "") {
-            filtered.sort((a, b) => {
-                let aCompare = a[sortProp];
-                let bCompare = b[sortProp];
+        let sorted = filtered;
+        filtered = sorted.sort((a, b) => {
+            let aBadges = getTotalNumOfBadges(a);
+            let bBadges = getTotalNumOfBadges(b);
+            let aCompare = aBadges.hof;
+            let bCompare = bBadges.hof;
 
-                if (sortProp === "totalBadges") {
-                    let aBadges = getTotalNumOfBadges(a);
-                    let bBadges = getTotalNumOfBadges(b);
-                    aCompare = aBadges.bronze + aBadges.silver + aBadges.gold + aBadges.hof;
-                    bCompare = bBadges.bronze + bBadges.silver + bBadges.gold + bBadges.hof;
-                } else if (sortProp === "wingspan") {
-                    let aWingspan = a[sortProp].replace(/\"/g, "").split("'");
-                    let bWingspan = b[sortProp].replace(/\"/g, "").split("'");
-                    aCompare = Number(aWingspan[0] * 12) + Number(aWingspan[1]);
-                    bCompare = Number(bWingspan[0] * 12) + Number(bWingspan[1]);
+            if (sortProp !== "") {
+                aCompare = a[sortProp];
+                bCompare = b[sortProp];
+            }
+
+            if (sortProp === "totalBadges") {
+                aCompare = aBadges.bronze + aBadges.silver + aBadges.gold + aBadges.hof;
+                bCompare = bBadges.bronze + bBadges.silver + bBadges.gold + bBadges.hof;
+            } else if (sortProp === "wingspan") {
+                let aWingspan = a[sortProp].replace(/\"/g, "").split("'");
+                let bWingspan = b[sortProp].replace(/\"/g, "").split("'");
+                aCompare = Number(aWingspan[0] * 12) + Number(aWingspan[1]);
+                bCompare = Number(bWingspan[0] * 12) + Number(bWingspan[1]);
+            }
+            
+            if (sortProp === "") {
+                if (a.overall > b.overall) {
+                    return -1;
+                } else if (a.overall === b.overall) {
+                    if (aBadges.hof > bBadges.hof) {
+                        return -1;
+                    } else if (aBadges.hof === bBadges.hof) {
+                        if (a.name > b.name)
+                            return 1;
+                        else
+                            return -1;
+                    }
+                } else {
+                    return 1;
                 }
-
+            } else {
                 if (aCompare > bCompare)
                     return asc ? 1 : -1;
                 else if (aCompare === bCompare) {
@@ -159,10 +180,9 @@ export default function Players({ players, allAnimations }) {
                 } else {
                     return asc ? -1 : 1;
                 }
-            })
-        }
+            }
+        })
 
-        //filter by name value
         filtered = filtered.filter(player => player.name.toLowerCase().includes(searchValue));
 
         setAllPlayers(filtered);
