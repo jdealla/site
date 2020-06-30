@@ -33,8 +33,7 @@ export default function Home({ players }) {
 }
 
 export async function getStaticProps() {
-  const players = await getAllPlayers()
-                        .catch(console.error);
+  const players = await getAllPlayers().catch(console.error);
 
   return {
     props: {

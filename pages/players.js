@@ -179,8 +179,7 @@ export default function Players({ players, allAnimations }) {
 }
 
 export async function getStaticProps() {
-    const players = await getAllPlayersWithAllStats()
-                            .catch(console.error);
+    const players = await getAllPlayersWithAllStats().catch(console.error);
 
     players.sort((a, b) => {
         let aBadges = getTotalNumOfBadges(a);

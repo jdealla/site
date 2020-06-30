@@ -60,12 +60,12 @@ export default function Updates({ groupedByDate, updateNames, players }) {
 }
 
 export async function getStaticProps() {
-    const groupedByDate = await getPlayersByDates()
-                                .catch(console.error);
-	const updateNames = await getUpdatesNames();							
+    const groupedByDate = await getPlayersByDates().catch(console.error);
+
+    const updateNames = await getUpdatesNames().catch(console.error);						
     
-    const players = await getAllPlayers()
-                        .catch(console.error);
+    const players = await getAllPlayers().catch(console.error);
+
     return {
         props: {
             groupedByDate,

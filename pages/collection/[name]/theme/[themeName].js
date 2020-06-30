@@ -45,7 +45,7 @@ export default function Collection({ collection, theme, allPlayers, players }) {
 }
 
 export async function getStaticPaths() {
-    const paths = await getThemes();
+    const paths = await getThemes().catch(console.error);
 
     return {
         paths,
@@ -57,10 +57,9 @@ export async function getStaticProps({ params }) {
     const collection = params.name;
     const theme = params.themeName;
 
-    const allPlayers = await getPlayersByTheme(collection, theme);
+    const allPlayers = await getPlayersByTheme(collection, theme).catch(console.error);;
 
-    const players = await getAllPlayers()
-                            .catch(console.error);
+    const players = await getAllPlayers().catch(console.error);
     return {
         props: {
             collection,
