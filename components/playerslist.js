@@ -1,6 +1,7 @@
 import React from "react";
 import { ratingColor, formatName, getTotalNumOfBadges } from "../lib/helpers";
 import OverallImage from "./overallimage";
+import TagOverall from "./tagoverall";
 
 export default function PlayersList(props) {
     const { players, searchOptions } = props;
@@ -117,10 +118,7 @@ export default function PlayersList(props) {
                                 </td>
                                 <td style={{ textAlign: "center" }}>
                                     <div className="container margin-auto-list">
-                                        <OverallImage size="24x24" overall={player.overall} />
-                                        <p className="is-overlay has-text-white inline-number-ovr">
-                                            {player.overall}
-                                        </p>
+                                        <TagOverall overall={player.overall} />
                                     </div>
                                 </td>
                                 <td className="has-text-centered">{player.position}{player.secondary_position != null ? `/${player.secondary_position}` : ""} </td>

@@ -1,7 +1,7 @@
 import React from "react";
 
 import SearchPlayers from "../components/searchplayers";
-import OverallImage from "./overallimage";
+import TagOverall from "./tagoverall";
 
 export default function CompareHeader(props) {
     const { players, handlePlayer, compare } = props;
@@ -23,21 +23,26 @@ export default function CompareHeader(props) {
                                   <br />
 		                          <br />
 		                       </p>
-                               <p className="heading">Overall</p>
-                               <p className="compare-ovr">
-                               <OverallImage size="24x24" overall={playerData.info.overall} />
-                                   <p className="is-overlay is-size-6 has-text-white inline-number-ovr" >
-                                       {playerData.info.overall}
-                                   </p>
+                                <p className="heading">Overall</p>
+                                <p className="compare-ovr">
+                                    <TagOverall overall={playerData.info.overall} />
                                 </p>
                                 <br />
                                 <p className="heading">Position</p>
                                 <p className="title is-size-6">{playerData.info.position}{playerData.info.secondary_position != null ? `/${playerData.info.secondary_position}` : ""}</p>
                                 <br />
-                                <p className="heading">Height</p>
-                                <p className="title is-size-6">{playerData.info.height}</p>
-                                <br />
-                                <p className="heading">Weight</p>
+								<div className="is-flex" style={{ justifyContent: "space-evenly" }}>
+								    <div>
+                                        <p className="heading">Height</p>
+                                        <p className="title is-size-6">{playerData.info.height}"</p>
+								    </div>
+								    <div>
+								        <p className="heading">Wingspan</p>
+                                        <p className="title is-size-6">{playerData.info.wingspan}</p>
+								    </div>
+								</div>
+								<br />
+								<p className="heading">Weight</p>
                                 <p className="title is-size-6">{playerData.info.weight}</p>
                           </div>
                       </div>

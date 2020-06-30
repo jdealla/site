@@ -6,6 +6,7 @@ import { getTotalUpgradedBadges } from "../lib/helpers";
 
 import ShotChart from "./shotchart";
 import OverallImage from "./overallimage";
+import TagOverall from "./tagoverall";
 
 export default function PlayerHeader(props) {
     const { playerData, altPlayers, evos, evoLevel, handleEvo, duo, duoOn, handleDuo, duoPartner } = props;
@@ -54,14 +55,11 @@ export default function PlayerHeader(props) {
                                 <div className="columns is-mobile is-centered py-5" style={{ flexWrap:"wrap" }}>
                                     {altPlayers.map((player, i) => (
                                         <div className="column is-narrow" key={i} style={{ padding:"0.1em" }}>
-                                            <div className="container no-shadow">
-                                                <a href={`/player/${player.id}`}>
-                                                    <OverallImage size="24x24" overall={player.overall} />
-                                                    <p className="is-overlay is-size-6 has-text-white has-text-centered inline-number-ovr" >
-                                                        {player.overall}
-                                                    </p>
-                                                </a>
-                                            </div>
+                                           <div className="column is-narrow" key={i} style={{ padding:"0.1em" }}>
+                                            <a href={`/player/${player.id}`}>
+                                                <TagOverall overall={player.overall} />
+                                            </a>
+                                        </div>
                                         </div>
                                     ))}
                                 </div>
@@ -76,14 +74,9 @@ export default function PlayerHeader(props) {
                                 <div className="columns is-mobile is-centered py-5" style={{ flexWrap:"wrap" }}>
                                     {altPlayers.map((player, i) => (
                                         <div className="column is-narrow" key={i} style={{ padding:"0.1em" }}>
-                                            <div className="container no-shadow">
-                                                <a href={`/player/${player.id}`}>
-                                                    <OverallImage size="24x24" overall={player.overall} />
-                                                    <p className="is-overlay is-size-6 has-text-white has-text-centered inline-number-ovr" >
-                                                        {player.overall}
-                                                    </p>
-                                                </a>
-                                            </div>
+                                            <a href={`/player/${player.id}`}>
+                                                <TagOverall overall={player.overall} />
+                                            </a>
                                         </div>
                                     ))}
                                 </div>
@@ -167,10 +160,7 @@ export default function PlayerHeader(props) {
                                         <p className="heading has-text-warning">Dynamic Duo</p> 
                                         <div className="container is-flex duo-items">
 										    <div className="has-text-centered no-shadow">
-										        <OverallImage overall={duoPartner.overall} size={24} />
-                                                <p className="is-overlay is-size-6 has-text-white inline-number-ovr">
-                                                   {duoPartner.overall}
-                                                </p>
+										        <TagOverall overall={duoPartner.overall} />
                                             </div>
                                             <a href={`/player/${duoPartner.id}`}>{duoPartner.name}</a>
                                             {renderDuo()}
