@@ -175,28 +175,22 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const playerData = await getPlayerData(params.id)
-                            .catch(console.error);
+    const playerData = await getPlayerData(params.id).catch(console.error);
 
-    const res = await findAltPlayers(playerData.info.name)
-                        .catch(console.error);
+    const res = await findAltPlayers(playerData.info.name).catch(console.error);
     
     const altPlayers = res.filter(player => player.id != playerData.info.id).sort((a, b) => a.overall > b.overall ? -1 : 1);
 
-    const evos = await findEvos(playerData.info.id)
-                        .catch(console.error);
+    const evos = await findEvos(playerData.info.id).catch(console.error);
 
-    const duo = await findDuos(playerData.info.id)
-                        .catch(console.error);
+    const duo = await findDuos(playerData.info.id).catch(console.error);
 
     let duoPartner = {};
-    if (duo != null) {
-        duoPartner = await findDuoPartner(duo.id2)
-                    .catch(console.error);
-    }
+    if (duo != null)
+        duoPartner = await findDuoPartner(duo.id2).catch(console.error);
 
-    const players = await getAllPlayers()
-                        .catch(console.error);
+
+    const players = await getAllPlayers().catch(console.error);
 
     return {
         props: {

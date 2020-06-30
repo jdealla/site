@@ -63,11 +63,9 @@ export default function Collections({ collections, players }) {
 }
 
 export async function getStaticProps() {
-    let collections = await getCollections()
-                            .catch(console.error);
+    let collections = await getCollections().catch(console.error);
 
-    const players = await getAllPlayers()
-                        .catch(console.error);
+    const players = await getAllPlayers().catch(console.error);
 
     return {
         props: {
