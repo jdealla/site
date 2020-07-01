@@ -49,6 +49,8 @@ export async function getStaticProps({ params }) {
     
     const players = await getAllPlayers().catch(console.error);
     
+    console.log(allPlayers.length);
+
     return {
         props: {
             date,
