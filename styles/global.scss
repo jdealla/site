@@ -21,6 +21,20 @@ $footer-padding: 1.2rem 1.5rem 1.2rem;
 $badge-height: 8px;
 $badge-padding: .03rem .10rem;
 
+.bg_main {
+    margin-top: -1.5em;
+    background: url('/bg_main.jpg') no-repeat 0 -19em scroll;
+    background-size: 100%;
+}
+		
+.index-search {
+    input {
+    background-color: hsla(0,0%,100%,0.2);
+    color: #fff;
+    border: 0;
+    }
+}
+		
 .navsearch-item-div {
     width: 100%;
 	
