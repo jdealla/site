@@ -1,9 +1,7 @@
-import React from "react";
-import { useRouter } from "next/router";
+import React, { Fragment } from "react";
 
 export default function UpdatedList(props) {
-    const { date, players, amount } = props;
-    const router = useRouter();
+    const { players, amount } = props;
 
     const renderPlayerCards = () => {
         let playersToRender = players;
@@ -16,16 +14,15 @@ export default function UpdatedList(props) {
         
         let newPlayers = playersToRender.map((player, i) => {
 			let imgBg = {
-                    backgroundImage: `url(https://2kdbimg.com/300/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg)`,
+                backgroundImage: `url(https://2kdbimg.com/300/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg)`,
             };
             return (
-			   <>
-                <a className="updates-cards hvr-float" key={i} href={`/player/${player.id}`}>
-                    <img src={`https://2kdbimg.com/35/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} />
-                </a>
-				
-		        <span style={imgBg} className="popup-img" />
-			   </>
+			   <Fragment key={i}>
+                    <a className="updates-cards hvr-float" href={`/player/${player.id}`}>
+                        <img src={`https://2kdbimg.com/35/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} />
+                    </a>
+		            <span style={imgBg} className="popup-img" />
+			   </Fragment>
             )
         })
 

@@ -4,9 +4,10 @@ import TagOverall from "./tagoverall";
 
 export default function PlayersList(props) {
     const { players, searchOptions } = props;
-    
+
     const handleClick = (playerId) => {
-        window.location = `/player/${playerId}`
+        window.location.href = `/player/${playerId}`
+        // window.open(`/player/${playerId}`,'_blank')
     }
 
     const displayHeaders = () => {
