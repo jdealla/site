@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function DuosCardView(props) {
-    const { players, page } = props;
+    const { players, date } = props;
 
     const renderPlayers = () => {
         return players.map((player, i) => {
