@@ -261,7 +261,7 @@ $badge-padding: .03rem .10rem;
     height: 300px;
     width: 215px;
     margin: -2.55em 0 0 -14em;
-    display:none;
+    display: none;
     position: absolute;
 	z-index: 999;
 }
@@ -312,6 +312,10 @@ $badge-padding: .03rem .10rem;
 	>a:hover, >span:hover {
         color: #ffdd57;	
 	}
+	
+	p {
+        top: -1px;
+    }
 }
 
 .compare-img {
@@ -383,6 +387,24 @@ $badge-padding: .03rem .10rem;
 
 .logo {
    padding: 0 12px 0 0 !important;
+}
+
+.alt-players-tags {
+    padding: 0.1em !important;
+    margin-top: -1em;
+	
+	&:hover >a >.popup-img-alt {
+	    display: block;
+	}
+}
+
+.popup-img-alt {
+    height: 250px;
+    width: 179px;
+    margin: 1em 0 0 0;
+    display: none;
+    position: absolute;
+    z-index: 999;
 }
 
 @import "../node_modules/bulma/sass/utilities/functions.sass";

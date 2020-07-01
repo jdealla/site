@@ -117,7 +117,7 @@ export default function PlayersList(props) {
                                 </td>
                                 <td style={{ textAlign: "center" }}>
                                     <div className="container margin-auto-list">
-                                        <TagOverall overall={player.overall} />
+                                        <TagOverall theme={player.theme} overall={player.overall} />
                                     </div>
                                 </td>
                                 <td className="has-text-centered">{player.position}{player.secondary_position != null ? `/${player.secondary_position}` : ""} </td>
