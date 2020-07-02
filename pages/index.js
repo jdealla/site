@@ -18,11 +18,11 @@ export default function Home({ players }) {
         <meta name="description" content="NBA 2K20 MyTeam Database Index Page" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <section className="hero is-fullheight-with-navbar">
+      <section className="hero is-fullheight-with-navbar bg_main">
         <div className="hero-body">
-          <div className="container has-text-centered">
+          <div className="container has-text-centered index-search">
             <p className="title">
-              NBA2K MyTeam Database
+             <img src="/logo_main.png" />
             </p>
             <SearchBar handleClick={handleClick} players={players} placeholder="Search players..." />
           </div>

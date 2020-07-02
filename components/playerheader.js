@@ -57,7 +57,7 @@ export default function PlayerHeader(props) {
                                         <div className="column is-narrow" key={i} style={{ padding:"0.1em" }}>
                                            <div className="column is-narrow" key={i} style={{ padding:"0.1em" }}>
                                             <a href={`/player/${playerData.info.name.replace(/( |')/g, "-").toLowerCase()}/${player.id}`}>
-                                                <TagOverall overall={player.overall} />
+                                                <TagOverall hasBorder={true} theme={player.theme} overall={player.overall} />
                                             </a>
                                         </div>
                                         </div>
@@ -68,14 +68,15 @@ export default function PlayerHeader(props) {
                     <div className="column is-full-mobile is-9-tablet is-four-fifths-fullhd">
                         <div className="columns is-mobile is-multiline justify-header">
                             <div className="column is-4-tablet is-3-desktop player-column-height is-hidden-mobile">
-                                <figure className="image is-3by4 mb-1">
+                                <figure className="image is-3by4 mb-4">
                                     <img src={`https://2kdbimg.com/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}_${playerData.info.id}.jpg`} />
                                 </figure>
-                                <div className="columns is-mobile is-centered py-5" style={{ flexWrap:"wrap" }}>
+                                <div className="columns is-mobile is-centered pt-5" style={{ flexWrap:"wrap" }}>
                                     {altPlayers.map((player, i) => (
-                                        <div className="column is-narrow" key={i} style={{ padding:"0.1em" }}>
+                                        <div className="column is-narrow alt-players-tags" key={i}>
                                             <a href={`/player/${playerData.info.name.replace(/( |')/g, "-").toLowerCase()}/${player.id}`}>
-                                                <TagOverall overall={player.overall} />
+                                                <TagOverall hasBorder={true} theme={player.theme} overall={player.overall} />
+												<span style={{ backgroundImage: `url(https://2kdbimg.com/250/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg)` }} className="popup-img-alt" />
                                             </a>
                                         </div>
                                     ))}
@@ -160,7 +161,7 @@ export default function PlayerHeader(props) {
                                         <p className="heading has-text-warning">Dynamic Duo</p> 
                                         <div className="container is-flex duo-items">
 										    <div className="has-text-centered no-shadow">
-										        <TagOverall overall={duoPartner.overall} />
+										        <TagOverall hasBorder={true} overall={duoPartner.overall} />
                                             </div>
                                             <a href={`/player/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}/${duoPartner.id}`}>{duoPartner.name}</a>
                                             {renderDuo()}

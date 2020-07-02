@@ -25,7 +25,7 @@ export default function CompareHeader(props) {
 		                       </p>
                                 <p className="heading">Overall</p>
                                 <p className="compare-ovr">
-                                    <TagOverall overall={playerData.info.overall} />
+                                    <TagOverall theme={playerData.info.theme} overall={playerData.info.overall} />
                                 </p>
                                 <br />
                                 <p className="heading">Position</p>

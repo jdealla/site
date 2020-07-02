@@ -43,7 +43,7 @@ export default function SearchBar(props) {
                     <div>
                         <span className="tags ml-2 has-addons navsearch-tag-overall">
                             <span className="tag">{suggestion.position}{suggestion.secondary_position != null ? `/${suggestion.secondary_position}` : ""}</span> 
-                            <TagOverall overall={suggestion.overall} />
+                            <TagOverall theme={suggestion.theme} overall={suggestion.overall} />
                         </span>
                     </div>
              </div>
