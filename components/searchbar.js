@@ -14,7 +14,7 @@ export default function SearchBar(props) {
     const onSuggestionsClearRequested = () => setItems([]);
     
     const getSuggestionValue = (suggestion) => {
-        handleClick(suggestion.id);
+        handleClick(suggestion.name, suggestion.id);
         return suggestion.name;
     };
 
@@ -33,7 +33,7 @@ export default function SearchBar(props) {
     }
 
     const renderSuggestion = (suggestion) => (
-        <div className="is-flex has-text-black" onClick={() => handleClick(suggestion.id)}>
+        <div className="is-flex has-text-black" onClick={() => handleClick(suggestion.name, suggestion.id)}>
             <img src={`https://2kdbimg.com/35/${suggestion.name.replace(/( |')/g, "_").toLowerCase()}_${suggestion.id}.jpg`} />
             <div className="is-flex navsearch-item-div">
                     <div className="ml-1 has-text-left"> 

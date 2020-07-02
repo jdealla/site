@@ -8,7 +8,7 @@ export default function NavBar(props) {
     const router = useRouter();
 
     const handleClick = () => setView(!view);
-    const handleClickPlayer = (playerId) => router.push(`/player/${playerId}`);
+    const handleClickPlayer = (playerName, playerId) => router.push(`/player/${playerName.replace(/( |')/g, "-").toLowerCase()}/${playerId}`);
 
     return (
         <nav className="navbar is-black" role="navigation" aria-label="main navigation">

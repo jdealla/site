@@ -56,7 +56,7 @@ export default function PlayerHeader(props) {
                                     {altPlayers.map((player, i) => (
                                         <div className="column is-narrow" key={i} style={{ padding:"0.1em" }}>
                                            <div className="column is-narrow" key={i} style={{ padding:"0.1em" }}>
-                                            <a href={`/player/${player.id}`}>
+                                            <a href={`/player/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}/${player.id}`}>
                                                 <TagOverall overall={player.overall} />
                                             </a>
                                         </div>
@@ -74,7 +74,7 @@ export default function PlayerHeader(props) {
                                 <div className="columns is-mobile is-centered py-5" style={{ flexWrap:"wrap" }}>
                                     {altPlayers.map((player, i) => (
                                         <div className="column is-narrow" key={i} style={{ padding:"0.1em" }}>
-                                            <a href={`/player/${player.id}`}>
+                                            <a href={`/player/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}/${player.id}`}>
                                                 <TagOverall overall={player.overall} />
                                             </a>
                                         </div>
@@ -162,7 +162,7 @@ export default function PlayerHeader(props) {
 										    <div className="has-text-centered no-shadow">
 										        <TagOverall overall={duoPartner.overall} />
                                             </div>
-                                            <a href={`/player/${duoPartner.id}`}>{duoPartner.name}</a>
+                                            <a href={`/player/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}/${duoPartner.id}`}>{duoPartner.name}</a>
                                             {renderDuo()}
                                         </div>
                                     </div>
