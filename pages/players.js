@@ -4,8 +4,8 @@ import { getAllPlayersWithAllStats, getAllAnimations } from "../lib/players";
 import { getFilterTiers, getTotalNumOfBadges } from "../lib/helpers"
 import useSWR from "swr";
 
-import FilterSortBox from "../components/filtersortbox";
-import PlayersList from "../components/playerslist";
+// import FilterSortBox from "../components/filtersortbox";
+// import PlayersList from "../components/playerslist";
 import Layout from "../components/layout";
 
 const fetcher = url => fetch(url).then(r => r.json())
@@ -20,173 +20,173 @@ export default function Players({ players, allAnimations }) {
         evos: false, duos: false
     })
 
-    const handlePage = (dir) => {
-        if (dir === "prev") {
-            if (searchOptions.page > 0)
-                setSearchOptions({ ...searchOptions, page: searchOptions.page - 1 });
-        } else {
-            setSearchOptions({ ...searchOptions, page: searchOptions.page + 1 });
-        }
-    }
+    // const handlePage = (dir) => {
+    //     if (dir === "prev") {
+    //         if (searchOptions.page > 0)
+    //             setSearchOptions({ ...searchOptions, page: searchOptions.page - 1 });
+    //     } else {
+    //         setSearchOptions({ ...searchOptions, page: searchOptions.page + 1 });
+    //     }
+    // }
 
-    const handleOptions = (options) => setSearchOptions(options);
+    // const handleOptions = (options) => setSearchOptions(options);
 
-    useEffect(() => {
-        if (updatedPlayers) {
-            let newPlayers = [...players, ...updatedPlayers];
+    // useEffect(() => {
+    //     if (updatedPlayers) {
+    //         let newPlayers = [...players, ...updatedPlayers];
 
-            newPlayers.sort((a, b) => {
-                let aBadges = getTotalNumOfBadges(a);
-                let bBadges = getTotalNumOfBadges(b);
+    //         newPlayers.sort((a, b) => {
+    //             let aBadges = getTotalNumOfBadges(a);
+    //             let bBadges = getTotalNumOfBadges(b);
         
-                if (a.overall > b.overall) {
-                    return -1;
-                } else if (a.overall === b.overall) {
-                    if (aBadges.hof > bBadges.hof) {
-                        return -1;
-                    } else if (aBadges.hof === bBadges.hof) {
-                        if (a.name > b.name)
-                            return 1;
-                        else
-                            return -1;
-                    }
-                } else {
-                    return 1;
-                }
-            })
+    //             if (a.overall > b.overall) {
+    //                 return -1;
+    //             } else if (a.overall === b.overall) {
+    //                 if (aBadges.hof > bBadges.hof) {
+    //                     return -1;
+    //                 } else if (aBadges.hof === bBadges.hof) {
+    //                     if (a.name > b.name)
+    //                         return 1;
+    //                     else
+    //                         return -1;
+    //                 }
+    //             } else {
+    //                 return 1;
+    //             }
+    //         })
             
-            setAllPlayers(newPlayers);
-            setUpdate(newPlayers);
-        }
-    }, [updatedPlayers])
+    //         setAllPlayers(newPlayers);
+    //         setUpdate(newPlayers);
+    //     }
+    // }, [updatedPlayers])
 
-    useEffect(() => {
-        const { searchValue, filterOptions, sortProp, asc, evos, duos } = searchOptions;
+    // useEffect(() => {
+    //     const { searchValue, filterOptions, sortProp, asc, evos, duos } = searchOptions;
 
-        let filtered = update.length === 0 ? players : update
+    //     let filtered = update.length === 0 ? players : update
 
-        if (duos) {
-            filtered = filtered.filter(player => player.is_duo === "True");
-        }
+    //     if (duos) {
+    //         filtered = filtered.filter(player => player.is_duo === "True");
+    //     }
 
-        if (evos) {
-            filtered = filtered.filter(player => player.is_evo === "True");
-        }
+    //     if (evos) {
+    //         filtered = filtered.filter(player => player.is_evo === "True");
+    //     }
 
-        if (filterOptions.overall.length > 0) {
-            const tiers = getFilterTiers(filterOptions.overall);
-            filtered = filtered.filter(player => {
-                for(const tier of tiers) {
-                    if (player.overall >= tier[0] && player.overall <= tier[1])
-                        return true;
-                }
-            })
-        }
+    //     if (filterOptions.overall.length > 0) {
+    //         const tiers = getFilterTiers(filterOptions.overall);
+    //         filtered = filtered.filter(player => {
+    //             for(const tier of tiers) {
+    //                 if (player.overall >= tier[0] && player.overall <= tier[1])
+    //                     return true;
+    //             }
+    //         })
+    //     }
 
-        if (filterOptions.position.length > 0) {
-            filtered = filtered.filter(player => {
-                for(const value of filterOptions.position) {
-                    if (player.position === value)
-                        return true;
-                }
-            })
-        }
+    //     if (filterOptions.position.length > 0) {
+    //         filtered = filtered.filter(player => {
+    //             for(const value of filterOptions.position) {
+    //                 if (player.position === value)
+    //                     return true;
+    //             }
+    //         })
+    //     }
 
-        if (filterOptions.badges.length > 0) {
-            filtered = filtered.filter(player => {
-                let check = [];
-                for(let badge of filterOptions.badges) {
-                    let temp = badge.split("-");
-                    let [name, level] = temp;
+    //     if (filterOptions.badges.length > 0) {
+    //         filtered = filtered.filter(player => {
+    //             let check = [];
+    //             for(let badge of filterOptions.badges) {
+    //                 let temp = badge.split("-");
+    //                 let [name, level] = temp;
                     
-                    if (player[name] == level)
-                        check.push(true);
-                    else
-                        check.push(false);
-                }
+    //                 if (player[name] == level)
+    //                     check.push(true);
+    //                 else
+    //                     check.push(false);
+    //             }
 
-                if (!check.includes(false))
-                    return true;
-            })
-        }
+    //             if (!check.includes(false))
+    //                 return true;
+    //         })
+    //     }
 
-        if (filterOptions.animations.length > 0) {
-            filtered = filtered.filter(player => {
-                let check = [];
-                for(let animation of filterOptions.animations) {
-                    let temp = animation.split("-");
-                    let [cat, value] = temp;
+    //     if (filterOptions.animations.length > 0) {
+    //         filtered = filtered.filter(player => {
+    //             let check = [];
+    //             for(let animation of filterOptions.animations) {
+    //                 let temp = animation.split("-");
+    //                 let [cat, value] = temp;
                 
-                    if (player[cat] === value) 
-                        check.push(true);
-                }
+    //                 if (player[cat] === value) 
+    //                     check.push(true);
+    //             }
 
-                if (check.includes(true))
-                    return true;
-            })
-        }
+    //             if (check.includes(true))
+    //                 return true;
+    //         })
+    //     }
 
-        let sorted = filtered;
-        filtered = sorted.sort((a, b) => {
-            let aBadges = getTotalNumOfBadges(a);
-            let bBadges = getTotalNumOfBadges(b);
-            let aCompare = aBadges.hof;
-            let bCompare = bBadges.hof;
+    //     let sorted = filtered;
+    //     filtered = sorted.sort((a, b) => {
+    //         let aBadges = getTotalNumOfBadges(a);
+    //         let bBadges = getTotalNumOfBadges(b);
+    //         let aCompare = aBadges.hof;
+    //         let bCompare = bBadges.hof;
 
-            if (sortProp !== "") {
-                aCompare = a[sortProp];
-                bCompare = b[sortProp];
-            }
+    //         if (sortProp !== "") {
+    //             aCompare = a[sortProp];
+    //             bCompare = b[sortProp];
+    //         }
 
-            if (sortProp === "totalBadges") {
-                aCompare = aBadges.bronze + aBadges.silver + aBadges.gold + aBadges.hof;
-                bCompare = bBadges.bronze + bBadges.silver + bBadges.gold + bBadges.hof;
-            } else if (sortProp === "wingspan") {
-                let aWingspan = a[sortProp].replace(/\"/g, "").split("'");
-                let bWingspan = b[sortProp].replace(/\"/g, "").split("'");
-                aCompare = Number(aWingspan[0] * 12) + Number(aWingspan[1]);
-                bCompare = Number(bWingspan[0] * 12) + Number(bWingspan[1]);
-            }
+    //         if (sortProp === "totalBadges") {
+    //             aCompare = aBadges.bronze + aBadges.silver + aBadges.gold + aBadges.hof;
+    //             bCompare = bBadges.bronze + bBadges.silver + bBadges.gold + bBadges.hof;
+    //         } else if (sortProp === "wingspan") {
+    //             let aWingspan = a[sortProp].replace(/\"/g, "").split("'");
+    //             let bWingspan = b[sortProp].replace(/\"/g, "").split("'");
+    //             aCompare = Number(aWingspan[0] * 12) + Number(aWingspan[1]);
+    //             bCompare = Number(bWingspan[0] * 12) + Number(bWingspan[1]);
+    //         }
             
-            if (sortProp === "") {
-                if (a.overall > b.overall) {
-                    return -1;
-                } else if (a.overall === b.overall) {
-                    if (aBadges.hof > bBadges.hof) {
-                        return -1;
-                    } else if (aBadges.hof === bBadges.hof) {
-                        if (a.name > b.name)
-                            return 1;
-                        else
-                            return -1;
-                    }
-                } else {
-                    return 1;
-                }
-            } else {
-                if (aCompare > bCompare)
-                    return asc ? 1 : -1;
-                else if (aCompare === bCompare) {
-                    if (a.overall > b.overall) {
-                        return -1;
-                    } else if (a.overall === b.overall) {
-                        if (a.name > b.name)
-                            return 1;
-                        else
-                            return -1;
-                    } else {
-                        return 1;
-                    }
-                } else {
-                    return asc ? -1 : 1;
-                }
-            }
-        })
+    //         if (sortProp === "") {
+    //             if (a.overall > b.overall) {
+    //                 return -1;
+    //             } else if (a.overall === b.overall) {
+    //                 if (aBadges.hof > bBadges.hof) {
+    //                     return -1;
+    //                 } else if (aBadges.hof === bBadges.hof) {
+    //                     if (a.name > b.name)
+    //                         return 1;
+    //                     else
+    //                         return -1;
+    //                 }
+    //             } else {
+    //                 return 1;
+    //             }
+    //         } else {
+    //             if (aCompare > bCompare)
+    //                 return asc ? 1 : -1;
+    //             else if (aCompare === bCompare) {
+    //                 if (a.overall > b.overall) {
+    //                     return -1;
+    //                 } else if (a.overall === b.overall) {
+    //                     if (a.name > b.name)
+    //                         return 1;
+    //                     else
+    //                         return -1;
+    //                 } else {
+    //                     return 1;
+    //                 }
+    //             } else {
+    //                 return asc ? -1 : 1;
+    //             }
+    //         }
+    //     })
 
-        filtered = filtered.filter(player => player.name.toLowerCase().includes(searchValue));
+    //     filtered = filtered.filter(player => player.name.toLowerCase().includes(searchValue));
 
-        setAllPlayers(filtered);
-    }, [searchOptions])
+    //     setAllPlayers(filtered);
+    // }, [searchOptions])
 
     return (
         <Layout players={[]} searchOn={false}>
@@ -197,7 +197,7 @@ export default function Players({ players, allAnimations }) {
             </Head>
             <div className="container">
                 <div className="box">
-                    <FilterSortBox allAnimations={allAnimations} searchOptions={searchOptions} handleOptions={handleOptions} />
+                    {/* <FilterSortBox allAnimations={allAnimations} searchOptions={searchOptions} handleOptions={handleOptions} /> */}
                 </div>
                 {/* <PlayersList players={allPlayers.slice(searchOptions.page * searchOptions.perPage, (searchOptions.page * searchOptions.perPage) + searchOptions.perPage)} searchOptions={searchOptions} /> */}
                 {/* <div className="columns">
