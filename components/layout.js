@@ -1,10 +1,10 @@
 import NavBar from "./navbar";
 
 export default function Layout(props) {
-    const { searchOn } = props;
+    const { searchOn, players } = props;
     return (
         <>
-            <NavBar players={props.players} searchOn={searchOn} />
+            <NavBar players={players} searchOn={searchOn} />
             {props.children}
             <footer className="footer">
                 <div className="container has-text-centered">

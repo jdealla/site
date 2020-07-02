@@ -6,7 +6,6 @@ import { getTotalNumOfBadges } from "../lib/helpers"
 import Layout from "../components/layout";
 
 export default function Players({ players, allAnimations }) {
-
     return (
         <Layout players={[]} searchOn={false}>
             <Head>
