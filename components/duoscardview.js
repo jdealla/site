@@ -7,7 +7,7 @@ export default function DuosCardView(props) {
     const renderPlayers = () => {
         return players.map((player, i) => {
             return (
-                <div className="column is-1-desktop is-3-widescreen is-half-mobile" key={i}>
+                <div className="column is-3-tablet is-half-mobile" key={i}>
                     <div className={styles.imageStack}>
                         <div className={styles.imageStackItemLeft}>
                             <figure className="hvr-float-shadow image is-3by4">

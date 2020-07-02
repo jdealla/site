@@ -44,7 +44,7 @@ export default function Updates({ groupedByDate, updateNames, duoUpdates, evoUpd
                     <a href={`/updates/duos/${date}`}>
                         <span className="tags has-addons" style={{ margin: 0 }}>
                             <span className="tag is-size-6 is-size-7-mobile">{date}</span>
-                            <span className="tag is-size-6 is-size-7-mobile is-warning is-light">+{players.length} cards</span>
+                            <span className="tag is-size-6 is-size-7-mobile is-primary is-light">+{players.length / 2} duos</span>
                             <span className="tag is-size-6 is-size-7-mobile"> Dynamic Duos Update </span>
                         </span>
                     </a>
@@ -62,7 +62,7 @@ export default function Updates({ groupedByDate, updateNames, duoUpdates, evoUpd
                     <a href={`/updates/evos/${date}`}>
                         <span className="tags has-addons" style={{ margin: 0 }}>
                             <span className="tag is-size-6 is-size-7-mobile">{date}</span>
-                            <span className="tag is-size-6 is-size-7-mobile is-warning is-light">+{players.length} cards</span>
+                            <span className="tag is-size-6 is-size-7-mobile is-success is-light">+{players.length} evos</span>
                             <span className="tag is-size-6 is-size-7-mobile"> Evos Update </span>
                         </span>
                     </a>

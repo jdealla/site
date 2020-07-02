@@ -9,7 +9,7 @@ $danger: #FF0000;
 $link: #FF9E00;
 $info: #228b22;
 $success: rgb(0, 190, 0);
-$primary: $logo-color;
+$primary: #2160c4;
 $black: #000000;
 //bulma component variables
 $divider-margin-size: 10px;
@@ -23,8 +23,8 @@ $badge-padding: .03rem .10rem;
 
 .bg_main {
     margin-top: -1.5em;
-    background: url('/bg_main.jpg') no-repeat 0 -19em scroll;
-    background-size: 100%;
+    background: url('/bg_main.jpg') no-repeat scroll;
+    background-size: 100% 100%;
 }
 		
 .index-search {
