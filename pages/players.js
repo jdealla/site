@@ -199,24 +199,18 @@ export default function Players({ players, allAnimations }) {
                 <div className="box">
                     <FilterSortBox allAnimations={allAnimations} searchOptions={searchOptions} handleOptions={handleOptions} />
                 </div>
-                <PlayersList players={allPlayers.slice(searchOptions.page * searchOptions.perPage, (searchOptions.page * searchOptions.perPage) + searchOptions.perPage)} searchOptions={searchOptions} />
-                <div className="columns">
+                {/* <PlayersList players={allPlayers.slice(searchOptions.page * searchOptions.perPage, (searchOptions.page * searchOptions.perPage) + searchOptions.perPage)} searchOptions={searchOptions} /> */}
+                {/* <div className="columns">
                     <div className="column is-full">
                         <nav className="pagination is-centered" role="navigation" aria-label="pagination">
                             <a className="pagination-previous" onClick={() => handlePage("prev")} disabled={searchOptions.page <= 0}>Previous</a>
                             <ul className="pagination-list">
-                                {/* <li><a className="pagination-link" aria-label="Goto page 1">1</a></li>
-                                <li><a className="pagination-link" aria-label="Goto page 2">2</a></li>
-                                <li><a className="pagination-link is-current" aria-label="Page 3">3</a></li>
-                                <li><span className="pagination-ellipsis">&hellip;</span></li>
-                                <li><a className="pagination-link" aria-label="Goto page 47">47</a></li>
-                                <li><a className="pagination-link" aria-label="Goto page 86">86</a></li> */}
                                 <li><p className="pagination-link" aria-label="total-players">Total Players: {allPlayers.length}</p></li>
                             </ul>
                             <a className="pagination-next" onClick={() => handlePage("next")} disabled={searchOptions.page * searchOptions.perPage > (allPlayers.length - searchOptions.page * searchOptions.perPage)}>Next page</a>
                         </nav>
                     </div>
-                </div>
+                </div> */}
             </div>
         </Layout>
     )
