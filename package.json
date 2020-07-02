@@ -9,8 +9,6 @@
     "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
-    "@creativebulma/bulma-badge": "^1.0.1",
-    "@next/bundle-analyzer": "^9.4.4",
     "bulma-pageloader": "^0.3.0",
     "fs": "0.0.1-security",
     "fs-extra": "^9.0.1",
