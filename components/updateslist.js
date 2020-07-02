@@ -18,7 +18,7 @@ export default function UpdatedList(props) {
             };
             return (
 			   <Fragment key={i}>
-                    <a className="updates-cards hvr-float" href={`/player/${player.name.replace(/( |')/g, "_").toLowerCase()}/${player.id}`}>
+                    <a className="updates-cards hvr-float" href={`/player/${player.name.replace(/( |')/g, "-").toLowerCase()}/${player.id}`}>
                         <img src={`https://2kdbimg.com/35/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} />
                     </a>
 		            <span style={imgBg} className="popup-img" />

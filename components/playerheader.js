@@ -56,7 +56,7 @@ export default function PlayerHeader(props) {
                                     {altPlayers.map((player, i) => (
                                         <div className="column is-narrow" key={i} style={{ padding:"0.1em" }}>
                                            <div className="column is-narrow" key={i} style={{ padding:"0.1em" }}>
-                                            <a href={`/player/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}/${player.id}`}>
+                                            <a href={`/player/${playerData.info.name.replace(/( |')/g, "-").toLowerCase()}/${player.id}`}>
                                                 <TagOverall overall={player.overall} />
                                             </a>
                                         </div>
@@ -74,7 +74,7 @@ export default function PlayerHeader(props) {
                                 <div className="columns is-mobile is-centered py-5" style={{ flexWrap:"wrap" }}>
                                     {altPlayers.map((player, i) => (
                                         <div className="column is-narrow" key={i} style={{ padding:"0.1em" }}>
-                                            <a href={`/player/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}/${player.id}`}>
+                                            <a href={`/player/${playerData.info.name.replace(/( |')/g, "-").toLowerCase()}/${player.id}`}>
                                                 <TagOverall overall={player.overall} />
                                             </a>
                                         </div>
