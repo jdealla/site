@@ -1,14 +1,13 @@
 import React from "react";
-import { useRouter } from "next/router";
+import Head from "next/head";
 import { getPlayersByDates, getUpdatesNames, getAllPlayers } from "../lib/players";
+import { getDuoUpdates } from "../lib/duos";
 
 import UpdatesList from "../components/updateslist";
 import Layout from "../components/layout";
-import Head from "next/head";
+import { getEvoUpdates } from "../lib/evos";
 
-export default function Updates({ groupedByDate, updateNames, players }) {
-    const router = useRouter();
-	
+export default function Updates({ groupedByDate, updateNames, duoUpdates, evoUpdates, players }) {
     const findUpdateName = (date) => {
         let updateName = "";
         let nameObj = updateNames.find( x => x.date === date);
@@ -19,24 +18,73 @@ export default function Updates({ groupedByDate, updateNames, players }) {
     }
 
     const renderUpdates = () => {
-        let updates = [], i = 0;
-        for(let [date, players] of Object.entries(groupedByDate)) {
-			
-            let dateObj = (
-                <a href={`/updates/${date}`} className="panel-block" key={i++}>
-				    <span className="tags  has-addons" style={{margin:0}}>
-                        <span className="tag is-size-6 is-size-7-mobile">{date}</span>
-                        <span className="tag is-size-6 is-size-7-mobile is-warning is-light">+ {players.length} cards</span>
-                        <span className="tag is-size-6 is-size-7-mobile"> {findUpdateName(date)} </span>
-					</span>
-					<div className="is-hidden-mobile" style={{ marginLeft: "auto" }}>
-					    <UpdatesList date={date} players={players} amount={10} />
-					</div>
-                </a>
+        let updates = [];
 
+        for(let [date, players] of Object.entries(groupedByDate)) {
+            let dateObj = (
+                <div className="panel-block" key={date + "_players"}>
+                    <a href={`/updates/${date}`}>
+                        <span className="tags has-addons" style={{ margin: 0 }}>
+                            <span className="tag is-size-6 is-size-7-mobile">{date}</span>
+                            <span className="tag is-size-6 is-size-7-mobile is-warning is-light">+{players.length} cards</span>
+                            <span className="tag is-size-6 is-size-7-mobile"> {findUpdateName(date)} </span>
+                        </span>
+                    </a>
+                    <p className="is-hidden-mobile" style={{ marginLeft: "auto" }}>
+                        <UpdatesList date={date} players={players} amount={10} />
+                    </p>
+                </div>
             )
             updates.push(dateObj);
         }
+
+        for(let [date, players] of Object.entries(duoUpdates)) {
+            let dateObj = (
+                <div className="panel-block" key={date + "_duos"}>
+                    <a href={`/updates/duos/${date}`}>
+                        <span className="tags has-addons" style={{ margin: 0 }}>
+                            <span className="tag is-size-6 is-size-7-mobile">{date}</span>
+                            <span className="tag is-size-6 is-size-7-mobile is-warning is-light">+{players.length} cards</span>
+                            <span className="tag is-size-6 is-size-7-mobile"> Dynamic Duos Update </span>
+                        </span>
+                    </a>
+                    <p className="is-hidden-mobile" style={{ marginLeft: "auto" }}>
+                        {/* <DuosCardView date={date} players={players} amount={10} /> */}
+                    </p>
+                </div>
+            )
+            updates.push(dateObj);
+        }
+
+        for(let [date, players] of Object.entries(evoUpdates)) {
+            let dateObj = (
+                <div className="panel-block" key={date + "_evos"}>
+                    <a href={`/updates/evos/${date}`}>
+                        <span className="tags has-addons" style={{ margin: 0 }}>
+                            <span className="tag is-size-6 is-size-7-mobile">{date}</span>
+                            <span className="tag is-size-6 is-size-7-mobile is-warning is-light">+{players.length} cards</span>
+                            <span className="tag is-size-6 is-size-7-mobile"> Evos Update </span>
+                        </span>
+                    </a>
+                    <p className="is-hidden-mobile" style={{ marginLeft: "auto" }}>
+                        {/* <UpdatesList date={date} players={players} amount={10} /> */}
+                    </p>
+                </div>
+            )
+            updates.push(dateObj);
+        }
+
+        updates.sort((a, b) => {
+            let dateA = a.key.split("_")[0];
+            let dateB = b.key.split("_")[0];
+
+            if (dateA > dateB) 
+                return -1;
+            else if (dateA === dateB) 
+                return 0;
+            else 
+                return 1;
+        })
         return updates;
     }
 
@@ -52,7 +100,7 @@ export default function Updates({ groupedByDate, updateNames, players }) {
                     <p className="panel-heading">
                         MyTeam Card Updates
                     </p>
-                        {renderUpdates()}
+                    {renderUpdates()}
                 </nav>
             </div>
         </Layout>
@@ -66,10 +114,16 @@ export async function getStaticProps() {
     
     const players = await getAllPlayers().catch(console.error);
 
+    const duoUpdates = await getDuoUpdates().catch(console.error);
+
+    const evoUpdates = await getEvoUpdates().catch(console.error);
+
     return {
         props: {
             groupedByDate,
             updateNames,
+            duoUpdates,
+            evoUpdates,
             players
         },
         unstable_revalidate: 1

@@ -9,7 +9,7 @@ import SearchBar from "../components/searchbar";
 export default function Home({ players }) {
   const router = useRouter();
 
-  const handleClick = (playerId) => router.push(`/player/${playerId}`);
+  const handleClick = (playerName, playerId) => router.push(`/player/${playerName.replace(/( |')/g, "-").toLowerCase()}/${playerId}`);
 
   return (
     <Layout players={[]} searchOn={false}>

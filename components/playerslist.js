@@ -4,9 +4,10 @@ import TagOverall from "./tagoverall";
 
 export default function PlayersList(props) {
     const { players, searchOptions } = props;
-    
+
     const handleClick = (playerId) => {
-        window.location = `/player/${playerId}`
+        // window.location.href = `/player/${playerId}`
+        window.open(`/player/${player.name.replace(/( |')/g, "-").toLowerCase()}/${playerId}`,'_blank')
     }
 
     const displayHeaders = () => {
@@ -106,13 +107,13 @@ export default function PlayersList(props) {
                     {players.map(player => {
                         let totalBadges = getTotalNumOfBadges(player);
                         return (
-                            <tr data-href={`/player/${player.id}`} onClick={() => handleClick(player.id)} key={player.id} style={{ cursor: "pointer" }}>
+                            <tr onClick={() => handleClick(player.id)} key={player.id} style={{ cursor: "pointer" }}>
                                 <td>
                                     <div className="container is-flex">
                                         <figure className="image is-24x24" style={{ marginBottom: "5px" }}>
                                             <img src={`https://2kdbimg.com/35/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} />
                                         </figure>
-                                        <p>{player.name}</p>
+                                        <p><a className="has-text-black" href={`/player/${player.name.replace(/( |')/g, "_").toLowerCase()}/${player.id}`}>{player.name}</a></p>
                                     </div>
                                 </td>
                                 <td style={{ textAlign: "center" }}>

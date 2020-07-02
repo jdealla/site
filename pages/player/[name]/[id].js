@@ -1,16 +1,16 @@
 import { useState, Fragment } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { getPlayersIds, findAltPlayers, getAllPlayers } from "../../lib/players";
-import { findEvos } from "../../lib/evos";
-import { findDuos, findDuoPartner } from "../../lib/duos";
-import { getPlayerData } from "../../pages/api/player/[id]";
+import { getPlayersIds, findAltPlayers, getAllPlayers } from "../../../lib/players";
+import { findEvos } from "../../../lib/evos";
+import { findDuos, findDuoPartner } from "../../../lib/duos";
+import { getPlayerData } from "../../../pages/api/player/[id]";
 
-import Layout from "../../components/layout";
-import PlayerHeader from "../../components/playerheader";
-import BadgeContainer from "../../components/badgecontainer";
-import Attributes from "../../components/attributes";
-import Loader from "../../components/idloader";
+import Layout from "../../../components/layout";
+import PlayerHeader from "../../../components/playerheader";
+import BadgeContainer from "../../../components/badgecontainer";
+import Attributes from "../../../components/attributes";
+import Loader from "../../../components/idloader";
 
 export default function Player({ playerData, altPlayers, evos, duo, duoPartner, players }) {
     const [view, setView] = useState("stats");
@@ -175,15 +175,17 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const playerData = await getPlayerData(params.id).catch(console.error);
+    const id = params.id;
+
+    const playerData = await getPlayerData(id).catch(console.error);
 
     const res = await findAltPlayers(playerData.info.name).catch(console.error);
     
-    const altPlayers = res.filter(player => player.id != playerData.info.id).sort((a, b) => a.overall > b.overall ? -1 : 1);
+    const altPlayers = res.filter(player => player.id != id).sort((a, b) => a.overall > b.overall ? -1 : 1);
 
-    const evos = await findEvos(playerData.info.id).catch(console.error);
+    const evos = await findEvos(id).catch(console.error);
 
-    const duo = await findDuos(playerData.info.id).catch(console.error);
+    const duo = await findDuos(id).catch(console.error);
 
     let duoPartner = {};
     if (duo != null)
