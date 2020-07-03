@@ -2,17 +2,13 @@ import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { getAllPlayersWithAllStats, getAllAnimations } from "../lib/players";
 import { getFilterTiers, getTotalNumOfBadges } from "../lib/helpers"
-import useSWR from "swr";
 
 import FilterSortBox from "../components/filtersortbox";
 import PlayersList from "../components/playerslist";
 import Layout from "../components/layout";
 
-const fetcher = url => fetch(url).then(r => r.json())
 
 export default function Players({ players, allAnimations }) {
-    const { data: total } = useSWR("/api/totalplayers", fetcher);
-    const { data: updatedPlayers } = useSWR((total && total.totalResults > players.length) ? "/api/addplayers" : null, fetcher);
     const [update, setUpdate] = useState([]);
     const [allPlayers, setAllPlayers] = useState(players);
     const [searchOptions, setSearchOptions] = useState({ 
@@ -30,36 +26,7 @@ export default function Players({ players, allAnimations }) {
     }
 
     const handleOptions = (options) => setSearchOptions(options);
-
-    useEffect(() => {
-        if (updatedPlayers) {
-            let newPlayers = [...players, ...updatedPlayers];
-
-            newPlayers.sort((a, b) => {
-                let aBadges = getTotalNumOfBadges(a);
-                let bBadges = getTotalNumOfBadges(b);
-        
-                if (a.overall > b.overall) {
-                    return -1;
-                } else if (a.overall === b.overall) {
-                    if (aBadges.hof > bBadges.hof) {
-                        return -1;
-                    } else if (aBadges.hof === bBadges.hof) {
-                        if (a.name > b.name)
-                            return 1;
-                        else
-                            return -1;
-                    }
-                } else {
-                    return 1;
-                }
-            })
-            
-            setAllPlayers(newPlayers);
-            setUpdate(newPlayers);
-        }
-    }, [updatedPlayers])
-
+    
     useEffect(() => {
         const { searchValue, filterOptions, sortProp, asc, evos, duos } = searchOptions;
 
