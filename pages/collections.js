@@ -72,6 +72,6 @@ export async function getStaticProps() {
             collections,
             players,
         },
-        unstable_revalidate: 10
+        unstable_revalidate: 3600
     }
 }

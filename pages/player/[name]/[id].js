@@ -203,6 +203,6 @@ export async function getStaticProps({ params }) {
             duoPartner,
             players,
         },
-        unstable_revalidate: 10
+        unstable_revalidate: 3600
     }
 }
