@@ -18,8 +18,7 @@
     "react-autosuggest": "^10.0.2",
     "react-dom": "16.13.1",
     "react-icons": "^3.10.0",
-    "sass": "^1.26.8",
-    "swr": "^0.2.3"
+    "sass": "^1.26.8"
   },
   "devDependencies": {
     "@zeit/next-css": "^1.0.1",
