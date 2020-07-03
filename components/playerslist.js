@@ -5,9 +5,9 @@ import TagOverall from "./tagoverall";
 export default function PlayersList(props) {
     const { players, searchOptions } = props;
 
-    const handleClick = (playerId) => {
+    const handleClick = (playerId, playerName) => {
         // window.location.href = `/player/${playerId}`
-        window.open(`/player/${player.name.replace(/( |')/g, "-").toLowerCase()}/${playerId}`,'_blank')
+        window.open(`/player/${playerName.replace(/( |')/g, "-").toLowerCase()}/${playerId}`,'_blank')
     }
 
     const displayHeaders = () => {
@@ -95,8 +95,8 @@ export default function PlayersList(props) {
                         <th>Name</th>
                         <th className="has-text-centered">Overall</th>
                         <th className="has-text-centered">Position</th>
-                        <th className="has-text-centered">Off Overall</th>
-                        <th className="has-text-centered">Def Overall</th>
+                        <th className="has-text-centered">Offense</th>
+                        <th className="has-text-centered">Defense</th>
                         <th className="has-text-centered">Height</th>
                         <th className="has-text-centered">Badges</th>
                         {displayHeaders()}
@@ -107,13 +107,13 @@ export default function PlayersList(props) {
                     {players.map(player => {
                         let totalBadges = getTotalNumOfBadges(player);
                         return (
-                            <tr onClick={() => handleClick(player.id)} key={player.id} style={{ cursor: "pointer" }}>
+                            <tr onClick={() => handleClick(player.id, player.name)} key={player.id} style={{ cursor: "pointer" }}>
                                 <td>
                                     <div className="container is-flex">
                                         <figure className="image is-24x24" style={{ marginBottom: "5px" }}>
                                             <img src={`https://2kdbimg.com/35/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} />
                                         </figure>
-                                        <p><a className="has-text-black" href={`/player/${player.name.replace(/( |')/g, "_").toLowerCase()}/${player.id}`}>{player.name}</a></p>
+                                        <p className="ml-1"><a className="has-text-black" href={`/player/${player.name.replace(/( |')/g, "_").toLowerCase()}/${player.id}`}>{player.name}</a></p>
                                     </div>
                                 </td>
                                 <td style={{ textAlign: "center" }}>
