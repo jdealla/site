@@ -13,6 +13,7 @@ export async function getPlayerData(id) {
 export default async (req, res) => {
     const { query: { id } } = req;
 
-    const data = await getPlayerData(id)
+    const data = await getPlayerData(id).catch(console.error);
+
     res.status(200).json(data)
 }

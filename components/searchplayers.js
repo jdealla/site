@@ -4,7 +4,7 @@ import SearchBar from "./searchbar";
 export default function SearchPlayers(props) {
     const { players, handleClick, playerInfo, placeholder } = props;
 
-    const handlePlayer = (playerId) => {
+    const handlePlayer = (playerName, playerId) => {
         handleClick(playerInfo, playerId);
     }
 
