@@ -28,7 +28,7 @@ export default function TagOverall(props) {
         }
 		
 		if (overall >= 93)
-            shadow = `drop-shadow(0px 0px 3px ${color2})`;
+            shadow = `0px 0px 6px ${color2}`;
 		
 		if (hasBorder)
             borderStyle = `1px solid ${color}`;
@@ -36,7 +36,7 @@ export default function TagOverall(props) {
 		let TagStyle = {
             background: `linear-gradient(${color}, ${color2})`,
             position: "relative",
-            filter: `${shadow}`,
+            boxShadow: `${shadow}`,
             border: `${borderStyle}`
 		}
 

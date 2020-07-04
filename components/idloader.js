@@ -13,7 +13,7 @@ const Loader = () => (
            <figure style={{ width:"100%" }} className="image is-3by4 tag is-dark mb-1 loading header-loading"></figure>
             <div className="columns is-mobile is-centered py-5" >
               <div className="column is-narrow" style={{ padding: "0.1em"}}>
-                  <div className="container no-shadow">
+                  <div className="container">
                       <span>
                           <figure className="image tag is-dark is-24x24 loading header-loading" style={{ width:"7em" }}></figure>
                       </span>
@@ -28,7 +28,7 @@ const Loader = () => (
                      <figure style={{ width:"100%" }} className="image is-3by4 tag is-dark mb-1 loading header-loading"></figure>
                      <div className="columns is-mobile is-centered py-5" >
                         <div className="column is-narrow" style={{ padding: "0.1em"}}>
-                           <div className="container no-shadow">
+                           <div className="container">
                               <span>
                                  <figure className="image tag is-dark is-24x24 loading header-loading" style={{ width:"7em" }}></figure>
                               </span>
