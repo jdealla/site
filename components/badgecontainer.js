@@ -53,10 +53,10 @@ export default function BadgesContainer(props) {
                 imgSource = "badge_none.png";
 
             let img = (
-                <div className="column is-paddingless is-2-mobile is-one-third-tablet is-1-desktop is-badge" key={i++}>
+                <div className="column is-paddingless is-2-mobile is-one-third-tablet is-1-desktop is-badge" key={`${name}-${levelToNum(level)}`}>
                     <div className="container is-vcentered">
                         <figure className="image is-48x48" style={{ marginLeft: "auto", marginRight: "auto" }}>
-                            <img src={`https://2kdbimg.com/48x48/${imgSource}`} />
+                            <img src={`https://2kdbimg.com/64x64/${imgSource}`} />
                         </figure>
                         {renderNotification(upgraded)}
                         <p className="is-size-7 has-text-centered"> {formatName(key)} </p>
@@ -65,6 +65,23 @@ export default function BadgesContainer(props) {
             )
             badgeImgs.push(img)
         }
+
+        badgeImgs.sort((a, b) => {
+            let [nameA, levelA] = a.key.split("-");
+            let [nameB, levelB] = b.key.split("-");
+            
+            if (levelA > levelB) {
+                return -1;
+            } else if (levelA === levelB) {
+                if (nameA > nameB) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            } else {
+                return 1;
+            }
+        })
         return badgeImgs;
     }
 
