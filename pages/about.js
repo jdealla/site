@@ -7,7 +7,7 @@ import Layout from "../components/layout";
 export default function About({ players }) {
 
   return (
-    <Layout players={players} searchOn={false}>
+    <Layout players={players} searchOn={true}>
       <Head>
         <title>2KDB About Page</title>
         <meta name="description" content="NBA 2K20 MyTeam Database About Page" />
