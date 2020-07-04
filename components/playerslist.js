@@ -107,7 +107,7 @@ export default function PlayersList(props) {
                     {players.map(player => {
                         let totalBadges = getTotalNumOfBadges(player);
                         return (
-                            <tr onClick={() => handleClick(player.id, player.name)} key={player.id} style={{ cursor: "pointer" }}>
+                            <tr className="playerlist-item" onClick={() => handleClick(player.id, player.name)} key={player.id}>
                                 <td>
                                     <div className="container is-flex">
                                         <figure className="image is-24x24" style={{ marginBottom: "5px" }}>

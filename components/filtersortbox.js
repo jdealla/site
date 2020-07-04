@@ -208,7 +208,7 @@ export default function FilterSortBox(props) {
                 <div className="columns is-mobile is-multiline">
                     <div className="column is-full">
                         <p className="heading">Search Settings: </p>
-                        <div className="container is-flex">
+                        <div className="container is-flex container-mobile">
                             <div className="control" style={{ width: "100%" }}>
                                 <input className="input is-small" value={searchOptions.searchValue} onChange={handleChange} type="text" placeholder="Search players..."/>
                             </div>
@@ -228,7 +228,7 @@ export default function FilterSortBox(props) {
                             <button className="button is-small" onClick={() => clearOptions()}>Clear Filters/Sort</button>
                         </div>
                     </div>
-                    <div className="column is-4-widescreen is-full-mobile">
+                    <div className="column is-4-tablet is-full-mobile">
                         <p className="heading">Filter By Overall: </p>
                         <div className="field has-addons">
                             <p className="control">
@@ -333,7 +333,7 @@ export default function FilterSortBox(props) {
                             </p>
                         </div>
                     </div>
-                    <div className="column is-2-widescreen">
+                    <div className="column is-3-tablet is-3-widescreen is-2-fullhd">
                         <p className="heading">Filter By Position: </p>
                         <div className="field has-addons">
                             <p className="control">
@@ -353,7 +353,7 @@ export default function FilterSortBox(props) {
                             </p>
                         </div>
                     </div>
-                    <div className="column is-6-widescreen">
+                    <div className="column is-5-tablet is-5-widescreen is-6-fullhd is-full-mobile">
                         <p className="heading">Filter By Animations: </p>
                         <div className="container is-flex li-nopadding">
                             <Dropdown title={animationCat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/g, "")} items={getAnimationCats()} />
@@ -361,7 +361,7 @@ export default function FilterSortBox(props) {
                             <SearchFilter suggestions={filterItems} handleAnimationFilter={handleAnimationFilter} animationCat={animationCat} placeholder={`Search ${animationCat.replace(/_/g, " ")} here`} />
                         </div>
                     </div>
-                    <div className="column is-3-widescreen">
+                    <div className="column is-3-tablet">
                         <p className="heading">Filter By Badges: </p>
                         <Dropdown title="Finishing" items={getBadgeItems("finishing")} />
                         <Dropdown title="Shooting" items={getBadgeItems("shooting")} />
@@ -369,7 +369,7 @@ export default function FilterSortBox(props) {
                         <Dropdown title="Defensive" items={getBadgeItems("defense")} />
                     </div>
                     
-                    <div className="column is-5-widescreen is-full-mobile">
+                    <div className="column is-5-tablet is-full-mobile">
                         <p className="heading">Sort By Stats: </p>
                         <Dropdown title="Shooting" items={getDropdownItems("shootingStats")} />
                         <Dropdown title="Inside Scoring" items={getDropdownItems("insideStats")} />
@@ -378,7 +378,7 @@ export default function FilterSortBox(props) {
                         <Dropdown title="Defense" items={getDropdownItems("defenseStats")} />
                         <Dropdown title="Rebound" items={getDropdownItems("reboundStats")} />
                     </div>
-                    <div className="column is-4-widescreen is-full-mobile">
+                    <div className="column is-4-tablet is-full-mobile">
                         <p className="heading">Sort By Tendencies: </p>
                         <Dropdown title="Inside" items={getDropdownItems("insideT")} />
                         <Dropdown title="Shooting" items={getDropdownItems("shootingT")} />
@@ -386,7 +386,7 @@ export default function FilterSortBox(props) {
                         <Dropdown title="Freelance" items={getDropdownItems("freelanceT")} />
                         <Dropdown title="Passing" items={getDropdownItems("passingT")} />
                     </div>
-                    <div className="column is-3-widescreen is-full-mobile">
+                    <div className="column is-4-tablet is-full-mobile">
                         <p className="heading">Sort By Misc: </p>
                         <button className={`button is-small ${searchOptions.sortProp === "date" ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("date")}>Date</button>
                         <button className={`button is-small ${searchOptions.sortProp === "totalBadges" ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("totalBadges")}>Total Badges</button>
