@@ -34,6 +34,9 @@ export default function NavBar(props) {
                     <a className="navbar-item hvr-underline-reveal" href="/updates">Updates</a>
                     <a className="navbar-item hvr-underline-reveal" href="/collections">Collections</a>
                 </div>
+                <div className="navbar-end">
+                    <a className="navbar-item hvr-underline-reveal" href="/about">About</a>
+                </div>
             </div>
         </nav>
     )

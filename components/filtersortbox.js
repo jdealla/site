@@ -220,6 +220,11 @@ export default function FilterSortBox(props) {
                                 onClick={() => handleOptions({ ...searchOptions, evos: !searchOptions.evos })}>Evos</button>
                             <button className={`button is-small ${searchOptions.duos ? "is-active filter-button-active" : ""}`} 
                                 onClick={() => handleOptions({ ...searchOptions, duos: !searchOptions.duos })}>Duos</button>
+                            <button className={`button is-small ${searchOptions.filterOptions.secondary ? "is-active filter-button-active" : ""}`}
+                                onClick={() => handleOptions({ ...searchOptions, filterOptions: { ...searchOptions.filterOptions, secondary: !searchOptions.filterOptions.secondary }})}
+                            >
+                                Include Secondary Position
+                            </button>
                             <button className="button is-small" onClick={() => clearOptions()}>Clear Filters/Sort</button>
                         </div>
                     </div>

@@ -13,7 +13,7 @@ export default function Players({ players, allAnimations }) {
     const [allPlayers, setAllPlayers] = useState(players);
     const [searchOptions, setSearchOptions] = useState({ 
         searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [] }, sortProp: "", asc: false, page: 0, perPage: 15,
-        evos: false, duos: false
+        evos: false, duos: false, secondary: false
     })
 
     const handlePage = (dir) => {
@@ -53,7 +53,7 @@ export default function Players({ players, allAnimations }) {
         if (filterOptions.position.length > 0) {
             filtered = filtered.filter(player => {
                 for(const value of filterOptions.position) {
-                    if (player.position === value)
+                    if (player.position === value || (filterOptions.secondary && (player.secondary_position === value)))
                         return true;
                 }
             })

@@ -26,6 +26,10 @@ export default function Compare({ players }) {
             fetchPlayer();
     }
 
+    const handleEvo = (num, playerId) => {
+        
+    }
+
     const renderView = () => {
         const { player1, player2 } = compare;
 
