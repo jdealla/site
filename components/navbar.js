@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 import NavSearch from "../components/navsearch";
 
 export default function NavBar(props) {
@@ -33,9 +34,7 @@ export default function NavBar(props) {
                     <a className="navbar-item hvr-underline-reveal" href="/compare">Compare</a>
                     <a className="navbar-item hvr-underline-reveal" href="/updates">Updates</a>
                     <a className="navbar-item hvr-underline-reveal" href="/collections">Collections</a>
-                </div>
-                <div className="navbar-end">
-                    <a className="navbar-item hvr-underline-reveal" href="/about">About</a>
+                    <a className="navbar-item hvr-underline-reveal" href="/about"><AiOutlineInfoCircle /></a>
                 </div>
             </div>
         </nav>
