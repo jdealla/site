@@ -1,9 +1,16 @@
-import React from "react";
-import { formatName, levelToNum } from "../lib/helpers";
+import React, { Fragment } from "react";
+import { formatName, levelToNum, numToLevel } from "../lib/helpers";
 import { ratingColor } from "../lib/helpers";
 
 export default function CompareTable(props) {
-    const { tableName, firstName, firstStats, secondName, secondStats, diff, isBadges } = props;
+    const { tableName, firstName, firstStats, firstEvoStats, firstDuoStats, secondName, secondStats, secondEvoStats, secondDuoStats, diff, isBadges } = props;
+    
+    const renderNotification = (upgraded) => {
+        if (upgraded)
+            return <span className="badge is-success" style={{ display: "inline-block", position: "initial", marginBottom: "30px" }}></span>
+        else
+            return "";
+    }
 
     const difference = (value, value2) => {
         let diff = levelToNum(value) - levelToNum(value2)
@@ -39,21 +46,62 @@ export default function CompareTable(props) {
         let table = [], i = 0;
         for(let key in firstStats) {
             let name = key.replace(/_/g, "");
+            let first = firstStats[key];
+            let second = secondStats[key];
+            let upgraded = { player1: false, player2: false };
+
+            if (firstEvoStats != "" && firstDuoStats === "" ) {
+                first = isBadges ? numToLevel(levelToNum(first) + firstEvoStats[key]).toUpperCase() : (first + firstEvoStats[key]);
+            } else if (firstEvoStats != "" && firstDuoStats != "") {
+                first = isBadges ? numToLevel(levelToNum(first) + firstEvoStats[key] + firstDuoStats[key]).toUpperCase() : (first + firstEvoStats[key] + firstDuoStats[key]);
+            } else if (firstEvoStats === "" && firstDuoStats != "") {
+                first = isBadges ? numToLevel(levelToNum(first) + firstDuoStats[key]).toUpperCase() : (first + firstDuoStats[key]);
+            }
+            
+            if (secondEvoStats != "" && secondDuoStats === "" ) {
+                second = isBadges ? numToLevel(levelToNum(second) + secondEvoStats[key]).toUpperCase() : (second + secondEvoStats[key]);
+            } else if (secondEvoStats != "" && secondDuoStats != "") {
+                second = isBadges ? numToLevel(levelToNum(first) + secondEvoStats[key] + secondDuoStats[key]).toUpperCase() : (second + secondEvoStats[key] + secondDuoStats[key]);
+            } else if (secondEvoStats === "" && secondDuoStats != "") {
+                second = isBadges ? numToLevel(levelToNum(second) + secondDuoStats[key]).toUpperCase() : (second + secondDuoStats[key]);
+            }
+
+            debugger
+            if ((firstEvoStats != "" || firstDuoStats != "") && first !== firstStats[key])
+                upgraded.player1 = true;
+            
+            if ((secondEvoStats != "" || secondDuoStats != "") && second !== secondStats[key])
+                upgraded.player2 = true;
+
             let newRow = (
-                <tr key={i++}>
+                <tr key={name}>
                     <td className="has-text-weight-semibold" style={{ verticalAlign: "middle" }}>{formatName(key)}</td>
 					  { isBadges ? (
-						    <>
-						        <td className="has-text-centered">{renderBadgeCompare(firstStats[key], name)} {diff === false ? "" : difference(firstStats[key], secondStats[key])}</td> 
-						        <td className="has-text-centered">{renderBadgeCompare(secondStats[key], name)} {diff === false ? "" : difference(secondStats[key], firstStats[key])}</td>
-						    </>
+						    <Fragment>
+						        <td className="has-text-centered">
+                                    {renderBadgeCompare(first, name)}
+                                    {diff === false ? "" : difference(first, second)}
+                                    {renderNotification(upgraded.player1)}
+                                </td> 
+						        <td className="has-text-centered">
+                                    {renderBadgeCompare(second, name)}
+                                    {diff === false ? "" : difference(second, first)}
+                                    {renderNotification(upgraded.player2)}
+                                </td>
+						    </Fragment>
 						)
 						 :
 						  (
-						     <>
-						        <td className="has-text-centered">{ratingColor(firstStats[key])} {diff === false ? "" : difference(firstStats[key], secondStats[key])}</td> 
-						        <td className="has-text-centered">{ratingColor(secondStats[key])} {diff === false ? "" : difference(secondStats[key], firstStats[key])}</td>
-						     </>
+						     <Fragment>
+						        <td className="has-text-centered">
+                                    {ratingColor(first)}
+                                    {diff === false ? "" : difference(first, second)}
+                                </td> 
+						        <td className="has-text-centered">
+                                    {ratingColor(second)}
+                                    {diff === false ? "" : difference(second, first)}
+                                </td>
+						     </Fragment>
 						  )
 				      }
                 </tr>

@@ -1,12 +1,42 @@
 import React from "react";
+import { AiOutlineStar, AiFillStar } from "react-icons/ai"
+import { IoMdCheckbox, IoMdCheckboxOutline } from "react-icons/io";
 
 import SearchPlayers from "../components/searchplayers";
 import TagOverall from "./tagoverall";
 
 export default function CompareHeader(props) {
-    const { players, handlePlayer, compare } = props;
+    const { players, handlePlayer, compare, duoOn, evoLevel, handleEvo, handleDuo } = props;
 
-    const playerInfoContainer = (playerData, playerId) => {
+    const handleEvoStars = (playerId, level) => {
+        if (evoLevel[playerId] === level)
+            handleEvo(playerId, level - 1);
+        else
+            handleEvo(playerId, level);
+    }
+
+    const renderEvoStars = (playerId, evos) => {
+        let stars = []
+        for(let i = 0; i < evos.length; i++) {
+            let star = (
+                <div className="container star" onClick={() => handleEvoStars(playerId, i)} key={i}>
+                    {evoLevel[playerId] >= i ? <AiFillStar className="icon-selected" size="1.5em" /> : <AiOutlineStar size="1.5em" />}
+                </div>
+            )
+            stars.push(star);
+        }
+
+        return (
+            <>
+                <p className="heading">Evo</p>
+                <div className="is-flex">
+                    {stars}
+                </div>
+            </>
+        )
+    }
+
+    const playerInfoContainer = (playerData, playerId, playerEvos, playerDuo) => {
         return (
 		   <div className="box" style={{  minWidth: "80%" }}>
 		       <div className="column">
@@ -16,34 +46,59 @@ export default function CompareHeader(props) {
                        </div>
                        <div className="media-content">
                            <div className="content has-text-centered">
-                               <p> 
-							      <strong>{playerData.info.name}</strong> <br /> 
-							      <small><a className="has-text-dark" href={`/collections`}>{playerData.info.collection}</a> / 
-		                          <a className="has-text-dark" href={`/collection/${playerData.info.collection.toLowerCase().replace(/ /g, "-")}/theme/${playerData.info.theme.toLowerCase().replace(/ /g, "-")}`}> {playerData.info.theme} </a></small>
-                                  <br />
-		                          <br />
-		                       </p>
-                                <p className="heading">Overall</p>
-                                <p className="compare-ovr">
-                                    <TagOverall theme={playerData.info.theme} overall={playerData.info.overall} />
-                                </p>
-                                <br />
-                                <p className="heading">Position</p>
-                                <p className="title is-size-6">{playerData.info.position}{playerData.info.secondary_position != null ? `/${playerData.info.secondary_position}` : ""}</p>
-                                <br />
-								<div className="is-flex" style={{ justifyContent: "space-evenly" }}>
+                               <div className="is-flex" style={{ justifyContent: "space-evenly", alignItems: "center" }}>
+                                    <div>
+                                        <p className="heading">Overall</p>
+                                        <TagOverall theme={playerData.info.theme} overall={playerData.info.overall} />
+                                    </div>
+                                    <div>
+                                        <p> 
+                                            <strong>{playerData.info.name}</strong> <br /> 
+                                            <small><a className="has-text-dark" href={`/collections`}>{playerData.info.collection}</a> / 
+                                            <a className="has-text-dark" href={`/collection/${playerData.info.collection.toLowerCase().replace(/ /g, "-")}/theme/${playerData.info.theme.toLowerCase().replace(/ /g, "-")}`}> {playerData.info.theme} </a></small>
+                                        </p>
+                                    </div>
+                               </div>
+                               <br />
+                               <div className="is-flex" style={{ justifyContent: "space-evenly", alignItems: "center" }}>
 								    <div>
                                         <p className="heading">Height</p>
                                         <p className="title is-size-6">{playerData.info.height}"</p>
 								    </div>
+                                    <div>
+                                        <p className="heading">Position</p>
+                                        <p className="title is-size-6">{playerData.info.position}{playerData.info.secondary_position != null ? `/${playerData.info.secondary_position}` : ""}</p>
+                                    </div>
+                               </div>
+                                <br />
+								<div className="is-flex" style={{ justifyContent: "space-evenly", alignItems: "center" }}>
 								    <div>
 								        <p className="heading">Wingspan</p>
                                         <p className="title is-size-6">{playerData.info.wingspan}</p>
 								    </div>
+                                    <div>
+                                        <p className="heading">Weight</p>
+                                        <p className="title is-size-6">{playerData.info.weight}</p>
+                                    </div>
 								</div>
-								<br />
-								<p className="heading">Weight</p>
-                                <p className="title is-size-6">{playerData.info.weight}</p>
+                                <br />
+                                {
+                                    playerEvos.length > 0 ? renderEvoStars(playerId, playerEvos) : ""
+                                }
+                                <br />
+                                {
+                                    playerDuo ? (
+                                        <div>
+                                            <div className="heading">Dynamic Duo</div>
+                                            <span className="icon" onClick={() => handleDuo(playerId)} style={{ cursor: "pointer" }}>
+                                                {duoOn[playerId] ? 
+                                                    <IoMdCheckbox className="icon-selected" size="1.7em" /> 
+                                                    : <IoMdCheckboxOutline size="1.7em" />
+                                                }
+                                            </span>
+                                        </div>
+                                    ) : ""
+                                }
                           </div>
                       </div>
                   </article>
@@ -59,18 +114,22 @@ export default function CompareHeader(props) {
                 if (compare.player1 == null) {
                     return <SearchPlayers players={players} handleClick={handlePlayer} playerInfo="player1" placeholder="Search player to compare" />
                 } else {
-                    let playerData = compare.player1
+                    let playerData = compare.player1[0];
+                    let evos = compare.player1[1];
+                    let duo = compare.player1[2];
 
-                    return playerInfoContainer(playerData, "player1");
+                    return playerInfoContainer(playerData, "player1", evos, duo);
                 }
             }
             case 2: {
                 if (compare.player2 == null) {
                     return <SearchPlayers players={players} handleClick={handlePlayer} playerInfo="player2" placeholder="Search player to compare" />
                 } else {
-                    let playerData = compare.player2
-                    
-                    return playerInfoContainer(playerData, "player2")
+                    let playerData = compare.player2[0];
+                    let evos = compare.player2[1];
+                    let duo = compare.player2[2];
+
+                    return playerInfoContainer(playerData, "player2",  evos, duo)
                 }
             }
         }

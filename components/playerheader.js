@@ -16,7 +16,7 @@ export default function PlayerHeader(props) {
         if (evoLevel === level)
             handleEvo(level - 1);
         else
-            handleEvo(level)
+            handleEvo(level);
     }
 
     const renderEvoStars = () => {

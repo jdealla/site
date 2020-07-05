@@ -6,8 +6,7 @@ export default function PlayersList(props) {
     const { players, searchOptions } = props;
 
     const handleClick = (playerId, playerName) => {
-        // window.location.href = `/player/${playerId}`
-        window.open(`/player/${playerName.replace(/( |')/g, "-").toLowerCase()}/${playerId}`,'_blank')
+        window.location.href = `/player/${playerName.replace(/( |')/g, "-").toLowerCase()}/${playerId}`;
     }
 
     const displayHeaders = () => {
