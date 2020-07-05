@@ -50,28 +50,32 @@ export default function CompareTable(props) {
             let second = secondStats[key];
             let upgraded = { player1: false, player2: false };
 
-            if (firstEvoStats != "" && firstDuoStats === "" ) {
-                first = isBadges ? numToLevel(levelToNum(first) + firstEvoStats[key]) : (first + firstEvoStats[key]);
-            } else if (firstEvoStats != "" && firstDuoStats != "") {
-                first = isBadges ? numToLevel(levelToNum(first) + firstEvoStats[key] + firstDuoStats[key]) : (first + firstEvoStats[key] + firstDuoStats[key]);
-            } else if (firstEvoStats === "" && firstDuoStats != "") {
-                first = isBadges ? numToLevel(levelToNum(first) + firstDuoStats[key]) : (first + firstDuoStats[key]);
+            if (firstEvoStats != null || firstEvoStats != undefined || firstDuoStats != undefined || firstDuoStats != null) {
+                if (firstEvoStats != "" && firstDuoStats === "") {
+                    first = isBadges ? numToLevel(levelToNum(first) + firstEvoStats[key]) : (first + firstEvoStats[key]);
+                } else if (firstEvoStats != "" && firstDuoStats != "") {
+                    first = isBadges ? numToLevel(levelToNum(first) + firstEvoStats[key] + firstDuoStats[key]) : (first + firstEvoStats[key] + firstDuoStats[key]);
+                } else if (firstEvoStats === "" && firstDuoStats != "") {
+                    first = isBadges ? numToLevel(levelToNum(first) + firstDuoStats[key]) : (first + firstDuoStats[key]);
+                }
             }
             
-            if (secondEvoStats != "" && secondDuoStats === "" ) {
-                second = isBadges ? numToLevel(levelToNum(second) + secondEvoStats[key]) : (second + secondEvoStats[key]);
-            } else if (secondEvoStats != "" && secondDuoStats != "") {
-                second = isBadges ? numToLevel(levelToNum(first) + secondEvoStats[key] + secondDuoStats[key]) : (second + secondEvoStats[key] + secondDuoStats[key]);
-            } else if (secondEvoStats === "" && secondDuoStats != "") {
-                second = isBadges ? numToLevel(levelToNum(second) + secondDuoStats[key]) : (second + secondDuoStats[key]);
+            if (secondEvoStats != null || secondEvoStats != undefined || secondDuoStats != undefined || secondDuoStats != null) {
+                if (secondEvoStats != "" && secondDuoStats === "" ) {
+                    second = isBadges ? numToLevel(levelToNum(second) + secondEvoStats[key]) : (second + secondEvoStats[key]);
+                } else if (secondEvoStats != "" && secondDuoStats != "") {
+                    second = isBadges ? numToLevel(levelToNum(first) + secondEvoStats[key] + secondDuoStats[key]) : (second + secondEvoStats[key] + secondDuoStats[key]);
+                } else if (secondEvoStats === "" && secondDuoStats != "") {
+                    second = isBadges ? numToLevel(levelToNum(second) + secondDuoStats[key]) : (second + secondDuoStats[key]);
+                }
             }
 
-            if ((firstEvoStats != "" || firstDuoStats != "") && first.toLowerCase() !== firstStats[key].toLowerCase())
-                if (first.toLowerCase() !== "none")
+            if (firstEvoStats != "" || firstDuoStats != "")
+                if (isBadges && first.toLowerCase() !== firstStats[key].toLowerCase() && first.toLowerCase() !== "none")
                     upgraded.player1 = true;
             
-            if ((secondEvoStats != "" || secondDuoStats != "") && second.toLowerCase() !== secondStats[key].toLowerCase())
-                if (second.toLowerCase() != "None")
+            if (secondEvoStats != "" || secondDuoStats != "")
+                if (isBadges && second.toLowerCase() !== secondStats[key].toLowerCase() && second.toLowerCase() != "None")
                     upgraded.player2 = true;
 
             let newRow = (
