@@ -163,7 +163,7 @@ export default function PlayerHeader(props) {
 										    <div className="has-text-centered">
 										        <TagOverall hasBorder={true} overall={duoPartner.overall} />
                                             </div>
-                                            <a href={`/player/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}/${duoPartner.id}`}>{duoPartner.name}</a>
+                                            <a href={`/player/${playerData.info.name.replace(/( |')/g, "-").toLowerCase()}/${duoPartner.id}`}>{duoPartner.name}</a>
                                             {renderDuo()}
                                         </div>
                                     </div>
