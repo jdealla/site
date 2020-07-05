@@ -51,7 +51,7 @@ export default function CompareHeader(props) {
                                         <p className="heading">Overall</p>
                                         <TagOverall theme={playerData.info.theme} overall={playerData.info.overall} />
                                     </div>
-                                    <div>
+                                    <div className="is-hidden-mobile">
                                         <p> 
                                             <strong>{playerData.info.name}</strong> <br /> 
                                             <small><a className="has-text-dark" href={`/collections`}>{playerData.info.collection}</a> / 
