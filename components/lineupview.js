@@ -1,4 +1,5 @@
 import React from "react";
+import Popover from "react-tiny-popover";
 
 export default function LineupView(props) {
     const { lineup, handleLineup } = props;
@@ -9,7 +10,7 @@ export default function LineupView(props) {
             let item;
             if (player == null) {
                 item = (
-                    <img src="https://via.placeholder.com/240x340/" />
+                    <img src="https://2kdbimg.com/240x340/no_image.png" />
                 )
             } else {
                 item = (
@@ -27,7 +28,7 @@ export default function LineupView(props) {
             let item;
             if (player == null) {
                 item = (
-                    <img src="https://via.placeholder.com/240x340/" />
+                    <img src="https://2kdbimg.com/240x340/no_image.png" />
                 )
             } else {
                 item = (

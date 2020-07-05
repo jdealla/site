@@ -25,7 +25,7 @@ export default function NavBar(props) {
                 </a>
             </div>
 
-            <div className={`navbar-menu is-transparent ${view ? "is-active" : ""}`}>
+            <div className={`navbar-menu ${view ? "is-active" : ""}`}>
                 <div className="navbar-start">
                     <div className="navbar-item">
                         {searchOn ? <NavSearch handleClick={handleClickPlayer} players={players} placeholder="Search players here" /> : ""}

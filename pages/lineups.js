@@ -29,7 +29,7 @@ export default function Home({ players }) {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <p className="title has-text-centered"> Coming soon. </p>
-            {/* <LineupView lineup={lineup} handleLineup={handleLineup} /> */}
+            <LineupView lineup={lineup} handleLineup={handleLineup} />
         </Layout>
     )
 }
