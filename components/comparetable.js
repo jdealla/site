@@ -66,7 +66,6 @@ export default function CompareTable(props) {
                 second = isBadges ? numToLevel(levelToNum(second) + secondDuoStats[key]).toUpperCase() : (second + secondDuoStats[key]);
             }
 
-            debugger
             if ((firstEvoStats != "" || firstDuoStats != "") && first !== firstStats[key])
                 upgraded.player1 = true;
             
