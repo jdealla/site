@@ -17,8 +17,9 @@ export default function About({ players }) {
         <div className="hero-body">
           <div className="container">
             <div className="content">
-                <p className="has-text-weight-semibold"> Created by KennyMcK69 and chknwaffles </p>
-                
+                <p className="has-text-weight-semibold"> 
+                  Created by <a href="https://2kgamer.com/u/kennymck69">KennyMcK69</a> and <a href="https://2kgamer.com/u/chknwaffles">chknwaffles</a>
+                </p>
                 <p> If you like our site and would like to help keep the site up, you can donate here: </p>
                 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                     <input type="hidden" name="cmd" value="_donations" />

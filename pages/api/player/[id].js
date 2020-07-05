@@ -1,4 +1,6 @@
 import { store } from "../../../lib/db";
+import { findEvos } from "../../../lib/evos";
+import { findDuos } from "../../../lib/duos";
 import { formatPlayerObject } from "../../../lib/format-helpers/player";
 
 export async function getPlayerData(id) {
@@ -15,5 +17,9 @@ export default async (req, res) => {
 
     const data = await getPlayerData(id).catch(console.error);
 
-    res.status(200).json(data)
+    const evos = await findEvos(id).catch(console.error);
+
+    const duo = await findDuos(id).catch(console.error);
+
+    res.status(200).json([data, evos, duo])
 }
