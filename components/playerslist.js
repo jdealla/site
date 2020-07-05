@@ -6,7 +6,7 @@ export default function PlayersList(props) {
     const { players, searchOptions } = props;
 
     const handleClick = (playerId, playerName) => {
-        window.location.href = `/player/${playerName.replace(/( |')/g, "-").toLowerCase()}/${playerId}`;
+        window.location = `/player/${playerName.replace(/( |')/g, "-").toLowerCase()}/${playerId}`;
     }
 
     const displayHeaders = () => {
@@ -112,7 +112,7 @@ export default function PlayersList(props) {
                                         <figure className="image is-24x24" style={{ marginBottom: "5px" }}>
                                             <img src={`https://2kdbimg.com/35/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} />
                                         </figure>
-                                        <p className="ml-1"><a className="has-text-black" href={`/player/${player.name.replace(/( |')/g, "-").toLowerCase()}/${player.id}`}>{player.name}</a></p>
+                                        <p className="ml-1">{player.name}</p>
                                     </div>
                                 </td>
                                 <td style={{ textAlign: "center" }}>
