@@ -102,8 +102,8 @@ export default function CompareHeader(props) {
                           </div>
                       </div>
                   </article>
-              </div>
-                 <a className="delete is-medium" aria-label="delete" style={{ position: "absolute", top: 0 }} onClick={() => handlePlayer(playerId, null)}></a>
+                </div>
+                <a className="delete is-medium" aria-label="delete" style={{ marginTop: "-360px" }} onClick={() => handlePlayer(playerId, null)}></a>
 		  </div>    
         )
     };
