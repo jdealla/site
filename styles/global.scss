@@ -145,6 +145,13 @@ $dropdown-item-hover-background-color: none;
 	.transform-badges {
 	    transform: scale(0.7) translate(-22%, -22%);
 	}
+	
+    .search-theme {
+        white-space: nowrap;
+        width: 185px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
 
 @media only screen and (max-width: 1216px) {
