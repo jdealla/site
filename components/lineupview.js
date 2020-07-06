@@ -20,20 +20,19 @@ export default function LineupView(props) {
                     <div className="column is-4-mobile" key={`starters-${slot}`}>
                         <Popup 
                             trigger={(
-                                <figure className="image is-3by4">
+                                <figure className="image is-3by4" key={`starters-${slot}`}>
                                     <img src="https://2kdbimg.com/240x340/no_image.png" />
                                 </figure>
                             )}
                             contentStyle={{ width: "350px" }}
                             on="click"
-                            position={["top center", "center center", "right center", "left center"]}
-                            closeOnDocumentClick
+                            position={["top center", "right center", "left center"]}
+                            overlayStyle={{ zIndex: "1" }}
                         >
                             <div className="box">
                                 <SearchPlayers players={players} handleClick={handleClick} playerInfo={slot} placeholder="Search player" styles={lineupStyle} />
                             </div>
                         </Popup>
-
                     </div>
                 )
             } else {
@@ -62,14 +61,14 @@ export default function LineupView(props) {
                     <div className="column is-3-mobile" key={`bench-${slot}`}>
                         <Popup 
                             trigger={(
-                                <figure className="image is-3by4">
+                                <figure className="image is-3by4" key={`bench-${slot}`}>
                                     <img src="https://2kdbimg.com/160x211/no_image.png" />
                                 </figure>
                             )}
                             contentStyle={{ width: "350px" }}
                             on="click"
-                            position={["top center", "center center", "right center", "left center"]}
-                            closeOnDocumentClick
+                            position={["top center", "right center", "left center"]}
+                            overlayStyle={{ zIndex: "1" }}
                         >
                             <div className="box">
                                 <SearchPlayers players={players} handleClick={handleClick} playerInfo={slot} placeholder="Search player" styles={lineupStyle} />
