@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import { getAllPlayers } from "../lib/players";
-
 import Layout from "../components/layout";
 import LineupView from "../components/lineupview";
 
@@ -29,9 +28,7 @@ export default function Home({ players }) {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <p className="title has-text-centered"> Lineup Builder </p>
-            <div className="container">
-                <LineupView players={players} lineup={lineup} handleLineup={handleLineup} />
-            </div>
+            <LineupView players={players} lineup={lineup} handleLineup={handleLineup} />
         </Layout>
     )
 }

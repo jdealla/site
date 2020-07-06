@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Popup from "reactjs-popup";
 
 import SearchPlayers from "../components/searchplayers";
@@ -6,9 +6,23 @@ import SearchPlayers from "../components/searchplayers";
 import lineupStyle from "../components/lineupview.module.scss";
 
 export default function LineupView(props) {
+    const lineupRef = useRef(null);
     const { players, lineup, handleLineup } = props;
 
     const handleClick = (slot, playerId) => handleLineup(slot, playerId, Number(slot) > 5 ? false : true);
+
+    const saveImage = () => {
+        import('dom-to-image').then(dom => {
+            dom.toJpeg(lineupRef.current, { quality: 0.95 })
+            .then(dataUrl => {
+                const link = document.createElement('a');
+                link.download = '2kdb-lineup.jpeg';
+                link.crossOrigin = 'anonymous';
+                link.href = dataUrl;
+                link.click();
+            })
+        }).catch(e => {console("load failed")})
+    }
 
     const renderStarters = () => {
         let view = [];
@@ -94,19 +108,23 @@ export default function LineupView(props) {
     }
 
     return (
-        <div className="box">
-            <div className="columns is-multiline is-mobile">
-                <div className="column is-full">
-                    <div className="columns is-variable is-1 is-multiline is-mobile is-centered">
-                        {renderStarters()}
+        <div className="container">
+            <button className="button is-small" onClick={() => saveImage()} >Save your lineup as a picture</button>
+            <div className="box" ref={lineupRef}>
+                <div className="columns is-multiline is-mobile">
+                    <div className="column is-full">
+                        <div className="columns is-variable is-1 is-multiline is-mobile is-centered">
+                            {renderStarters()}
+                        </div>
                     </div>
-                </div>
-                <div className="column is-full">
-                    <div className="columns is-variable is-1 is-multiline is-mobile">
-                        {renderBench()}
+                    <div className="column is-full">
+                        <div className="columns is-variable is-1 is-multiline is-mobile">
+                            {renderBench()}
+                        </div>
                     </div>
                 </div>
             </div>
+            
         </div>
     )
 }
