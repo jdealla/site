@@ -9,10 +9,9 @@ import Layout from "../components/layout";
 
 
 export default function Players({ players, allAnimations }) {
-    const [update, setUpdate] = useState([]);
     const [allPlayers, setAllPlayers] = useState(players);
     const [searchOptions, setSearchOptions] = useState({ 
-        searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [] }, sortProp: "", asc: false, page: 0, perPage: 15,
+        searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [], teams: [] }, sortProp: "", asc: false, page: 0, perPage: 15,
         evos: false, duos: false, secondary: false
     })
 
@@ -30,68 +29,77 @@ export default function Players({ players, allAnimations }) {
     useEffect(() => {
         const { searchValue, filterOptions, sortProp, asc, evos, duos } = searchOptions;
 
-        let filtered = update.length === 0 ? players : update
+        let filtered = players
 
-        if (duos) {
-            filtered = filtered.filter(player => player.is_duo === "True");
-        }
+        filtered = filtered.filter(player => {
+            let checked = [];
 
-        if (evos) {
-            filtered = filtered.filter(player => player.is_evo === "True");
-        }
+            if (duos && player.is_duo) checked.push(true);
+            if (evos && player.is_evo) checked.push(true);
 
-        if (filterOptions.overall.length > 0) {
-            const tiers = getFilterTiers(filterOptions.overall);
-            filtered = filtered.filter(player => {
+            if (filterOptions.overall.length > 0) {
+                const tiers = getFilterTiers(filterOptions.overall);
                 for(const tier of tiers) {
                     if (player.overall >= tier[0] && player.overall <= tier[1])
-                        return true;
+                        checked.push(true);
+                    else
+                        checked.push(false);
                 }
-            })
-        }
+            }
 
-        if (filterOptions.position.length > 0) {
-            filtered = filtered.filter(player => {
+            if (filterOptions.position.length > 0) {
                 for(const value of filterOptions.position) {
                     if (player.position === value || (filterOptions.secondary && (player.secondary_position === value)))
-                        return true;
+                        checked.push(true);
+                    else
+                        checked.push(false);
                 }
-            })
-        }
+            }
 
-        if (filterOptions.badges.length > 0) {
-            filtered = filtered.filter(player => {
-                let check = [];
+            if (filterOptions.badges.length > 0) {
+                let badgeCheck = [];
                 for(let badge of filterOptions.badges) {
                     let temp = badge.split("-");
                     let [name, level] = temp;
                     
                     if (player[name] == level)
-                        check.push(true);
+                        badgeCheck.push(true);
                     else
-                        check.push(false);
+                        badgeCheck.push(false);
                 }
 
-                if (!check.includes(false))
-                    return true;
-            })
-        }
+                if (!badgeCheck.includes(false))
+                    checked.push(true);
+                else
+                    checked.push(false);
+            }
 
-        if (filterOptions.animations.length > 0) {
-            filtered = filtered.filter(player => {
-                let check = [];
+            if (filterOptions.animations.length > 0) {
+                let aniCheck = [];
                 for(let animation of filterOptions.animations) {
                     let temp = animation.split("-");
                     let [cat, value] = temp;
                 
                     if (player[cat] === value) 
-                        check.push(true);
+                        aniCheck.push(true);
                 }
 
-                if (check.includes(true))
-                    return true;
-            })
-        }
+                if (aniCheck.includes(true))
+                    checked.push(true);
+                else
+                    checked.push(false);
+            }
+
+            if (filterOptions.teams.length > 0) {
+                if (filterOptions.teams.includes(player.team))
+                    checked.push(true);
+                else
+                    checked.push(false);
+            }
+
+            if (checked.includes(true) || checked.length === 0)
+                return true;
+        })
 
         let sorted = filtered;
         filtered = sorted.sort((a, b) => {
@@ -155,6 +163,8 @@ export default function Players({ players, allAnimations }) {
         setAllPlayers(filtered);
     }, [searchOptions])
 
+    const teams = Array.from(new Set(players.map(player => player.team))).sort();
+
     return (
         <Layout players={[]} searchOn={false}>
             <Head>
@@ -164,7 +174,7 @@ export default function Players({ players, allAnimations }) {
             </Head>
             <div className="container">
                 <div className="box">
-                    <FilterSortBox allAnimations={allAnimations} searchOptions={searchOptions} handleOptions={handleOptions} />
+                    <FilterSortBox teams={teams} allAnimations={allAnimations} searchOptions={searchOptions} handleOptions={handleOptions} />
                 </div>
                 <PlayersList players={allPlayers.slice(searchOptions.page * searchOptions.perPage, (searchOptions.page * searchOptions.perPage) + searchOptions.perPage)} searchOptions={searchOptions} />
                 <div className="columns">

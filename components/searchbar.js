@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import Autosuggest from "react-autosuggest";
 import TagOverall from "./tagoverall";
 
-import styles from "./searchbar.module.scss";
+import defaultStyle from "./searchbar.module.scss";
 
 export default function SearchBar(props) {
-    const { handleClick, players, placeholder } = props;
+    const { handleClick, players, placeholder, styles } = props;
     const [value, setValue] = useState('');
     const [items, setItems] = useState([]);
     
@@ -58,12 +58,13 @@ export default function SearchBar(props) {
         placeholder,
         value,
         type: "search",
+        autoFocus: true,
         onChange
     };
 
     return (
         <Autosuggest
-            theme={styles}
+            theme={styles ? styles : defaultStyle}
             suggestions={items}
             onSuggestionsFetchRequested={onSuggestionsFetchRequested}
             onSuggestionsClearRequested={onSuggestionsClearRequested}

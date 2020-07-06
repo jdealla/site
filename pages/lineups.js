@@ -11,13 +11,13 @@ export default function Home({ players }) {
         bench: { "6": null, "7": null, "8": null, "9": null, "10": null, "11": null, "12": null, "13": null }
     })
 
-    const handleLineup = (playerNum, slot, starting) => {
-        let targetPlayer = players.find(player => player.id === playerNum);
-
+    const handleLineup = (slot, playerNum, starting) => {
+        let targetIndex = (playerNum != null) ? players.findIndex(player => player.id === playerNum) : null;
+        
         if (starting) {
-            setLineup({ ...lineup, starters: { ...lineup.starters, [slot]: targetPlayer } });
+            setLineup({ ...lineup, starters: { ...lineup.starters, [slot]: players[targetIndex] } });
         } else {
-            setLineup({ ...lineup, bench: { ...lineup.bench, [slot]: targetPlayer } });
+            setLineup({ ...lineup, bench: { ...lineup.bench, [slot]: players[targetIndex] } });
         }
     }
 
@@ -28,8 +28,10 @@ export default function Home({ players }) {
                 <meta name="description" content="NBA 2K20 MyTeam Database Lineup Page" />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <p className="title has-text-centered"> Coming soon. </p>
-            <LineupView lineup={lineup} handleLineup={handleLineup} />
+            <p className="title has-text-centered"> Lineup Builder </p>
+            <div className="container">
+                <LineupView players={players} lineup={lineup} handleLineup={handleLineup} />
+            </div>
         </Layout>
     )
 }

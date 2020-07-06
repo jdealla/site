@@ -56,7 +56,7 @@ export default function CompareHeader(props) {
                                     </div>
                                </div>
                                <br />
-                               <div className="is-flex" style={{ justifyContent: "space-evenly", alignItems: "center" }}>
+                               <div className="is-flex" style={{ justifyContent: "space-around" }}>
 								    <div>
                                         <p className="heading">Height</p>
                                         <p className="title is-size-6">{playerData.info.height}"</p>
@@ -67,7 +67,7 @@ export default function CompareHeader(props) {
                                     </div>
                                </div>
                                 <br />
-								<div className="is-flex" style={{ justifyContent: "space-evenly", alignItems: "center" }}>
+								<div className="is-flex" style={{ justifyContent: "space-around" }}>
 								    <div>
 								        <p className="heading">Wingspan</p>
                                         <p className="title is-size-6">{playerData.info.wingspan}</p>
