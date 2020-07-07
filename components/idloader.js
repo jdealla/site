@@ -132,6 +132,7 @@ const Loader = () => (
                <li className="is-active"><a>Stats</a></li>
                <li className=""><a>Tendencies</a></li>
                <li className=""><a>Signature/Animations</a></li>
+               <li className=""><a>True Ratings</a></li>
             </ul>
          </div>
       </div>

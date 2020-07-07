@@ -1,10 +1,11 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { getPlayersIds, findAltPlayers, getAllPlayers } from "../../../lib/players";
 import { findEvos } from "../../../lib/evos";
 import { findDuos, findDuoPartner } from "../../../lib/duos";
 import { getPlayerData } from "../../../pages/api/player/[id]";
+import { ratePlayer } from "../../../lib/ratings";
 
 import Layout from "../../../components/layout";
 import PlayerHeader from "../../../components/playerheader";
@@ -16,6 +17,12 @@ export default function Player({ playerData, altPlayers, evos, duo, duoPartner, 
     const [view, setView] = useState("stats");
     const [evoLevel, setEvoLevel] = useState(-1);
     const [duoOn, setDuoOn] = useState(false);
+    const [trueRatings, setTrueRatings] = useState(false);
+    useEffect(() => {
+        if (playerData) {
+            setTrueRatings(ratePlayer(playerData, duoOn, evoLevel, duo, evos));
+        }
+    }, [ playerData, duoOn, evoLevel ]);
 
     const { isFallback } = useRouter();
     if (isFallback) {
@@ -114,6 +121,21 @@ export default function Player({ playerData, altPlayers, evos, duo, duoPartner, 
                     </div>
                 </Fragment>
             )
+            case "trueRatings": return (
+                <Fragment>
+                    <div>
+                        <div className="column is-three-fifths-desktop pl-0 pt-0 ml-0"><strong>True Ratings</strong> are based on a weighted calculation that favors specific attributes for specific positions, helping measure the true quality of the card. Currently, badging, animations, and player models aren’t factored in. </div>
+                        <div className="mb-3 is-size-7 pl-0 ml-0">created by <strong><a href="https://2kgamer.com/u/element">element</a></strong> | implemented by <strong><a href="https://2kgamer.com/u/jdealla">jdealla</a></strong></div>
+                    </div>
+                    {trueRatings ? trueRatings.map( ({ overall, sections, position }) => {
+                        return (
+                            <div className="column is-one-fifth-desktop is-one-fourth-tablet is-half-mobile">
+                                <Attributes attributes={{overall, ...sections}} attrName={position} trueRating={true}/>
+                            </div>
+                        );
+                    }) : null}
+                </Fragment>
+            )
             default: return;
         }
     }
@@ -151,6 +173,7 @@ export default function Player({ playerData, altPlayers, evos, duo, duoPartner, 
                                 <li className={view === "stats" ? "is-active" : ""} onClick={() => setView("stats")}><a>Stats</a></li>
                                 <li className={view === "tendencies" ? "is-active" : ""} onClick={() => setView("tendencies")}><a>Tendencies</a></li>
                                 <li className={view === "animations" ? "is-active" : ""} onClick={() => setView("animations")}><a>Signature/Animations</a></li>
+                                <li className={view === "trueRatings" ? "is-active" : ""} onClick={() => setView("trueRatings")}><a>True Ratings</a></li>
                             </ul>
                         </div>
                     </div>
