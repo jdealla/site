@@ -74,9 +74,9 @@ export default function BadgesContainer(props) {
                 return -1;
             } else if (levelA === levelB) {
                 if (nameA > nameB) {
-                    return -1;
-                } else {
                     return 1;
+                } else {
+                    return -1;
                 }
             } else {
                 return 1;
