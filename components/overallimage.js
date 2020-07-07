@@ -21,7 +21,7 @@ export default function OverallImage(props) {
         }
 
         return (
-            <figure className={`image is-${size}`} style={{ filter:`drop-shadow(0px 0px 4px ${color})` }}>
+            <figure className={`image is-${size}`}>
                 <img src={`https://2kdbimg.com/${size}/icon_${tier}.png`} />
             </figure>
         )

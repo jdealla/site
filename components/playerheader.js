@@ -85,7 +85,7 @@ export default function PlayerHeader(props) {
                             <div className="column is-full-mobile is-8-tablet is-player-info">
                                 <div className="columns is-mobile is-multiline">
                                     <div className="column is-1-mobile is-1-tablet ovr-margin" style={{ margin: "auto 5px auto 0" }}>
-									  <div className="has-text-centered no-shadow" style={{ position: "relative", width: "48px" }}>
+									  <div className="has-text-centered" style={{ position: "relative", width: "48px" }}>
                                           <OverallImage size="48x48" overall={playerData.info.overall} />
                                           <p className="is-overlay is-size-3 has-text-white inline-number-ovr">
                                               {playerData.info.overall}
@@ -178,8 +178,7 @@ export default function PlayerHeader(props) {
                                     }
                                 </div>
                             </div>
-                        </div>
-                        
+                        </div>    
                     </div>
                     
                     <div className="column is-3-tablet is-2-desktop">
