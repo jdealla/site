@@ -30,9 +30,10 @@ export default function Players({ players, allAnimations }) {
         const { searchValue, filterOptions, sortOptions, asc, evos, duos } = searchOptions;
 
         let filtered = players
+        console.log(searchOptions);
 
         filtered = filtered.filter(player => {
-            let checked = [];
+            let checked = [], exclusiveChecked = [];
 
             if (duos && player.is_duo) checked.push(true);
             if (evos && player.is_evo) checked.push(true);
@@ -106,7 +107,7 @@ export default function Players({ players, allAnimations }) {
                     checked.push(false);
             }
 
-            if (checked.includes(true) || checked.length === 0)
+            if (!checked.includes(false) || checked.length === 0)
                 return true;
         })
 
