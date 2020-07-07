@@ -151,26 +151,34 @@ export default function PlayerHeader(props) {
                                             })}
                                         </div>
                                     </div>
-									<div className={evos.length == 0 ? "is-hidden" : "column is-3-tablet is-full-mobile"}>
-                                        <p className="heading has-text-warning">Evolutions</p>
-                                        <div className="columns is-mobile">
-                                            {renderEvoStars()}
-                                        </div>
-                                    </div>
-                                    <div className={(duo != undefined || duo != null) ? "column is-6-tablet is-full-mobile" : "is-hidden"}>
-                                        <p className="heading has-text-warning">Dynamic Duo</p> 
-                                        <div className="container is-flex duo-items">
-										    <div className="has-text-centered">
-										        <TagOverall hasBorder={true} overall={duoPartner.overall} />
+                                    {
+                                        evos.length !== 0 ? (
+                                            <div className="column is-3-tablet is-full-mobile">
+                                                <p className="heading has-text-warning">Evolutions</p>
+                                                <div className="columns is-mobile">
+                                                    {renderEvoStars()}
+                                                </div>
                                             </div>
-                                            <a href={`/player/${playerData.info.name.replace(/( |')/g, "-").toLowerCase()}/${duoPartner.id}`}>{duoPartner.name}</a>
-                                            {renderDuo()}
-                                        </div>
-                                    </div>
+                                        ) : ""
+                                    }
+									
+                                    {
+                                        (Object.keys(duoPartner).length !== 0) ? (
+                                            <div className="column is-6-tablet is-full-mobile">
+                                                <p className="heading has-text-warning">Dynamic Duo</p> 
+                                                <div className="container is-flex duo-items">
+                                                    <div className="has-text-centered no-shadow">
+                                                        <TagOverall hasBorder={true} overall={duoPartner.overall} />
+                                                    </div>
+                                                    <a href={`/player/${duoPartner.name.replace(/( |')/g, "-").toLowerCase()}/${duoPartner.id}`}>{duoPartner.name}</a>
+                                                    {renderDuo()}
+                                                </div>
+                                            </div>
+                                        ) : ""
+                                    }
                                 </div>
                             </div>
-                        </div>
-                        
+                        </div>    
                     </div>
                     
                     <div className="column is-3-tablet is-2-desktop">

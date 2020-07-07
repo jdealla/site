@@ -200,7 +200,7 @@ export default function Compare({ players }) {
                 <meta name="description" content="Compare 2 NBA 2K20 MyTeam player cards for their stats, badges, tendencies, and animations"/>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
             </Head>
-            <div className="container" style={{ marginTop: '10px' }}>
+            <div className="container compare-header">
                 <CompareHeader players={players} handlePlayer={handlePlayer} compare={compare} duoOn={duoOn} evoLevel={evoLevel} handleEvo={handleEvo} handleDuo={handleDuo} />
 
                 <div className="container">

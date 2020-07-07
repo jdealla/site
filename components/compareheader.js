@@ -38,29 +38,25 @@ export default function CompareHeader(props) {
 
     const playerInfoContainer = (playerData, playerId, playerEvos, playerDuo) => {
         return (
-		   <div className="box" style={{  minWidth: "80%" }}>
+		   <div className="box" style={{  position: "relative" }}>
 		       <div className="column">
                    <article className="media">
-                       <div className="media-left">
+                       <div className="media-left media-mobile">
                            <img className="compare-img" src={`https://2kdbimg.com/240x350/${playerData.info.name.replace(/( |')/g, "_").toLowerCase()}_${playerData.info.id}.jpg`} />
                        </div>
                        <div className="media-content">
                            <div className="content has-text-centered">
                                <div className="is-flex" style={{ justifyContent: "space-evenly", alignItems: "center" }}>
                                     <div>
-                                        <p className="heading">Overall</p>
-                                        <TagOverall theme={playerData.info.theme} overall={playerData.info.overall} />
-                                    </div>
-                                    <div className="is-hidden-mobile">
-                                        <p> 
-                                            <strong>{playerData.info.name}</strong> <br /> 
+                                       <p className="compare-name"> 
+                                            <strong>{playerData.info.name}</strong> <span className="ml-2"> <TagOverall theme={playerData.info.theme} overall={playerData.info.overall} /> </span> 
+                                       </p>
                                             <small><a className="has-text-dark" href={`/collections`}>{playerData.info.collection}</a> / 
                                             <a className="has-text-dark" href={`/collection/${playerData.info.collection.toLowerCase().replace(/ /g, "-")}/theme/${playerData.info.theme.toLowerCase().replace(/ /g, "-")}`}> {playerData.info.theme} </a></small>
-                                        </p>
                                     </div>
                                </div>
                                <br />
-                               <div className="is-flex" style={{ justifyContent: "space-evenly", alignItems: "center" }}>
+                               <div className="is-flex" style={{ justifyContent: "space-around" }}>
 								    <div>
                                         <p className="heading">Height</p>
                                         <p className="title is-size-6">{playerData.info.height}"</p>
@@ -71,7 +67,7 @@ export default function CompareHeader(props) {
                                     </div>
                                </div>
                                 <br />
-								<div className="is-flex" style={{ justifyContent: "space-evenly", alignItems: "center" }}>
+								<div className="is-flex" style={{ justifyContent: "space-around" }}>
 								    <div>
 								        <p className="heading">Wingspan</p>
                                         <p className="title is-size-6">{playerData.info.wingspan}</p>
@@ -103,7 +99,7 @@ export default function CompareHeader(props) {
                       </div>
                   </article>
                 </div>
-                <a className="delete is-medium" aria-label="delete" style={{ marginTop: "-360px" }} onClick={() => handlePlayer(playerId, null)}></a>
+                <a className="delete is-medium" aria-label="delete" style={{ position: "absolute", top: 0 }} onClick={() => handlePlayer(playerId, null)}></a>
 		  </div>    
         )
     };
@@ -137,10 +133,10 @@ export default function CompareHeader(props) {
 
     return (
         <div className="level">
-            <div className="level-item">
+            <div className="level-item is-narrow">
                 {renderSearch(1)}
             </div>
-            <div className="level-item">
+            <div className="level-item is-narrow">
                 {renderSearch(2)}
             </div>
         </div>

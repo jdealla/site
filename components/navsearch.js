@@ -38,7 +38,7 @@ export default function SearchBar(props) {
                 <div className="is-flex navsearch-item-div">
                     <div className="ml-1 has-text-left"> 
                         <p className="title is-7">{suggestion.name}</p> 
-                        <p className="subtitle">{suggestion.collection} / {suggestion.theme}</p>
+                        <p className="subtitle search-theme">{suggestion.collection} / {suggestion.theme}</p>
                     </div>
                     <div>
                         <span className="tags ml-2 has-addons navsearch-tag-overall">

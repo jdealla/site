@@ -14,7 +14,7 @@ export default function NavBar(props) {
     return (
         <nav className="navbar is-black" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
-                <a className="navbar-item hvr-underline-reveal logo ml-5" onClick={() => router.push(`/`)}>
+                <a className="navbar-item hvr-underline-reveal logo ml-5" href="/">
                     <img src="/logo.png" />
                 </a>
 
@@ -25,7 +25,7 @@ export default function NavBar(props) {
                 </a>
             </div>
 
-            <div className={`navbar-menu is-transparent ${view ? "is-active" : ""}`}>
+            <div className={`navbar-menu ${view ? "is-active" : ""}`}>
                 <div className="navbar-start">
                     <div className="navbar-item">
                         {searchOn ? <NavSearch handleClick={handleClickPlayer} players={players} placeholder="Search players here" /> : ""}
@@ -34,6 +34,7 @@ export default function NavBar(props) {
                     <a className="navbar-item hvr-underline-reveal" href="/compare">Compare</a>
                     <a className="navbar-item hvr-underline-reveal" href="/updates">Updates</a>
                     <a className="navbar-item hvr-underline-reveal" href="/collections">Collections</a>
+                    <a className="navbar-item hvr-underline-reveal" href="/lineups">Lineups</a>
                     <a className="navbar-item hvr-underline-reveal" href="/about"><AiOutlineInfoCircle /></a>
                 </div>
             </div>

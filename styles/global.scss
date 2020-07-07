@@ -20,6 +20,8 @@ $footer-background-color: white;
 $footer-padding: 1.2rem 1.5rem 1.2rem;
 $badge-height: 8px;
 $badge-padding: .03rem .10rem;
+$dropdown-item-hover-color: none;
+$dropdown-item-hover-background-color: none;
 
 .bg_main {
     margin-top: -1.5em;
@@ -99,6 +101,12 @@ $badge-padding: .03rem .10rem;
 	}
 }
 
+@media only screen and (max-width: 449px) {
+    .media-mobile {
+       width: 45%;
+    }
+}
+
 @media only screen and (min-width: 769px) {
     
 	.navbar {
@@ -137,6 +145,22 @@ $badge-padding: .03rem .10rem;
 	.transform-badges {
 	    transform: scale(0.7) translate(-22%, -22%);
 	}
+	
+    .search-theme {
+        white-space: nowrap;
+        width: 185px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+@media only screen and (max-width: 1216px) {
+    .compare-header {
+        .box { 
+            min-width: 300px !important;
+            max-width: 460px;
+        }
+    }
 }
 
 @media only screen and (min-width: 1216px) {
@@ -223,10 +247,6 @@ $badge-padding: .03rem .10rem;
 .inline-number-ovr {
     font-family: "Rajdhani";
     text-shadow: 1px 1px 5px #000;
-}
-
-.compare-thead {
-    border-width: 0 0 2px !important;
 }
 
 .margin-auto-list figure {
@@ -339,9 +359,32 @@ $badge-padding: .03rem .10rem;
     }
 }
 
+.compare-header {
+	margin-top: 10px !important;
+	
+    .level {
+	    justify-content: space-evenly;
+		flex-wrap: wrap;
+	}
+	
+	.box { 
+        min-width: 516px;
+    }
+}
+
+.compare-name {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 .compare-img {
     border-radius: 6px;
     box-shadow: 0 0.5em 1em -0.125em rgba(0, 0, 0, 0.1), 0 0px 0 1px rgba(0, 0, 0, 0.02);
+}
+
+.compare-thead {
+    border-width: 0 0 2px !important;
 }
 
 .is-Bronze {

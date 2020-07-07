@@ -14,7 +14,7 @@ export default function Home({ players }) {
   return (
     <Layout players={[]} searchOn={false}>
       <Head>
-        <title>2KDB Homepage</title>
+        <title>2KDB MyTeam Card Database</title>
         <meta name="description" content="NBA 2K20 MyTeam Database Index Page" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>

@@ -20,7 +20,10 @@ export default function About({ players }) {
                 <p className="has-text-weight-semibold"> 
                   Created by <a href="https://2kgamer.com/u/kennymck69">KennyMcK69</a> and <a href="https://2kgamer.com/u/chknwaffles">chknwaffles</a>
                 </p>
-                <p> If you like our site and would like to help keep the site up, you can donate here: </p>
+                <p>
+                  If you want to give us feedback or suggestions on new features or report on any bugs let us know on <a href="https://2kgamer.com/t/2kdb-kennys-website/90748">2KGamer</a>
+                </p>
+                <p> Also, if you like our site and would like to help keep the site up, you can donate by clicking the donate button below. Thank you! </p>
                 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                     <input type="hidden" name="cmd" value="_donations" />
                     <input type="hidden" name="business" value="AU9DPNYHSU3ZG" />

@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import Autosuggest from "react-autosuggest";
 import TagOverall from "./tagoverall";
 
-import styles from "./searchbar.module.scss";
+import defaultStyle from "./searchbar.module.scss";
 
 export default function SearchBar(props) {
-    const { handleClick, players, placeholder } = props;
+    const { handleClick, players, placeholder, styles } = props;
     const [value, setValue] = useState('');
     const [items, setItems] = useState([]);
     
@@ -38,7 +38,7 @@ export default function SearchBar(props) {
             <div className="is-flex navsearch-item-div">
                     <div className="ml-1 has-text-left"> 
                         <p className="searchbar-title title is-7">{suggestion.name}</p> 
-                        <p className="subtitle">{suggestion.collection} / {suggestion.theme}</p>
+                        <p className="subtitle search-theme">{suggestion.collection} / {suggestion.theme}</p>
                     </div>
                     <div>
                         <span className="tags ml-2 has-addons navsearch-tag-overall">
@@ -58,12 +58,13 @@ export default function SearchBar(props) {
         placeholder,
         value,
         type: "search",
+        autoFocus: true,
         onChange
     };
 
     return (
         <Autosuggest
-            theme={styles}
+            theme={styles ? styles : defaultStyle}
             suggestions={items}
             onSuggestionsFetchRequested={onSuggestionsFetchRequested}
             onSuggestionsClearRequested={onSuggestionsClearRequested}
