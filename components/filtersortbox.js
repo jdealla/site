@@ -296,7 +296,7 @@ export default function FilterSortBox(props) {
                             >
                                 Include Secondary Position
                             </button>
-                            <button className="button is-small" onClick={() => clearOptions()}>Clear Filters/Sort</button>
+                            <button className="button is-small" onClick={() => clearOptions()}>Clear Options</button>
                         </div>
                     </div>
                     <div className="column is-4-tablet is-full-mobile">

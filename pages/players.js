@@ -39,13 +39,17 @@ export default function Players({ players, allAnimations }) {
             if (evos && player.is_evo) checked.push(true);
 
             if (filterOptions.overall.length > 0) {
+                let tierCheck = [];
                 const tiers = getFilterTiers(filterOptions.overall);
                 for(const tier of tiers) {
                     if (player.overall >= tier[0] && player.overall <= tier[1])
-                        checked.push(true);
-                    else
-                        checked.push(false);
+                        tierCheck.push(true);
                 }
+
+                if(tierCheck.includes(true))
+                    checked.push(true);
+                else
+                    checked.push(false);
             }
 
             if (filterOptions.position.length > 0) {
