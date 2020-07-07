@@ -18,19 +18,24 @@ export default function FilterSortBox(props) {
     const handleSortDirection = () => handleOptions({ ...searchOptions, asc: !searchOptions.asc });
     const clearOptions = () => {
         handleOptions({
-            searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [], teams: [] }, sortProp: "", asc: false, page: 0, perPage: 15,
+            searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [], teams: [] }, sortOptions: [], asc: false, page: 0, perPage: 15,
             evos: false, duos: false
         });
     }
 
     const handleSort = (prop) => {
-        const { sortProp } = searchOptions;
-        let newProp = prop;
+        const { sortOptions } = searchOptions;
+        let newOptions = sortOptions;
 
-        if (sortProp === prop)
-            newProp = "";
+        let targetIndex = newOptions.findIndex(option => option === prop);
 
-        handleOptions({ ...searchOptions, page: 0, sortProp: newProp });
+        if (newOptions.includes(prop)) {
+            newOptions.splice(targetIndex, 1);
+        } else {
+            newOptions.push(prop);
+        }
+
+        handleOptions({ ...searchOptions, page: 0, sortOptions: newOptions });
     }
 
     const handleFilter = (prop, value="") => {
@@ -142,7 +147,7 @@ export default function FilterSortBox(props) {
         return items.map((stat, i) => (
             <a 
                 key={i} 
-                className={`dropdown-item ${searchOptions.sortProp === stat.toLowerCase().replace(/ /g, "_") ? "is-active" : ""}`} 
+                className={`dropdown-item ${searchOptions.sortOptions.includes(stat.toLowerCase().replace(/ /g, "_")) ? "is-active" : ""}`} 
                 onClick={() => handleSort(stat.toLowerCase().replace(/ /g, "_"))}
             >
                 {stat}
@@ -338,9 +343,9 @@ export default function FilterSortBox(props) {
                     </div>
                     <div className="column is-3-tablet is-full-mobile">
                         <p className="heading">Sort By Misc: </p>
-                        <button className={`button is-small ${searchOptions.sortProp === "date" ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("date")}>Date</button>
-                        <button className={`button is-small ${searchOptions.sortProp === "totalBadges" ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("totalBadges")}>Total Badges</button>
-                        <button className={`button is-small ${searchOptions.sortProp === "wingspan" ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("wingspan")}>Wingspan</button>
+                        <button className={`button is-small ${searchOptions.sortOptions.includes("date") ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("date")}>Date</button>
+                        <button className={`button is-small ${searchOptions.sortOptions.includes("totalBadges") ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("totalBadges")}>Total Badges</button>
+                        <button className={`button is-small ${searchOptions.sortOptions.includes("wingspan") ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("wingspan")}>Wingspan</button>
                     </div>
                     <div className="column is-3-widescreen is-full-mobile">
                         <p className="heading">Filter By Misc: </p>

@@ -17,7 +17,7 @@ export default function LineupView(props) {
             .then(dataUrl => {
                 const link = document.createElement('a');
                 link.download = '2kdb-lineup.jpeg';
-                link.crossOrigin = 'anonymous';
+                link.crossOrigin = "anonymous";
                 link.href = dataUrl;
                 link.click();
             })

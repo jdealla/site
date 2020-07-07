@@ -11,7 +11,7 @@ import Layout from "../components/layout";
 export default function Players({ players, allAnimations }) {
     const [allPlayers, setAllPlayers] = useState(players);
     const [searchOptions, setSearchOptions] = useState({ 
-        searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [], teams: [] }, sortProp: "", asc: false, page: 0, perPage: 15,
+        searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [], teams: [] }, sortOptions: [], asc: false, page: 0, perPage: 15,
         evos: false, duos: false, secondary: false
     })
 
@@ -27,7 +27,7 @@ export default function Players({ players, allAnimations }) {
     const handleOptions = (options) => setSearchOptions(options);
     
     useEffect(() => {
-        const { searchValue, filterOptions, sortProp, asc, evos, duos } = searchOptions;
+        const { searchValue, filterOptions, sortOptions, asc, evos, duos } = searchOptions;
 
         let filtered = players
 
@@ -107,58 +107,31 @@ export default function Players({ players, allAnimations }) {
             let bBadges = getTotalNumOfBadges(b);
             let aCompare = aBadges.hof;
             let bCompare = bBadges.hof;
+            for (let prop of sortOptions) {
+                let value = a[prop] > b[prop] ? 1 : a[prop] < b[prop] ? -1 : 0;
+                if (prop === "totalBadges") {
+                    aCompare = aBadges.bronze + aBadges.silver + aBadges.gold + aBadges.hof;
+                    bCompare = bBadges.bronze + bBadges.silver + bBadges.gold + bBadges.hof;
+                    value = aCompare > bCompare ? 1 : aCompare < bCompare ? -1 : 0;
+                } else if (prop === "wingspan") {
+                    let aWingspan = a[prop].replace(/\"/g, "").split("'");
+                    let bWingspan = b[prop].replace(/\"/g, "").split("'");
+                    aCompare = Number(aWingspan[0] * 12) + Number(aWingspan[1]);
+                    bCompare = Number(bWingspan[0] * 12) + Number(bWingspan[1]);
 
-            if (sortProp !== "") {
-                aCompare = a[sortProp];
-                bCompare = b[sortProp];
-            }
-
-            if (sortProp === "totalBadges") {
-                aCompare = aBadges.bronze + aBadges.silver + aBadges.gold + aBadges.hof;
-                bCompare = bBadges.bronze + bBadges.silver + bBadges.gold + bBadges.hof;
-            } else if (sortProp === "wingspan") {
-                let aWingspan = a[sortProp].replace(/\"/g, "").split("'");
-                let bWingspan = b[sortProp].replace(/\"/g, "").split("'");
-                aCompare = Number(aWingspan[0] * 12) + Number(aWingspan[1]);
-                bCompare = Number(bWingspan[0] * 12) + Number(bWingspan[1]);
-            }
-            
-            if (sortProp === "") {
-                if (a.overall > b.overall) {
-                    return -1;
-                } else if (a.overall === b.overall) {
-                    if (aBadges.hof > bBadges.hof) {
-                        return -1;
-                    } else if (aBadges.hof === bBadges.hof) {
-                        if (a.name > b.name)
-                            return 1;
-                        else
-                            return -1;
-                    }
-                } else {
-                    return 1;
+                    value = aWingspan > bWingspan ? 1 : aWingspan < bWingspan ? -1 : 0;
                 }
-            } else {
-                if (aCompare > bCompare)
-                    return asc ? 1 : -1;
-                else if (aCompare === bCompare) {
-                    if (a.overall > b.overall) {
-                        return -1;
-                    } else if (a.overall === b.overall) {
-                        if (a.name > b.name)
-                            return 1;
-                        else
-                            return -1;
-                    } else {
-                        return 1;
-                    }
-                } else {
-                    return asc ? -1 : 1;
+
+                if (!asc) {
+                    value = value * -1;
+                }
+                if (value !== 0) {
+                    return value;
                 }
             }
         })
 
-        filtered = filtered.filter(player => player.name.toLowerCase().includes(searchValue));
+        filtered = filtered.filter(player => player.name.toLowerCase().includes(searchValue.toLowerCase()));
 
         setAllPlayers(filtered);
     }, [searchOptions])
