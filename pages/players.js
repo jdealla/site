@@ -12,7 +12,7 @@ export default function Players({ players, allAnimations }) {
     const [allPlayers, setAllPlayers] = useState(players);
     const [searchOptions, setSearchOptions] = useState({ 
         searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [], teams: [] }, sortOptions: [], asc: false, page: 0, perPage: 15,
-        evos: false, duos: false, secondary: false
+        evos: false, duos: false, secondary: false, exclusive: false
     })
 
     const handlePage = (dir) => {
@@ -82,12 +82,21 @@ export default function Players({ players, allAnimations }) {
                 
                     if (player[cat] === value) 
                         aniCheck.push(true);
+                    else
+                        aniCheck.push(false);
                 }
 
-                if (aniCheck.includes(true))
-                    checked.push(true);
-                else
-                    checked.push(false);
+                if (!searchOptions.exclusive) {
+                    if (aniCheck.includes(true))
+                        checked.push(true);
+                    else
+                        checked.push(false);
+                } else {
+                    if (!aniCheck.includes(false))
+                        checked.push(true);
+                    else
+                        checked.push(false);
+                }
             }
 
             if (filterOptions.teams.length > 0) {

@@ -19,7 +19,7 @@ export default function FilterSortBox(props) {
     const clearOptions = () => {
         handleOptions({
             searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [], teams: [] }, sortOptions: [], asc: false, page: 0, perPage: 15,
-            evos: false, duos: false
+            evos: false, duos: false, secondary: false, exclusive: false
         });
     }
 
@@ -120,9 +120,12 @@ export default function FilterSortBox(props) {
         })
 
         return (
-            <div className="tags">
-                {filters}
-            </div>
+            <>
+                <button className="button is-small" onClick={() => handleOptions({ ...searchOptions, exclusive: !searchOptions.exclusive })}>{searchOptions.exclusive ? "Exact Match" : "Include All"}</button>
+                <div className="tags">
+                    {filters}
+                </div>
+            </>
         )
     }
 

@@ -27,7 +27,6 @@ export default function Home({ players }) {
                 <meta name="description" content="NBA 2K20 MyTeam Database Lineup Page" />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <p className="title has-text-centered"> Lineup Builder </p>
             <LineupView players={players} lineup={lineup} handleLineup={handleLineup} />
         </Layout>
     )

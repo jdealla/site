@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { ratingColor, formatName, getTotalNumOfBadges } from "../lib/helpers";
 import TagOverall from "./tagoverall";
 
@@ -35,17 +35,17 @@ export default function PlayersList(props) {
             }
         } else {
             headerRows.push((
-                <>
+                <Fragment key="default-headers">
                     <th className="has-text-centered">Collection</th>
                     <th className="has-text-centered">Theme</th>
                     <th className="has-text-centered">Team</th>
-                </>
+                </Fragment>
             ))
         }
 
         if (sortProps.length > 0) {
             for (let prop of sortProps) {
-                let row = (<th key={prop} className="players-sort-column">{formatName(prop)}</th>)
+                let row = (<th key={prop + "header"} className="players-sort-column">{formatName(prop)}</th>)
 
                 headerRows.push(row);
             }
@@ -80,11 +80,11 @@ export default function PlayersList(props) {
             }
         } else {
             tableRows.push((
-                <>
+                <Fragment key="default-columns">
                     <td className="has-text-centered">{player.collection}</td>
                     <td className="has-text-centered">{player.theme}</td>
                     <td className="has-text-centered">{player.team}</td>
-                </>
+                </Fragment>
             ));
         }
 
@@ -92,12 +92,12 @@ export default function PlayersList(props) {
             for(let prop of sortProps) {
                 if (prop !== "totalBadges") {
                     let cell = (
-                        <td className="has-text-centered">{ratingColor(player[prop], prop.includes("_t"))}</td>
+                        <td key={prop} className="has-text-centered">{ratingColor(player[prop], prop.includes("_t"))}</td>
                     )
                     tableRows.push(cell)
                 } else {
                     let cell = (
-                        <td className="has-text-centered">
+                        <td key={prop} className="has-text-centered">
                             <span className="tag is-dark has-text-weight-semibold">{totalBadges.bronze + totalBadges.silver + totalBadges.gold + totalBadges.hof} {'   '}</span>
                         </td>
                     )

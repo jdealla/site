@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import Popup from "reactjs-popup";
+import { IoMdCloudDownload } from "react-icons/io";
 
 import SearchPlayers from "../components/searchplayers";
 
@@ -35,7 +36,7 @@ export default function LineupView(props) {
                         <Popup 
                             trigger={(
                                 <figure className="image is-3by4" key={`starters-${slot}`}>
-                                    <img src="https://2kdbimg.com/240x340/no_image.png" />
+                                    <img src="https://2kdbimg.com/280x400/lineup_placeholder.png" />
                                 </figure>
                             )}
                             contentStyle={{ width: "350px" }}
@@ -76,7 +77,7 @@ export default function LineupView(props) {
                         <Popup 
                             trigger={(
                                 <figure className="image is-3by4" key={`bench-${slot}`}>
-                                    <img src="https://2kdbimg.com/160x211/no_image.png" />
+                                    <img src="https://2kdbimg.com/240x340/lineup_placeholder.png" />
                                 </figure>
                             )}
                             contentStyle={{ width: "350px" }}
@@ -97,7 +98,7 @@ export default function LineupView(props) {
                             <a className="delete" aria-label="delete" style={{ position: "absolute", top: 0, zIndex: "2" }} onClick={() => handleClick(slot, null)}></a>
                         </div>
                         <figure className="image is-3by4">
-                            <img key={player.id} src={`https://2kdbimg.com/160x211/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} />
+                            <img key={player.id} src={`https://2kdbimg.com/240x340/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} />
                         </figure>
                     </div>
                 )
@@ -109,7 +110,16 @@ export default function LineupView(props) {
 
     return (
         <div className="container">
-            <button className="button is-small" onClick={() => saveImage()} >Save your lineup as a picture</button>
+            <p className="title has-text-centered">Lineup Builder</p>
+            <div className="container">
+                <button className="button is-small" onClick={() => saveImage()}>
+                    <IoMdCloudDownload />
+                    <span>Save Lineup as Image</span>
+                </button>
+                <button className="button is-small" disabled>
+                    <span>Save to Profile</span>
+                </button>
+            </div>
             <div className="box" ref={lineupRef}>
                 <div className="columns is-multiline is-mobile">
                     <div className="column is-full">
