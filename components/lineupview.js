@@ -115,13 +115,10 @@ export default function LineupView(props) {
     return (
         <div className="container">
             <p className="title has-text-centered">Lineup Builder</p>
-            <div className="container">
+            <div className="container is-flex" style={{ alignItems: "flex-end" }}>
                 <button className="button is-small" onClick={() => saveImage()}>
                     <IoMdCloudDownload />
                     <span>Save Lineup as Image</span>
-                </button>
-                <button className="button is-small" disabled>
-                    <span>Save to Profile</span>
                 </button>
             </div>
             <div className="box" ref={lineupRef}>
