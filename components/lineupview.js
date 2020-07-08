@@ -13,8 +13,12 @@ export default function LineupView(props) {
     const handleClick = (slot, playerId) => handleLineup(slot, playerId, Number(slot) > 5 ? false : true);
 
     const saveImage = () => {
+        const filter = (node) => {
+            return (node.className !== "delete");
+        }
+        
         import('dom-to-image').then(dom => {
-            dom.toJpeg(lineupRef.current, { quality: 0.95 })
+            dom.toJpeg(lineupRef.current, { quality: 0.95, filter: filter })
             .then(dataUrl => {
                 const link = document.createElement('a');
                 link.download = '2kdb-lineup.jpeg';
