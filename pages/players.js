@@ -34,8 +34,8 @@ export default function Players({ players, allAnimations }) {
         filtered = filtered.filter(player => {
             let checked = [];
 
-            if (duos && player.is_duo) checked.push(true);
-            if (evos && player.is_evo) checked.push(true);
+            if (duos) checked.push(player.is_duo === "True" ? true : false);
+            if (evos) checked.push(player.is_evo === "True" ? true : false);
 
             if (filterOptions.overall.length > 0) {
                 let tierCheck = [];
