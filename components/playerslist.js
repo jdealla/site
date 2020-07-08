@@ -10,8 +10,8 @@ export default function PlayersList(props) {
     }
 
     const displayHeaders = () => {
+        const { animations, colleges } = searchOptions.filterOptions;
         let sortProps = searchOptions.sortOptions;
-        let animations = searchOptions.filterOptions.animations;
         let headerRows = [], headerCats = [];
 
         if (animations.length > 0) {
@@ -33,6 +33,15 @@ export default function PlayersList(props) {
                     headerRows.unshift((<th key={"teamheader"} className="has-text-centered">Team</th>))
                 }
             }
+        } else if (colleges.length > 0) {
+            let header = (
+                <Fragment key="college-headers">
+                    <th className="has-text-centered">Theme</th>
+                    <th className="has-text-centered">Team</th>
+                    <th className="has-text-centered">College</th>
+                </Fragment>
+            )
+            headerRows.push(header);
         } else {
             headerRows.push((
                 <Fragment key="default-headers">
@@ -54,8 +63,8 @@ export default function PlayersList(props) {
     }
 
     const displayColumns = (player, totalBadges) => {
+        const { animations, colleges } = searchOptions.filterOptions;
         let sortProps = searchOptions.sortOptions;
-        let animations = searchOptions.filterOptions.animations
         let tableRows = [], cats = [];
 
         if (animations.length > 0) {
@@ -78,6 +87,15 @@ export default function PlayersList(props) {
                     tableRows.unshift((<td key={"teamtable"} className="has-text-centered">{player.team}</td>))
                 }
             }
+        } else if (colleges.length > 0) {
+            let column = (
+                <Fragment key="college-columns">
+                    <td className="has-text-centered">{player.theme}</td>
+                    <td className="has-text-centered">{player.team}</td>
+                    <td className="has-text-centered">{player.college}</td>
+                </Fragment>
+            );
+            tableRows.push(column);
         } else {
             tableRows.push((
                 <Fragment key="default-columns">
