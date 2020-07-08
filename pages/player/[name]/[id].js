@@ -127,9 +127,9 @@ export default function Player({ playerData, altPlayers, evos, duo, duoPartner, 
                         <div className="column is-three-fifths-desktop pl-0 pt-0 ml-0"><strong>True Ratings</strong> are based on a weighted calculation that favors specific attributes for specific positions, helping measure the true quality of the card. Currently, badging, animations, and player models aren’t factored in. </div>
                         <div className="mb-3 is-size-7 pl-0 ml-0">created by <strong><a href="https://2kgamer.com/u/element">element</a></strong> | implemented by <strong><a href="https://2kgamer.com/u/jdealla">jdealla</a></strong></div>
                     </div>
-                    {trueRatings ? trueRatings.map( ({ overall, sections, position }) => {
+                    {trueRatings ? trueRatings.map( ({ overall, sections, position }, index) => {
                         return (
-                            <div className="column is-one-fifth-desktop is-one-fourth-tablet is-half-mobile">
+                            <div key={`trueRating${index}`} className="column is-one-fifth-desktop is-one-fourth-tablet is-half-mobile">
                                 <Attributes attributes={{overall, ...sections}} attrName={position} trueRating={true}/>
                             </div>
                         );
