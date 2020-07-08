@@ -11,8 +11,8 @@ import Layout from "../components/layout";
 export default function Players({ players, allAnimations }) {
     const [allPlayers, setAllPlayers] = useState(players);
     const [searchOptions, setSearchOptions] = useState({ 
-        searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [], teams: [] }, sortOptions: [], asc: false, page: 0, perPage: 15,
-        evos: false, duos: false, secondary: false, exclusive: false
+        searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [], teams: [], colleges: [], themes: [] }, sortOptions: [], asc: false, 
+        page: 0, perPage: 15, evos: false, duos: false, secondary: false, exclusive: false
     })
 
     const handlePage = (dir) => {
@@ -30,10 +30,9 @@ export default function Players({ players, allAnimations }) {
         const { searchValue, filterOptions, sortOptions, asc, evos, duos } = searchOptions;
 
         let filtered = players
-        console.log(searchOptions);
 
         filtered = filtered.filter(player => {
-            let checked = [], exclusiveChecked = [];
+            let checked = [];
 
             if (duos && player.is_duo) checked.push(true);
             if (evos && player.is_evo) checked.push(true);
@@ -111,6 +110,20 @@ export default function Players({ players, allAnimations }) {
                     checked.push(false);
             }
 
+            if (filterOptions.colleges.length > 0) {
+                if (filterOptions.colleges.includes(player.college))
+                    checked.push(true);
+                else
+                    checked.push(false);
+            }
+
+            if (filterOptions.themes.length > 0) {
+                if (filterOptions.themes.includes(player.theme))
+                    checked.push(true);
+                else
+                    checked.push(false);
+            }
+
             if (!checked.includes(false) || checked.length === 0)
                 return true;
         })
@@ -148,9 +161,11 @@ export default function Players({ players, allAnimations }) {
         filtered = filtered.filter(player => player.name.toLowerCase().includes(searchValue.toLowerCase()));
 
         setAllPlayers(filtered);
-    }, [searchOptions])
+    }, [searchOptions]);
 
     const teams = Array.from(new Set(players.map(player => player.team))).sort();
+    const colleges = Array.from(new Set(players.map(player => player.college))).sort();
+    const themes = Array.from(new Set(players.map(player => player.theme))).sort();
 
     return (
         <Layout players={[]} searchOn={false}>
@@ -161,7 +176,7 @@ export default function Players({ players, allAnimations }) {
             </Head>
             <div className="container">
                 <div className="box">
-                    <FilterSortBox teams={teams} allAnimations={allAnimations} searchOptions={searchOptions} handleOptions={handleOptions} />
+                    <FilterSortBox teams={teams} colleges={colleges} themes={themes} allAnimations={allAnimations} searchOptions={searchOptions} handleOptions={handleOptions} />
                 </div>
                 <PlayersList players={allPlayers.slice(searchOptions.page * searchOptions.perPage, (searchOptions.page * searchOptions.perPage) + searchOptions.perPage)} searchOptions={searchOptions} />
                 <div className="columns">

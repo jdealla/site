@@ -4,7 +4,7 @@ import Dropdown from "./dropdown";
 import SearchFilter from "./searchfilter";
 
 export default function FilterSortBox(props) {
-    const { teams, allAnimations, searchOptions, handleOptions, } = props;
+    const { teams, colleges, themes, allAnimations, searchOptions, handleOptions, } = props;
     const [animationCat, setAnimationCat] = useState("lower_base_a");
     const [filterItems, setFilterItems] = useState(allAnimations.lower_base_a)
 
@@ -18,7 +18,7 @@ export default function FilterSortBox(props) {
     const handleSortDirection = () => handleOptions({ ...searchOptions, asc: !searchOptions.asc });
     const clearOptions = () => {
         handleOptions({
-            searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [], teams: [] }, sortOptions: [], asc: false, page: 0, perPage: 15,
+            searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [], teams: [], colleges: [], themes: [] }, sortOptions: [], asc: false, page: 0, perPage: 15,
             evos: false, duos: false, secondary: false, exclusive: false
         });
     }
@@ -42,6 +42,7 @@ export default function FilterSortBox(props) {
         const { filterOptions } = searchOptions;
         let values = filterOptions[prop];
 
+        debugger
         if (filterOptions[prop].indexOf(value) === -1) {
             values.push(value);
         } else {
@@ -93,21 +94,6 @@ export default function FilterSortBox(props) {
         handleOptions({ ...searchOptions, page: 0, filterOptions: { ...filterOptions, animations: animations }})
     }
 
-    const handleTeamFilter = (team) => {
-        const { filterOptions } = searchOptions;
-        let teams = filterOptions.teams;
-
-        let targetIndex = teams.findIndex(ani => ani === team);
-
-        if (targetIndex === -1) {
-            teams.push(team);
-        } else {
-            teams.splice(targetIndex, 1);
-        }
-
-        handleOptions({ ...searchOptions, page: 0, filterOptions: { ...filterOptions, teams: teams }})
-    }
-
     const showAnimationFilters = () => {
         let filters = searchOptions.filterOptions.animations.map((ani, i) => {
             let [cat, value] = ani.split("-");
@@ -129,7 +115,7 @@ export default function FilterSortBox(props) {
         )
     }
 
-    const getDropdownItems = (cat) => {
+    const getSortDropdownItems = (cat) => {
         let items = [];
         switch(cat) {
             case "shootingStats": items = ["Shot Close", "Shot Mid", "Shot 3pt", "Free Throw", "Offensive Consistency"]; break;
@@ -202,19 +188,27 @@ export default function FilterSortBox(props) {
         })
     }
 
+    const getFilterDropdownItems = (cat) => {
+        let items = [];
+
+        switch(cat) {
+            case "teams": items = teams; break;
+            case "colleges": items = colleges; break;
+            case "themes": items = themes; break;
+        }
+
+        return items.map(item => (
+            <a key={item} className={`dropdown-item ${searchOptions.filterOptions[cat].includes(item) ? "is-active" : ""}`} onClick={() => handleFilter(cat, item)}>
+                {item}
+            </a>    
+        ))
+    }
+
     const getAnimationCats = () => {
         return Object.keys(allAnimations).map((cat, i) => (
             <a className="dropdown-item" key={i} onClick={() => handleAnimationCat(cat)}>
                 {cat.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase()).replace(/A/g, "")}
             </a>
-        ))
-    }
-
-    const getTeamDropdownItems = () => {
-        return teams.map(team => (
-            <a key={team} className={`dropdown-item ${searchOptions.filterOptions.teams.includes(team) ? "is-active" : ""}`} onClick={() => handleTeamFilter(team)}>
-                {team}
-            </a>    
         ))
     }
 
@@ -329,20 +323,20 @@ export default function FilterSortBox(props) {
                     
                     <div className="column is-5-tablet is-full-mobile">
                         <p className="heading">Sort By Stats: </p>
-                        <Dropdown title="Shooting" items={getDropdownItems("shootingStats")} />
-                        <Dropdown title="Inside Scoring" items={getDropdownItems("insideStats")} />
-                        <Dropdown title="Playmaking" items={getDropdownItems("playmakingStats")} />
-                        <Dropdown title="Athleticism" items={getDropdownItems("athleticismStats")} />
-                        <Dropdown title="Defense" items={getDropdownItems("defenseStats")} />
-                        <Dropdown title="Rebound" items={getDropdownItems("reboundStats")} />
+                        <Dropdown title="Shooting" items={getSortDropdownItems("shootingStats")} />
+                        <Dropdown title="Inside Scoring" items={getSortDropdownItems("insideStats")} />
+                        <Dropdown title="Playmaking" items={getSortDropdownItems("playmakingStats")} />
+                        <Dropdown title="Athleticism" items={getSortDropdownItems("athleticismStats")} />
+                        <Dropdown title="Defense" items={getSortDropdownItems("defenseStats")} />
+                        <Dropdown title="Rebound" items={getSortDropdownItems("reboundStats")} />
                     </div>
                     <div className="column is-4-tablet is-full-mobile">
                         <p className="heading">Sort By Tendencies: </p>
-                        <Dropdown title="Inside" items={getDropdownItems("insideT")} />
-                        <Dropdown title="Shooting" items={getDropdownItems("shootingT")} />
-                        <Dropdown title="Defense" items={getDropdownItems("defenseT")} />
-                        <Dropdown title="Freelance" items={getDropdownItems("freelanceT")} />
-                        <Dropdown title="Passing" items={getDropdownItems("passingT")} />
+                        <Dropdown title="Inside" items={getSortDropdownItems("insideT")} />
+                        <Dropdown title="Shooting" items={getSortDropdownItems("shootingT")} />
+                        <Dropdown title="Defense" items={getSortDropdownItems("defenseT")} />
+                        <Dropdown title="Freelance" items={getSortDropdownItems("freelanceT")} />
+                        <Dropdown title="Passing" items={getSortDropdownItems("passingT")} />
                     </div>
                     <div className="column is-3-tablet is-full-mobile">
                         <p className="heading">Sort By Misc: </p>
@@ -352,7 +346,9 @@ export default function FilterSortBox(props) {
                     </div>
                     <div className="column is-3-widescreen is-full-mobile">
                         <p className="heading">Filter By Misc: </p>
-                        <Dropdown title="By Team" items={getTeamDropdownItems()} />
+                        <Dropdown title="By Team" items={getFilterDropdownItems("teams")} />
+                        <Dropdown title="By College" items={getFilterDropdownItems("colleges")} />
+                        <Dropdown title="By Theme" items={getFilterDropdownItems("themes")} />
                     </div>
                 </div>
             </div>
