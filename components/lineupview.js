@@ -40,7 +40,7 @@ export default function LineupView(props) {
                         <Popup 
                             trigger={(
                                 <figure className="image is-3by4" key={`starters-${slot}`}>
-                                    <img className="hvr-grow" src="https://2kdbimg.com/380/lineup_placeholder.png" />
+                                    <img className="hvr-grow" src={`https://2kdbimg.com/380/lineup_placeholder_${slot}.png`} />
                                 </figure>
                             )}
                             contentStyle={{ width: "350px" }}
@@ -114,7 +114,7 @@ export default function LineupView(props) {
 
     return (
         <div className="container">
-            <p className="title has-text-centered has-text-white">Lineup Builder</p>
+            <p className="title has-text-centered">Lineup Builder</p>
             <div className="container mb-4">
                 <button className="button is-small" onClick={() => saveImage()}>
                     <IoMdCloudDownload />

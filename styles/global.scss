@@ -29,13 +29,6 @@ $dropdown-item-hover-background-color: none;
     background-size: 100% 100%;
 }
 
-.bg_lineups {
-    margin-top: -1.5em;
-    background: url('/playercard_bg.png') no-repeat scroll;
-    background-size: 100% 100%;
-	padding-bottom: 5em;
-}
-
 .index-search {
     input {
     background-color: hsla(0,0%,100%,0.2);
@@ -491,9 +484,9 @@ $dropdown-item-hover-background-color: none;
 }
 
 .lineups-box {
-    background-color: rgba(255,255,255,0.38);
+    background-color: white;
     border-radius: 10px;
-    box-shadow: 0 0.5em 1em -0.125em rgba(0, 0, 0, 0.5), 0 0px 0 1px rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0.5em 1em -0.125em rgba(0, 0, 0, 0.15), 0 0px 0 1px rgba(100, 100, 100, 0.15);
     color: #4a4a4a;
     display: block;
     padding: 15px;
