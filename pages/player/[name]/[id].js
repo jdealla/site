@@ -108,15 +108,15 @@ export default function Player({ playerData, altPlayers, evos, duo, duoPartner, 
             )
             case "animations": return (
                 <Fragment>
-                    <div className="column is-one-fifth-tablet is-half-mobile">
+                    <div className="column is-full-mobile is-3-desktop is-one-fifth-fullhd">
                         <Attributes attributes={playerData.animations.shooting} attrName="Shooting" reverse={true} />
 						<Attributes attributes={playerData.animations.post} attrName="Post" reverse={true} />
                     </div>
-                    <div className="column is-one-fifth-tablet is-half-mobile">
+                    <div className="column is-full-mobile is-3-desktop is-one-fifth-fullhd">
                         <Attributes attributes={playerData.animations.ballhandle} attrName="Dribble Moves" reverse={true} />
 						<Attributes attributes={playerData.animations.hands} attrName="Handedness" reverse={true} />
                     </div>
-                    <div className="column is-one-fifth-tablet is-half-mobile">
+                    <div className="column is-full-mobile is-4-desktop is-one-fifths-fullhd">
                         <Attributes attributes={playerData.animations.layup} attrName="Layups/Dunks" reverse={true} />
                     </div>
                 </Fragment>
