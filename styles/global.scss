@@ -63,6 +63,13 @@ $dropdown-item-hover-background-color: none;
     margin-bottom: 1.5rem !important;
 }
 
+.search-theme {
+    white-space: nowrap;
+    width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .playerlist-item {
     cursor: pointer;
 }
@@ -145,13 +152,6 @@ $dropdown-item-hover-background-color: none;
 	.transform-badges {
 	    transform: scale(0.7) translate(-22%, -22%);
 	}
-	
-    .search-theme {
-        white-space: nowrap;
-        width: 185px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
 }
 
 @media only screen and (max-width: 1216px) {
@@ -463,6 +463,33 @@ $dropdown-item-hover-background-color: none;
     display: none;
     position: absolute;
     z-index: 999;
+}
+
+.lineups-styling {
+	img {
+        cursor: pointer;
+    }
+    .box {
+        background: rgba(255,255,255,0);
+        box-shadow: none;
+    }
+    .popup-content {
+        border-radius: 6px;
+        background: linear-gradient(#fff, #f6f6f6) !important;
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 3px !important;
+    }
+    .popup-arrow {
+        background: linear-gradient(#f6f6f6, #fff) !important;
+    }
+}
+
+.lineups-box {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0.5em 1em -0.125em rgba(0, 0, 0, 0.15), 0 0px 0 1px rgba(100, 100, 100, 0.15);
+    color: #4a4a4a;
+    display: block;
+    padding: 15px;
 }
 
 @import "../node_modules/bulma/sass/utilities/functions.sass";

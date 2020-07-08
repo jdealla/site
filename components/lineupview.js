@@ -18,7 +18,7 @@ export default function LineupView(props) {
         }
         
         import('dom-to-image').then(dom => {
-            dom.toJpeg(lineupRef.current, { quality: 0.95, filter: filter })
+            dom.toJpeg(lineupRef.current, { bgcolor: "#fff", quality: 0.95, filter: filter })
             .then(dataUrl => {
                 const link = document.createElement('a');
                 link.download = '2kdb-lineup.jpeg';
@@ -36,11 +36,11 @@ export default function LineupView(props) {
             
             if (player == null) {
                 item = (
-                    <div className="column is-4-mobile" key={`starters-${slot}`}>
+                    <div className="column is-4-mobile lineups-styling" key={`starters-${slot}`}>
                         <Popup 
                             trigger={(
                                 <figure className="image is-3by4" key={`starters-${slot}`}>
-                                    <img src="https://2kdbimg.com/280x400/lineup_placeholder.png" />
+                                    <img className="hvr-grow" src={`https://2kdbimg.com/380/lineup_placeholder_${slot}.png`} />
                                 </figure>
                             )}
                             contentStyle={{ width: "350px" }}
@@ -61,7 +61,7 @@ export default function LineupView(props) {
                             <a className="delete" aria-label="delete" style={{ position: "absolute", top: 0, zIndex: "2" }} onClick={() => handleClick(slot, null)}></a>
                         </div>
                         <figure className="image is-3by4">
-                            <img src={`https://2kdbimg.com/240x340/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} />
+                            <img src={`https://2kdbimg.com/380/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} />
                         </figure>
                     </div>
                 )
@@ -77,11 +77,11 @@ export default function LineupView(props) {
             let item;
             if (player == null) {
                 item = (
-                    <div className="column is-3-mobile" key={`bench-${slot}`}>
+                    <div className="column is-3-mobile lineups-styling" key={`bench-${slot}`}>
                         <Popup 
                             trigger={(
-                                <figure className="image is-3by4" key={`bench-${slot}`}>
-                                    <img src="https://2kdbimg.com/240x340/lineup_placeholder.png" />
+                                <figure className="image is-3by4 hvr-grow" key={`bench-${slot}`}>
+                                    <img src="https://2kdbimg.com/380/lineup_placeholder.png" />
                                 </figure>
                             )}
                             contentStyle={{ width: "350px" }}
@@ -102,7 +102,7 @@ export default function LineupView(props) {
                             <a className="delete" aria-label="delete" style={{ position: "absolute", top: 0, zIndex: "2" }} onClick={() => handleClick(slot, null)}></a>
                         </div>
                         <figure className="image is-3by4">
-                            <img key={player.id} src={`https://2kdbimg.com/240x340/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} />
+                            <img key={player.id} src={`https://2kdbimg.com/380/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} />
                         </figure>
                     </div>
                 )
@@ -121,10 +121,10 @@ export default function LineupView(props) {
                     <span>Save Lineup as Image</span>
                 </button>
             </div>
-            <div className="box" ref={lineupRef}>
+            <div className="lineups-box" ref={lineupRef}>
                 <div className="columns is-multiline is-mobile">
                     <div className="column is-full">
-                        <div className="columns is-variable is-1 is-multiline is-mobile is-centered">
+                        <div className="columns is-variable is-2 is-multiline is-mobile is-centered">
                             {renderStarters()}
                         </div>
                     </div>
