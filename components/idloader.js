@@ -199,6 +199,10 @@ const Loader = () => (
             <div className="tags has-addons is-marginless" ><span className="tag is-light loading"><FaCircleNotch size="1.3em" className="icon-spin" />    </span><span className="tag loading">Intangibles</span></div>
             <div className="tags has-addons is-marginless" ><span className="tag is-light loading"><FaCircleNotch size="1.3em" className="icon-spin" />    </span><span className="tag loading">Potential</span></div>
          </div>
+         <div className="container">
+            <p className="has-text-weight-semibold "> Total Stats </p>
+            <div className="tags has-addons is-marginless" ><span className="tag is-light loading"><FaCircleNotch size="1.3em" className="icon-spin" />    </span></div>
+         </div>
       </div>
       <div className="column badges-loading">
          <div className="container">

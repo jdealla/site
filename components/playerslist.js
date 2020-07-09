@@ -108,17 +108,24 @@ export default function PlayersList(props) {
 
         if (sortProps.length > 0) {
             for(let prop of sortProps) {
-                if (prop !== "totalBadges") {
-                    let cell = (
-                        <td key={prop} className="has-text-centered">{ratingColor(player[prop], prop.includes("_t"))}</td>
-                    )
-                    tableRows.push(cell)
-                } else {
+                if (prop === "totalBadges") {
                     let cell = (
                         <td key={prop} className="has-text-centered">
                             <span className="tag is-dark has-text-weight-semibold">{totalBadges.bronze + totalBadges.silver + totalBadges.gold + totalBadges.hof} {'   '}</span>
                         </td>
-                    )
+                    );
+                    tableRows.push(cell);
+                } else if (prop === "total_stats") {
+                    let cell = (
+                        <td key={prop} className="has-text-centered">
+                            <span className="tag is-dark has-text-weight-semibold">{player[prop]}</span>
+                        </td>
+                    );
+                    tableRows.push(cell);
+                } else {
+                    let cell = (
+                        <td key={prop} className="has-text-centered">{ratingColor(player[prop], prop.includes("_t"))}</td>
+                    );
                     tableRows.push(cell);
                 }
             }
