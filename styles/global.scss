@@ -492,6 +492,18 @@ $dropdown-item-hover-background-color: none;
     padding: 15px;
 }
 
+.delete-hover {
+    .delete {
+        display: none;
+        position: absolute;
+        top: 0;
+        z-index: 2;
+    }
+    &:hover .delete {
+        display: inline-block !important;
+    }
+}
+
 @import "../node_modules/bulma/sass/utilities/functions.sass";
 @import "../node_modules/bulma/sass/utilities/derived-variables.scss";
 @import "../node_modules/bulma/sass/utilities/controls.sass";
