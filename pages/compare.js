@@ -1,6 +1,7 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import Head from "next/head";
 import { getAllPlayers } from "../lib/players";
+import { ratePlayer } from "../lib/ratings";
 
 import Layout from "../components/layout";
 import CompareTable from "../components/comparetable";
@@ -11,6 +12,17 @@ export default function Compare({ players }) {
     const [view, setView] = useState("stats");
     const [duoOn, setDuoOn] = useState({ player1: false, player2: false });
     const [evoLevel, setEvoLevel] = useState({ player1: -1, player2: -1 });
+    const [trueRatings, setTrueRatings] = useState(false);
+
+    useEffect(() => {
+        const { player1, player2 } = compare;
+        if (player1 && player2) {
+            setTrueRatings({
+                player1: ratePlayer(player1[0], duoOn.player1, evoLevel.player1, player1[2], player1[1]),
+                player2: ratePlayer(player2[0], duoOn.player2, evoLevel.player2, player2[2], player2[1])
+            })
+        }
+    }, [ compare, duoOn, evoLevel ]);
 
     const handlePlayer = (num, playerId) => {
         const fetchPlayer = async () => {
@@ -190,6 +202,32 @@ export default function Compare({ players }) {
                         </Fragment>
                     )
             }
+            case "trueRatings": {
+                if (player1 == null || player2 == null || typeof player1 === "string" || typeof player2 === "string" || !trueRatings)
+                    return heroView;
+                else 
+                    return (
+                        <Fragment>
+                            <div className="column">
+                                <table className="table is-striped is-fullwidth">
+                                    <CompareTable 
+                                        tableName={player1[0].info.name} firstName={trueRatings.player1[0].position} firstStats={{"overall": trueRatings.player1[0].overall, ...trueRatings.player1[0].sections}} secondName={trueRatings.player1.length > 1 ? trueRatings.player1[1].position : false} secondStats={trueRatings.player1.length > 1 ? {"overall": trueRatings.player1[1].overall, ...trueRatings.player1[1].sections} : false} diff={false}
+                                        thirdName={trueRatings.player1.length > 2 ? trueRatings.player1[2].position : false} thirdStats={trueRatings.player1.length > 2? {"overall": trueRatings.player1[2].overall, ...trueRatings.player1[2].sections} : false}
+                                        />
+                                </table>
+                            </div>
+                            <div className="column">
+                            <table className="table is-striped is-fullwidth">
+                                    <CompareTable 
+                                        tableName={player2[0].info.name} firstName={trueRatings.player2[0].position} firstStats={{"overall": trueRatings.player2[0].overall, ...trueRatings.player2[0].sections}} secondName={trueRatings.player2.length > 1 ? trueRatings.player2[1].position : false} secondStats={trueRatings.player2.length > 1 ? {"overall": trueRatings.player2[1].overall, ...trueRatings.player2[1].sections} : false} diff={false}
+                                        thirdName={trueRatings.player2.length > 2 ? trueRatings.player2[2].position : false} thirdStats={trueRatings.player2.length > 2? {"overall": trueRatings.player2[2].overall, ...trueRatings.player2[2].sections} : false}
+                                        />
+                                    </table>
+                                </div>
+
+                        </Fragment>
+                    )
+            }
         };
     };
 
@@ -210,6 +248,7 @@ export default function Compare({ players }) {
                             <li className={view === "badges" ? "is-active" : ""} onClick={() => setView("badges")}><a>Badges</a></li>
                             <li className={view === "tendencies" ? "is-active" : ""} onClick={() => setView("tendencies")}><a>Tendencies</a></li>
                             <li className={view === "animations" ? "is-active" : ""} onClick={() => setView("animations")}><a>Animations</a></li>
+                            <li className={view === "trueRatings" ? "is-active" : ""} onClick={() => setView("trueRatings")}><a>True Ratings</a></li>
                         </ul>
                     </div>
                 </div>
