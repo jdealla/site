@@ -2,7 +2,7 @@ import React from "react";
 import { formatName, ratingColor } from "../lib/helpers";
 
 export default function Attributes(props) {
-    const { attributes, attrName, evoStats, duoStats, reverse, tendency, trueRating } = props;
+    const { attributes, attrName, evoStats, duoStats, reverse, tendency, trueRating, totalStats } = props;
 
     const renderBonusStats = (baseStat, key) => {
         if ((evoStats != undefined || evoStats != null) && (duoStats != undefined || duoStats != null)) {
@@ -40,23 +40,48 @@ export default function Attributes(props) {
             return ratingColor(value);
     }
 
+    const renderBonusTotal = () => {
+        if ((evoStats != undefined || evoStats != null) && (duoStats != undefined || duoStats != null)) {
+            if (evoStats !== "" && duoStats !== "") {
+                if (evoStats !== 0 || duoStats !== 0)
+                    return <span className="tag has-text-success">{`+${(evoStats + duoStats)}`}</span>
+            } else if (evoStats !== "" && duoStats === "") {
+                if (evoStats !== 0)
+                    return <span className="tag has-text-success">{`+${evoStats}`}</span>
+            } else if (duoStats !== "" && evoStats === "") {
+                if (duoStats !== 0)
+                    return <span className="tag has-text-success">{`+${duoStats}`}</span>
+            }
+        } 
+    }
+
     const renderTags = () => {
         let tags = [];
         let i = 0;
-        for (let [key, value] of Object.entries(attributes)) {
-            const tag = reverse ? (
-                <div className="tags has-addons is-marginless" key={i++} >
-                    <span className="tag">{formatName(key)}</span>
-                    {ratingColor(value)}
-                </div>
-            ) : (
+        if (totalStats) {
+            const tag = (
                 <div className="tags has-addons is-marginless" key={i++} style={{ flex: "0 0 75%" }}>
-                    {renderStat(value, key)}
-                    <span className="tag">{formatName(key)}</span>
-                    {renderBonusStats(value, key)}
+                    <span className="tag is-dark has-text-weight-semibold">{attributes} {'   '}</span>
+                    {renderBonusTotal()}
                 </div>
-            )
-            tags.push(tag)
+            );
+            tags.push(tag);
+        } else {
+            for (let [key, value] of Object.entries(attributes)) {
+                const tag = reverse ? (
+                    <div className="tags has-addons is-marginless" key={i++} >
+                        <span className="tag">{formatName(key)}</span>
+                        {ratingColor(value)}
+                    </div>
+                ) : (
+                    <div className="tags has-addons is-marginless" key={i++} style={{ flex: "0 0 75%" }}>
+                        {renderStat(value, key)}
+                        <span className="tag">{formatName(key)}</span>
+                        {renderBonusStats(value, key)}
+                    </div>
+                )
+                tags.push(tag)
+            }
         }
         return tags
     }

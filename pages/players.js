@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { getAllPlayersWithAllStats, getAllAnimations } from "../lib/players";
-import { getFilterTiers, getTotalNumOfBadges } from "../lib/helpers"
+import { getFilterTiers, getTotalNumOfBadges, getTotalStats, getTotalBadges } from "../lib/helpers"
 
 import FilterSortBox from "../components/filtersortbox";
 import PlayersList from "../components/playerslist";
@@ -146,7 +146,7 @@ export default function Players({ players, allAnimations }) {
                     aCompare = Number(aWingspan[0] * 12) + Number(aWingspan[1]);
                     bCompare = Number(bWingspan[0] * 12) + Number(bWingspan[1]);
 
-                    value = aWingspan > bWingspan ? 1 : aWingspan < bWingspan ? -1 : 0;
+                    value = aCompare > bCompare ? 1 : aCompare < bCompare ? -1 : 0;
                 }
 
                 if (!asc) {
@@ -204,6 +204,10 @@ export default function Players({ players, allAnimations }) {
 export async function getStaticProps() {
     const players = await getAllPlayersWithAllStats().catch(console.error);
 
+    for(let i = 0; i < players.length; i++) {
+        players[i].total_stats = getTotalStats(players[i]);
+    }
+
     players.sort((a, b) => {
         let aBadges = getTotalNumOfBadges(a);
         let bBadges = getTotalNumOfBadges(b);
@@ -222,7 +226,7 @@ export async function getStaticProps() {
         } else {
             return 1;
         }
-    })
+    });
 
     const allAnimations = getAllAnimations(players);
 

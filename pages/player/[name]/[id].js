@@ -52,6 +52,8 @@ export default function Player({ playerData, altPlayers, evos, duo, duoPartner, 
                         attrName="Rebound" evoStats={evoLevel != -1 ? evos[evoLevel].stats.rebound : ""} duoStats={duoOn ? duo.stats.rebound : ""} />
                     <Attributes attributes={playerData.stats.potential} 
                         attrName="Potential" evoStats={evoLevel != -1 ? evos[evoLevel].stats.potential : ""} duoStats={duoOn ? duo.stats.potential : ""} />
+                    <Attributes attributes={playerData.stats.totalStats} totalStats={true}
+                        attrName="Total Stats" evoStats={evoLevel != -1 ? evos[evoLevel].stats.totalStats : ""} duoStats={duoOn ? duo.stats.totalStats : ""} />
                 </div>
             </Fragment>
         )

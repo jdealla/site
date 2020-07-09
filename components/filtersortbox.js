@@ -42,7 +42,6 @@ export default function FilterSortBox(props) {
         const { filterOptions } = searchOptions;
         let values = filterOptions[prop];
 
-        debugger
         if (filterOptions[prop].indexOf(value) === -1) {
             values.push(value);
         } else {
@@ -342,6 +341,7 @@ export default function FilterSortBox(props) {
                         <p className="heading">Sort By Misc: </p>
                         <button className={`button is-small ${searchOptions.sortOptions.includes("date") ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("date")}>Date</button>
                         <button className={`button is-small ${searchOptions.sortOptions.includes("totalBadges") ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("totalBadges")}>Total Badges</button>
+                        <button className={`button is-small ${searchOptions.sortOptions.includes("total_stats") ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("total_stats")}>Total Stats</button>
                         <button className={`button is-small ${searchOptions.sortOptions.includes("wingspan") ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("wingspan")}>Wingspan</button>
                     </div>
                     <div className="column is-3-widescreen is-full-mobile">
