@@ -337,12 +337,13 @@ export default function FilterSortBox(props) {
                         <Dropdown title="Freelance" items={getSortDropdownItems("freelanceT")} />
                         <Dropdown title="Passing" items={getSortDropdownItems("passingT")} />
                     </div>
-                    <div className="column is-3-tablet is-full-mobile">
+                    <div className="column is-4-tablet is-full-mobile">
                         <p className="heading">Sort By Misc: </p>
                         <button className={`button is-small ${searchOptions.sortOptions.includes("date") ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("date")}>Date</button>
                         <button className={`button is-small ${searchOptions.sortOptions.includes("totalBadges") ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("totalBadges")}>Total Badges</button>
                         <button className={`button is-small ${searchOptions.sortOptions.includes("total_stats") ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("total_stats")}>Total Stats</button>
                         <button className={`button is-small ${searchOptions.sortOptions.includes("wingspan") ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("wingspan")}>Wingspan</button>
+                        <button className={`button is-small ${searchOptions.sortOptions.includes("height") ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("height")}>Height</button>
                     </div>
                     <div className="column is-3-widescreen is-full-mobile">
                         <p className="heading">Filter By Misc: </p>

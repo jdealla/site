@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { getAllPlayersWithAllStats, getAllAnimations } from "../lib/players";
-import { getFilterTiers, getTotalNumOfBadges, getTotalStats, getTotalBadges } from "../lib/helpers"
+import { getFilterTiers, getTotalNumOfBadges, getTotalStats } from "../lib/helpers"
 
 import FilterSortBox from "../components/filtersortbox";
 import PlayersList from "../components/playerslist";
 import Layout from "../components/layout";
-
 
 export default function Players({ players, allAnimations }) {
     const [allPlayers, setAllPlayers] = useState(players);
@@ -145,6 +144,13 @@ export default function Players({ players, allAnimations }) {
                     let bWingspan = b[prop].replace(/\"/g, "").split("'");
                     aCompare = Number(aWingspan[0] * 12) + Number(aWingspan[1]);
                     bCompare = Number(bWingspan[0] * 12) + Number(bWingspan[1]);
+
+                    value = aCompare > bCompare ? 1 : aCompare < bCompare ? -1 : 0;
+                } else if (prop === "height") {
+                    let aHeight = a[prop].replace(/\"/g, "").split("'");
+                    let bHeight = b[prop].replace(/\"/g, "").split("'");
+                    aCompare = Number(aHeight[0] * 12) + Number(aHeight[1]);
+                    bCompare = Number(bHeight[0] * 12) + Number(bHeight[1]);
 
                     value = aCompare > bCompare ? 1 : aCompare < bCompare ? -1 : 0;
                 }
