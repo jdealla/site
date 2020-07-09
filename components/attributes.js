@@ -40,6 +40,23 @@ export default function Attributes(props) {
             return ratingColor(value);
     }
 
+    const renderTotal = () => {
+        let total = attributes;
+        if ((evoStats != undefined || evoStats != null) && (duoStats != undefined || duoStats != null)) {
+            if (evoStats !== "" && duoStats !== "") {
+                if (duoStats !== 0 || evoStats !== 0)
+                    total = total + duoStats + evoStats;
+            } else if (evoStats !== "" && duoStats === "") {
+                if (evoStats !== 0)
+                    total = total + evoStats;
+            } else if (duoStats !== "" && evoStats === "") {
+                if (duoStats !== 0)
+                    total = total + duoStats;
+            }
+        }
+        return total;
+    }
+
     const renderBonusTotal = () => {
         if ((evoStats != undefined || evoStats != null) && (duoStats != undefined || duoStats != null)) {
             if (evoStats !== "" && duoStats !== "") {
@@ -61,7 +78,7 @@ export default function Attributes(props) {
         if (totalStats) {
             const tag = (
                 <div className="tags has-addons is-marginless" key={i++} style={{ flex: "0 0 75%" }}>
-                    <span className="tag is-dark has-text-weight-semibold">{attributes} {'   '}</span>
+                    <span className="tag is-dark has-text-weight-semibold">{renderTotal()} {'   '}</span>
                     {renderBonusTotal()}
                 </div>
             );

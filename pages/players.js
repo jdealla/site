@@ -51,12 +51,16 @@ export default function Players({ players, allAnimations }) {
             }
 
             if (filterOptions.position.length > 0) {
+                let posCheck = [];
                 for(const value of filterOptions.position) {
                     if (player.position === value || (filterOptions.secondary && (player.secondary_position === value)))
-                        checked.push(true);
-                    else
-                        checked.push(false);
+                        posCheck.push(true);
                 }
+
+                if(posCheck.includes(true))
+                    checked.push(true)
+                else
+                    checked.push(false);
             }
 
             if (filterOptions.badges.length > 0) {
