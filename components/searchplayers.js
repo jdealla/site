@@ -6,6 +6,6 @@ export default function SearchPlayers(props) {
 
     const handlePlayer = (playerName, playerId) => handleClick(playerInfo, playerId);
 
-    return <SearchBar ref={ref} players={players} handleClick={handlePlayer} placeholder={placeholder} styles={styles} />
+    return <SearchBar ref={ref} players={players} handleClick={handlePlayer} placeholder={placeholder} styles={styles} autoFocus={false} />
 }
 

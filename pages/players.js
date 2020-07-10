@@ -178,7 +178,7 @@ export default function Players({ players, allAnimations }) {
     const themes = Array.from(new Set(players.map(player => player.theme))).sort();
 
     return (
-        <Layout players={[]} searchOn={false}>
+        <Layout players={players} searchOn={true}>
             <Head>
                 <title>All Players List | 2KDB </title>
                 <meta name="description" content="List of all players in NBA 2K20 MyTeam" key="description"/>

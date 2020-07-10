@@ -5,7 +5,7 @@ import TagOverall from "./tagoverall";
 import defaultStyle from "./searchbar.module.scss";
 
 export default function SearchBar(props) {
-    const { handleClick, players, placeholder, styles } = props;
+    const { handleClick, players, placeholder, styles, autoFocus } = props;
     const [value, setValue] = useState('');
     const [items, setItems] = useState([]);
     
@@ -58,7 +58,7 @@ export default function SearchBar(props) {
         placeholder,
         value,
         type: "search",
-        autoFocus: true,
+        autoFocus: autoFocus,
         onChange
     };
 

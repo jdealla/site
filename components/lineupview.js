@@ -49,7 +49,7 @@ export default function LineupView(props) {
                             overlayStyle={{ zIndex: "1" }}
                         >
                             <div className="box">
-                                <SearchPlayers players={players} handleClick={handleClick} playerInfo={slot} placeholder="Search player" styles={lineupStyle} />
+                                <SearchPlayers players={players} handleClick={handleClick} playerInfo={slot} placeholder="Search player" styles={lineupStyle} autoFocus={true} />
                             </div>
                         </Popup>
                     </div>
@@ -88,7 +88,7 @@ export default function LineupView(props) {
                             overlayStyle={{ zIndex: "1" }}
                         >
                             <div className="box">
-                                <SearchPlayers players={players} handleClick={handleClick} playerInfo={slot} placeholder="Search player" styles={lineupStyle} />
+                                <SearchPlayers players={players} handleClick={handleClick} playerInfo={slot} placeholder="Search player" styles={lineupStyle} autoFocus={true} />
                             </div>
                         </Popup>
                     </div>
