@@ -49,18 +49,16 @@ export default function LineupView(props) {
                             overlayStyle={{ zIndex: "1" }}
                         >
                             <div className="box">
-                                <SearchPlayers players={players} handleClick={handleClick} playerInfo={slot} placeholder="Search player" styles={lineupStyle} />
+                                <SearchPlayers players={players} handleClick={handleClick} playerInfo={slot} placeholder="Search player" styles={lineupStyle} autoFocus={true} />
                             </div>
                         </Popup>
                     </div>
                 )
             } else {
                 item = (
-                    <div className="column is-4-mobile" key={`starters-${slot}`}>
-                        <div style={{ position: "relative" }}>
-                            <a className="delete" aria-label="delete" style={{ position: "absolute", top: 0, zIndex: "2" }} onClick={() => handleClick(slot, null)}></a>
-                        </div>
-                        <figure className="image is-3by4">
+                    <div className="column is-4-mobile " key={`starters-${slot}`}>
+                        <figure className="image is-3by4 delete-hover">
+                            <a className="delete is-medium" aria-label="delete" onClick={() => handleClick(slot, null)}></a>
                             <img src={`https://2kdbimg.com/380/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} />
                         </figure>
                     </div>
@@ -90,7 +88,7 @@ export default function LineupView(props) {
                             overlayStyle={{ zIndex: "1" }}
                         >
                             <div className="box">
-                                <SearchPlayers players={players} handleClick={handleClick} playerInfo={slot} placeholder="Search player" styles={lineupStyle} />
+                                <SearchPlayers players={players} handleClick={handleClick} playerInfo={slot} placeholder="Search player" styles={lineupStyle} autoFocus={true} />
                             </div>
                         </Popup>
                     </div>
@@ -98,10 +96,8 @@ export default function LineupView(props) {
             } else {
                 item = (
                     <div className="column is-3-mobile" key={`bench-${slot}`}>
-                        <div style={{ position: "relative" }}>
-                            <a className="delete" aria-label="delete" style={{ position: "absolute", top: 0, zIndex: "2" }} onClick={() => handleClick(slot, null)}></a>
-                        </div>
-                        <figure className="image is-3by4">
+                        <figure className="image is-3by4 delete-hover">
+                            <a className="delete is-medium" aria-label="delete" onClick={() => handleClick(slot, null)}></a>
                             <img key={player.id} src={`https://2kdbimg.com/380/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} />
                         </figure>
                     </div>

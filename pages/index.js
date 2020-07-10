@@ -24,7 +24,7 @@ export default function Home({ players }) {
             <p className="title">
              <img src="/logo_main.png" />
             </p>
-            <SearchBar handleClick={handleClick} players={players} placeholder="Search players..." />
+            <SearchBar handleClick={handleClick} players={players} placeholder="Search players..." autoFocus={false} />
           </div>
         </div>
       </section>

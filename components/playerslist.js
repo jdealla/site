@@ -124,7 +124,7 @@ export default function PlayersList(props) {
                     tableRows.push(cell);
                 } else {
                     let cell = (
-                        <td key={prop} className="has-text-centered">{ratingColor(player[prop], prop.includes("_t"))}</td>
+                        <td key={prop} className="has-text-centered">{ratingColor(player[prop], prop.includes("_t") || prop.includes("true_rating"))}</td>
                     );
                     tableRows.push(cell);
                 }
