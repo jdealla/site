@@ -3,7 +3,7 @@ import { formatName, levelToNum, numToLevel } from "../lib/helpers";
 import { ratingColor } from "../lib/helpers";
 
 export default function CompareTable(props) {
-    const { tableName, firstName, firstStats, firstEvoStats, firstDuoStats, secondName, secondStats, secondEvoStats, secondDuoStats, diff, isBadges, thirdStats, thirdName } = props;
+    const { tableName, firstName, firstStats, firstEvoStats, firstDuoStats, secondName, secondStats, secondEvoStats, secondDuoStats, diff, isBadges, thirdStats, thirdName, isTrueRating } = props;
     
     const renderNotification = (upgraded) => {
         if (upgraded)
@@ -103,16 +103,16 @@ export default function CompareTable(props) {
 						  (
 						     <Fragment>
 						        <td className="has-text-centered">
-                                    {ratingColor(first)}
+                                    {ratingColor(first, isTrueRating)}
                                     {diff === false ? "" : difference(first, second)}
                                 </td> 
 						        { second ? <td className="has-text-centered">
-                                    {ratingColor(second)}
+                                    {ratingColor(second, isTrueRating)}
                                     {diff === false ? "" : difference(second, first)}
                                 </td> : '' }
                                 { third ? 
                                 <td className="has-text-centered">
-                                    {ratingColor(third)}
+                                    {ratingColor(third, isTrueRating)}
                                 </td> : '' }
 						     </Fragment>
 						  )

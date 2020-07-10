@@ -212,7 +212,7 @@ export default function Compare({ players }) {
                                 <table className="table is-striped is-fullwidth">
                                     <CompareTable 
                                         tableName={player1[0].info.name} firstName={trueRatings.player1[0].position} firstStats={{"overall": trueRatings.player1[0].overall, ...trueRatings.player1[0].sections}} secondName={trueRatings.player1.length > 1 ? trueRatings.player1[1].position : false} secondStats={trueRatings.player1.length > 1 ? {"overall": trueRatings.player1[1].overall, ...trueRatings.player1[1].sections} : false} diff={false}
-                                        thirdName={trueRatings.player1.length > 2 ? trueRatings.player1[2].position : false} thirdStats={trueRatings.player1.length > 2? {"overall": trueRatings.player1[2].overall, ...trueRatings.player1[2].sections} : false}
+                                        thirdName={trueRatings.player1.length > 2 ? trueRatings.player1[2].position : false} thirdStats={trueRatings.player1.length > 2? {"overall": trueRatings.player1[2].overall, ...trueRatings.player1[2].sections} : false} isTrueRating={true}
                                         />
                                 </table>
                             </div>
@@ -220,7 +220,7 @@ export default function Compare({ players }) {
                             <table className="table is-striped is-fullwidth">
                                     <CompareTable 
                                         tableName={player2[0].info.name} firstName={trueRatings.player2[0].position} firstStats={{"overall": trueRatings.player2[0].overall, ...trueRatings.player2[0].sections}} secondName={trueRatings.player2.length > 1 ? trueRatings.player2[1].position : false} secondStats={trueRatings.player2.length > 1 ? {"overall": trueRatings.player2[1].overall, ...trueRatings.player2[1].sections} : false} diff={false}
-                                        thirdName={trueRatings.player2.length > 2 ? trueRatings.player2[2].position : false} thirdStats={trueRatings.player2.length > 2? {"overall": trueRatings.player2[2].overall, ...trueRatings.player2[2].sections} : false}
+                                        thirdName={trueRatings.player2.length > 2 ? trueRatings.player2[2].position : false} thirdStats={trueRatings.player2.length > 2? {"overall": trueRatings.player2[2].overall, ...trueRatings.player2[2].sections} : false} isTrueRating={true}
                                         />
                                     </table>
                                 </div>
