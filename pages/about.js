@@ -20,6 +20,9 @@ export default function About({ players }) {
                 <p className="has-text-weight-semibold"> 
                   Created by <a href="https://2kgamer.com/u/kennymck69">KennyMcK69</a> and <a href="https://2kgamer.com/u/chknwaffles">chknwaffles</a>
                 </p>
+                <p className="has-text-weight-semibold">
+                  Huge credit to <a href="https://2kgamer.com/u/jdealla/">jdealla</a> for helping out with the site too!
+                </p>
                 <p>
                   If you want to give us feedback or suggestions on new features or report on any bugs let us know on <a href="https://2kgamer.com/t/2kdb-kennys-website/90748">2KGamer</a>
                 </p>
