@@ -344,6 +344,7 @@ export default function FilterSortBox(props) {
                         <button className={`button is-small ${searchOptions.sortOptions.includes("total_stats") ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("total_stats")}>Total Stats</button>
                         <button className={`button is-small ${searchOptions.sortOptions.includes("wingspan") ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("wingspan")}>Wingspan</button>
                         <button className={`button is-small ${searchOptions.sortOptions.includes("height") ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("height")}>Height</button>
+                        <button className={`button is-small ${searchOptions.sortOptions.includes("true_rating") ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("true_rating")}>True Ratings</button>
                     </div>
                     <div className="column is-3-widescreen is-full-mobile">
                         <p className="heading">Filter By Misc: </p>
