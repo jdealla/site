@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import Popup from "reactjs-popup";
+import Tippy from '@tippyjs/react';
 import { IoMdCloudDownload } from "react-icons/io";
 
 import SearchPlayers from "../components/searchplayers";
@@ -37,21 +37,16 @@ export default function LineupView(props) {
             if (player == null) {
                 item = (
                     <div className="column is-4-mobile lineups-styling" key={`starters-${slot}`}>
-                        <Popup 
-                            trigger={(
-                                <figure className="image is-3by4" key={`starters-${slot}`}>
-                                    <img className="hvr-grow" src={`https://2kdbimg.com/380/lineup_placeholder_${slot}.png`} />
-                                </figure>
-                            )}
-                            contentStyle={{ width: "350px" }}
-                            on="click"
-                            position={["top center", "right center", "left center"]}
-                            overlayStyle={{ zIndex: "1" }}
-                        >
-                            <div className="box">
-                                <SearchPlayers players={players} handleClick={handleClick} playerInfo={slot} placeholder="Search player" styles={lineupStyle} autoFocus={true} />
-                            </div>
-                        </Popup>
+                        <Tippy maxWidth={400} animation="shift-away" inertia={true} theme="light-border" interactive={true} trigger="click" 
+                            content={
+                                <div className="box">
+                                    <SearchPlayers players={players} handleClick={handleClick} playerInfo={slot} placeholder="Search player" styles={lineupStyle} autoFocus={true} />
+                                </div> 
+                            }>
+                            <figure className="image is-3by4" key={`starters-${slot}`}>
+                                <img className="hvr-grow" src={`https://2kdbimg.com/380/lineup_placeholder_${slot}.png`} />
+                            </figure>
+                        </Tippy>
                     </div>
                 )
             } else {
@@ -76,21 +71,16 @@ export default function LineupView(props) {
             if (player == null) {
                 item = (
                     <div className="column is-3-mobile lineups-styling" key={`bench-${slot}`}>
-                        <Popup 
-                            trigger={(
-                                <figure className="image is-3by4 hvr-grow" key={`bench-${slot}`}>
-                                    <img src="https://2kdbimg.com/380/lineup_placeholder.png" />
-                                </figure>
-                            )}
-                            contentStyle={{ width: "350px" }}
-                            on="click"
-                            position={["top center", "right center", "left center"]}
-                            overlayStyle={{ zIndex: "1" }}
-                        >
-                            <div className="box">
-                                <SearchPlayers players={players} handleClick={handleClick} playerInfo={slot} placeholder="Search player" styles={lineupStyle} autoFocus={true} />
-                            </div>
-                        </Popup>
+                        <Tippy maxWidth={400} animation="shift-away" inertia={true} theme="light-border" interactive={true} trigger="click" 
+                            content={
+                                <div className="box">
+                                    <SearchPlayers players={players} handleClick={handleClick} playerInfo={slot} placeholder="Search player" styles={lineupStyle} autoFocus={true} />
+                                </div> 
+                            }>
+                            <figure className="image is-3by4" key={`bench-${slot}`}>
+                                <img className="hvr-grow" src={`https://2kdbimg.com/380/lineup_placeholder.png`} />
+                            </figure>
+                        </Tippy>
                     </div>
                 )
             } else {
