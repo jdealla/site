@@ -1,5 +1,6 @@
 import React from "react";
 import { formatName, ratingColor } from "../lib/helpers";
+import Popup from "reactjs-popup";
 
 export default function Attributes(props) {
     const { attributes, attrName, evoStats, duoStats, reverse, tendency, trueRating, totalStats } = props;
@@ -78,7 +79,16 @@ export default function Attributes(props) {
         if (totalStats) {
             const tag = (
                 <div className="tags has-addons is-marginless" key={i++} style={{ flex: "0 0 75%" }}>
-                    <span className="tag is-dark has-text-weight-semibold">{renderTotal()} {'   '}</span>
+                    <Popup
+                        trigger={(<span className="tag is-dark has-text-weight-semibold">{renderTotal()} {'   '}</span>)}
+                        on="hover"
+                        position="top center"
+                    >
+                        <span className="is-size-7"> 
+                            <p>Does not include <strong>Intangibles</strong> and <strong>Potential</strong></p> 
+                            <p><strong>Intangibles</strong> and <strong>Potential</strong> are filler stats to change the overall rating</p>
+                        </span>
+                    </Popup>
                     {renderBonusTotal()}
                 </div>
             );
