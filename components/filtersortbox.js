@@ -337,7 +337,7 @@ export default function FilterSortBox(props) {
                         <Dropdown title="Freelance" items={getSortDropdownItems("freelanceT")} />
                         <Dropdown title="Passing" items={getSortDropdownItems("passingT")} />
                     </div>
-                    <div className="column is-4-tablet is-full-mobile">
+                    <div className="column is-5-tablet is-full-mobile">
                         <p className="heading">Sort By Misc: </p>
                         <button className={`button is-small ${searchOptions.sortOptions.includes("date") ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("date")}>Date</button>
                         <button className={`button is-small ${searchOptions.sortOptions.includes("totalBadges") ? "is-active filter-button-active" : ""}`} onClick={() => handleSort("totalBadges")}>Total Badges</button>
