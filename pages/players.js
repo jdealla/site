@@ -3,6 +3,7 @@ import Head from "next/head";
 import { getAllPlayersWithAllStats, getAllAnimations } from "../lib/players";
 import { getFilterTiers, getTotalNumOfBadges, getTotalStats } from "../lib/helpers"
 
+import { ratePlayer } from "../lib/ratings";
 import FilterSortBox from "../components/filtersortbox";
 import PlayersList from "../components/playerslist";
 import Layout from "../components/layout";
@@ -12,7 +13,7 @@ export default function Players({ players, allAnimations }) {
     const [searchOptions, setSearchOptions] = useState({ 
         searchValue: "", filterOptions: { position: [], overall: [], badges: [], animations: [], teams: [], colleges: [], themes: [] }, sortOptions: [], asc: false, 
         page: 0, perPage: 15, evos: false, duos: false, secondary: false, exclusive: false
-    })
+    });
 
     const handlePage = (dir) => {
         if (dir === "prev") {
@@ -132,6 +133,14 @@ export default function Players({ players, allAnimations }) {
         })
 
         let sorted = filtered;
+
+        // adding true_rating to players
+        sorted = sorted.map( player => {
+            const true_rating = ratePlayer(player, false, -1, false, false, true);
+            player.true_rating = true_rating;
+            return player;
+        });
+
         filtered = sorted.sort((a, b) => {
             let aBadges = getTotalNumOfBadges(a);
             let bBadges = getTotalNumOfBadges(b);

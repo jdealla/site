@@ -3,7 +3,7 @@ import { formatName, levelToNum, numToLevel } from "../lib/helpers";
 import { ratingColor } from "../lib/helpers";
 
 export default function CompareTable(props) {
-    const { tableName, firstName, firstStats, firstEvoStats, firstDuoStats, secondName, secondStats, secondEvoStats, secondDuoStats, diff, isBadges } = props;
+    const { tableName, firstName, firstStats, firstEvoStats, firstDuoStats, secondName, secondStats, secondEvoStats, secondDuoStats, diff, isBadges, thirdStats, thirdName, isTrueRating } = props;
     
     const renderNotification = (upgraded) => {
         if (upgraded)
@@ -48,6 +48,10 @@ export default function CompareTable(props) {
             let name = key.replace(/_/g, "");
             let first = firstStats[key];
             let second = secondStats[key];
+            let third = false;
+            if (thirdStats){
+                third = thirdStats[key];
+            }
             let upgraded = { player1: false, player2: false };
 
             if (firstEvoStats != null || firstEvoStats != undefined || firstDuoStats != undefined || firstDuoStats != null) {
@@ -99,13 +103,17 @@ export default function CompareTable(props) {
 						  (
 						     <Fragment>
 						        <td className="has-text-centered">
-                                    {ratingColor(first)}
+                                    {ratingColor(first, isTrueRating)}
                                     {diff === false ? "" : difference(first, second)}
                                 </td> 
-						        <td className="has-text-centered">
-                                    {ratingColor(second)}
+						        { second ? <td className="has-text-centered">
+                                    {ratingColor(second, isTrueRating)}
                                     {diff === false ? "" : difference(second, first)}
-                                </td>
+                                </td> : '' }
+                                { third ? 
+                                <td className="has-text-centered">
+                                    {ratingColor(third, isTrueRating)}
+                                </td> : '' }
 						     </Fragment>
 						  )
 				      }
@@ -121,10 +129,11 @@ export default function CompareTable(props) {
             <tr>
                 <td className="compare-thead has-text-weight-semibold">{tableName}</td>
                 <td className="compare-thead has-text-weight-semibold has-text-centered">{firstName}</td>
-                <td className="compare-thead has-text-weight-semibold has-text-centered">{secondName}</td>
+                { secondName ? <td className="compare-thead has-text-weight-semibold has-text-centered">{secondName}</td> : ''}
+                { thirdName ? <td className="compare-thead has-text-weight-semibold has-text-centered">{thirdName}</td> : ''}
             </tr>
 		    {getTableValues()}
-			<td style={{ border:0 }}></td> 
+			<td style={{ border:0 }}></td>
 		</tbody>
     )
 }
