@@ -1,6 +1,6 @@
 import React from "react";
 import { formatName, ratingColor } from "../lib/helpers";
-import Popup from "reactjs-popup";
+import Tippy from '@tippyjs/react';
 
 export default function Attributes(props) {
     const { attributes, attrName, evoStats, duoStats, reverse, tendency, trueRating, totalStats } = props;
@@ -79,16 +79,15 @@ export default function Attributes(props) {
         if (totalStats) {
             const tag = (
                 <div className="tags has-addons is-marginless" key={i++} style={{ flex: "0 0 75%" }}>
-                    <Popup
-                        trigger={(<span className="tag is-dark has-text-weight-semibold">{renderTotal()} {'   '}</span>)}
-                        on="hover"
-                        position="top center"
-                    >
-                        <span className="is-size-7"> 
-                            <p>Does not include <strong>Intangibles</strong> and <strong>Potential</strong></p> 
-                            <p><strong>Intangibles</strong> and <strong>Potential</strong> are filler stats to change the overall rating</p>
-                        </span>
-                    </Popup>
+                    <Tippy maxWidth={250} animation="shift-away" inertia={true} theme="light-border"
+                        content={ 
+                            <span className="is-size-7"> 
+                                <p className="mb-3">Does not include <strong>Intangibles</strong> and <strong>Potential</strong></p>
+                                <p><strong>Intangibles</strong> and <strong>Potential</strong> are filler stats to change the overall rating</p>
+                            </span>
+                        }>
+                        <span className="tag is-primary has-text-weight-semibold">{renderTotal()} {'   '}</span>
+                    </Tippy>
                     {renderBonusTotal()}
                 </div>
             );
