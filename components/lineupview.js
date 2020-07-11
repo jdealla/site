@@ -43,8 +43,8 @@ export default function LineupView(props) {
                                     <SearchPlayers players={players} handleClick={handleClick} playerInfo={slot} placeholder="Search player" styles={lineupStyle} autoFocus={true} />
                                 </div> 
                             }>
-                            <figure className="image is-3by4" key={`starters-${slot}`}>
-                                <img className="hvr-grow" src={`https://2kdbimg.com/380/lineup_placeholder_${slot}.png`} />
+                            <figure className="image" key={`starters-${slot}`}>
+                                <img className="hvr-grow" src={`https://2kdbimg.com/450/lineup_placeholder_${slot}.png`} />
                             </figure>
                         </Tippy>
                     </div>
@@ -52,9 +52,9 @@ export default function LineupView(props) {
             } else {
                 item = (
                     <div className="column is-4-mobile " key={`starters-${slot}`}>
-                        <figure className="image is-3by4 delete-hover">
+                        <figure className="image delete-hover">
                             <a className="delete is-medium" aria-label="delete" onClick={() => handleClick(slot, null)}></a>
-                            <img src={`https://2kdbimg.com/380/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} />
+                            <img src={`https://2kdbimg.com/500/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} />
                         </figure>
                     </div>
                 )
@@ -77,8 +77,8 @@ export default function LineupView(props) {
                                     <SearchPlayers players={players} handleClick={handleClick} playerInfo={slot} placeholder="Search player" styles={lineupStyle} autoFocus={true} />
                                 </div> 
                             }>
-                            <figure className="image is-3by4" key={`bench-${slot}`}>
-                                <img className="hvr-grow" src={`https://2kdbimg.com/380/lineup_placeholder.png`} />
+                            <figure className="image" key={`bench-${slot}`}>
+                                <img className="hvr-grow" src={`https://2kdbimg.com/350/lineup_placeholder.png`} />
                             </figure>
                         </Tippy>
                     </div>
@@ -86,9 +86,9 @@ export default function LineupView(props) {
             } else {
                 item = (
                     <div className="column is-3-mobile" key={`bench-${slot}`}>
-                        <figure className="image is-3by4 delete-hover">
+                        <figure className="image delete-hover">
                             <a className="delete is-medium" aria-label="delete" onClick={() => handleClick(slot, null)}></a>
-                            <img key={player.id} src={`https://2kdbimg.com/380/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} />
+                            <img key={player.id} src={`https://2kdbimg.com/450/${player.name.replace(/( |')/g, "_").toLowerCase()}_${player.id}.jpg`} />
                         </figure>
                     </div>
                 )

@@ -448,6 +448,11 @@ $dropdown-item-hover-background-color: none;
 }
 
 .alt-players-tags {
+    height: 26px;
+    >a {
+        display: inline-block;
+        height: 26px;
+    }
     padding: 0.1em !important;
     margin-top: -1em;
 	

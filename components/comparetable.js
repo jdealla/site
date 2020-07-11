@@ -38,7 +38,7 @@ export default function CompareTable(props) {
             badgeImg = "badge_none.png";
 			
         return (
-            <img src={`https://2kdbimg.com/40x40/${badgeImg}`}></img>
+            <img style={{ maxWidth: "40px" }} src={`https://2kdbimg.com/96/${badgeImg}`}></img>
 		)
 	}
 	

@@ -7,10 +7,10 @@ export default function PlayersCardView(props) {
         return players.map((player, i) => {
             let playerId = evos ? player.pid : player.id
             return (
-                <div className="column is-1-desktop is-2-widescreen is-half-mobile" key={i}>
-                    <figure className="hvr-float-shadow image is-3by4">
+                <div className="column is-2-tablet is-half-mobile" key={i}>
+                    <figure className="hvr-float-shadow">
                         <a href={`/player/${player.name.replace(/( |')/g, "-").toLowerCase()}/${playerId}`}>
-							<img  alt={`${player.overall} ${player.name} | ${player.theme}`} src={`https://2kdbimg.com/390/${player.name.replace(/( |')/g, "_").toLowerCase()}_${playerId}.jpg`} />
+							<img alt={`${player.overall} ${player.name} | ${player.theme}`} src={`https://2kdbimg.com/${player.name.replace(/( |')/g, "_").toLowerCase()}_${playerId}.jpg`} />
                         </a>
                     </figure>
                 </div>
